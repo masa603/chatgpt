@@ -115,11 +115,12 @@ Arduino上で使用する重みデータを圧縮し，限られたメモリ内�
 \subsection{圧縮方式の調査と選択}
 
 適用候補として，絶対値の小さい重みを0にする枝刈り，COO・CSR等の疎行列形式，
-重みを低ビット整数で表す量子化，および枝刈りと量子化を組み合わせるHybrid方式を調査する．
+重みを低ビット整数で表す量子化，および枝刈りと量子化を組み合わせるHybrid方式を
+先行研究\cite{han2015,han2016,jacob2018}に基づいて調査する．
 各方式について，重み1要素当たりのデータ量，索引やスケール等の付加情報，Arduino上での
 行列ベクトル積の実装可能性，期待される計算量，推論誤差を比較する．
 
-本実験では，L1正則化済みモデルに小さい重みが多いことを利用でき，行単位の積和演算にも適する
+本実験では，L1正則化による係数縮小\cite{tibshirani1996}を利用でき，行単位の積和演算にも適する
 枝刈り+CSRを主方式として選ぶ．一方，十分な疎性が得られない場合にも一定の削減効果を見込める
 INT8量子化を比較方式として選ぶ．計画段階では一方に確定せず，両方式を同一条件で実装・測定し，
 容量，MSE，推論時間の選択基準に従って最終方式を決定する．どちらか一方に決められない場合は，
@@ -184,7 +185,7 @@ RAM使用量を記録する．また，現行の\texttt{model\_parameters.h}は�
 \end{equation}
 で求める．本実験では$\tau=0$を非圧縮の基準とし，
 $\tau\in\{0.001, 0.005, 0.01, 0.02, 0.05\}$を候補にする．
-授業資料の0.01は例であり，固定値とはせず，MSEと容量の両方から選ぶ．
+0.01は候補値の一つであり，固定値とはせず，MSEと容量の両方から選ぶ．
 
 バイアスは要素数が少なく，0化による削減効果が小さいため，主実験ではFP32のまま保持する．
 これにより，圧縮による変化を重み行列に限定する．
@@ -193,6 +194,7 @@ $\tau\in\{0.001, 0.005, 0.01, 0.02, 0.05\}$を候補にする．
 
 $m\times n$行列に$K$個の非ゼロ要素がある場合，COO形式は値，行番号，列番号を列挙する．
 一方，CSR形式は値配列，列番号配列，各行の開始位置を表す行ポインタ配列を使用する．
+CSRは疎行列ベクトル積で広く用いられる格納形式である\cite{bell2009}．
 $H\leq 200$では行・列番号を\texttt{uint8\_t}，行ポインタを\texttt{uint16\_t}で表現できるため，
 理論データ量は概ね
 \begin{align}
@@ -225,7 +227,8 @@ for (uint16_t row = 0; row < rows; ++row) {
 
 \subsection{8 bit量子化}
 
-比較方式では，層ごとに対称量子化を行う．層内の最大絶対値を$w_{\max}$として
+比較方式では，整数演算向け量子化の先行研究\cite{jacob2018}を参考に，層ごとに対称量子化を行う．
+層内の最大絶対値を$w_{\max}$として
 スケール$s=w_{\max}/127$を求め，
 \begin{equation}
   q=\mathrm{clip}\left(\mathrm{round}\left(\frac{w}{s}\right),-127,127\right)
@@ -475,27 +478,34 @@ CSRの容量削減が得られない場合はINT8を主候補とする．INT8の
 \texttt{60nn.ino}も比較用として変更せず別途保存する．
 
 \begin{thebibliography}{9}
-  \bibitem{lecture}
-  前川仁孝・信川創・大西隆之・佐藤愛実，
-  「アジャイルワーク2 第4--5週（行列データ圧縮 実験計画書作成）」，2026年10月9日．
+  \bibitem{tibshirani1996}
+  R. Tibshirani,
+  ``Regression Shrinkage and Selection via the Lasso,''
+  Journal of the Royal Statistical Society: Series B, vol. 58, no. 1,
+  pp. 267--288, 1996.
 
-  \bibitem{lecture3}
-  前川仁孝・信川創・大西隆之・佐藤愛実，
-  「アジャイルワーク2 第3週（フルカラースキャナのデータ取得品質向上）」，2026年10月6日．
+  \bibitem{han2015}
+  S. Han, J. Pool, J. Tran, and W. J. Dally,
+  ``Learning Both Weights and Connections for Efficient Neural Networks,''
+  Advances in Neural Information Processing Systems 28,
+  pp. 1135--1143, 2015.
 
-  \bibitem{lecture2}
-  前川仁孝・信川創・大西隆之・佐藤愛実，
-  「アジャイルワーク2 第2週（フルカラースキャナの作成）」，2026年9月25日．
-
-  \bibitem{deepcompression}
+  \bibitem{han2016}
   S. Han, H. Mao, and W. J. Dally,
   ``Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding,''
   International Conference on Learning Representations (ICLR), 2016.
 
-  \bibitem{scipycsr}
-  SciPy Developers, ``\texttt{scipy.sparse.csr\_matrix},''
-  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html}
-  （2026年10月9日参照）．
+  \bibitem{bell2009}
+  N. Bell and M. Garland,
+  ``Implementing Sparse Matrix-Vector Multiplication on Throughput-Oriented Processors,''
+  Proceedings of the Conference on High Performance Computing Networking, Storage and Analysis,
+  Article 18, pp. 1--11, 2009.
+
+  \bibitem{jacob2018}
+  B. Jacob et al.,
+  ``Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference,''
+  Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
+  pp. 2704--2713, 2018.
 \end{thebibliography}
 
 \clearpage
