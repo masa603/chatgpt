@@ -142,8 +142,12 @@ $B_{\mathrm{dense}}=4N_{\mathrm{total}}$ byteである。理論値を表\ref{tab
 \end{table}
 
 この値以外にも、プログラム本体、入出力用配列、スタック等がArduinoのメモリを使用する。
+現行の\texttt{60nn.ino}では、推論時に隠れ層出力\texttt{layer1[]}と\texttt{layer2[]}を
+ローカルなFP32配列として確保するため、その作業領域は$8H$ byte（$H=60$では480 byte）となる。
+さらに最大6$\times$6画素の\texttt{imageData}が108 byteを使用する。
 したがって、理論値だけで搭載可否を判断せず、実際のコンパイル結果に表示されるフラッシュ使用量と
-RAM使用量を記録する。
+RAM使用量を記録する。また、現行の\texttt{model\_parameters.h}は修飾子なしの\texttt{float}配列を
+出力するため、全方式で\texttt{const}等の配置条件をそろえ、圧縮方式以外の差が生じないようにする。
 
 \subsection{閾値による枝刈り}
 
@@ -253,18 +257,21 @@ P3形式のPPM画像を生成し、配布済みの\texttt{mse\_calculator.html}�
     \midrule
     独立変数 & 隠れ層次元$H$（40、50、60）、圧縮方式（密FP32、枝刈り+CSR、INT8）、枝刈り閾値$\tau$ \\
     従属変数 & MSE、MSE相対変化率、疎性、モデルデータ量、削減率、コンパイル可否、実行可否、RAM・フラッシュ使用量、推論時間 \\
-    統制条件 & 学習データ、学習済み重み、評価チャート、黒・白校正手順、\texttt{RGBFlashDelay}、RGB尺度、測定治具、照明、チャート位置、紙の圧着、ウォームアップ時間、ソフトウェア版 \\
+    統制条件 & 学習データ、学習済み重み、評価チャート、黒・白校正手順、\texttt{SAMPLE\_COUNT}、\texttt{RGB\_FLASH\_DELAY}、RGB尺度、測定治具、照明、チャート位置、紙の圧着、ソフトウェア版 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 学習条件は既存プログラムに合わせ、損失関数をMSE、最適化手法をAdam、学習率を0.01、
-L1正則化係数を$10^{-6}$とする。圧縮の影響だけを比較するため、各$H$について一度得た
+L1正則化係数を$10^{-6}$、学習回数を50,000 epochとする。圧縮の影響だけを比較するため、各$H$について一度得た
 同一の学習済み重みからすべての圧縮条件を生成し、圧縮条件ごとに再学習は行わない。
-学習には第3週と同じ3$\times$3および6$\times$4カラーチャートの読取値を使用し、
+現行Notebookの学習データは、3$\times$3の9色と、6$\times$6で読み取った画像の上4行
+（6$\times$4の24色）を合わせた33組である。
 RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipynb}へ入力する。
+教師データは対応する2枚の基準PNG画像を最近傍法で3$\times$3と6$\times$4へ縮小して生成する。
 読取ミスを学習しないよう、元のPPM画像を目視確認してから学習データへ変換する。
-乱数シード、エポック数、データ分割、Python・PyTorch・Arduino IDE・ボードコアの
+現行Notebookには乱数シードの固定処理がないため、モデル生成前にNumPyとPyTorchのシードを設定する。
+乱数シード、データ分割、Python・PyTorch・Arduino IDE・ボードコアの
 バージョンを実験記録へ残す。
 
 \subsection{実験条件の一覧}
@@ -296,6 +303,9 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
   \item \textbf{基準モデルの作成：}
     $H=40,50,60$について、3$\times$3および6$\times$4チャートから取得した
     同一の正規化済み学習データを用いて学習する。
+    現行Notebookは$H=40$、\texttt{60nn.ino}は$H=60$に固定されているため、
+    Notebook側では単一の変数$H$を3つの\texttt{Linear}層へ使用し、Arduino側の
+    \texttt{HIDDEN\_SIZE1}と\texttt{HIDDEN\_SIZE2}も同じ値へ変更する。
     最終評価には、学習用データとは独立した評価用カラーチャートを教員から受け取って使用する。
   \item \textbf{PC上での圧縮候補生成：}
     Pythonで各重みに閾値を適用し、疎性、CSR理論容量、圧縮後MSEを計算する。
@@ -307,11 +317,16 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
     \texttt{values[]}、\texttt{col\_idx[]}、\texttt{row\_ptr[]}の3配列を出力し、
     それぞれ非ゼロ値、列番号、行開始位置を格納する。
     INT8では\texttt{int8\_t}重みと層ごとのスケールを出力する。
+    各出力後に重み要素数が$3H$、$H^2$、$3H$、バイアス要素数が$H$、$H$、3であることを検査し、
+    NotebookとArduinoの次元不一致をビルド前に検出する。
   \item \textbf{Arduino推論処理の実装：}
     Dense、CSR、INT8の各行列ベクトル積関数を分離して実装する。
     既存の\texttt{predict()}と同じく重みを出力ニューロン単位の行優先で参照し、
     隠れ層1・2だけにReLUを適用する。出力層にはReLUを適用しない。
-    入出力の正規化、バイアス加算順序、0--255への復元は既存版と一致させる。
+    前処理は現行Arduino版と一致させる。\texttt{normalizeInput()}では、入力を
+    $(\mathrm{raw}-\mathrm{black})/(\mathrm{white}-\mathrm{black})$で正規化して0--1へクリップする。
+    \texttt{outputTo255()}では、出力を0--1へクリップし、255倍して四捨五入する。
+    圧縮方式を変更しても、この前処理・後処理とバイアス加算順序は変更しない。
   \item \textbf{単体確認：}
     PC上で枝刈り後の密行列とCSRから復元した行列が一致することを確認する。
     同じ固定入力に対するPruned-DenseとPrune-CSRの出力を比較した後、PC版とArduino版の各層出力を比較する。
@@ -327,9 +342,12 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
 
 \begin{enumerate}
   \item 学習に使用していない同一の評価用カラーチャートを全条件で使用する。
-  \item 第3週と同じ2ボタン版プログラムを用い、測定ブロックの開始時に黒を最小値、白を最大値として読み込む。
+  \item 非圧縮の基準には\texttt{batansyusei.ino}、ニューラルネットワーク版の基準には
+    \texttt{60nn.ino}を用いる。両者ともD2で黒、白の順に校正し、D3で1画素ずつ読み取る。
+    測定ブロックの開始時に黒を最小値、白を最大値として読み込む。
     モデルごとに同じ位置・手順で校正し、得られた値と時刻を記録する。
-  \item RGBの読取時間ずれを抑えるため、\texttt{RGBFlashDelay}を10に固定する。
+  \item 1色のセンサ値は\texttt{SAMPLE\_COUNT}=10回の平均とし、RGBの読取時間ずれを抑えるため、
+    \texttt{RGB\_FLASH\_DELAY}=10 msに固定する。
     センサ、光源、遮光、紙の固定治具、チャート位置を変えず、測定前のウォームアップ時間も一定にする。
   \item チャートの9色を同じ順序で読み取り、各回について3$\times$3のP3形式PPM画像を保存する。
     \texttt{mse\_calculator.html}へ評価チャートに対応する基準PPM画像と読取画像を入力してMSEを記録する。
@@ -428,9 +446,10 @@ CSRの容量削減が得られない場合はINT8を主候補とする。INT8の
 実験で生成した学習済み重み、圧縮後ヘッダ、Python・Arduinoソース、測定CSVを条件ごとの
 フォルダへ保存する。各ファイルには$H$、方式、閾値、乱数シードを含む名前を付ける。
 使用したArduinoボード名、コンパイラ・ボードコア・Python・PyTorchのバージョン、
-ビルドログ、黒・白の校正値、\texttt{RGBFlashDelay}、測定日時、評価チャート識別子、
+ビルドログ、黒・白の校正値、\texttt{SAMPLE\_COUNT}、\texttt{RGB\_FLASH\_DELAY}、測定日時、評価チャート識別子、
 各回のPPM画像も記録し、同じ条件を再実行できるようにする。
-ニューラルネットワークを組み込む前のArduinoスケッチも比較用として別途保存する。
+ニューラルネットワークを組み込む前の\texttt{batansyusei.ino}と、現行の
+\texttt{60nn.ino}も比較用として変更せず別途保存する。
 
 \begin{thebibliography}{9}
   \bibitem{lecture}
