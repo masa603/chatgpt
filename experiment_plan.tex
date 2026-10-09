@@ -1,0 +1,443 @@
+% !TeX program = xelatex
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{fontspec}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,longtable}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+\setmainfont{Noto Serif CJK JP}
+\setsansfont{Noto Sans CJK JP}
+\setmonofont{Noto Sans Mono CJK JP}
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 1pt
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!45!black,
+  urlcolor=blue!55!black,
+  pdftitle={ニューラルネットワーク重みデータ圧縮に関する実験計画書}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{アジャイルワーク2}
+\rhead{重みデータ圧縮 実験計画書}
+\cfoot{\thepage}
+\setlength{\headheight}{14pt}
+
+\renewcommand{\contentsname}{目次}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0.35em}
+
+% 提出前に、次の2行だけ本人の情報へ変更する。
+\newcommand{\StudentID}{\textcolor{red}{（ここに学籍番号を入力）}}
+\newcommand{\StudentName}{\textcolor{red}{（ここに氏名を入力）}}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  frame=single,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  \centering
+  \vspace*{22mm}
+  {\Large アジャイルワーク2\par}
+  \vspace{12mm}
+  {\Huge\bfseries ニューラルネットワーク\par}
+  \vspace{3mm}
+  {\Huge\bfseries 重みデータ圧縮に関する実験計画書\par}
+  \vspace{25mm}
+
+  \begin{tabular}{>{\bfseries}p{38mm}p{90mm}}
+    学籍番号 & \StudentID \\
+    氏名     & \StudentName \\
+  \end{tabular}
+
+  \vfill
+  {\large 作成日：2026年10月9日\par}
+  \vspace{2mm}
+  {\large 提出期限：2026年10月16日（金）\par}
+\end{titlepage}
+
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\section{実験の目的}
+
+本実験の目的は、カラーチャートの読み取り値を補正するニューラルネットワークについて、
+Arduino上で使用する重みデータを圧縮し、限られたメモリ内で推論精度を保ったまま
+隠れ層の次元数を拡大できる条件を明らかにすることである。
+
+対象ネットワークは入力3次元、隠れ層2層、出力3次元である。授業資料では、隠れ層60次元は
+コンパイル・実行が可能である一方、70次元ではメモリ不足によるコンパイルエラーが確認されている。
+隠れ層を大きくすると表現能力の向上が期待できるが、第2層の重み数は次元数の二乗で増加するため、
+32 bit浮動小数点数のまま全要素を保存する方法には限界がある。
+
+そこで、L1正則化によって絶対値が小さくなった重みを0へ置き換える枝刈りと、
+非ゼロ要素だけを保持するCSR（Compressed Sparse Row）形式を主方式として検討する。
+比較方式として8 bit整数への量子化も評価する。隠れ層40、50、60次元において、
+圧縮前後のモデル容量、Arduinoへの搭載可否、推論時間、平均二乗誤差（MSE）を同一条件で比較し、
+メモリ削減量と推論品質のトレードオフを定量化する。
+
+\subsection{検証する仮説}
+
+\begin{enumerate}
+  \item L1正則化後の絶対値が小さい重みは推論への寄与が小さいため、適切な閾値で0化してもMSEの増加は小さい。
+  \item 十分な疎性が得られれば、CSR形式は列番号等の付加情報を含めても密行列より小さくなる。
+  \item 8 bit量子化は疎性に依存せず約4分の1まで重みを削減できるが、量子化誤差によりMSEが増える可能性がある。
+\end{enumerate}
+
+\section{実験の理論}
+
+\subsection{ネットワークのデータ量}
+
+隠れ層の次元数を$H$とすると、各層の重み行列は
+$H\times 3$、$H\times H$、$3\times H$である。重みとバイアスの要素数はそれぞれ
+\begin{align}
+  \boldsymbol{h}_1 &= \mathrm{ReLU}(W_1\boldsymbol{x}+\boldsymbol{b}_1),\\
+  \boldsymbol{h}_2 &= \mathrm{ReLU}(W_2\boldsymbol{h}_1+\boldsymbol{b}_2),\\
+  \boldsymbol{y}   &= W_3\boldsymbol{h}_2+\boldsymbol{b}_3
+\end{align}
+によって計算される。パラメータ数は
+\begin{align}
+  N_{\mathrm{weight}} &= H^2+6H, \\
+  N_{\mathrm{bias}}   &= 2H+3, \\
+  N_{\mathrm{total}}  &= H^2+8H+3
+\end{align}
+となる。すべてを\texttt{float}（1要素4 byte）で保持した場合のデータ量は
+$B_{\mathrm{dense}}=4N_{\mathrm{total}}$ byteである。理論値を表\ref{tab:dense-size}に示す。
+
+\begin{table}[htbp]
+  \centering
+  \caption{密形式で保持した場合のパラメータ量（配列管理情報を除く）}
+  \label{tab:dense-size}
+  \begin{tabular}{rrrrr}
+    \toprule
+    $H$ & 重み数 & バイアス数 & 合計要素数 & FP32データ量 [byte] \\
+    \midrule
+     40 &  1,840 &  83 &  1,923 &   7,692 \\
+     50 &  2,800 & 103 &  2,903 &  11,612 \\
+     60 &  3,960 & 123 &  4,083 &  16,332 \\
+     70 &  5,320 & 143 &  5,463 &  21,852 \\
+    100 & 10,600 & 203 & 10,803 &  43,212 \\
+    200 & 41,200 & 403 & 41,603 & 166,412 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+この値以外にも、プログラム本体、入出力用配列、スタック等がArduinoのメモリを使用する。
+したがって、理論値だけで搭載可否を判断せず、実際のコンパイル結果に表示されるフラッシュ使用量と
+RAM使用量を記録する。
+
+\subsection{閾値による枝刈り}
+
+学習後の重み$w$に閾値$\tau$を適用し、
+\begin{equation}
+  \widetilde{w}=\begin{cases}
+    0 & (|w|<\tau),\\
+    w & (|w|\geq\tau)
+  \end{cases}
+\end{equation}
+とする。0となった割合（疎性）$S$は、全重み数を$N$、非ゼロ重み数を$K$として
+\begin{equation}
+  S=1-\frac{K}{N}
+\end{equation}
+で求める。本実験では$\tau=0$を非圧縮の基準とし、
+$\tau\in\{0.001, 0.005, 0.01, 0.02, 0.05\}$を候補にする。
+授業資料の0.01は例であり、固定値とはせず、MSEと容量の両方から選ぶ。
+
+バイアスは要素数が少なく、0化による削減効果が小さいため、主実験ではFP32のまま保持する。
+これにより、圧縮による変化を重み行列に限定する。
+
+\subsection{疎行列の格納方式}
+
+$m\times n$行列に$K$個の非ゼロ要素がある場合、COO形式は値、行番号、列番号を列挙する。
+一方、CSR形式は値配列、列番号配列、各行の開始位置を表す行ポインタ配列を使用する。
+$H\leq 200$では行・列番号を\texttt{uint8\_t}、行ポインタを\texttt{uint16\_t}で表現できるため、
+理論データ量は概ね
+\begin{align}
+  B_{\mathrm{COO}} &= (4+1+1)K=6K,\\
+  B_{\mathrm{CSR}} &= (4+1)K+2(m+1)
+\end{align}
+となる。3層分のCSR配列とFP32バイアスを合計すると
+\begin{equation}
+  B_{\mathrm{CSR,total}}=5K+12H+24
+\end{equation}
+byteである。したがってCSRが密形式より小さくなる目安は
+\begin{equation}
+  K<\frac{4H^2+20H-12}{5}
+\end{equation}
+となる。CSRでは行番号を要素ごとに保存しないため、本実験のような行列積に適している。
+ただし、C/C++コンパイラによるアラインメントや配列管理情報もあり得るため、最終的には
+\texttt{sizeof}とコンパイル時のメモリ表示で実測する。CSRが密形式より大きくなる条件では採用しない。
+
+CSR形式の行列ベクトル積は次のように実装する。
+
+\begin{lstlisting}[language=C,caption={CSR形式による1層分の行列ベクトル積（概略）}]
+for (uint16_t row = 0; row < rows; ++row) {
+    float sum = bias[row];
+    for (uint16_t p = row_ptr[row]; p < row_ptr[row + 1]; ++p) {
+        sum += values[p] * input[col_idx[p]];
+    }
+    output[row] = sum;
+}
+\end{lstlisting}
+
+\subsection{8 bit量子化}
+
+比較方式では、層ごとに対称量子化を行う。層内の最大絶対値を$w_{\max}$として
+スケール$s=w_{\max}/127$を求め、
+\begin{equation}
+  q=\mathrm{clip}\left(\mathrm{round}\left(\frac{w}{s}\right),-127,127\right)
+\end{equation}
+により重みを\texttt{int8\_t}へ変換する。推論時は$sq$として使用する。
+重み1個を4 byteから1 byteへ削減でき、各層に4 byteのスケール値を追加する。
+3層分とFP32バイアスを合わせた理論データ量は$H^2+14H+24$ byteである。
+バイアスはFP32のままとする。量子化は疎性が低い場合にも有効である一方、
+スケールの選び方や丸め誤差がMSEへ影響する。
+
+\subsection{評価指標}
+
+評価用カラーチャートの色数を$N$、色$i$の正解RGB値を$\boldsymbol{t}_i$、
+推論値を$\boldsymbol{y}_i$とすると、MSEを
+\begin{equation}
+  \mathrm{MSE}=\frac{1}{3N}\sum_{i=1}^{N}\sum_{c\in\{R,G,B\}}
+  \left(y_{i,c}-t_{i,c}\right)^2
+\end{equation}
+とする。値の尺度は既存学習プログラムと同じものに統一する。
+圧縮前からの相対変化率は
+\begin{equation}
+  \Delta_{\mathrm{MSE}}=\frac{\mathrm{MSE}_{\mathrm{compressed}}-
+  \mathrm{MSE}_{\mathrm{dense}}}{\mathrm{MSE}_{\mathrm{dense}}}\times100\ [\%]
+\end{equation}
+で表す。また、モデルデータ削減率$R_B$と圧縮比$C_B$を
+\begin{align}
+  R_B &= \left(1-\frac{B_{\mathrm{compressed}}}{B_{\mathrm{dense}}}\right)\times100\ [\%],\\
+  C_B &= \frac{B_{\mathrm{dense}}}{B_{\mathrm{compressed}}}
+\end{align}
+とする。
+
+\section{実験方法}
+
+\subsection{実験条件}
+
+独立変数、従属変数、統制条件を表\ref{tab:variables}に示す。
+
+\begin{table}[htbp]
+  \centering
+  \caption{実験変数}
+  \label{tab:variables}
+  \begin{tabular}{>{\bfseries}p{30mm}p{118mm}}
+    \toprule
+    分類 & 内容 \\
+    \midrule
+    独立変数 & 隠れ層次元$H$（40、50、60）、圧縮方式（密FP32、枝刈り+CSR、INT8）、枝刈り閾値$\tau$ \\
+    従属変数 & MSE、MSE相対変化率、疎性、モデルデータ量、削減率、コンパイル可否、実行可否、RAM・フラッシュ使用量、推論時間 \\
+    統制条件 & 学習データ、学習済み重み、評価チャート、RGB尺度、測定治具、照明、チャート位置、紙の圧着、ウォームアップ時間、ソフトウェア版 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+学習条件は既存プログラムに合わせ、損失関数をMSE、最適化手法をAdam、学習率を0.01、
+L1正則化係数を$10^{-6}$とする。圧縮の影響だけを比較するため、各$H$について一度得た
+同一の学習済み重みからすべての圧縮条件を生成し、圧縮条件ごとに再学習は行わない。
+乱数シード、エポック数、データ分割、Python・PyTorch・Arduino IDE・ボードコアの
+バージョンを実験記録へ残す。
+
+\subsection{実験条件の一覧}
+
+\begin{table}[htbp]
+  \centering
+  \caption{比較する方式}
+  \label{tab:conditions}
+  \begin{tabular}{p{28mm}p{35mm}p{28mm}p{52mm}}
+    \toprule
+    条件 & 重み表現 & バイアス & 目的 \\
+    \midrule
+    Dense-FP32 & FP32密配列 & FP32 & 圧縮前の基準 \\
+    Pruned-Dense（PC確認） & 枝刈り後のFP32密配列 & FP32 & 枝刈り誤差とCSR実装誤差の切り分け \\
+    Prune-CSR & 閾値枝刈り後のFP32値とCSR索引 & FP32 & 小さい重みを除去した疎行列圧縮 \\
+    INT8 & 層ごとの対称8 bit量子化 & FP32 & 疎性に依存しない比較方式 \\
+    Hybrid（任意） & 枝刈り後のINT8値とCSR索引 & FP32 & 必須実験完了後の追加検討 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+まずPC上で全閾値を事前評価し、Arduino実機へ載せるPrune-CSR条件を各$H$につき1条件へ絞る。
+必須範囲の40、50、60次元が完了した後、まず非圧縮で限界を超える70次元を圧縮版で試し、
+容量に余裕があれば100次元を試す。200次元およびHybridは発展課題とし、必須条件の測定を優先する。
+
+\subsection{プログラムの実装手順}
+
+\begin{enumerate}
+  \item \textbf{基準モデルの作成：}
+    $H=40,50,60$について同一の学習・評価データを用いて学習する。
+    学習用データとは独立した評価用カラーチャートを確保する。
+  \item \textbf{PC上での圧縮候補生成：}
+    Pythonで各重みに閾値を適用し、疎性、CSR理論容量、圧縮後MSEを計算する。
+    同じ重みからINT8版も生成する。
+  \item \textbf{ヘッダファイルの出力：}
+    Dense-FP32では従来の配列を出力する。Prune-CSRでは各層の
+    \texttt{values[]}、\texttt{col\_idx[]}、\texttt{row\_ptr[]}を出力する。
+    INT8では\texttt{int8\_t}重みと層ごとのスケールを出力する。
+  \item \textbf{Arduino推論処理の実装：}
+    Dense、CSR、INT8の各行列ベクトル積関数を分離して実装する。
+    ReLU、入出力の正規化、バイアス加算順序は既存版と一致させる。
+  \item \textbf{単体確認：}
+    PC上で枝刈り後の密行列とCSRから復元した行列が一致することを確認する。
+    同じ固定入力に対するPruned-DenseとPrune-CSRの出力を比較した後、PC版とArduino版の各層出力を比較する。
+    配列次元、CSR行ポインタ終端、整数のオーバーフロー、添字範囲を確認する。
+  \item \textbf{ビルド・実行確認：}
+    各条件を同一ボード設定でクリーンビルドし、コンパイル可否、フラッシュ・RAM使用量を記録する。
+    書き込み後、固定入力に対する出力と推論時間を確認する。
+\end{enumerate}
+
+\subsection{MSEの測定方法}
+
+照明、紙の圧着、位置ずれ、周辺光による変動を圧縮誤差と混同しないため、次の手順を用いる。
+
+\begin{enumerate}
+  \item 学習に使用していない同一の評価用カラーチャートを全条件で使用する。
+  \item センサ、光源、遮光、紙の固定治具、チャート位置を変えず、測定前のウォームアップ時間を一定にする。
+  \item 各モデル・方式について同じチャートを10回測定する。測定順序はDenseと圧縮版を交互にし、時間変化の偏りを抑える。
+  \item 各回のMSEを保存し、平均$\overline{\mathrm{MSE}}$、標準偏差$s$、最小値、最大値を求める。
+  \item 圧縮版と基準版の各回の差も確認し、圧縮による差が基準版自身の測定ばらつきより大きいかを検討する。
+\end{enumerate}
+
+推論時間は\texttt{micros()}で計測する。10回のウォームアップ後に100回連続実行し、
+合計時間を100で割った平均を用いる。シリアル出力時間は計測区間から除外する。
+
+\subsection{方式と閾値の選択基準}
+
+方式の選択は次の優先順位で行う。
+
+\begin{enumerate}
+  \item \textbf{必須条件：}Arduinoでコンパイル、書き込み、推論が正常に完了する。
+  \item \textbf{品質条件：}暫定基準として、圧縮前に対する平均MSEの増加率を5\%以下とする。
+    さらに、その差が反復測定のばらつきと同程度かを確認する。
+  \item \textbf{容量条件：}品質条件を満たす候補のうち、実測モデルデータ量とRAM使用量が最小のものを優先する。
+  \item \textbf{速度条件：}推論時間がDense-FP32より20\%を超えて増加する場合は、容量削減との利得を比較し、採否を再検討する。
+  \item \textbf{実装条件：}容量とMSEが同程度なら、配列数が少なく、誤添字やオーバーフローを防ぎやすい方式を選ぶ。
+\end{enumerate}
+
+5\%および20\%は本計画で比較を行うための暫定基準であり、授業で指定された値ではない。
+最終判断では、Dense-FP32、Prune-CSR、INT8の「MSE--容量--速度」を図示し、
+いずれか一指標だけでなくPareto関係を確認する。CSRの索引を含む実容量が密形式以上なら、
+その閾値ではCSRを不採用とする。
+
+\subsection{結果の記録様式}
+
+各条件について、表\ref{tab:result-template}の項目を記録する。これにより理論値だけでなく、
+実機での搭載可否と推論品質を同時に比較できる。
+
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{17mm}p{16mm}p{13mm}p{16mm}p{18mm}p{18mm}p{17mm}p{17mm}@{}}
+  \caption{実験結果記録表（測定時に記入）}\label{tab:result-template}\\
+  \toprule
+  $H$ & 方式 & $\tau$ & 疎性 [\%] & データ量 [byte] & RAM [byte] & MSE 平均$\pm$s & 時間 [$\mu$s] \\
+  \midrule
+  \endfirsthead
+  \toprule
+  $H$ & 方式 & $\tau$ & 疎性 [\%] & データ量 [byte] & RAM [byte] & MSE 平均$\pm$s & 時間 [$\mu$s] \\
+  \midrule
+  \endhead
+  40 & Dense & 0 & 0 & & & & \\
+  40 & CSR & & & & & & \\
+  40 & INT8 & -- & -- & & & & \\
+  50 & Dense & 0 & 0 & & & & \\
+  50 & CSR & & & & & & \\
+  50 & INT8 & -- & -- & & & & \\
+  60 & Dense & 0 & 0 & & & & \\
+  60 & CSR & & & & & & \\
+  60 & INT8 & -- & -- & & & & \\
+  \bottomrule
+\end{longtable}
+}
+
+\section{予想される結果と問題発生時の対応}
+
+L1正則化によって第2層を中心に絶対値の小さい重みが多くなり、適切な閾値ではMSEを大きく
+悪化させずにCSR容量を削減できると予想する。ただし疎性が低い場合、CSRは索引の分だけ
+Dense-FP32より大きくなる。INT8は一定の削減効果が得られるが、外れ値にスケールが支配されると
+小さい重みの量子化誤差が増える可能性がある。
+
+閾値0.01で品質条件を満たさない場合は0.005、0.001の順に閾値を下げる。
+CSRの容量削減が得られない場合はINT8を主候補とする。INT8のMSEが大きく悪化する場合は、
+16 bit量子化または層単位から行単位へのスケール変更を検討する。
+実測MSEのばらつきが圧縮前後の差より大きい場合は、固定治具と遮光を再確認し、
+反復回数を20回へ増やす。100次元以上が搭載できない場合でも、40--60次元の必須比較を完了させ、
+容量計算から障害原因を説明する。
+
+\section{実施予定}
+
+\begin{table}[htbp]
+  \centering
+  \caption{実験スケジュール}
+  \begin{tabular}{p{30mm}p{110mm}}
+    \toprule
+    日付 & 内容 \\
+    \midrule
+    10月9--15日 & 方式調査、実験条件決定、計画書作成 \\
+    10月16日 & LaTeX原稿の最終確認、PDF化、manabaへ計画書を提出 \\
+    実験第1日 & 次元数変更、枝刈り・CSR・INT8出力プログラムの実装 \\
+    実験第2日 & PC上での閾値探索、MSEと容量の事前評価 \\
+    実験第3日 & Arduino版の実装、固定入力による単体確認 \\
+    実験第4日 & 実機でのメモリ・速度・MSE反復測定 \\
+    実験第5日 & 集計、グラフ作成、方式の選択と考察 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{再現性のために保存する情報}
+
+実験で生成した学習済み重み、圧縮後ヘッダ、Python・Arduinoソース、測定CSVを条件ごとの
+フォルダへ保存する。各ファイルには$H$、方式、閾値、乱数シードを含む名前を付ける。
+使用したArduinoボード名、コンパイラ・ボードコア・Python・PyTorchのバージョン、
+ビルドログ、測定日時、評価チャート識別子も記録し、同じ条件を再実行できるようにする。
+
+\begin{thebibliography}{9}
+  \bibitem{lecture}
+  前川仁孝・信川創・大西隆之・佐藤愛実，
+  「アジャイルワーク2 第4--5週（行列データ圧縮 実験計画書作成）」，2026年10月9日．
+
+  \bibitem{deepcompression}
+  S. Han, H. Mao, and W. J. Dally,
+  ``Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding,''
+  International Conference on Learning Representations (ICLR), 2016.
+
+  \bibitem{scipycsr}
+  SciPy Developers, ``\texttt{scipy.sparse.csr\_matrix},''
+  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html}
+  （2026年10月9日参照）．
+\end{thebibliography}
+
+\clearpage
+\section*{提出前チェックリスト}
+\addcontentsline{toc}{section}{提出前チェックリスト}
+
+\begin{itemize}
+  \item[$\square$] 表紙の学籍番号と氏名を本人の情報へ変更した。
+  \item[$\square$] 使用するArduinoボード名と各ソフトウェアのバージョンを追記した。
+  \item[$\square$] LaTeXからPDFを生成し、数式・表・改ページ・文字化けを目視確認した。
+  \item[$\square$] 未実施の測定結果を記入していないことを確認した。
+  \item[$\square$] ファイル名とmanabaの提出欄を確認し、2026年10月16日（金）までに提出した。
+\end{itemize}
+
+\end{document}
