@@ -166,7 +166,7 @@ $H\times 3$，$H\times H$，$3\times H$である．ネットワーク構成を�
       node[below,font=\footnotesize] {$3\times H$} (output.west);
     \node[font=\small] at (0,-1.35) {$H=40,50,60$で圧縮前後を比較する};
   \end{tikzpicture}
-  \caption{対象ネットワークの構成．各層でバイアスを加算し，隠れ層だけにReLUを適用する．}
+  \caption{ニューラルネットワークの構成．}
   \label{fig:network}
 \end{figure}
 
@@ -303,7 +303,7 @@ CSRが密形式より大きくなる条件では採用しない．
     \draw[planarrow] (sparseexample.south) -- node[right,xshift=2pt,font=\footnotesize] {CSR化}
       ([xshift=15mm]csrarrays.north);
   \end{tikzpicture}
-  \caption{枝刈りからCSRへの変換例．0化した密配列を，非ゼロ値・列番号・行ポインタへ変換する．}
+  \caption{枝刈りとCSRへの変換例．}
   \label{fig:csr-example}
 \end{figure}
 
