@@ -6,6 +6,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs,array,longtable,tabularx}
 \usepackage{float,needspace}
+\usepackage{setspace}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,calc}
@@ -95,6 +96,7 @@
 \tableofcontents
 \clearpage
 \pagenumbering{arabic}
+\setstretch{1.12}
 
 \section{実験の目的}
 
@@ -333,6 +335,7 @@ CSRが密形式より大きくなる条件では採用しない．
   \label{fig:csr-example}
 \end{figure}
 
+\Needspace{60mm}
 CSR形式の行列ベクトル積は次のように実装する．
 
 \begin{lstlisting}[language=C,caption={CSR形式による1層分の行列ベクトル積（概略）}]
@@ -378,7 +381,7 @@ MSEの単位は0--255のRGB値に基づく階調値の二乗である．
 \end{align}
 とする．
 
-\Needspace{65mm}
+\Needspace{85mm}
 \section{実験方法}
 
 \subsection{実験条件}
