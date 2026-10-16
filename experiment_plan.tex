@@ -5,8 +5,10 @@
 \usepackage[margin=24mm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs,array,longtable,tabularx}
-\usepackage{float}
+\usepackage{float,needspace}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{listings}
@@ -34,7 +36,16 @@
 \renewcommand{\contentsname}{目次}
 \renewcommand{\refname}{参考文献}
 \renewcommand{\tablename}{表}
+\renewcommand{\figurename}{図}
 \renewcommand{\lstlistingname}{コード}
+\definecolor{PlanBlue}{HTML}{244B67}
+\definecolor{PlanGreen}{HTML}{346E62}
+\tikzset{
+  planbox/.style={draw=PlanBlue,line width=0.7pt,rounded corners=2pt,
+    fill=PlanBlue!5,align=center,font=\small\sffamily,inner sep=5pt},
+  plandata/.style={planbox,draw=PlanGreen,fill=PlanGreen!6},
+  planarrow/.style={-{Stealth[length=2mm]},draw=PlanBlue,line width=0.7pt}
+}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 \renewcommand{\arraystretch}{1.25}
@@ -134,7 +145,32 @@ CSRは行ごとに非ゼロ要素を取り出せるため，出力ニューロ�
 \subsection{ネットワークのデータ量}
 
 隠れ層の次元数を$H$とすると，各層の重み行列は
-$H\times 3$，$H\times H$，$3\times H$である．順伝播は
+$H\times 3$，$H\times H$，$3\times H$である．ネットワーク構成を図\ref{fig:network}に示す．
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \node[plandata,text width=18mm,minimum height=16mm] (input) at (-6.5,0)
+      {入力層\\3次元};
+    \node[planbox,text width=27mm,minimum height=16mm] (hiddenone) at (-2.15,0)
+      {隠れ層1\\$H$次元・ReLU};
+    \node[planbox,text width=27mm,minimum height=16mm] (hiddentwo) at (2.15,0)
+      {隠れ層2\\$H$次元・ReLU};
+    \node[plandata,text width=26mm,minimum height=16mm] (output) at (6.5,0)
+      {出力層\\3次元・線形};
+    \draw[planarrow] (input.east) -- node[above,font=\small] {$W_1$}
+      node[below,font=\footnotesize] {$H\times3$} (hiddenone.west);
+    \draw[planarrow] (hiddenone.east) -- node[above,font=\small] {$W_2$}
+      node[below,font=\footnotesize] {$H\times H$} (hiddentwo.west);
+    \draw[planarrow] (hiddentwo.east) -- node[above,font=\small] {$W_3$}
+      node[below,font=\footnotesize] {$3\times H$} (output.west);
+    \node[font=\small] at (0,-1.35) {$H=40,50,60$で圧縮前後を比較する};
+  \end{tikzpicture}
+  \caption{対象ネットワークの構成．各層でバイアスを加算し，隠れ層だけにReLUを適用する．}
+  \label{fig:network}
+\end{figure}
+
+順伝播は
 \begin{align}
   \boldsymbol{h}_1 &= \mathrm{ReLU}(W_1\boldsymbol{x}+\boldsymbol{b}_1),\\
   \boldsymbol{h}_2 &= \mathrm{ReLU}(W_2\boldsymbol{h}_1+\boldsymbol{b}_2),\\
@@ -227,6 +263,44 @@ byteである．したがってCSRが密形式より小さくなる目安は
 各配列の\texttt{sizeof}の合計とビルド結果の両方で確認する．
 CSRが密形式より大きくなる条件では採用しない．
 
+枝刈りとCSRへの格納の対応を図\ref{fig:csr-example}に示す．
+図は説明用の3$\times$4行列であり，実験で使用する学習済み重みではない．
+非ゼロ値は行優先で並べ，列番号と行ポインタの添字は0始まりとする．
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[font=\small]
+    \node (denseexample) at (-4.5,0) {$\displaystyle
+      W=\begin{pmatrix}
+        0.002 & 0.8 & -0.004 & 0\\
+        -0.6 & 0.001 & 0 & 0.3\\
+        0 & 0.007 & -0.4 & 0.002
+      \end{pmatrix}$};
+    \node (sparseexample) at (4.5,0) {$\displaystyle
+      \widetilde W=\begin{pmatrix}
+        0 & 0.8 & 0 & 0\\
+        -0.6 & 0 & 0 & 0.3\\
+        0 & 0 & -0.4 & 0
+      \end{pmatrix}$};
+    \draw[planarrow] (denseexample.east) --
+      node[above,align=center,font=\footnotesize] {$\tau=0.01$\\$|w|<\tau$を0化}
+      (sparseexample.west);
+    \node[align=left,font=\small] at (-4.3,-2.15)
+      {非ゼロ数 $K=4$\\疎性 $S=1-4/12\simeq66.7\%$\\列番号は0--3，行ポインタ終端は4};
+    \node[planbox,text width=70mm] (csrarrays) at (3,-2.15) {
+      \begin{tabular}{@{}ll@{}}
+        \texttt{values} & $[0.8,-0.6,0.3,-0.4]$\\
+        \texttt{col\_idx} & $[1,0,3,2]$\\
+        \texttt{row\_ptr} & $[0,1,3,4]$
+      \end{tabular}
+    };
+    \draw[planarrow] (sparseexample.south) -- node[right,xshift=2pt,font=\footnotesize] {CSR化}
+      ([xshift=15mm]csrarrays.north);
+  \end{tikzpicture}
+  \caption{枝刈りからCSRへの変換例．0化した密配列を，非ゼロ値・列番号・行ポインタへ変換する．}
+  \label{fig:csr-example}
+\end{figure}
+
 CSR形式の行列ベクトル積は次のように実装する．
 
 \begin{lstlisting}[language=C,caption={CSR形式による1層分の行列ベクトル積（概略）}]
@@ -272,13 +346,14 @@ MSEの単位は0--255のRGB値に基づく階調値の二乗である．
 \end{align}
 とする．
 
+\Needspace{65mm}
 \section{実験方法}
 
 \subsection{実験条件}
 
 独立変数，従属変数，統制条件を表\ref{tab:variables}に示す．
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \caption{実験変数}
   \label{tab:variables}
@@ -293,17 +368,58 @@ MSEの単位は0--255のRGB値に基づく階調値の二乗である．
   \end{tabularx}
 \end{table}
 
-使用ボードはArduino UNO R4 WiFiとする．主マイコンRA4M1のSRAMは32 KB（32,768 byte），
-フラッシュメモリは256 KB（262,144 byte）である．推論はRA4M1側で実行し，
-WiFi通信用ESP32-S3のメモリはモデルの格納先に含めない．
-カラー読取用センサ・光源，固定治具，遮光部材とPCを使用する．
-実験開始時にArduino IDE・ボードコア・コンパイラ・Python・PyTorchのバージョンと，
-ビルド表示上の利用可能メモリ量を確認して実験記録へ記載し，以後の比較では固定する．
+使用機材と実行環境を表\ref{tab:environment}に，学習・圧縮・測定の設定を
+表\ref{tab:settings}にまとめる．メモリ容量は推論を実行する主マイコンRA4M1の公称値である．
+実際に利用できる容量と配列の配置先は，ボードコア・ビルド設定の影響を含めて確認する．
+
+\begin{table}[H]
+  \centering
+  \caption{使用機材・実行環境とArduinoのメモリ仕様}
+  \label{tab:environment}
+  \begin{tabularx}{\linewidth}{P{29mm}P{55mm}Y}
+    \toprule
+    項目 & 仕様・設定 & 実験での扱い \\
+    \midrule
+    ボード & Arduino UNO R4 WiFi & 圧縮前後で同一の実機を使用 \\
+    主マイコン & Renesas RA4M1 & ニューラルネットワークの推論を実行 \\
+    SRAM & 32 KB（32,768 byte） & 静的領域・作業配列・スタック等が使用 \\
+    \shortstack[l]{フラッシュ\\メモリ} & 256 KB（262,144 byte） & プログラムと配置された定数データ等が使用 \\
+    補助マイコン & ESP32-S3 & 推論モデルの格納先に含めない \\
+    読取機材 & 授業で使用するセンサ・光源，固定治具，遮光部材 & 配置・照明・紙の固定条件を統一 \\
+    学習用PC & PCのCPU上で学習 & 同じ学習データから各$H$の重みを作成 \\
+    Arduino環境 & Arduino IDE，ボードコア，コンパイラ & バージョンを実験開始時に記録し，以後固定 \\
+    Python環境 & Python，NumPy，PyTorch & バージョンを実験開始時に記録し，以後固定 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{学習・圧縮・測定の設定値}
+  \label{tab:settings}
+  \begin{tabularx}{\linewidth}{P{47mm}Y}
+    \toprule
+    項目 & 設定値 \\
+    \midrule
+    ネットワーク構成 & 入力3，隠れ層$H$・$H$，出力3（隠れ層のみReLU） \\
+    基本の隠れ層次元 & $H=40,50,60$ \\
+    損失関数／最適化手法 & MSE／Adam \\
+    学習率／L1正則化係数 & $0.01$／$10^{-6}$ \\
+    学習回数／乱数シード & 50,000 epoch／42（NumPy・PyTorch） \\
+    枝刈り閾値の候補 & $\tau\in\{0.001,0.005,0.01,0.02,0.05\}$（検証用データで選択） \\
+    センサ平均回数 & \texttt{SAMPLE\_COUNT}=10回 \\
+    RGB読取待機時間 & \texttt{RGB\_FLASH\_DELAY}=10 ms \\
+    光源の安定待機時間 & 測定前に60秒間点灯 \\
+    MSEの反復測定 & 各$H$で2条件を各10回（計6条件・60回） \\
+    推論時間の測定 & 10回ウォームアップ後，100回連続実行を5組 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
 授業資料の60次元で実行可，70次元でコンパイル不可という結果は参考とし，
 使用する実機でもDense-FP32の搭載限界を確認する．
 
-本実験の学習条件は，損失関数をMSE，最適化手法をAdam，学習率を0.01，
-L1正則化係数を$10^{-6}$，学習回数を50,000 epochとする．圧縮の影響だけを比較するため，各$H$について一度得た
+学習条件は表\ref{tab:settings}のとおりとする．圧縮の影響だけを比較するため，各$H$について一度得た
 同一の学習済み重みからすべての圧縮条件を生成し，圧縮条件ごとに再学習は行わない．
 学習用データは，3$\times$3の9色と，6$\times$6で読み取った画像の上4行
 （6$\times$4の24色）を合わせた33組とする．
@@ -311,7 +427,7 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
 教師データは対応する基準画像から各色のRGB値を取得する．縮小には最近傍法を用い，
 6$\times$4の読取データには6$\times$6の基準画像の上4行を対応させるなど，色の位置を一致させる．
 読取ミスを学習しないよう，元のPPM画像を目視確認してから学習データへ変換する．
-モデル生成前にNumPyとPyTorchの乱数シードを42に固定し，学習はPCのCPU上で行う．
+モデル生成前にNumPyとPyTorchへ表\ref{tab:settings}の乱数シードを設定する．
 データの並び順，学習済み重み，学習ログを保存する．次元ごとに1回の学習とし，
 本実験の結論はその学習済みモデルに対する圧縮の影響に限定する．
 
@@ -340,7 +456,7 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
   \centering
   \caption{実機で比較する条件}
   \label{tab:conditions}
-  \begin{tabularx}{\linewidth}{P{30mm}P{40mm}P{14mm}Y}
+  \begin{tabularx}{\linewidth}{P{30mm}P{40mm}P{20mm}Y}
     \toprule
     条件 & 重み表現 & バイアス & 目的 \\
     \midrule
@@ -359,6 +475,38 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
 40，50，60次元の比較が完了した後，70次元のDense-FP32と圧縮版で搭載可否を比較し，
 容量に余裕があれば100次元を試す．200次元は発展課題とし，必須条件の測定を優先する．
 
+学習から実機評価までの流れを図\ref{fig:workflow}に示す．
+検証用データではDense-FP32も同じ入力で評価し，MSE増加率の基準とする．
+最終評価用データは閾値決定後に使用し，閾値の選択へ戻さない．
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \node[plandata,text width=95mm] (trained) at (0,0)
+      {学習用データ33組からL1正則化で学習\\$H=40,50,60$ごとに同一の学習済み重みを保存};
+    \node[planbox,text width=45mm,minimum height=16mm] (densepath) at (-4.5,-1.8)
+      {Dense-FP32\\重みをそのまま保持};
+    \node[planbox,text width=45mm,minimum height=16mm] (csrpath) at (4.5,-1.8)
+      {Prune-CSR候補\\各閾値で枝刈り・CSR化};
+    \coordinate (branchpoint) at (0,-0.9);
+    \draw[draw=PlanBlue,line width=0.7pt] (trained.south) -- (branchpoint);
+    \draw[planarrow] (branchpoint) -| (densepath.north);
+    \draw[planarrow] (branchpoint) -| (csrpath.north);
+    \node[plandata,text width=95mm] (validation) at (0,-4)
+      {PC：検証用データで閾値を選択\\Denseを基準にMSE増加率とCSR容量を比較\\各$H$で閾値を固定し，CSRの実装を確認};
+    \draw[planarrow] (densepath.south) -- ++(0,-2mm) -| ([xshift=-29mm]validation.north);
+    \draw[planarrow] (csrpath.south) -- ++(0,-2mm) -| ([xshift=29mm]validation.north);
+    \node[planbox,text width=95mm] (evaluation) at (0,-6.5)
+      {Arduino：独立した最終評価データで圧縮前後を比較\\Dense-FP32と選択済みPrune-CSRを各$H$で10ブロック測定\\計6条件・60回のMSE，容量，RAM・Flash，推論時間を記録};
+    \draw[planarrow] (validation.south) --
+      node[right,align=left,font=\footnotesize] {以後，閾値は変更しない}
+      (evaluation.north);
+  \end{tikzpicture}
+  \caption{実験全体の流れ．学習用・検証用・最終評価用データを分離する．実センサでの反復測定に加え，保存済み入力による固定入力比較も行う．}
+  \label{fig:workflow}
+\end{figure}
+
+\Needspace{40mm}
 \subsection{プログラムの実装手順}
 
 \begin{enumerate}
