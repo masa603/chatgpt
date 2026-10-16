@@ -5,7 +5,7 @@
 \usepackage[margin=24mm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs,array,longtable,tabularx}
-\usepackage{float,needspace}
+\usepackage{float}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
@@ -93,7 +93,7 @@ Arduino上で使用する重みデータを圧縮し，限られたメモリ内�
 
 \subsection{データ圧縮が必要な理由}
 
-対象ネットワークは入力3次元，隠れ層2層，出力3次元である．授業資料\cite{class2026}では，隠れ層60次元は
+対象ネットワークは入力3次元，隠れ層2層，出力3次元である．授業資料では，隠れ層60次元は
 コンパイル・実行が可能である一方，70次元ではメモリ不足によるコンパイルエラーが確認されている．
 隠れ層を大きくすると表現能力の向上が期待できるが，第2層の重み数は次元数の二乗で増加するため，
 32 bit浮動小数点数のまま全要素を保存する方法には限界がある．
@@ -350,7 +350,7 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
 別々のチャートを用意できない場合は，学習に用いない1枚の追加チャートの色を，
 測定結果を見る前に検証用と最終評価用へ分割し，対応する色だけでMSEを計算する．
 その場合は色数，分割方法，同一チャート内の分割であるという制約を記録する．
-現時点では追加チャートの入手可否は未確定のため，実験第1日に用意できるチャートと分割方法を確定する．
+現時点では追加チャートの入手可否は未確定のため，実験開始前に用意できるチャートと分割方法を確定する．
 独立した検証・最終評価用の色を用意できない場合でも，実装・固定入力比較・容量・速度の確認を先行する．
 ただし，学習データでのMSEは参考値とし，独立データでの精度確認が完了したとは扱わない．
 最終評価結果を見て同じ評価データで閾値を選び直すことはしない．
@@ -562,45 +562,11 @@ CSRの容量削減が得られない場合はINT8を主候補とする．INT8の
 100次元以上が搭載できない場合でも，40--60次元の必須比較を完了させ，
 容量計算から障害原因を説明する．
 
-\Needspace{75mm}
-\section{実施予定}
-
-\begin{table}[H]
-  \centering
-  \caption{実験スケジュール}
-  \begin{tabular}{p{30mm}p{110mm}}
-    \toprule
-    日付 & 内容 \\
-    \midrule
-    10月9--15日 & 方式調査，実験条件決定，計画書作成 \\
-    10月16日 & LaTeX原稿の最終確認，PDF化，manabaへ計画書を提出 \\
-    実験第1日 & ボード・ソフトウェア版の確認，検証・最終評価用データの準備，次元数変更 \\
-    実験第2日 & 枝刈り・CSR・INT8出力の実装，PC上の閾値探索と容量評価 \\
-    実験第3日 & Arduino版の実装，固定入力による単体確認 \\
-    実験第4日 & 実機でのメモリ・速度・MSE反復測定 \\
-    実験第5日 & 集計，グラフ作成，方式の選択と考察 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\section{再現性のために保存する情報}
-
-実験で生成した学習済み重み，圧縮後ヘッダ，Python・Arduinoソース，測定CSVを条件ごとの
-フォルダへ保存する．各ファイルには$H$，方式，閾値，乱数シードを含む名前を付ける．
-使用したArduinoボード名，コンパイラ・ボードコア・Python・PyTorchのバージョン，
-ビルドログ，黒・白の校正値，\texttt{SAMPLE\_COUNT}，\texttt{RGB\_FLASH\_DELAY}，測定日時，評価チャート識別子，
-各回のPPM画像も記録し，同じ条件を再実行できるようにする．
-学習用・検証用・最終評価用の対応表，色の分割方法，測定順序，センサ生値，
-固定入力比較の出力，配列配置の確認結果，方式・閾値の選択理由も保存する．
-ニューラルネットワークを組み込む前の\texttt{batansyusei.ino}と，現行の
-\texttt{60nn.ino}も比較用として変更せず別途保存する．
-
+\begingroup
+\small
+\setlength{\parskip}{0pt}
 \begin{thebibliography}{9}
-  \bibitem{class2026}
-  前川仁孝・信川創・大西隆之・佐藤愛実，
-  「アジャイルワーク2 第4--5週（行列データ圧縮 実験計画書作成）」，
-  授業配布資料，2026年10月9日．
-
+  \setlength{\itemsep}{3pt}
   \bibitem{tibshirani1996}
   R. Tibshirani,
   ``Regression Shrinkage and Selection via the Lasso,''
@@ -630,5 +596,6 @@ CSRの容量削減が得られない場合はINT8を主候補とする．INT8の
   Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
   pp. 2704--2713, 2018.
 \end{thebibliography}
+\endgroup
 
 \end{document}
