@@ -4,7 +4,8 @@
 \usepackage{fontspec}
 \usepackage[margin=24mm]{geometry}
 \usepackage{amsmath,amssymb}
-\usepackage{booktabs,array,longtable}
+\usepackage{booktabs,array,longtable,tabularx}
+\usepackage{float,needspace}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
@@ -32,11 +33,15 @@
 
 \renewcommand{\contentsname}{目次}
 \renewcommand{\refname}{参考文献}
+\renewcommand{\tablename}{表}
+\renewcommand{\lstlistingname}{コード}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 \renewcommand{\arraystretch}{1.25}
 \setlength{\parindent}{1em}
 \setlength{\parskip}{0.35em}
 
-% 提出前に，次の2行だけ本人の情報へ変更する．
+% 表紙の情報
 \newcommand{\StudentID}{25G1017}
 \newcommand{\StudentName}{岩澤大心}
 
@@ -69,6 +74,8 @@
   \vfill
   {\large 作成日：2026年10月9日\par}
   \vspace{2mm}
+  {\large 改訂日：2026年10月16日\par}
+  \vspace{2mm}
   {\large 提出期限：2026年10月16日（金）\par}
 \end{titlepage}
 
@@ -86,7 +93,7 @@ Arduino上で使用する重みデータを圧縮し，限られたメモリ内�
 
 \subsection{データ圧縮が必要な理由}
 
-対象ネットワークは入力3次元，隠れ層2層，出力3次元である．授業資料では，隠れ層60次元は
+対象ネットワークは入力3次元，隠れ層2層，出力3次元である．授業資料\cite{class2026}では，隠れ層60次元は
 コンパイル・実行が可能である一方，70次元ではメモリ不足によるコンパイルエラーが確認されている．
 隠れ層を大きくすると表現能力の向上が期待できるが，第2層の重み数は次元数の二乗で増加するため，
 32 bit浮動小数点数のまま全要素を保存する方法には限界がある．
@@ -163,12 +170,19 @@ $B_{\mathrm{dense}}=4N_{\mathrm{total}}$ byteである．理論値を表\ref{tab
 \end{table}
 
 この値以外にも，プログラム本体，入出力用配列，スタック等がArduinoのメモリを使用する．
-現行の\texttt{60nn.ino}では，推論時に隠れ層出力\texttt{layer1[]}と\texttt{layer2[]}を
-ローカルなFP32配列として確保するため，その作業領域は$8H$ byte（$H=60$では480 byte）となる．
-さらに最大6$\times$6画素の\texttt{imageData}が108 byteを使用する．
-したがって，理論値だけで搭載可否を判断せず，実際のコンパイル結果に表示されるフラッシュ使用量と
-RAM使用量を記録する．また，現行の\texttt{model\_parameters.h}は修飾子なしの\texttt{float}配列を
-出力するため，全方式で\texttt{const}等の配置条件をそろえ，圧縮方式以外の差が生じないようにする．
+本実験では隠れ層出力をFP32配列2本で保持する設計とし，その作業領域は
+$8H$ byte（$H=60$では480 byte）となる．さらに，6$\times$6画素のRGB値を
+各成分1 byteで保持する場合，画像配列だけで108 byteを使用する．
+ビルド結果に表示されるRAM使用量は通常，グローバル変数等の静的領域であり，
+ローカル配列を含むスタックや動的確保領域をすべて含むとは限らない．
+フラッシュ使用量，静的RAM使用量，推論用作業配列の容量を区別して記録し，
+実機での連続推論も確認して搭載可否を判断する．
+
+全方式で重み配列とバイアスを読み取り専用として扱い，宣言の修飾子と配置方針を統一する．
+ただし，\texttt{const}を付けた配列の配置先と読出方法はボード・ツールチェーンに依存するため，
+必ずフラッシュへ配置されるとは仮定しない．実験開始時に対象ボードの配置を確認し，
+必要な読出方法を全方式でそろえる．モデル容量は重み，バイアス，索引，スケールの
+各配列の\texttt{sizeof}の合計で求め，配置やパディングを含むビルド全体の使用量と区別する．
 
 \subsection{閾値による枝刈り}
 
@@ -210,8 +224,10 @@ byteである．したがってCSRが密形式より小さくなる目安は
   K<\frac{4H^2+20H-12}{5}
 \end{equation}
 となる．CSRでは行番号を要素ごとに保存しないため，本実験のような行列積に適している．
-ただし，C/C++コンパイラによるアラインメントや配列管理情報もあり得るため，最終的には
-\texttt{sizeof}とコンパイル時のメモリ表示で実測する．CSRが密形式より大きくなる条件では採用しない．
+上式の$K$は3層分の非ゼロ重み数の合計である．
+配列間のアラインメント等はビルド全体の使用量に影響し得るため，最終的には
+各配列の\texttt{sizeof}の合計とビルド結果の両方で確認する．
+CSRが密形式より大きくなる条件では採用しない．
 
 CSR形式の行列ベクトル積は次のように実装する．
 
@@ -233,7 +249,12 @@ for (uint16_t row = 0; row < rows; ++row) {
 \begin{equation}
   q=\mathrm{clip}\left(\mathrm{round}\left(\frac{w}{s}\right),-127,127\right)
 \end{equation}
-により重みを\texttt{int8\_t}へ変換する．推論時は$sq$として使用する．
+により重みを\texttt{int8\_t}へ変換する．ただし，$w_{\max}=0$の層では$s=1$，全要素$q=0$とし，
+ゼロ除算を避ける．丸めは最近傍とし，ちょうど中間の場合は0から遠い側へ丸める．
+推論時は$sq$として使用する．本実験のINT8は重みの格納形式のみを量子化し，
+入力・中間出力・バイアス・積和演算はFP32とする．
+必要な重みだけを積和演算時にFP32へ復号し，全重みをFP32配列へ展開しない．
+したがって，全整数による推論や速度向上を前提とせず，復号の時間も含めて測定する．
 重み1個を4 byteから1 byteへ削減でき，各層に4 byteのスケール値を追加する．
 3層分とFP32バイアスを合わせた理論データ量は$H^2+14H+24$ byteである．
 バイアスはFP32のままとする．量子化は疎性が低い場合にも有効である一方，
@@ -247,17 +268,25 @@ for (uint16_t row = 0; row < rows; ++row) {
   \mathrm{MSE}=\frac{1}{3N}\sum_{i=1}^{N}\sum_{c\in\{R,G,B\}}
   \left(y_{i,c}-t_{i,c}\right)^2
 \end{equation}
-とする．本実験で使用する3$\times$3画像では$N=9$である．ニューラルネットワークへの
+とする．$N$は実際に用いる評価チャートの色数であり，3$\times$3の場合は$N=9$である．ニューラルネットワークへの
 入出力は0.0--1.0へ正規化する一方，最終評価では従来どおり0--255のRGB値へ戻して
 P3形式のPPM画像を生成し，配布済みの\texttt{mse\_calculator.html}で
-評価チャートに対応する基準PPM画像と比較する．第3週の3$\times$3チャートを使う場合の
-基準ファイルは\texttt{reference\_image.ppm}である．全条件で同じ変換方法を使用する．
-圧縮前からの相対変化率は
+評価チャートと同じ寸法・色順の基準PPM画像と比較する．学習に使用したチャートは
+最終評価に流用せず，基準画像の対応とRGB尺度を確認する．全条件で同じ変換方法を使用する．
+10回測定したMSEの平均を$\overline{\mathrm{MSE}}$とし，圧縮前からの絶対差と相対変化率を
+それぞれ
 \begin{equation}
-  \Delta_{\mathrm{MSE}}=\frac{\mathrm{MSE}_{\mathrm{compressed}}-
-  \mathrm{MSE}_{\mathrm{dense}}}{\mathrm{MSE}_{\mathrm{dense}}}\times100\ [\%]
+  D_{\mathrm{MSE}}=\overline{\mathrm{MSE}}_{\mathrm{compressed}}-
+  \overline{\mathrm{MSE}}_{\mathrm{dense}}
 \end{equation}
-で表す．また，モデルデータ削減率$R_B$と圧縮比$C_B$を
+および
+\begin{equation}
+  \Delta_{\mathrm{MSE}}=\frac{D_{\mathrm{MSE}}}
+  {\overline{\mathrm{MSE}}_{\mathrm{dense}}}\times100\ [\%]
+\end{equation}
+で表す．基準の平均MSEが0の場合は相対変化率を算出せず，絶対差で評価する．
+MSEの単位は0--255のRGB値に基づく階調値の二乗である．
+また，モデルデータ削減率$R_B$と圧縮比$C_B$を
 \begin{align}
   R_B &= \left(1-\frac{B_{\mathrm{compressed}}}{B_{\mathrm{dense}}}\right)\times100\ [\%],\\
   C_B &= \frac{B_{\mathrm{dense}}}{B_{\mathrm{compressed}}}
@@ -274,36 +303,65 @@ P3形式のPPM画像を生成し，配布済みの\texttt{mse\_calculator.html}�
   \centering
   \caption{実験変数}
   \label{tab:variables}
-  \begin{tabular}{>{\bfseries}p{30mm}p{118mm}}
+  \begin{tabularx}{\linewidth}{>{\bfseries}P{26mm}Y}
     \toprule
     分類 & 内容 \\
     \midrule
     独立変数 & 隠れ層次元$H$（40，50，60），圧縮方式（密FP32，枝刈り+CSR，INT8），枝刈り閾値$\tau$ \\
-    従属変数 & MSE，MSE相対変化率，疎性，モデルデータ量，削減率，コンパイル可否，実行可否，RAM・フラッシュ使用量，推論時間 \\
+    従属変数 & MSE，MSE絶対差・相対変化率，疎性，モデルデータ量，削減率，コンパイル・書き込み・実行可否，RAM・フラッシュ使用量，推論時間 \\
     統制条件 & 学習データ，学習済み重み，評価チャート，黒・白校正手順，\texttt{SAMPLE\_COUNT}，\texttt{RGB\_FLASH\_DELAY}，RGB尺度，測定治具，照明，チャート位置，紙の圧着，ソフトウェア版 \\
     \bottomrule
-  \end{tabular}
+  \end{tabularx}
 \end{table}
 
-学習条件は既存プログラムに合わせ，損失関数をMSE，最適化手法をAdam，学習率を0.01，
+使用ボードはArduino UNO R4 WiFiとする．主マイコンRA4M1のSRAMは32 KB（32,768 byte），
+フラッシュメモリは256 KB（262,144 byte）である．推論はRA4M1側で実行し，
+WiFi通信用ESP32-S3のメモリはモデルの格納先に含めない．
+カラー読取用センサ・光源，固定治具，遮光部材とPCを使用する．
+実験開始時にArduino IDE・ボードコア・コンパイラ・Python・PyTorchのバージョンと，
+ビルド表示上の利用可能メモリ量を確認して実験記録へ記載し，以後の比較では固定する．
+授業資料の60次元で実行可，70次元でコンパイル不可という結果は参考とし，
+使用する実機でもDense-FP32の搭載限界を確認する．
+
+本実験の学習条件は，損失関数をMSE，最適化手法をAdam，学習率を0.01，
 L1正則化係数を$10^{-6}$，学習回数を50,000 epochとする．圧縮の影響だけを比較するため，各$H$について一度得た
 同一の学習済み重みからすべての圧縮条件を生成し，圧縮条件ごとに再学習は行わない．
-現行Notebookの学習データは，3$\times$3の9色と，6$\times$6で読み取った画像の上4行
-（6$\times$4の24色）を合わせた33組である．
+学習用データは，3$\times$3の9色と，6$\times$6で読み取った画像の上4行
+（6$\times$4の24色）を合わせた33組とする．
 RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipynb}へ入力する．
-教師データは対応する2枚の基準PNG画像を最近傍法で3$\times$3と6$\times$4へ縮小して生成する．
+教師データは対応する基準画像から各色のRGB値を取得する．縮小には最近傍法を用い，
+6$\times$4の読取データには6$\times$6の基準画像の上4行を対応させるなど，色の位置を一致させる．
 読取ミスを学習しないよう，元のPPM画像を目視確認してから学習データへ変換する．
-現行Notebookには乱数シードの固定処理がないため，モデル生成前にNumPyとPyTorchのシードを設定する．
-乱数シード，データ分割，Python・PyTorch・Arduino IDE・ボードコアの
-バージョンを実験記録へ残す．
+モデル生成前にNumPyとPyTorchの乱数シードを42に固定し，学習はPCのCPU上で行う．
+データの並び順，学習済み重み，学習ログを保存する．次元ごとに1回の学習とし，
+本実験の結論はその学習済みモデルに対する圧縮の影響に限定する．
+
+\subsection{学習・検証・最終評価データの分離}
+
+データの用途は次の3つに分け，ファイル名とチャート識別子で管理する．
+\begin{enumerate}
+  \item \textbf{学習用：}上記33組を重みの学習に使用する．
+  \item \textbf{検証用：}学習に使用していない色を含む別チャートの読取値と正解RGB値を用意し，
+    枝刈り閾値と圧縮方式の選択に使用する．読取は独立した3回分を取得し，PC上の事前評価に用いる．
+  \item \textbf{最終評価用：}学習用・検証用と別のチャートを用い，可能であれば教員から配布を受ける．
+    比較する方式と各方式の設定（閾値等）を固定した後の実機評価だけに使用する．
+\end{enumerate}
+検証用と最終評価用には，同じチャートを単に再読取したデータを用いず，色の組合せが異なるものを用いる．
+別々のチャートを用意できない場合は，学習に用いない1枚の追加チャートの色を，
+測定結果を見る前に検証用と最終評価用へ分割し，対応する色だけでMSEを計算する．
+その場合は色数，分割方法，同一チャート内の分割であるという制約を記録する．
+現時点では追加チャートの入手可否は未確定のため，実験第1日に用意できるチャートと分割方法を確定する．
+独立した検証・最終評価用の色を用意できない場合でも，実装・固定入力比較・容量・速度の確認を先行する．
+ただし，学習データでのMSEは参考値とし，独立データでの精度確認が完了したとは扱わない．
+最終評価結果を見て同じ評価データで閾値を選び直すことはしない．
 
 \subsection{実験条件の一覧}
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \caption{比較する方式}
   \label{tab:conditions}
-  \begin{tabular}{p{28mm}p{35mm}p{28mm}p{52mm}}
+  \begin{tabularx}{\linewidth}{P{30mm}P{40mm}P{14mm}Y}
     \toprule
     条件 & 重み表現 & バイアス & 目的 \\
     \midrule
@@ -313,11 +371,14 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
     INT8 & 層ごとの対称8 bit量子化 & FP32 & 疎性に依存しない比較方式 \\
     Hybrid（任意） & 枝刈り後のINT8値とCSR索引 & FP32 & 必須実験完了後の追加検討 \\
     \bottomrule
-  \end{tabular}
+  \end{tabularx}
 \end{table}
 
-まずPC上で全閾値を事前評価し，Arduino実機へ載せるPrune-CSR条件を各$H$につき1条件へ絞る．
-必須範囲の40，50，60次元が完了した後，まず非圧縮で限界を超える70次元を圧縮版で試し，
+まずPC上で検証用データに対して全閾値を事前評価し，Arduino実機へ載せるPrune-CSR条件を
+各$H$につき1条件へ絞る．Dense-FP32，選んだPrune-CSR，INT8の3方式を，
+40，50，60次元でそれぞれ比較するため，実機測定は基本9条件となる．
+授業課題として優先する圧縮前後のMSE比較を，容量・速度の測定と合わせて実施する．
+40，50，60次元の比較が完了した後，70次元のDense-FP32と圧縮版で搭載可否を比較し，
 容量に余裕があれば100次元を試す．200次元およびHybridは発展課題とし，必須条件の測定を優先する．
 
 \subsection{プログラムの実装手順}
@@ -326,13 +387,13 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
   \item \textbf{基準モデルの作成：}
     $H=40,50,60$について，3$\times$3および6$\times$4チャートから取得した
     同一の正規化済み学習データを用いて学習する．
-    現行Notebookは$H=40$，\texttt{60nn.ino}は$H=60$に固定されているため，
     Notebook側では単一の変数$H$を3つの\texttt{Linear}層へ使用し，Arduino側の
     \texttt{HIDDEN\_SIZE1}と\texttt{HIDDEN\_SIZE2}も同じ値へ変更する．
-    最終評価には，学習用データとは独立した評価用カラーチャートを教員から受け取って使用する．
+    学習用・検証用・最終評価用のデータを分離し，最終評価用は選択段階で使用しない．
   \item \textbf{PC上での圧縮候補生成：}
-    Pythonで各重みに閾値を適用し，疎性，CSR理論容量，圧縮後MSEを計算する．
-    同じ重みからINT8版も生成する．
+    Pythonで各重みに閾値を適用し，疎性，CSR理論容量，検証用データでの圧縮後MSEを計算する．
+    PC上でもArduinoと同じ前処理・後処理を適用し，0--255のRGB値でMSEを求める．
+    同じ重みからINT8版も生成し，検証結果に基づいてCSRの閾値を決める．
   \item \textbf{ヘッダファイルの出力：}
     学習ノートブックが出力する\texttt{model\_parameters.h}を基準とする．
     Dense-FP32では従来の\texttt{weight\_1[]}--\texttt{weight\_3[]}と
@@ -340,60 +401,83 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
     \texttt{values[]}，\texttt{col\_idx[]}，\texttt{row\_ptr[]}の3配列を出力し，
     それぞれ非ゼロ値，列番号，行開始位置を格納する．
     INT8では\texttt{int8\_t}重みと層ごとのスケールを出力する．
-    各出力後に重み要素数が$3H$，$H^2$，$3H$，バイアス要素数が$H$，$H$，3であることを検査し，
-    NotebookとArduinoの次元不一致をビルド前に検出する．
+    密形式とINT8では，重み要素数が$3H$，$H^2$，$3H$，バイアス要素数が$H$，$H$，3であることを検査する．
+    CSRでは第$l$層の非ゼロ数を$K_l$，行数を$m_l$として，値・列番号の配列長が$K_l$，
+    行ポインタの長さが$m_l+1$であることを確認する．各層の配列には層番号を付け，名前の重複を避ける．
   \item \textbf{Arduino推論処理の実装：}
     Dense，CSR，INT8の各行列ベクトル積関数を分離して実装する．
-    既存の\texttt{predict()}と同じく重みを出力ニューロン単位の行優先で参照し，
+    重みを出力ニューロン単位の行優先で参照し，
     隠れ層1・2だけにReLUを適用する．出力層にはReLUを適用しない．
-    前処理は現行Arduino版と一致させる．\texttt{normalizeInput()}では，入力を
+    \texttt{normalizeInput()}では，入力を
     $(\mathrm{raw}-\mathrm{black})/(\mathrm{white}-\mathrm{black})$で正規化して0--1へクリップする．
     \texttt{outputTo255()}では，出力を0--1へクリップし，255倍して四捨五入する．
+    黒・白校正値が同一で分母が0になる場合は校正不成立とし，再校正する．
     圧縮方式を変更しても，この前処理・後処理とバイアス加算順序は変更しない．
+    配布プログラムの仕様も実装前に確認し，変更点を実験記録へ残す．
   \item \textbf{単体確認：}
     PC上で枝刈り後の密行列とCSRから復元した行列が一致することを確認する．
     同じ固定入力に対するPruned-DenseとPrune-CSRの出力を比較した後，PC版とArduino版の各層出力を比較する．
-    配列次元，CSR行ポインタ終端，整数のオーバーフロー，添字範囲を確認する．
+    CSRの行ポインタ先頭が0，終端が$K_l$，並びが非減少であること，列番号が列数未満であること，
+    復元後の行列形状，整数のオーバーフロー，添字範囲を確認する．
+    行列の復元一致と，浮動小数点演算による出力の近似一致を区別する．
+    各層出力は絶対誤差$10^{-5}$と相対誤差$10^{-4}$を目安に照合し，超過時は演算順と実装を調べる．
   \item \textbf{ビルド・実行確認：}
-    各条件を同一ボード設定でクリーンビルドし，コンパイル可否，フラッシュ・RAM使用量を記録する．
+    各条件を同一ボード設定でクリーンビルドし，コンパイル可否，フラッシュ・静的RAM使用量を記録する．
     書き込み後，固定入力に対する出力と推論時間を確認する．
 \end{enumerate}
 
 \subsection{性能確認方法}
 
 実装後の性能は，Arduinoへの搭載可否，フラッシュ・RAM使用量，推論時間，MSEによって確認する．
-圧縮前のDense-FP32を基準として，Prune-CSRとINT8を同一条件で比較する．
+各$H$の同一学習済み重みから作成したDense-FP32を圧縮前の基準とし，Prune-CSRとINT8を同一条件で比較する．
+ニューラルネットワークを用いない\texttt{batansyusei.ino}は参考条件として区別し，圧縮前の基準には用いない．
 特にMSE測定では，照明，紙の圧着，位置ずれ，周辺光による変動を圧縮誤差と混同しないため，
 次の手順を用いる．
 
 \begin{enumerate}
   \item 学習に使用していない同一の評価用カラーチャートを全条件で使用する．
-  \item 非圧縮の基準には\texttt{batansyusei.ino}，ニューラルネットワーク版の基準には
-    \texttt{60nn.ino}を用いる．両者ともD2で黒，白の順に校正し，D3で1画素ずつ読み取る．
-    測定ブロックの開始時に黒を最小値，白を最大値として読み込む．
-    モデルごとに同じ位置・手順で校正し，得られた値と時刻を記録する．
+  \item 配布の読取プログラムを基に，黒，白の順に校正してから各画素を読み取る．
+    使用するボタン割当ては配布コードで確認し，全方式で統一する．
+    書き込み後は毎回同じ位置・手順で校正し，得られた値と時刻を記録する．
   \item 1色のセンサ値は\texttt{SAMPLE\_COUNT}=10回の平均とし，RGBの読取時間ずれを抑えるため，
     \texttt{RGB\_FLASH\_DELAY}=10 msに固定する．
-    センサ，光源，遮光，紙の固定治具，チャート位置を変えず，測定前のウォームアップ時間も一定にする．
-  \item チャートの9色を同じ順序で読み取り，各回について3$\times$3のP3形式PPM画像を保存する．
+    センサ，光源，遮光，紙の固定治具，チャート位置を変えず，測定前に光源を60秒間点灯して安定させる．
+  \item 評価チャートの$N$色を同じ順序で読み取り，各回についてチャートと同じ寸法のP3形式PPM画像を保存する．
     \texttt{mse\_calculator.html}へ評価チャートに対応する基準PPM画像と読取画像を入力してMSEを記録する．
-  \item 各モデル・方式について同じチャートを10回測定する．測定順序はDenseと圧縮版を交互にし，時間変化の偏りを抑える．
-  \item 各回のMSEを保存し，平均$\overline{\mathrm{MSE}}$，標準偏差$s$，最小値，最大値を求める．
-    圧縮版と基準版の各回の差も確認し，圧縮による差が基準版自身の測定ばらつきより大きいかを検討する．
+    色の一部を最終評価用に分けた場合は，指定した色のRGB値を抽出して同じMSEの式で計算する．
+  \item 各$H$について3方式を1回ずつ測ることを1ブロックとし，10ブロック実施する．
+    測定順序はDense--CSR--INT8，CSR--INT8--Dense，INT8--Dense--CSRの順で巡回し，時間変化の偏りを抑える．
+    基本9条件，各10回の合計90回分の測定を行う．
+  \item 各回のMSEを保存し，平均，標本標準偏差（分母$n-1$），最小値，最大値を求める．
+    同一ブロック内の圧縮版とDense版のMSE差についても平均と標準偏差を求める．
+    測定ばらつきだけから有意差があるとは断定せず，差の大きさと変動を併記する．
 \end{enumerate}
 
-推論時間は\texttt{micros()}で計測する．10回のウォームアップ後に100回連続実行し，
-合計時間を100で割った平均を用いる．シリアル出力時間は計測区間から除外する．
+物理的な読取誤差と圧縮誤差を分けるため，最終評価用のセンサ生値と黒・白校正値を保存し，
+同じ保存済み入力を各方式へ与える固定入力比較も行う．
+これは方式決定後の確認とし，この結果で閾値を選び直さない．
+
+推論時間は\texttt{micros()}で計測する．同じ保存済み入力列について10回のウォームアップ後，
+100回連続実行し，合計時間を100で割る．これを5組繰り返し，1推論当たりの時間の平均と標準偏差を求める．
+計測区間は正規化済み入力からネットワーク出力までとし，CSRの索引参照，INT8の復号，ReLUを含める．
+センサ読取，待機，RGB画像への変換，シリアル出力は除外する．
+出力のチェックサムを計測後に表示し，コンパイラによる未使用演算の削除を防ぐ．
 
 \subsection{方式と閾値の選択基準}
 
-方式の選択は次の優先順位で行う．
+PC上の閾値選択では，検証用データの平均MSE増加率が5\%以下で，CSR容量が密形式未満となる候補から，
+CSR容量が最小の閾値を選ぶ．Denseの検証MSEが0の場合は，圧縮後も0であることを条件とする．
+同容量なら検証MSEが小さい候補を選ぶ．該当候補がなければ
+CSRは採用条件を満たさないと記録し，容量が最小となる閾値を診断用に実機比較する．
+実機比較を終えた後，方式の採否は次の優先順位で判断する．
 
 \begin{enumerate}
   \item \textbf{必須条件：}Arduinoでコンパイル，書き込み，推論が正常に完了する．
   \item \textbf{品質条件：}暫定基準として，圧縮前に対する平均MSEの増加率を5\%以下とする．
-    さらに，その差が反復測定のばらつきと同程度かを確認する．
-  \item \textbf{容量条件：}品質条件を満たす候補のうち，実測モデルデータ量とRAM使用量が最小のものを優先する．
+    基準の平均MSEが0の場合は，圧縮後も0となることを条件とする．
+    さらに絶対差と反復測定のばらつきを併記する．
+  \item \textbf{容量条件：}品質条件を満たす候補のうち，使用ボードで搭載を制約するメモリの使用量が
+    小さいものを優先し，モデル容量と静的RAM・フラッシュ使用量を併記する．
   \item \textbf{速度条件：}推論時間がDense-FP32より20\%を超えて増加する場合は，容量削減との利得を比較し，採否を再検討する．
   \item \textbf{実装条件：}容量とMSEが同程度なら，配列数が少なく，誤添字やオーバーフローを防ぎやすい方式を選ぶ．
 \end{enumerate}
@@ -402,36 +486,65 @@ RGBを0--255から0.0--1.0へ正規化して\texttt{train\_L1\_normalization.ipy
 最終判断では，Dense-FP32，Prune-CSR，INT8の「MSE--容量--速度」を図示し，
 いずれか一指標だけでなくPareto関係を確認する．CSRの索引を含む実容量が密形式以上なら，
 その閾値ではCSRを不採用とする．
+最終評価で品質条件を満たさなかった方式は，その結果を含めて報告する．
+やむを得ず閾値を再調整する場合は，当該データを検証用として扱い，新しい最終評価データを用意する．
 
 \subsection{結果の記録様式}
 
-各条件について，表\ref{tab:result-template}の項目を記録する．これにより理論値だけでなく，
-実機での搭載可否と推論品質を同時に比較できる．
+各条件について，表\ref{tab:result-template}と表\ref{tab:quality-template}を同じ条件IDで対応させて記録する．
+条件IDには$H$，方式，閾値，乱数シードを含める．結果欄は測定後に記入し，
+コンパイル・書き込み・実行はそれぞれ可／不可，未実施は未実施と記録する．
 
 {\small
-\setlength{\tabcolsep}{3pt}
-\begin{longtable}{@{}p{17mm}p{16mm}p{13mm}p{16mm}p{18mm}p{18mm}p{17mm}p{17mm}@{}}
-  \caption{実験結果記録表（測定時に記入）}\label{tab:result-template}\\
+\renewcommand{\arraystretch}{1.10}
+\setlength{\tabcolsep}{2.5pt}
+\begin{longtable}{@{}P{7mm}P{18mm}P{12mm}P{15mm}P{23mm}P{20mm}P{26mm}P{25mm}@{}}
+  \caption{容量・メモリ使用量の記録表}\label{tab:result-template}\\
   \toprule
-  $H$ & 方式 & $\tau$ & 疎性 [\%] & データ量 [byte] & RAM [byte] & MSE 平均$\pm$s & 時間 [$\mu$s] \\
+  $H$ & 方式 & $\tau$ & \shortstack{疎性\\{[\%]}} & \shortstack{モデル\\{[byte]}} & \shortstack{削減率\\{[\%]}} & \shortstack{静的RAM\\{[byte]}} & \shortstack{Flash\\{[byte]}} \\
   \midrule
   \endfirsthead
   \toprule
-  $H$ & 方式 & $\tau$ & 疎性 [\%] & データ量 [byte] & RAM [byte] & MSE 平均$\pm$s & 時間 [$\mu$s] \\
+  $H$ & 方式 & $\tau$ & \shortstack{疎性\\{[\%]}} & \shortstack{モデル\\{[byte]}} & \shortstack{削減率\\{[\%]}} & \shortstack{静的RAM\\{[byte]}} & \shortstack{Flash\\{[byte]}} \\
   \midrule
   \endhead
-  40 & Dense & 0 & 0 & & & & \\
+  40 & Dense & 0 & & & & & \\
   40 & CSR & & & & & & \\
   40 & INT8 & -- & -- & & & & \\
-  50 & Dense & 0 & 0 & & & & \\
+  50 & Dense & 0 & & & & & \\
   50 & CSR & & & & & & \\
   50 & INT8 & -- & -- & & & & \\
-  60 & Dense & 0 & 0 & & & & \\
+  60 & Dense & 0 & & & & & \\
   60 & CSR & & & & & & \\
   60 & INT8 & -- & -- & & & & \\
   \bottomrule
 \end{longtable}
+
+\begin{longtable}{@{}P{7mm}P{18mm}P{27mm}P{28mm}P{21mm}P{20mm}P{25mm}@{}}
+  \caption{動作・品質・速度の記録表}\label{tab:quality-template}\\
+  \toprule
+  $H$ & 方式 & \shortstack[l]{コンパイル／\\書込／実行} & \shortstack[l]{平均MSE\\$\pm s$} & $D_{\mathrm{MSE}}$ & \shortstack{$\Delta_{\mathrm{MSE}}$\\{[\%]}} & \shortstack[l]{推論時間\\平均$\pm s$ [$\mu$s]} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  $H$ & 方式 & \shortstack[l]{コンパイル／\\書込／実行} & \shortstack[l]{平均MSE\\$\pm s$} & $D_{\mathrm{MSE}}$ & \shortstack{$\Delta_{\mathrm{MSE}}$\\{[\%]}} & \shortstack[l]{推論時間\\平均$\pm s$ [$\mu$s]} \\
+  \midrule
+  \endhead
+  40 & Dense & & & & & \\
+  40 & CSR & & & & & \\
+  40 & INT8 & & & & & \\
+  50 & Dense & & & & & \\
+  50 & CSR & & & & & \\
+  50 & INT8 & & & & & \\
+  60 & Dense & & & & & \\
+  60 & CSR & & & & & \\
+  60 & INT8 & & & & & \\
+  \bottomrule
+\end{longtable}
 }
+各回のMSE，最小値・最大値，同一ブロック内のMSE差，圧縮比，作業配列容量，
+時間計測5組の生データは別の測定CSVへ保存する．INT8の疎性は圧縮方式の選択に使用しないため，
+表中では対象外とする．ビルドや書き込みに失敗した場合も行を削除せず，失敗段階とログを残す．
 
 \section{予想される結果と問題発生時の対応}
 
@@ -440,16 +553,19 @@ L1正則化によって第2層を中心に絶対値の小さい重みが多く�
 Dense-FP32より大きくなる．INT8は一定の削減効果が得られるが，外れ値にスケールが支配されると
 小さい重みの量子化誤差が増える可能性がある．
 
-閾値0.01で品質条件を満たさない場合は0.005，0.001の順に閾値を下げる．
+PC上の検証で品質条件を満たす閾値が得られない場合は，小さい閾値を優先して影響を確認し，
+全候補のMSEと容量を記録する．
 CSRの容量削減が得られない場合はINT8を主候補とする．INT8のMSEが大きく悪化する場合は，
 16 bit量子化または層単位から行単位へのスケール変更を検討する．
 実測MSEのばらつきが圧縮前後の差より大きい場合は，固定治具と遮光を再確認し，
-反復回数を20回へ増やす．100次元以上が搭載できない場合でも，40--60次元の必須比較を完了させ，
+各方式とも追加で10ブロック測定し，合計20回へ増やす．追加分だけで結論を選ばず，全測定を集計する．
+100次元以上が搭載できない場合でも，40--60次元の必須比較を完了させ，
 容量計算から障害原因を説明する．
 
+\Needspace{75mm}
 \section{実施予定}
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \caption{実験スケジュール}
   \begin{tabular}{p{30mm}p{110mm}}
@@ -458,8 +574,8 @@ CSRの容量削減が得られない場合はINT8を主候補とする．INT8の
     \midrule
     10月9--15日 & 方式調査，実験条件決定，計画書作成 \\
     10月16日 & LaTeX原稿の最終確認，PDF化，manabaへ計画書を提出 \\
-    実験第1日 & 次元数変更，枝刈り・CSR・INT8出力プログラムの実装 \\
-    実験第2日 & PC上での閾値探索，MSEと容量の事前評価 \\
+    実験第1日 & ボード・ソフトウェア版の確認，検証・最終評価用データの準備，次元数変更 \\
+    実験第2日 & 枝刈り・CSR・INT8出力の実装，PC上の閾値探索と容量評価 \\
     実験第3日 & Arduino版の実装，固定入力による単体確認 \\
     実験第4日 & 実機でのメモリ・速度・MSE反復測定 \\
     実験第5日 & 集計，グラフ作成，方式の選択と考察 \\
@@ -474,10 +590,17 @@ CSRの容量削減が得られない場合はINT8を主候補とする．INT8の
 使用したArduinoボード名，コンパイラ・ボードコア・Python・PyTorchのバージョン，
 ビルドログ，黒・白の校正値，\texttt{SAMPLE\_COUNT}，\texttt{RGB\_FLASH\_DELAY}，測定日時，評価チャート識別子，
 各回のPPM画像も記録し，同じ条件を再実行できるようにする．
+学習用・検証用・最終評価用の対応表，色の分割方法，測定順序，センサ生値，
+固定入力比較の出力，配列配置の確認結果，方式・閾値の選択理由も保存する．
 ニューラルネットワークを組み込む前の\texttt{batansyusei.ino}と，現行の
 \texttt{60nn.ino}も比較用として変更せず別途保存する．
 
 \begin{thebibliography}{9}
+  \bibitem{class2026}
+  前川仁孝・信川創・大西隆之・佐藤愛実，
+  「アジャイルワーク2 第4--5週（行列データ圧縮 実験計画書作成）」，
+  授業配布資料，2026年10月9日．
+
   \bibitem{tibshirani1996}
   R. Tibshirani,
   ``Regression Shrinkage and Selection via the Lasso,''
@@ -507,17 +630,5 @@ CSRの容量削減が得られない場合はINT8を主候補とする．INT8の
   Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
   pp. 2704--2713, 2018.
 \end{thebibliography}
-
-\clearpage
-\section*{提出前チェックリスト}
-\addcontentsline{toc}{section}{提出前チェックリスト}
-
-\begin{itemize}
-  \item[$\square$] 表紙の学籍番号と氏名を本人の情報へ変更した．
-  \item[$\square$] 使用するArduinoボード名と各ソフトウェアのバージョンを追記した．
-  \item[$\square$] LaTeXからPDFを生成し，数式・表・改ページ・文字化けを目視確認した．
-  \item[$\square$] 未実施の測定結果を記入していないことを確認した．
-  \item[$\square$] ファイル名とmanabaの提出欄を確認し，2026年10月16日（金）までに提出した．
-\end{itemize}
 
 \end{document}
