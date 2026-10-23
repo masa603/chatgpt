@@ -18,7 +18,7 @@
 #define RGB_FLASH_DELAY 10
 #define DEBOUNCE_MS 40
 
-#define MAX_IMAGE_SIZE 6
+#define MAX_IMAGE_SIZE 8
 
 // 0：シリアルモニタで操作、1：D2/D3ボタンも使用
 #define USE_PHYSICAL_BUTTONS 0
@@ -79,6 +79,9 @@ int calibrationStep = 0;
 int imageSize = 0;
 
 uint8_t imageData[MAX_IMAGE_SIZE][MAX_IMAGE_SIZE][3];
+
+// 全色の正規化済み入力を保存し、読取完了後にまとめて表示する
+float inputHistory[MAX_IMAGE_SIZE][MAX_IMAGE_SIZE][3];
 
 int currentRow = 0;
 int currentColumn = 0;
@@ -558,6 +561,51 @@ void outputPPM() {
 
 
 // =====================================================
+// 読取完了後のNN入力一覧（PPMは補正後、この一覧は補正前）
+// =====================================================
+
+void outputNNInputs() {
+  Serial.println();
+  Serial.println("---------- NN INPUT START ----------");
+  Serial.print("# size,");
+  Serial.print(imageSize);
+  Serial.print(",");
+  Serial.println(imageSize);
+
+  Serial.print("# black_rgb");
+  for (int channel = 0; channel < 3; channel++) {
+    Serial.print(",");
+    Serial.print(blackRGB[channel], 4);
+  }
+  Serial.println();
+
+  Serial.print("# white_rgb");
+  for (int channel = 0; channel < 3; channel++) {
+    Serial.print(",");
+    Serial.print(whiteRGB[channel], 4);
+  }
+  Serial.println();
+  Serial.println("color_id,input_r,input_g,input_b");
+
+  for (int row = 0; row < imageSize; row++) {
+    for (int col = 0; col < imageSize; col++) {
+      // color_idは1始まり。例：r1c1は左上、r8c8は右下。
+      Serial.print("r");
+      Serial.print(row + 1);
+      Serial.print("c");
+      Serial.print(col + 1);
+      for (int channel = 0; channel < 3; channel++) {
+        Serial.print(",");
+        Serial.print(inputHistory[row][col][channel], 8);
+      }
+      Serial.println();
+    }
+  }
+  Serial.println("----------- NN INPUT END -----------");
+}
+
+
+// =====================================================
 // 色読み取り + NN補正
 // =====================================================
 
@@ -703,6 +751,10 @@ void handleRead() {
   imageData[currentRow][currentColumn][1] = green;
   imageData[currentRow][currentColumn][2] = blue;
 
+  for (int channel = 0; channel < 3; channel++) {
+    inputHistory[currentRow][currentColumn][channel] = RGBInput[channel];
+  }
+
 
   Serial.print(currentRow);
   Serial.print(" 行目 ");
@@ -735,6 +787,7 @@ void handleRead() {
     imageFinished = true;
 
     outputPPM();
+    outputNNInputs();
   }
 }
 
@@ -807,6 +860,10 @@ void inputImageSize() {
     "6x6なら 6"
   );
 
+  Serial.println(
+    "8x8なら 8"
+  );
+
 
   while (imageSize == 0) {
 
@@ -832,9 +889,9 @@ void inputImageSize() {
 
       } else {
 
-        Serial.println(
-          "1～6を入力してください"
-        );
+        Serial.print("1～");
+        Serial.print(MAX_IMAGE_SIZE);
+        Serial.println("を入力してください");
       }
     }
 

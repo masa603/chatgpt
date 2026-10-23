@@ -32,6 +32,12 @@ CSRをDenseより小さくするには、少なくとも403個（約21.9%）の�
 
 ## 検証データを用意したら
 
+受け取った検証用の基準画像は `reference/reference_image4.ppm`（8×8、64マス）です。
+この画像の色IDと正解RGBは `reference/reference_image4_targets.csv` に保存しています。
+読取順は左上から右へ、行を順に進めます。色IDの `r1c1` が左上、`r8c8` が右下です。
+読み取り手順は [Arduino側のREADME](../hdjsk/README.md) を参照してください。
+正解画像だけではMSEを求められないので、検証用NN入力の実測を待っています。
+
 学習用とは別の検証チャートを独立に3回読み取り、対応する正解RGBと合わせて
 `validation.csv` をこのフォルダへ置きます。最終評価チャートは閾値選択に使いません。
 データ整形には `validation_template.csv` の列名を使います。空のテンプレートは評価できません。
