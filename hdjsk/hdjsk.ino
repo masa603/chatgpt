@@ -20,6 +20,9 @@
 
 #define MAX_IMAGE_SIZE 6
 
+// 0：シリアルモニタで操作、1：D2/D3ボタンも使用
+#define USE_PHYSICAL_BUTTONS 0
+
 #define SENSOR_PIN A0
 
 #define LED_R_PIN 8
@@ -368,7 +371,7 @@ int outputTo255(float value) {
 
 
 // =====================================================
-// D2：キャリブレーション
+// 黒・白キャリブレーション
 // =====================================================
 
 void handleCalibration() {
@@ -406,7 +409,7 @@ void handleCalibration() {
     Serial.println();
 
     Serial.println(
-      "白を当ててD2をもう1回押してください"
+      "白を当てて w を送信してください"
     );
 
 
@@ -483,7 +486,7 @@ void handleCalibration() {
     Serial.println();
 
     Serial.println(
-      "ここからD3だけを使ってください"
+      "色を当てて r を送信すると読み取ります"
     );
 
     Serial.println();
@@ -493,7 +496,7 @@ void handleCalibration() {
 
 
   Serial.println(
-    "キャリブレーション済みです。D3を使ってください。"
+    "キャリブレーション済みです。r を送信すると読み取ります。"
   );
 }
 
@@ -555,7 +558,7 @@ void outputPPM() {
 
 
 // =====================================================
-// D3：色読み取り + NN補正
+// 色読み取り + NN補正
 // =====================================================
 
 void handleRead() {
@@ -564,7 +567,7 @@ void handleRead() {
   if (calibrationStep != 2) {
 
     Serial.println(
-      "先にD2で黒→白のキャリブレーションをしてください"
+      "先に黒を当てて b、白を当てて w を順に送信してください"
     );
 
     return;
@@ -737,6 +740,56 @@ void handleRead() {
 
 
 // =====================================================
+// シリアルモニタから操作
+// =====================================================
+
+void handleSerialCommand() {
+  if (Serial.available() <= 0) {
+    return;
+  }
+
+  int command = Serial.read();
+
+  switch (command) {
+    case 'b':
+    case 'B':
+      if (calibrationStep != 0) {
+        Serial.println("黒は登録済みです。白は w、読取は r を送信してください。");
+        return;
+      }
+      Serial.println("黒を測定します");
+      handleCalibration();
+      break;
+
+    case 'w':
+    case 'W':
+      if (calibrationStep != 1) {
+        Serial.println("白の登録は黒の登録後です。黒は b、読取は r を送信してください。");
+        return;
+      }
+      Serial.println("白を測定します");
+      handleCalibration();
+      break;
+
+    case 'r':
+    case 'R':
+      handleRead();
+      break;
+
+    case '\r':
+    case '\n':
+    case ' ':
+    case '\t':
+      break;
+
+    default:
+      Serial.println("半角で b（黒）、w（白）、r（読取）を送信してください。");
+      break;
+  }
+}
+
+
+// =====================================================
 // 画像サイズ入力
 // =====================================================
 
@@ -840,6 +893,7 @@ void setup() {
   // ボタン
   // ===================================================
 
+#if USE_PHYSICAL_BUTTONS
   initButton(
     calibButton,
     BUTTON_CALIB_PIN
@@ -850,6 +904,7 @@ void setup() {
     readButton,
     BUTTON_READ_PIN
   );
+#endif
 
 
   // ===================================================
@@ -886,9 +941,14 @@ void setup() {
 
   Serial.println();
 
-  Serial.println("① 黒 → D2");
-  Serial.println("② 白 → D2");
-  Serial.println("③ その後はD3だけ");
+  Serial.println("① 黒を当てて b を送信");
+  Serial.println("② 白を当てて w を送信");
+  Serial.println("③ 各色を当てて r を1回ずつ送信");
+#if USE_PHYSICAL_BUTTONS
+  Serial.println("D2：黒・白登録、D3：読取も使用できます");
+#else
+  Serial.println("D2/D3ボタンは使いません");
+#endif
 
   Serial.println();
 }
@@ -900,6 +960,9 @@ void setup() {
 
 void loop() {
 
+  handleSerialCommand();
+
+#if USE_PHYSICAL_BUTTONS
   bool d2Pressed =
     buttonPressed(
       calibButton
@@ -922,6 +985,7 @@ void loop() {
 
     handleRead();
   }
+#endif
 
 
   delay(1);
