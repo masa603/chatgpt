@@ -1,0 +1,19 @@
+{
+  "model_sha256": "429d013f77f02c7aaf64cc6cba5020e23d2c7641ba1bdc69f4f162d352cdb658",
+  "hidden_size": 40,
+  "weight_count": 1840,
+  "candidate_count_including_zero_baseline": 1840,
+  "candidate_rule": "Zero baseline plus all midpoints between distinct adjacent absolute weights; one global threshold; biases unchanged.",
+  "capacity_scope": "FP32 values/bias + uint8 columns + uint16 row pointers; excludes whole-build alignment, buffers, NPZ container overhead.",
+  "validation_status": "not_supplied",
+  "validation_csv_sha256": null,
+  "validation_read_ids": null,
+  "validation_colors_per_read": null,
+  "input_collisions": null,
+  "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of three reading MSEs.",
+  "dense_validation_mse": null,
+  "dense_mse_by_read": null,
+  "selected": null,
+  "diagnostic_only": null,
+  "note": "No threshold is selected without independent validation. Training/final-evaluation data must not be supplied as validation. Training data and random seed are not encoded in the header; record model provenance separately. Re-run for each frozen trained model."
+}
