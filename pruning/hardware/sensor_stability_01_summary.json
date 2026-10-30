@@ -1,0 +1,287 @@
+{
+  "received_date_jst": "2026-10-30",
+  "board_declared": "Arduino UNO R4 WiFi",
+  "sensor_part": null,
+  "user_reported_sensor_fixation": "fixed; paper moved for patch changes",
+  "paper_fixation_during_capture": "Hand-held, as reported by the user after the first three captures.",
+  "led_drive": "DIGITAL_FULL_ON_OFF",
+  "sample_count_per_channel": 10,
+  "inter_read_pause_ms": 200,
+  "sequence": "black, white, same black; within each capture 10 ms first, 200 ms second",
+  "captures": [
+    {
+      "capture": 1,
+      "patch": "BLACK",
+      "blocks": [
+        {
+          "delay_ms": 10,
+          "n": 5,
+          "mean_rgb": [
+            20.66,
+            18.2,
+            14.3
+          ],
+          "sample_stddev_rgb": [
+            0.47749345545253274,
+            0.8366600265340756,
+            0.4062019202317981
+          ],
+          "min_rgb": [
+            20.0,
+            17.0,
+            14.0
+          ],
+          "max_rgb": [
+            21.0,
+            19.0,
+            15.0
+          ],
+          "first_rgb": [
+            20.0,
+            17.0,
+            14.0
+          ],
+          "last_rgb": [
+            21.0,
+            19.0,
+            14.3
+          ],
+          "first_to_last_change_pct": [
+            5.000000000000004,
+            11.764705882352944,
+            2.1428571428571574
+          ]
+        },
+        {
+          "delay_ms": 200,
+          "n": 5,
+          "mean_rgb": [
+            20.9,
+            20.419999999999998,
+            16.12
+          ],
+          "sample_stddev_rgb": [
+            1.3711309200802093,
+            2.4108089928486667,
+            2.0129580224137804
+          ],
+          "min_rgb": [
+            19.4,
+            18.0,
+            13.7
+          ],
+          "max_rgb": [
+            23.0,
+            24.3,
+            18.0
+          ],
+          "first_rgb": [
+            19.4,
+            18.0,
+            17.9
+          ],
+          "last_rgb": [
+            23.0,
+            24.3,
+            18.0
+          ],
+          "first_to_last_change_pct": [
+            18.556701030927837,
+            35.00000000000001,
+            0.5586592178770999
+          ]
+        }
+      ]
+    },
+    {
+      "capture": 2,
+      "patch": "WHITE",
+      "blocks": [
+        {
+          "delay_ms": 10,
+          "n": 5,
+          "mean_rgb": [
+            198.08,
+            135.85999999999999,
+            94.42
+          ],
+          "sample_stddev_rgb": [
+            20.035144122266754,
+            10.70154194497223,
+            4.981164522478655
+          ],
+          "min_rgb": [
+            175.7,
+            124.7,
+            88.3
+          ],
+          "max_rgb": [
+            220.5,
+            147.4,
+            99.8
+          ],
+          "first_rgb": [
+            220.5,
+            147.4,
+            99.0
+          ],
+          "last_rgb": [
+            180.0,
+            124.7,
+            88.3
+          ],
+          "first_to_last_change_pct": [
+            -18.36734693877551,
+            -15.400271370420626,
+            -10.808080808080812
+          ]
+        },
+        {
+          "delay_ms": 200,
+          "n": 5,
+          "mean_rgb": [
+            156.85999999999999,
+            110.14000000000001,
+            77.9
+          ],
+          "sample_stddev_rgb": [
+            9.208582952876085,
+            7.988616901566879,
+            5.126402247190518
+          ],
+          "min_rgb": [
+            143.0,
+            99.1,
+            70.0
+          ],
+          "max_rgb": [
+            164.3,
+            118.0,
+            82.4
+          ],
+          "first_rgb": [
+            164.0,
+            118.0,
+            82.1
+          ],
+          "last_rgb": [
+            143.0,
+            99.1,
+            70.0
+          ],
+          "first_to_last_change_pct": [
+            -12.804878048780488,
+            -16.01694915254238,
+            -14.738124238733242
+          ]
+        }
+      ]
+    },
+    {
+      "capture": 3,
+      "patch": "BLACK",
+      "blocks": [
+        {
+          "delay_ms": 10,
+          "n": 5,
+          "mean_rgb": [
+            27.360000000000003,
+            27.5,
+            20.84
+          ],
+          "sample_stddev_rgb": [
+            0.8648699324175863,
+            1.174734012447074,
+            1.1081516141756054
+          ],
+          "min_rgb": [
+            26.0,
+            25.4,
+            19.0
+          ],
+          "max_rgb": [
+            28.0,
+            28.1,
+            22.0
+          ],
+          "first_rgb": [
+            28.0,
+            28.1,
+            21.0
+          ],
+          "last_rgb": [
+            26.0,
+            25.4,
+            19.0
+          ],
+          "first_to_last_change_pct": [
+            -7.14285714285714,
+            -9.608540925266917,
+            -9.523809523809524
+          ]
+        },
+        {
+          "delay_ms": 200,
+          "n": 5,
+          "mean_rgb": [
+            31.419999999999998,
+            31.2,
+            26.619999999999997
+          ],
+          "sample_stddev_rgb": [
+            4.25816862042827,
+            2.4899799195977463,
+            2.4335159748807897
+          ],
+          "min_rgb": [
+            25.6,
+            28.0,
+            24.0
+          ],
+          "max_rgb": [
+            36.0,
+            33.0,
+            29.1
+          ],
+          "first_rgb": [
+            25.6,
+            28.0,
+            24.0
+          ],
+          "last_rgb": [
+            36.0,
+            33.0,
+            29.1
+          ],
+          "first_to_last_change_pct": [
+            40.625,
+            17.85714285714286,
+            21.250000000000014
+          ]
+        }
+      ]
+    }
+  ],
+  "white_first_to_last_change_pct": [
+    -35.147392290249435,
+    -32.767978290366365,
+    -29.292929292929294
+  ],
+  "black_capture_3_minus_capture_1_mean_rgb": {
+    "10": [
+      6.700000000000003,
+      9.3,
+      6.539999999999999
+    ],
+    "200": [
+      10.52,
+      10.780000000000001,
+      10.499999999999996
+    ]
+  },
+  "interpretation": "White falls and repeated black readings differ. Neither interval has established stable conditions. Order and elapsed-time effects are confounded; cause is not identified.",
+  "delay_choice": "not_selected",
+  "formal_training_data": false,
+  "next_control": "Keep white patch flat on a fixed surface, secure paper edges, release hands, retain fixed sensor and illumination, send w once with the same diagnostic sketch.",
+  "causal_status": "Paper movement/angle/shadow is a hypothesis to test, not an established cause."
+}
