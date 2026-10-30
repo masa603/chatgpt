@@ -1,0 +1,22 @@
+{
+  "received_date_jst": "2026-10-30",
+  "execution_datetime": null,
+  "board_declared": "Arduino UNO R4 WiFi",
+  "hidden_size": 40,
+  "source_model_sha256": "429d013f77f02c7aaf64cc6cba5020e23d2c7641ba1bdc69f4f162d352cdb658",
+  "threshold": 0.2449173554778099,
+  "model_status": "provisional",
+  "csr_array_bytes_reported_by_device": 1149,
+  "dense_array_bytes_reference": 7692,
+  "csr_index_check": "PASS",
+  "layer_self_test": "PASS",
+  "self_test_cases": 12,
+  "maximum_absolute_error": {
+    "hidden_1": 1.4e-07,
+    "hidden_2": 1.7e-07,
+    "output": 2.4e-07
+  },
+  "absolute_tolerance": 1e-05,
+  "relative_tolerance": 1e-05,
+  "scope": "Device CSR indexing and fixed-input layer outputs verified; color accuracy, timing, whole-build RAM/flash remain separate measurements."
+}

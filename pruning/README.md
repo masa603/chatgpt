@@ -80,6 +80,8 @@ CSRから元の枝刈り後行列を復元できることと、配列の合計�
 NPZはPC用の保存形式です。Arduino用ヘッダと起動時チェック付きのスケッチは
 [hdjsk_csr](../hdjsk_csr/README.md) に用意しています。
 `python3 pruning/export_csr_arduino.py` をリポジトリ直下で実行すると、選択結果からヘッダを再生成できます。
+実機のCSR配列チェックと12入力の各層チェックはPASSで、ログは `hardware/` に保存しています。
+保存済み128入力による速度比較は [hdjsk_benchmark](../hdjsk_benchmark/README.md) で実行できます。
 
 CSR容量は配列データ量です。ビルド全体のRAM・フラッシュ、配置、作業配列、
 C++で空配列を実装する場合の保存方法などは、Arduinoへの実装時に別途確認してください。
