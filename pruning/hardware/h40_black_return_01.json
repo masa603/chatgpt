@@ -1,0 +1,41 @@
+{
+  "received_date_jst": "2026-10-30",
+  "board_declared": "Arduino UNO R4 WiFi",
+  "procedure": "Black calibration, white calibration, then the same black patch read once.",
+  "user_reported_movement": "Sensor fixed; paper moved.",
+  "calibration_raw_rgb": {
+    "black": [
+      17.0,
+      14.0,
+      10.9
+    ],
+    "white": [
+      190.1,
+      138.2,
+      94.9
+    ]
+  },
+  "normalized_black_return_rgb": [
+    0.06932409,
+    0.12882447,
+    0.16785714
+  ],
+  "raw_black_return_rgb_inferred": [
+    28.999999979000002,
+    29.999999173999996,
+    24.99999976
+  ],
+  "inference_method": "raw = black + normalized_input * (white - black); all three normalized values are strictly between 0 and 1, so inversion is unaffected by clipping.",
+  "raw_black_return_difference_from_calibration": [
+    11.999999979000002,
+    15.999999173999996,
+    14.099999760000001
+  ],
+  "csr_output_rgb8": [
+    57,
+    0,
+    117
+  ],
+  "interpretation": "Black reference and subsequent black reading differ before neural inference. Movement of sensor itself is excluded by the user report; cause is not yet isolated.",
+  "next_check": "Stationary black-white-black raw readings at several LED settling delays, without neural inference."
+}
