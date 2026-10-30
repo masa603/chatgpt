@@ -93,8 +93,10 @@ def predict_rgb8(layers, inputs):
     return np.floor(np.clip(x, 0, 1) * np.float32(255) + np.float32(0.5)).astype(np.uint8)
 
 
-def load_validation(path):
-    """Three independent readings of the same validation chart, with RGB8 truth."""
+def load_validation(path, expected_reads=2):
+    """Independently measured repetitions of one validation chart, with RGB8 truth."""
+    if isinstance(expected_reads, bool) or not isinstance(expected_reads, int) or expected_reads < 2:
+        raise ValueError("Specify an integer expected_reads of at least 2.")
     with Path(path).open(encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
         if reader.fieldnames != VALIDATION_COLUMNS:
@@ -106,11 +108,11 @@ def load_validation(path):
     if any(not read or not color for read, color in keys) or len(set(keys)) != len(keys):
         raise ValueError("Each reading/color pair must be present exactly once.")
     groups = sorted({read for read, _ in keys})
-    if len(groups) != 3:
-        raise ValueError("The plan requires three separately measured validation readings.")
+    if len(groups) != expected_reads:
+        raise ValueError(f"Expected {expected_reads} separately measured validation readings; received {len(groups)}.")
     colors = [{color for read, color in keys if read == group} for group in groups]
     if any(c != colors[0] for c in colors[1:]):
-        raise ValueError("All three readings must contain the same validation colors.")
+        raise ValueError("All readings must contain the same validation colors.")
     x = np.array([[r[f"input_{c}"] for c in "rgb"] for r in rows], dtype=np.float32)
     y = np.array([[r[f"target_{c}8"] for c in "rgb"] for r in rows], dtype=np.float64)
     if not np.isfinite(x).all() or np.any((x < 0) | (x > 1)):
@@ -190,11 +192,11 @@ def save_csr_npz(layers, path):
     return sum(v.nbytes for v in arrays.values())
 
 
-def run(header_path, output_dir, validation_path=None):
+def run(header_path, output_dir, validation_path=None, expected_reads=2):
     header_path, output_dir = Path(header_path), Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     layers = load_model(header_path)
-    validation = load_validation(validation_path) if validation_path is not None else None
+    validation = load_validation(validation_path, expected_reads=expected_reads) if validation_path is not None else None
     records, baseline = analyze(layers, validation)
     with (output_dir / "candidates.csv").open("w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=list(records[0]), lineterminator="\n")
@@ -219,11 +221,17 @@ def run(header_path, output_dir, validation_path=None):
         "validation_status": "not_supplied" if validation is None else "evaluated",
         "validation_csv_sha256": None if validation is None else hashlib.sha256(Path(validation_path).read_bytes()).hexdigest(),
         "validation_read_ids": None if validation is None else validation["read_ids"],
+        "expected_validation_reads": expected_reads,
+        "validation_read_count": 0 if validation is None else len(validation["read_ids"]),
         "validation_colors_per_read": None if validation is None else validation["colors_per_read"],
         "input_collisions": None if validation is None else validation["input_collisions"],
-        "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of three reading MSEs.",
+        "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of the measured reading MSEs.",
         **baseline,
         "selected": selected,
+        "selection_status": ("pending_validation" if validation is None else
+                             "no_eligible_candidate" if selected is None else
+                             "provisional_input_collisions" if validation["input_collisions"] else
+                             "selected_for_measured_reads"),
         "diagnostic_only": None if validation is None or selected is not None else min(records, key=lambda r: (r["csr_bytes"], r["validation_mse"], r["threshold"])),
         "note": "No threshold is selected without independent validation. Training/final-evaluation data must not be supplied as validation. Training data and random seed are not encoded in the header; record model provenance separately. Re-run for each frozen trained model.",
     }
@@ -270,7 +278,11 @@ def plot_results(layers, records, report, output_dir):
         ax.axhline(report["dense_validation_mse"] * 1.05, color="gray", linestyle="--", label="Dense MSE x 1.05")
         if report["selected"] is not None:
             chosen = report["selected"]
-            ax.scatter([chosen["csr_bytes"]], [chosen["validation_mse"]], color="red", s=65, label="Selected")
+            provisional = report["selection_status"] == "provisional_input_collisions"
+            ax.scatter([chosen["csr_bytes"]], [chosen["validation_mse"]], color="red", s=65,
+                       label="Provisional candidate" if provisional else "Selected")
+            if provisional:
+                ax.set_title("Provisional: input collisions in validation data")
         ax.set(xlabel="CSR model array bytes", ylabel="Mean validation MSE (RGB8)")
         ax.legend()
         fig_tradeoff.tight_layout()

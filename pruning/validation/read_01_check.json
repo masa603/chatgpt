@@ -47,7 +47,7 @@
     "g": 5394.171875,
     "b": 5345.109375
   },
-  "threshold_selection_status": "pending_read_2_and_read_3",
+  "threshold_selection_status": "included_in_two_read_validation",
   "selected_threshold": null,
-  "scope": "One validation reading of the existing H40 model; no threshold selected. No all-zero inputs in this chart does not establish that the earlier training-chart calibration issue is resolved."
+  "scope": "Per-reading checks of existing H40 model. Threshold selection is in ../results/h40/summary.json; input collisions and calibration differences limit interpretation."
 }

@@ -1,0 +1,121 @@
+{
+  "received_date_jst": "2026-10-30",
+  "measurement_datetime": null,
+  "read_id": "2",
+  "chart_id": "reference_image4",
+  "data_role": "validation",
+  "dimensions": {
+    "width": 8,
+    "height": 8
+  },
+  "pixel_count": 64,
+  "complete_color_ids_in_row_order": true,
+  "reference_image_sha256": "b940406305fd6b2876a88fb9884d6bc1eb562abfeb424cb3e716f1bea4c9f875",
+  "reference_model_sha256": "429d013f77f02c7aaf64cc6cba5020e23d2c7641ba1bdc69f4f162d352cdb658",
+  "reference_model_hidden_size": 40,
+  "calibration_raw_rgb": {
+    "black": [
+      56.6,
+      40.2,
+      40.0
+    ],
+    "white": [
+      257.1,
+      153.1,
+      117.4
+    ]
+  },
+  "all_zero_input_color_ids": [
+    "r6c2",
+    "r6c3",
+    "r7c1",
+    "r7c3",
+    "r7c5",
+    "r7c6"
+  ],
+  "input_collisions_with_different_targets": [
+    [
+      "r6c2",
+      "r6c3"
+    ],
+    [
+      "r6c2",
+      "r7c1"
+    ],
+    [
+      "r6c2",
+      "r7c3"
+    ],
+    [
+      "r6c2",
+      "r7c5"
+    ],
+    [
+      "r6c2",
+      "r7c6"
+    ],
+    [
+      "r6c3",
+      "r7c1"
+    ],
+    [
+      "r6c3",
+      "r7c3"
+    ],
+    [
+      "r6c3",
+      "r7c5"
+    ],
+    [
+      "r6c3",
+      "r7c6"
+    ],
+    [
+      "r7c1",
+      "r7c3"
+    ],
+    [
+      "r7c1",
+      "r7c5"
+    ],
+    [
+      "r7c1",
+      "r7c6"
+    ],
+    [
+      "r7c3",
+      "r7c5"
+    ],
+    [
+      "r7c3",
+      "r7c6"
+    ],
+    [
+      "r7c5",
+      "r7c6"
+    ]
+  ],
+  "channels_equal_to_zero": {
+    "r": 11,
+    "g": 25,
+    "b": 34
+  },
+  "channels_equal_to_one": {
+    "r": 0,
+    "g": 0,
+    "b": 0
+  },
+  "arduino_vs_pc_exact_rgb8_pixels": 64,
+  "arduino_vs_pc_max_rgb8_absolute_difference": 0,
+  "arduino_vs_pc_different_color_ids": [],
+  "observed_dense_rgb8_mse": 2782.5052083333335,
+  "pc_dense_rgb8_mse": 2782.5052083333335,
+  "observed_dense_rgb8_mse_by_channel": {
+    "r": 1420.890625,
+    "g": 4046.515625,
+    "b": 2880.109375
+  },
+  "threshold_selection_status": "included_in_two_read_validation",
+  "selected_threshold": null,
+  "scope": "Per-reading checks of existing H40 model. Threshold selection is in ../results/h40/summary.json; input collisions and calibration differences limit interpretation."
+}

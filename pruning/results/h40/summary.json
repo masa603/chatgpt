@@ -5,15 +5,145 @@
   "candidate_count_including_zero_baseline": 1840,
   "candidate_rule": "Zero baseline plus all midpoints between distinct adjacent absolute weights; one global threshold; biases unchanged.",
   "capacity_scope": "FP32 values/bias + uint8 columns + uint16 row pointers; excludes whole-build alignment, buffers, NPZ container overhead.",
-  "validation_status": "not_supplied",
-  "validation_csv_sha256": null,
-  "validation_read_ids": null,
-  "validation_colors_per_read": null,
-  "input_collisions": null,
-  "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of three reading MSEs.",
-  "dense_validation_mse": null,
-  "dense_mse_by_read": null,
-  "selected": null,
+  "validation_status": "evaluated",
+  "validation_csv_sha256": "def95fe209dde0cadab874aa77fd26744e23b2b7aaf0971c2b384af25bb4c7ad",
+  "validation_read_ids": [
+    "1",
+    "2"
+  ],
+  "expected_validation_reads": 2,
+  "validation_read_count": 2,
+  "validation_colors_per_read": 64,
+  "input_collisions": [
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r6c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c5",
+        "r7c6"
+      ]
+    }
+  ],
+  "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of the measured reading MSEs.",
+  "dense_validation_mse": 3698.763020833333,
+  "dense_mse_by_read": [
+    4615.020833333333,
+    2782.5052083333335
+  ],
+  "selected": {
+    "threshold": 0.2449173554778099,
+    "nonzero": 129,
+    "sparsity_pct": 92.98913043478261,
+    "csr_bytes": 1149,
+    "dense_bytes": 7692,
+    "saving_pct": 85.06240249609985,
+    "memory_ok": true,
+    "validation_mse": 3722.424479166667,
+    "mse_difference": 23.66145833333394,
+    "mse_increase_pct": 0.6397127418020787,
+    "quality_ok": true,
+    "eligible": true,
+    "read_1_mse": 3677.0625,
+    "read_2_mse": 3767.7864583333335
+  },
+  "selection_status": "provisional_input_collisions",
   "diagnostic_only": null,
   "note": "No threshold is selected without independent validation. Training/final-evaluation data must not be supplied as validation. Training data and random seed are not encoded in the header; record model provenance separately. Re-run for each frozen trained model."
 }
