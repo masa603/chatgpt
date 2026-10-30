@@ -1,0 +1,49 @@
+{
+  "scope": "PC tests only; physical Arduino compile, serial self-test and newly measured image MSE pending.",
+  "frozen_models": {
+    "40": {
+      "header_array_checkpoint_equality": "PASS",
+      "metrics_recomputed": "PASS",
+      "model_header_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b"
+    },
+    "50": {
+      "header_array_checkpoint_equality": "PASS",
+      "metrics_recomputed": "PASS",
+      "model_header_sha256": "3f8d485e75e595d31974d8d225b65c36c17de616adebfe8515704f555aa2a84d"
+    },
+    "60": {
+      "header_array_checkpoint_equality": "PASS",
+      "metrics_recomputed": "PASS",
+      "model_header_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803"
+    },
+    "100": {
+      "header_array_checkpoint_equality": "PASS",
+      "metrics_recomputed": "PASS",
+      "model_header_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5"
+    }
+  },
+  "host_cpp": {
+    "60": {
+      "cxx_standard": "C++11",
+      "sanitizers": "ASan and UBSan",
+      "startup_fixed_check": "PASS (12 cases)",
+      "serial_b_w_r_scanner": "PASS",
+      "differential_inputs": 417,
+      "max_abs_output_difference": 4.907226625050498e-09,
+      "rgb8_exact_match": true,
+      "acquisition_normalization_commands": "unchanged from original scanner"
+    },
+    "100": {
+      "cxx_standard": "C++11",
+      "sanitizers": "ASan and UBSan",
+      "startup_fixed_check": "PASS (12 cases)",
+      "serial_b_w_r_scanner": "PASS",
+      "differential_inputs": 417,
+      "max_abs_output_difference": 4.968871980537415e-09,
+      "rgb8_exact_match": true,
+      "acquisition_normalization_commands": "unchanged from original scanner"
+    }
+  },
+  "notebook": "PASS: embedded helpers and dataset, all cells; smoke H=4/5 and 100 epochs; full frozen runs separately completed H=40/50/60/100 and 50,000 epochs.",
+  "short_training_checks": "PASS: identical seed produces identical FP32 weights; frozen-output overwrite rejected."
+}

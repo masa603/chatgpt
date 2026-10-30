@@ -1,0 +1,82 @@
+{
+  "hidden_size": 50,
+  "epochs": 50000,
+  "seed_numpy_and_torch": 42,
+  "learning_rate": 0.01,
+  "lambda_l1_weights_only": 1e-06,
+  "optimizer": "Adam",
+  "checkpoint_rule": "Final epoch; no validation-driven early stopping or checkpoint selection.",
+  "device": "cpu",
+  "threads": 1,
+  "torch_version": "2.8.0+cpu",
+  "numpy_version": "2.3.5",
+  "python_version": "3.12.14",
+  "training_data_sha256": "fa34647c535b124d5cc4bb49b6be9029abdb1999f2e031bc0fc15cb1e9d0602c",
+  "training_rows": 33,
+  "all_rows_retained": true,
+  "pc_training_mse_normalized_torch": 0.0010767405619844794,
+  "pc_training_mse_rgb255_raw": 70.01505685218169,
+  "pc_training_mse_rgb8_all33": 70.01010101010101,
+  "pc_training_mse_rgb8_3x3": 0.0,
+  "pc_training_mse_rgb8_6x4": 96.26388888888889,
+  "torch_vs_sequential_fp32_max_abs_difference": 2.980232238769531e-07,
+  "dense_model_array_bytes": 11612,
+  "input_collision_bounds": {
+    "groups": [
+      {
+        "sample_ids": [
+          13,
+          19,
+          22,
+          32
+        ],
+        "input_rgb": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "target_rgb": [
+          [
+            91,
+            108,
+            64
+          ],
+          [
+            93,
+            59,
+            105
+          ],
+          [
+            39,
+            63,
+            144
+          ],
+          [
+            84,
+            85,
+            86
+          ]
+        ]
+      }
+    ],
+    "minimum_continuous_rgb255_mse": 70.00252525252525,
+    "minimum_rgb8_mse": 70.01010101010101
+  },
+  "saved_validation_evaluation": {
+    "role": "validation only; not used in training or checkpoint selection",
+    "read_ids": [
+      "1",
+      "2"
+    ],
+    "mse_rgb8_by_read": [
+      4519.8125,
+      2341.640625
+    ],
+    "mean_mse_rgb8": 3430.7265625,
+    "data_sha256": "def95fe209dde0cadab874aa77fd26744e23b2b7aaf0971c2b384af25bb4c7ad"
+  },
+  "wall_seconds": 46.16416739698616,
+  "interpretation": "PC fit on saved learning inputs, not newly measured device MSE. Hand-held variability and identical-input conflicting labels remain. Teacher RGB recovered from supplied Notebook reference displays; original PNG files not independently compared.",
+  "experiment_role": "planned hidden size",
+  "model_header_sha256": "3f8d485e75e595d31974d8d225b65c36c17de616adebfe8515704f555aa2a84d"
+}

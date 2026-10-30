@@ -1,5 +1,10 @@
 # 閾値選択：最初はH=40の重みを調べる
 
+測定済み33組からの新しい学習結果は [retraining](../retraining/README.md) にあります。
+このページの同梱CSR結果は旧モデルの暫定記録です。
+新モデルでは `retraining/results/h40`・`h50`・`h60` の `model_parameters.h` を使い、
+別の出力先で閾値選択をやり直します。旧閾値や旧CSR配列を流用しません。
+
 Jupyter Notebookで `threshold_selection.ipynb` を開き、上から順番に実行します。
 `threshold_tools.py` はNotebookと同じフォルダに置いてください。
 必要なPythonパッケージはNumPyとMatplotlibです。PyTorchやArduinoの接続は不要です。

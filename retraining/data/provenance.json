@@ -1,0 +1,349 @@
+{
+  "dataset_role": "training; distinct from validation/reference_image4 and final evaluation",
+  "rows": 33,
+  "chart_rows": {
+    "train_3x3": 9,
+    "train_6x4": 24
+  },
+  "input_scale": "Saved NN inputs already normalized/clipped to 0..1; no second division by 255.",
+  "acquisition": "Original scanner: A0, LED R8/G6/B7 via analogWrite 255/0, settling 10 ms, 10 ADC samples/channel with 2 ms spacing.",
+  "source_reading_files": [
+    {
+      "file_name": "scan_3x3_01.csv",
+      "sha256": "78b87baa70cd2a4db0d44a46063585aa5d5992952a73e410da997e6efe86a48d"
+    },
+    {
+      "file_name": "scan_6x4_01.csv",
+      "sha256": "581284646f6da4f7f47c254b7d730ac3b7936395680d13a09a37d050cbad6a7f"
+    }
+  ],
+  "source_notebook_file": "train_L1_normalization.ipynb",
+  "source_notebook_sha256": "e21bed594569ab5dd6200139cd51b436778f298e4864835f1f1ee11d78fe2f1c",
+  "target_source": "RGB sampled from uniform interiors of supplied Notebook saved reference-image displays after its 3x3/6x4 resizing.",
+  "original_png_files_verified_on_this_machine": false,
+  "reference_extraction": [
+    {
+      "chart_id": "train_3x3",
+      "display_png_sha256": "ff4155b9911715b7def59f387184a16171fc74194eb1ab77725fc7d7e0e5d16c",
+      "sample_centers": [
+        {
+          "row": 0,
+          "column": 0,
+          "display_pixel": [
+            116,
+            77
+          ]
+        },
+        {
+          "row": 0,
+          "column": 1,
+          "display_pixel": [
+            239,
+            77
+          ]
+        },
+        {
+          "row": 0,
+          "column": 2,
+          "display_pixel": [
+            362,
+            77
+          ]
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "display_pixel": [
+            116,
+            200
+          ]
+        },
+        {
+          "row": 1,
+          "column": 1,
+          "display_pixel": [
+            239,
+            200
+          ]
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "display_pixel": [
+            362,
+            200
+          ]
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "display_pixel": [
+            116,
+            323
+          ]
+        },
+        {
+          "row": 2,
+          "column": 1,
+          "display_pixel": [
+            239,
+            323
+          ]
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "display_pixel": [
+            362,
+            323
+          ]
+        }
+      ],
+      "uniform_patch_checked": "11x11 pixels at each center"
+    },
+    {
+      "chart_id": "train_6x4",
+      "display_png_sha256": "3a1eb015de0d0f1636fca15d7943259d06cf87d8749b27fc91ae792e92feee2c",
+      "sample_centers": [
+        {
+          "row": 0,
+          "column": 0,
+          "display_pixel": [
+            96,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 1,
+          "display_pixel": [
+            178,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 2,
+          "display_pixel": [
+            261,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 3,
+          "display_pixel": [
+            344,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 4,
+          "display_pixel": [
+            426,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 5,
+          "display_pixel": [
+            509,
+            57
+          ]
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "display_pixel": [
+            96,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 1,
+          "display_pixel": [
+            178,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "display_pixel": [
+            261,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 3,
+          "display_pixel": [
+            344,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 4,
+          "display_pixel": [
+            426,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 5,
+          "display_pixel": [
+            509,
+            139
+          ]
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "display_pixel": [
+            96,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 1,
+          "display_pixel": [
+            178,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "display_pixel": [
+            261,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 3,
+          "display_pixel": [
+            344,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 4,
+          "display_pixel": [
+            426,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 5,
+          "display_pixel": [
+            509,
+            222
+          ]
+        },
+        {
+          "row": 3,
+          "column": 0,
+          "display_pixel": [
+            96,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 1,
+          "display_pixel": [
+            178,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 2,
+          "display_pixel": [
+            261,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 3,
+          "display_pixel": [
+            344,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 4,
+          "display_pixel": [
+            426,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 5,
+          "display_pixel": [
+            509,
+            304
+          ]
+        }
+      ],
+      "uniform_patch_checked": "11x11 pixels at each center"
+    }
+  ],
+  "identical_input_groups": [
+    {
+      "sample_ids": [
+        13,
+        19,
+        22,
+        32
+      ],
+      "input_rgb": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "target_rgb": [
+        [
+          91,
+          108,
+          64
+        ],
+        [
+          93,
+          59,
+          105
+        ],
+        [
+          39,
+          63,
+          144
+        ],
+        [
+          84,
+          85,
+          86
+        ]
+      ]
+    }
+  ],
+  "minimum_possible_continuous_rgb255_training_mse_due_to_identical_inputs": 70.00252525252525,
+  "minimum_possible_rgb8_training_mse_due_to_identical_inputs": 70.01010101010101,
+  "constraints": [
+    "Hand-held measurement is accepted as the operating constraint; variability remains.",
+    "All 33 measured rows retained, including four all-zero inputs for different reference colors; no favorable-row filtering.",
+    "Reference RGB was recovered from Notebook figures; compare with original reference PNG values when available.",
+    "PC fit on saved training inputs is not a new physical reading and does not guarantee repeat-read or unseen-chart accuracy."
+  ]
+}
