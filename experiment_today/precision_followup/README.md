@@ -44,17 +44,19 @@ Dense自体の再読取MSEが約1,700〜2,000ある問題は残り、MSEが50な
 
 ## 次の実機確認
 
-まず [compare_h40](compare_h40) の `compare_h40.ino` と **`parameters_precision.h`** を同じフォルダへ保存します。
-UNO R4 WiFiへ書き込み、9600 bpsで **`t`** を送ります。
-`PRUNING_STAGE=EXPLORATORY_PRECISION_FOLLOW_UP`、H=40、CSR=4774 byteが新候補の識別情報です。
-`BENCHMARK START`〜`END` を保存します。ここでは保存済み入力でMSEと速度を確認します。
-同じ操作の [compare_h60](compare_h60) と [compare_h100](compare_h100) も用意しています。
-
-その後、新しい紙の読取は [fresh_scan_all](fresh_scan_all) の `fresh_scan_all.ino` と
-**`models_precision.h`** を使います。3×3の黒b・白wで校正し、9色をrで読みます。
+MSEを優先し、まず新しい紙の読取を行います。
+[fresh_scan_all](fresh_scan_all) の `fresh_scan_all.ino` と **`models_precision.h`** を同じフォルダへ保存します。
+UNO R4 WiFiへ書き込み、9600 bpsで起動時の `ALL MODELS CHECK: PASS` を確認します。
+3×3の黒b・白wで校正し、9色をrで読みます。
 全6条件の画像とMSEを出します。新スキャナのCAPTURE番号は書き込み後に1から始まります。
 新しい測定は別段階としてこのフォルダの配下へ保存し、元の測定平均と混ぜません。
 同じ学習用チャートの再読取なので、独立した最終評価にはなりません。
+
+精度の確認後、速度は [compare_h40](compare_h40) の `compare_h40.ino` と
+**`parameters_precision.h`** を同じフォルダへ置き、書き込み後に9600 bpsで **`t`** を送信します。
+`PRUNING_STAGE=EXPLORATORY_PRECISION_FOLLOW_UP`、H=40、CSR=4774 byteが新候補の識別情報です。
+`BENCHMARK START`〜`END` を保存します。
+同じ操作の [compare_h60](compare_h60) と [compare_h100](compare_h100) も用意しています。
 
 ## 再生成と確認
 
