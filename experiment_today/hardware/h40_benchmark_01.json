@@ -1,0 +1,135 @@
+{
+  "received_date_japan": "2026-11-06",
+  "execution_timestamp": null,
+  "source": "User-supplied serial output from Arduino UNO R4 WiFi",
+  "hidden_size": 40,
+  "status": "DEVICE_CHECK_AND_TIMING_PASS",
+  "model_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b",
+  "input_sha256": "def95fe209dde0cadab874aa77fd26744e23b2b7aaf0971c2b384af25bb4c7ad",
+  "threshold": 0.13873455673456192,
+  "compiler": "7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]",
+  "f_cpu_hz": 48000000,
+  "input_count": 128,
+  "warmup_calls": 10,
+  "calls_per_group": 100,
+  "groups": 5,
+  "dense_model_bytes": 7692,
+  "csr_model_bytes": 1109,
+  "model_bytes_reduction_percent": 85.58242329693188,
+  "timing": {
+    "dense": {
+      "mean_us": 544.408,
+      "sample_stddev_us": 0.008366600265333146
+    },
+    "csr": {
+      "mean_us": 160.19,
+      "sample_stddev_us": 0.0
+    }
+  },
+  "csr_time_change_percent": -70.57537729056149,
+  "dense_over_csr_speed_ratio": 3.398514264311131,
+  "timing_groups": [
+    {
+      "group": "1",
+      "first_model": "Dense",
+      "dense_total_us": "54441",
+      "csr_total_us": "16019",
+      "dense_us_per_inference": "544.4100",
+      "csr_us_per_inference": "160.1900",
+      "dense_checksum": "164.38135683",
+      "csr_checksum": "152.73925009"
+    },
+    {
+      "group": "2",
+      "first_model": "CSR",
+      "dense_total_us": "54440",
+      "csr_total_us": "16019",
+      "dense_us_per_inference": "544.4000",
+      "csr_us_per_inference": "160.1900",
+      "dense_checksum": "151.32633463",
+      "csr_checksum": "144.01937402"
+    },
+    {
+      "group": "3",
+      "first_model": "Dense",
+      "dense_total_us": "54441",
+      "csr_total_us": "16019",
+      "dense_us_per_inference": "544.4100",
+      "csr_us_per_inference": "160.1900",
+      "dense_checksum": "141.22785860",
+      "csr_checksum": "130.28916992"
+    },
+    {
+      "group": "4",
+      "first_model": "CSR",
+      "dense_total_us": "54440",
+      "csr_total_us": "16019",
+      "dense_us_per_inference": "544.4000",
+      "csr_us_per_inference": "160.1900",
+      "dense_checksum": "136.09942352",
+      "csr_checksum": "128.39857428"
+    },
+    {
+      "group": "5",
+      "first_model": "Dense",
+      "dense_total_us": "54442",
+      "csr_total_us": "16019",
+      "dense_us_per_inference": "544.4200",
+      "csr_us_per_inference": "160.1900",
+      "dense_checksum": "159.91573794",
+      "csr_checksum": "150.18545645"
+    }
+  ],
+  "mse_rows": [
+    {
+      "mse_dataset": "learning_3x3",
+      "read_id": "0",
+      "colors": "9",
+      "dense_mse": "0.000000",
+      "csr_mse": "776.370370"
+    },
+    {
+      "mse_dataset": "learning_6x4",
+      "read_id": "0",
+      "colors": "24",
+      "dense_mse": "96.291667",
+      "csr_mse": "520.861111"
+    },
+    {
+      "mse_dataset": "learning_all33",
+      "read_id": "0",
+      "colors": "33",
+      "dense_mse": "70.030303",
+      "csr_mse": "590.545455"
+    },
+    {
+      "mse_dataset": "validation",
+      "read_id": "1",
+      "colors": "64",
+      "dense_mse": "6101.062500",
+      "csr_mse": "6187.817708"
+    },
+    {
+      "mse_dataset": "validation",
+      "read_id": "2",
+      "colors": "64",
+      "dense_mse": "2897.380208",
+      "csr_mse": "3081.531250"
+    },
+    {
+      "mse_dataset": "validation_mean",
+      "read_id": "0",
+      "colors": "128",
+      "dense_mse": "4499.221354",
+      "csr_mse": "4634.674479"
+    }
+  ],
+  "pc_mse_agreement": "All aggregate learning/validation rows agree within 1e-6",
+  "paired_firmware_flash_bytes": null,
+  "paired_firmware_static_ram_bytes": null,
+  "independent_final_evaluation": "NOT_PERFORMED",
+  "new_sensor_capture": false,
+  "limitation": "Learning MSE worsens after pruning. Threshold selection used validation mean MSE. Zero CSR time SD is the observed value for these five quantized groups.",
+  "raw_log": "hardware/h40_benchmark_01.txt",
+  "raw_log_sha256": "50024e414c30f8a834fd58a549279c0d189faeb24dbd79ca609a18a278a8671b"
+}
