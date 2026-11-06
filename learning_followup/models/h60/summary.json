@@ -1,0 +1,20 @@
+{
+  "hidden_size": 60,
+  "config": {
+    "name": "chart36_mix_noise",
+    "mode": "chart",
+    "mix": true,
+    "noise": 0.01
+  },
+  "training_rows": 36,
+  "epochs": 50000,
+  "seed": 42,
+  "optimizer": "Adam, cosine learning rate 0.003 to 0.00003",
+  "l1_weights_only": 1e-06,
+  "training_mse_rgb8": 0.2037037037037037,
+  "wall_seconds": 84.27746723599921,
+  "training_data_sha256": "316a28abc7f15c05a5647620372c2f7d57923cf838549e50ff5df892340f9a7a",
+  "model_header_sha256": "957b01ae4ddc3a0f42ffa09eb15be73786b990c1ed66b652f9188f6a08fe304d",
+  "scope": "Multiread adaptation. Training fit is not a prospective device measurement. All available reading groups used after development selection.",
+  "next_test": "Freeze now, then acquire a new physical 3x3 reading; do not treat old training read replays as confirmation."
+}

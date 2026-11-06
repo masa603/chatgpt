@@ -1,9 +1,14 @@
 # 2026年11月6日：40→60→100次元の比較
 
-MSE維持を優先する追加探索は [precision_followup](precision_followup/README.md) です。
-元の候補・測定結果を保存したまま枝刈りを弱めた候補を作成し、新たな実機確認を行います。
-新スキャナは [precision_scan](precision_followup/precision_scan/README.md) です。
-起動時の `FIRMWARE=PRECISION_SCAN_V2` で版を確認し、vで今回保存した9入力を再計算します。
+現在は**新しく読み取った9色でMSE300以下を目指す再学習**を優先しています。
+学習済みの新しい版と次の手順は [learning_followup](../learning_followup/README.md)、
+Arduinoへ書き込む2ファイルは [color_retrain_v3](../learning_followup/color_retrain_v3/README.md) です。
+この版は3×3の9色×4回を学習したDenseモデルで、元の33色全体の改善を確認したものではありません。
+学習MSEと新しい実測MSEを分けて記録します。実測300以下の達成は未確認です。
+
+枝刈りを弱めた以前の追加探索は [precision_followup](precision_followup/README.md) に保存しました。
+`PRECISION_SCAN_V2` の実機再生ログを受領し、[直前のMSE・9色RGB・画像](precision_followup/replay_images/README.md)
+を保存しています。以下はそれ以前のモデル・測定の手順と記録です。
 
 実機ログの受領状況は [hardware](hardware/README.md)、実測値の集計は
 [device_results.csv](device_results.csv) に保存しています。40・60・100次元の計算確認・速度測定はPASSです。

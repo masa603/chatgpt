@@ -1,0 +1,4 @@
+hidden_size,training_rows,training_distinct_colors,training_mse_rgb8,new_physical_mse,new_physical_mse_goal_max,model_header_sha256
+40,36,9,0.5555555555555556,PENDING,300,5d0f26b9f382fc982620ca22eb3056acb042d772890ca29138f1e2114539031e
+60,36,9,0.2037037037037037,PENDING,300,957b01ae4ddc3a0f42ffa09eb15be73786b990c1ed66b652f9188f6a08fe304d
+100,36,9,0.10185185185185185,PENDING,300,ea01d4aa22fe00b9e82dfcd3c6e9f2ecc2d0d0e4723023ef4234764c0e78e28b

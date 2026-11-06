@@ -1,0 +1,7 @@
+hidden_size,format,colors,mse_device_reported,mse_recomputed_from_rgb,minimum_normalized_rounding_margin,max_device_error_bound_including_print_rounding,rgb8_equality_certificate,ppm,png
+40,DENSE,9,4260.518519,4260.518518518518,0.00010031298095104741,1.9e-07,PASS: all rounding thresholds farther than measured error bound,h40_dense.ppm,h40_dense.png
+40,CSR,9,4260.518519,4260.518518518518,0.00020058295306037453,1.9e-07,PASS: all rounding thresholds farther than measured error bound,h40_csr.ppm,h40_csr.png
+60,DENSE,9,3835.037037,3835.037037037037,5.8520307727888516e-05,1.9e-07,PASS: all rounding thresholds farther than measured error bound,h60_dense.ppm,h60_dense.png
+60,CSR,9,3838.111111,3838.1111111111113,0.00010396884936912387,1.9e-07,PASS: all rounding thresholds farther than measured error bound,h60_csr.ppm,h60_csr.png
+100,DENSE,9,3561.0,3561.0,4.6851588230507044e-05,1.9e-07,PASS: all rounding thresholds farther than measured error bound,h100_dense.ppm,h100_dense.png
+100,CSR,9,3569.740741,3569.740740740741,2.9627715840059168e-05,1.9e-07,PASS: all rounding thresholds farther than measured error bound,h100_csr.ppm,h100_csr.png

@@ -95,12 +95,28 @@
     "priority": "MSE preservation before further memory builds",
     "stage": "EXPLORATORY_PRECISION_FOLLOW_UP",
     "policy": "precision_followup/protocol.json",
-    "status": "OLD_FIRMWARE_RETRY_RECEIVED; NEW_FIRMWARE_ID_AND_LATEST_INPUT_DEVICE_REPLAY_PREPARED",
+    "status": "PRECISION_SCAN_V2_DEVICE_REPLAY_RECEIVED_PASS; ARCHIVED_BEFORE_RETRAINING",
     "selection_data": "Original learning/validation data plus fixed unlabeled grid; previous fresh captures only replayed after selection as post-hoc diagnostics.",
     "original_results": "Preserved; not replaced by PC replay or new candidates.",
     "absolute_dense_mse": "Still high on fresh inputs; preserving Dense is not a claim that absolute color accuracy is sufficient.",
     "wrong_firmware_retry": "version_mismatch/old_firmware_retry_01",
     "next_firmware": "precision_scan; boot ID PRECISION_SCAN_V2",
-    "latest_input_replay": "v command: actual new-coefficient Arduino inference on archived physical inputs, not another sensor capture; hardware result pending"
+    "latest_input_replay": "Actual Arduino replay received: hardware/latest_replay_01.txt under precision_followup. No new sensor reading; previous frozen models."
+  },
+  "learning_first_follow_up": {
+    "user_goal": "MSE <= 300 on a new physical 3x3 reading, ideally below 100.",
+    "stage": "EXPLORATORY_MULTIREAD_DENSE_RETRAINING",
+    "priority": "Learning and new physical accuracy check before more pruning, timing or memory builds.",
+    "model_directory": "../learning_followup/models",
+    "next_firmware": "COLOR_RETRAIN_V3",
+    "dataset": "Original 33 plus 27 measured repeat samples retained; four development configurations compared by whole-reading holdout.",
+    "selected_training_scope": "36 samples: same 3x3 nine colors across four readings. The original 6x4 colors are not part of this selected fit; no 33-color/unseen-chart performance claim.",
+    "development_cv_mean_mse": 645.75,
+    "development_cv_worst_reading_mse": 1918.4814814814815,
+    "acceptance_mse_max_inclusive": 300,
+    "development_target_met": false,
+    "new_physical_mse": "PENDING; learning fit and archived replay are not a prospective hardware result.",
+    "old_records": "Original 33-color models, CSR measurements and old replay images retained separately without replacing their results.",
+    "paper_handling": "Hand-held, as required by the user."
   }
 }

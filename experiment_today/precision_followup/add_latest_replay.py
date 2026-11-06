@@ -36,7 +36,7 @@ def add_replay(target):
             raw_output = dense_layer_references(model, inputs)[-1]
             expected.append(raw_output)
             pixels = np.floor(np.clip(raw_output.astype(float), 0, 1) * 255 + .5)
-            diagnostics.append({"hidden_size":h,"format":mode,"mse_pc_replay":float(np.mean((pixels-targets.astype(float))**2)),"role":"PC_REPLAY_ONLY; NEW_DEVICE_REPLAY_NOT_YET_RECEIVED"})
+            diagnostics.append({"hidden_size":h,"format":mode,"mse_pc_replay":float(np.mean((pixels-targets.astype(float))**2)),"role":"PC_REFERENCE; consult separate actual-device replay record when available"})
     raw_hash = hashlib.sha256((source / "raw_log.txt").read_bytes()).hexdigest()
     text = "\n#define PRECISION_LATEST_REPLAY_ENABLED 1\nnamespace precision_replay {\n"
     text += f'const char SOURCE_LOG_SHA256[] = "{raw_hash}";\n'
@@ -57,6 +57,17 @@ def add_replay(target):
                 "scope":"Physical-input log was received after follow-up thresholds were frozen; exact acquisition time is unconfirmed. It was not used for selection. Reuse input for new-coefficient inference; not a new sensor capture at replay time and not independent final evaluation.",
                 "source_counter":summary["capture_counter"],"input_reconstruction":"FP32 normalize from archived ADC means and calibration, then clip 0..1.",
                 "input_array_sha256_float32_le":hashlib.sha256(inputs.astype('<f4').tobytes()).hexdigest(),"pc_results":diagnostics,"device_replay":"PENDING"}
+    device_record = HERE/'hardware/latest_replay_01.json'
+    if device_record.exists():
+        received = json.loads(device_record.read_text())
+        models_match = True
+        for h in (40,60,100):
+            model = next((m for m in received.get('models',[]) if m['hidden_size']==h),{})
+            selection = json.loads((HERE/f'selection/h{h}/summary.json').read_text())
+            models_match &= (model.get('threshold') == selection['selected']['threshold']
+                             and model.get('model_sha256') == selection['model_sha256'])
+        if received.get('source_sensor_log_sha256') == raw_hash and received.get('output_check') == 'PASS' and models_match:
+            manifest.update(device_replay='RECEIVED_PASS',device_replay_record='hardware/latest_replay_01.json')
     (HERE / "latest_replay_manifest.json").write_text(json.dumps(manifest,indent=2)+'\n')
 
 

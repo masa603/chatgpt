@@ -1,0 +1,27 @@
+{
+  "rows": 60,
+  "three_by_three_readings": 4,
+  "original_rows": 33,
+  "additional_measured_rows": 27,
+  "sources": [
+    {
+      "group": "reread_01",
+      "raw_log": "experiment_today/fresh_readings/capture_01/raw_log.txt",
+      "sha256": "a2e276aac83e19440f4bb70a68e4a0b2725017a3ee733e1ce53dceeddafabd04"
+    },
+    {
+      "group": "reread_03",
+      "raw_log": "experiment_today/fresh_readings/capture_03/raw_log.txt",
+      "sha256": "21f80329430d675c7e6048b2db05ae735d2b163e5c999995f52c935b5a40125f"
+    },
+    {
+      "group": "reread_latest",
+      "raw_log": "experiment_today/version_mismatch/old_firmware_retry_01/raw_log.txt",
+      "sha256": "a8cb1b18c582df0a02c86effcd1c0a84794f29fc9078582b4516e9c567558c77"
+    }
+  ],
+  "invalid_capture_2": "Excluded for user-reported wrong patch; never included.",
+  "zero_conflict_records": "Four original records have identical all-zero NN inputs and different targets; retained in all60, excluded as information-lost records only in reliable56.",
+  "chart_only_mode": "36 rows of the same nine colors across four readings. Scope is current 3x3-chart adaptation, not 33-color/unseen-chart generalization.",
+  "roles": "Four reading groups used for development cross-validation and final fitting. None is an independent final evaluation after this change. A fresh prospective reading is required."
+}

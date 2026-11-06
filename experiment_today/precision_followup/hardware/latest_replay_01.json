@@ -1,0 +1,122 @@
+{
+  "received_date_japan": "2026-11-06",
+  "execution_timestamp": null,
+  "firmware": "PRECISION_SCAN_V2",
+  "source_sensor_log_sha256": "a8cb1b18c582df0a02c86effcd1c0a84794f29fc9078582b4516e9c567558c77",
+  "scope": "Actual Arduino inference on archived physical inputs, not new acquisition or independent final evaluation.",
+  "output_check": "PASS",
+  "reported_max_abs_error": 1.8e-07,
+  "pixel_values": "Reconstructed from exact embedded FP32 references; observed error bound certifies identical RGB8 rounding for all 162 components.",
+  "models": [
+    {
+      "hidden_size": 40,
+      "threshold": 0.0011764122755266726,
+      "model_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b"
+    },
+    {
+      "hidden_size": 60,
+      "threshold": 0.002061367151327431,
+      "model_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803"
+    },
+    {
+      "hidden_size": 100,
+      "threshold": 0.001160839688964188,
+      "model_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5"
+    }
+  ],
+  "results": [
+    {
+      "hidden_size": 40,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 4260.518519,
+      "mse_recomputed_from_rgb": 4260.518518518518,
+      "minimum_normalized_rounding_margin": 0.00010031298095104741,
+      "max_device_error_bound_including_print_rounding": 1.9e-07,
+      "rgb8_equality_certificate": "PASS: all rounding thresholds farther than measured error bound",
+      "ppm": "h40_dense.ppm",
+      "png": "h40_dense.png"
+    },
+    {
+      "hidden_size": 40,
+      "format": "CSR",
+      "colors": 9,
+      "mse_device_reported": 4260.518519,
+      "mse_recomputed_from_rgb": 4260.518518518518,
+      "minimum_normalized_rounding_margin": 0.00020058295306037453,
+      "max_device_error_bound_including_print_rounding": 1.9e-07,
+      "rgb8_equality_certificate": "PASS: all rounding thresholds farther than measured error bound",
+      "ppm": "h40_csr.ppm",
+      "png": "h40_csr.png"
+    },
+    {
+      "hidden_size": 60,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 3835.037037,
+      "mse_recomputed_from_rgb": 3835.037037037037,
+      "minimum_normalized_rounding_margin": 5.8520307727888516e-05,
+      "max_device_error_bound_including_print_rounding": 1.9e-07,
+      "rgb8_equality_certificate": "PASS: all rounding thresholds farther than measured error bound",
+      "ppm": "h60_dense.ppm",
+      "png": "h60_dense.png"
+    },
+    {
+      "hidden_size": 60,
+      "format": "CSR",
+      "colors": 9,
+      "mse_device_reported": 3838.111111,
+      "mse_recomputed_from_rgb": 3838.1111111111113,
+      "minimum_normalized_rounding_margin": 0.00010396884936912387,
+      "max_device_error_bound_including_print_rounding": 1.9e-07,
+      "rgb8_equality_certificate": "PASS: all rounding thresholds farther than measured error bound",
+      "ppm": "h60_csr.ppm",
+      "png": "h60_csr.png"
+    },
+    {
+      "hidden_size": 100,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 3561.0,
+      "mse_recomputed_from_rgb": 3561.0,
+      "minimum_normalized_rounding_margin": 4.6851588230507044e-05,
+      "max_device_error_bound_including_print_rounding": 1.9e-07,
+      "rgb8_equality_certificate": "PASS: all rounding thresholds farther than measured error bound",
+      "ppm": "h100_dense.ppm",
+      "png": "h100_dense.png"
+    },
+    {
+      "hidden_size": 100,
+      "format": "CSR",
+      "colors": 9,
+      "mse_device_reported": 3569.740741,
+      "mse_recomputed_from_rgb": 3569.740740740741,
+      "minimum_normalized_rounding_margin": 2.9627715840059168e-05,
+      "max_device_error_bound_including_print_rounding": 1.9e-07,
+      "rgb8_equality_certificate": "PASS: all rounding thresholds farther than measured error bound",
+      "ppm": "h100_csr.ppm",
+      "png": "h100_csr.png"
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "hidden_size": 40,
+      "dense_mse": 4260.518518518518,
+      "csr_mse": 4260.518518518518,
+      "csr_change_percent": 0.0
+    },
+    {
+      "hidden_size": 60,
+      "dense_mse": 3835.037037037037,
+      "csr_mse": 3838.1111111111113,
+      "csr_change_percent": 0.08015761111004327
+    },
+    {
+      "hidden_size": 100,
+      "dense_mse": 3561.0,
+      "csr_mse": 3569.740740740741,
+      "csr_change_percent": 0.24545747657234163
+    }
+  ],
+  "raw_replay_log_sha256": "3f4005dd666a1c5f37fdd9c9b13293840ac1c3093a39003b1ed0fde479be6dc4"
+}

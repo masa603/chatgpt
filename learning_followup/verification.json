@@ -1,0 +1,15 @@
+{
+  "scope": "Host verification only; prospective physical reading not received.",
+  "dataset_rows": 36,
+  "distinct_colors": 9,
+  "reading_groups": 4,
+  "checkpoint_npz_header_equality": "PASS",
+  "reported_training_mse_recomputed": "PASS",
+  "cpp11_asan_ubsan": "PASS",
+  "differential_inputs": 444,
+  "max_abs_fp32_difference": 4.985046375693969e-09,
+  "rgb8_exact_agreement": true,
+  "two_mock_captures_and_restart": "PASS",
+  "original_sensor_pipeline": "UNCHANGED",
+  "actual_new_physical_mse": "PENDING"
+}

@@ -1,0 +1,15 @@
+{
+  "selected_config": {
+    "name": "chart36_mix_noise",
+    "mode": "chart",
+    "mix": true,
+    "noise": 0.01
+  },
+  "development_selection_hidden_size": 60,
+  "development_mean_mse": 645.75,
+  "selection_rule": "Minimum mean MSE over four whole-reading holdouts, not random pixel split. Development selection only; new physical reading still required.",
+  "goal": "MSE <= 300 on a new physical reading; ideally below 100. Training fit is not success evidence.",
+  "prospective_target_mse_max": 300,
+  "development_mean_meets_300": false,
+  "prospective_result": "PENDING"
+}
