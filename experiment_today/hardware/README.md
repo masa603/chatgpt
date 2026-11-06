@@ -42,4 +42,6 @@ MSEはPC結果と表示精度内で一致しました。学習MSEの悪化を含
 今回100次元はDenseとCSRの両方が実機で実行できています。モデル配列はconstであり、
 CSRだけが100次元を搭載可能だったという結論にはしません。
 全3モデルの速度測定がそろっています。その後、[全6条件の3×3スキャナ](../fresh_scan_all/README.md) による
-新しい紙の読取1回分を受領しました。別の記録として [fresh_readings](../fresh_readings/README.md) に保存しています。
+新しい紙の有効な読取2回分（CAPTURE=1と3）を受領しました。CAPTURE=2は操作ミスとして除外理由を記録し、
+別の記録として [fresh_readings](../fresh_readings/README.md) に保存しています。
+速度・容量と再読取MSEを合わせた集計は [RESULTS.md](../RESULTS.md) にあります。

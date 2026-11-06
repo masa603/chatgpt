@@ -53,5 +53,6 @@ PC上ではC++11のASan・UBSanを有効にして各417入力の全6出力、
 2回の模擬校正・9色読取、PPMとMSE、NN入力、nでの再開始を確認しました。
 模擬読取の値は実験結果として保存しません。
 [fresh_scan_verification.json](../fresh_scan_verification.json) はPC上の検証記録です。
-実物の紙の読取は現在1回分を受領し、[fresh_readings](../fresh_readings/README.md) に保存しました。
-起動時のチェック部分のログは未受領ですが、新しい9入力での6モデルの出力はPCの再計算と一致しています。
+実物の紙の有効な読取2回分（CAPTURE=1と3）を [fresh_readings](../fresh_readings/README.md) に保存しました。
+CAPTURE=2は利用者申告の操作ミスとして除外しています。
+起動時のチェック部分のログは未受領ですが、受領した全18入力で6モデルの出力はPCの再計算と一致しています。

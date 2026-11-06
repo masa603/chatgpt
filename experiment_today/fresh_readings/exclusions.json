@@ -1,0 +1,17 @@
+{
+  "received_date_japan": "2026-11-06",
+  "excluded_captures": [
+    {
+      "capture_counter": 2,
+      "reason": "Wrong chart patch was read; prescribed color/order was not followed.",
+      "reason_user_reported_japanese": "間違っって違う色を読み込んじゃった",
+      "disposition": "Excluded for reported acquisition error, not an MSE cutoff.",
+      "nine_color_completion": "NOT_CONFIRMED",
+      "raw_log_received": false,
+      "included_in_statistics": false
+    }
+  ],
+  "valid_received_capture_counters": [1, 3],
+  "included_physical_captures": 2,
+  "note": "Keep original device counters. Do not rename capture 3 to capture 2 or treat it as a third valid replicate."
+}

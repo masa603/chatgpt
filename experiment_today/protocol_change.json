@@ -20,7 +20,7 @@
   "paper_handling": "Hand-held constraint remains; no paper fixation is required for the saved-input comparison.",
   "reporting": "Keep PC results, actual device logs and missing final evaluation distinct. Do not fill unmeasured device values or claim the original full protocol completed.",
   "fresh_sensor_follow_up": {
-    "status": "ONE_PHYSICAL_CAPTURE_RECEIVED_AND_VERIFIED; SECOND_CAPTURE_PENDING",
+    "status": "TWO_VALID_PHYSICAL_CAPTURES_RECEIVED_AND_VERIFIED",
     "chart": "Existing learning 3x3 chart; black left bottom and white right bottom used for calibration.",
     "models": [
       40,
@@ -36,8 +36,17 @@
     "repeat_procedure": "Use n to start another independent black/white calibration and nine-patch capture.",
     "accuracy_scope": "Fresh physical read of a chart used for learning, not independent final evaluation. Six outputs from one capture are not six independent physical repetitions.",
     "original_ten_read_protocol": "Not fulfilled by this follow-up.",
-    "actual_repeat_readings": 1,
+    "actual_repeat_readings": 2,
     "result_directory": "fresh_readings",
-    "startup_check_log": "NOT_SUPPLIED"
+    "startup_check_log": "NOT_SUPPLIED",
+    "valid_received_capture_counters": [
+      1,
+      3
+    ],
+    "excluded_capture_counters": [
+      2
+    ],
+    "exclusion_reason": "User reported wrong chart patch read during CAPTURE=2; excluded as acquisition protocol error. Raw excluded log not received; completion unknown.",
+    "exclusion_record": "fresh_readings/exclusions.json"
   }
 }
