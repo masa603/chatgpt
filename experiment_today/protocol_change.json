@@ -59,7 +59,7 @@
     "peak_runtime_ram": "NOT_MEASURED"
   },
   "single_model_build_follow_up": {
-    "status": "PREPARED; ARDUINO_IDE_BUILD_COUNTS_NOT_RECEIVED",
+    "status": "H40_DENSE_RECORDED; PAUSED_FOR_PRECISION_FOLLOW_UP",
     "sketch": "memory_probe",
     "conditions": [
       [
@@ -90,5 +90,14 @@
     "method": "Exactly one frozen model/format per preprocessing configuration; same dynamic volatile-input/output wrapper; original benchmark inference kernels. No sensor or MSE/reference image arrays.",
     "storage": "const FP32 weights/bias for both modes; unchanged CSR uint8 columns and uint16 pointers.",
     "scope": "Whole single-model wrapper build Flash and static RAM, not peak runtime RAM and not the six-model scanner footprint."
+  },
+  "precision_follow_up": {
+    "priority": "MSE preservation before further memory builds",
+    "stage": "EXPLORATORY_PRECISION_FOLLOW_UP",
+    "policy": "precision_followup/protocol.json",
+    "status": "THREE_CANDIDATES_FROZEN; HOST_TESTS_PASS; NEW_HARDWARE_RESULTS_PENDING",
+    "selection_data": "Original learning/validation data plus fixed unlabeled grid; previous fresh captures only replayed after selection as post-hoc diagnostics.",
+    "original_results": "Preserved; not replaced by PC replay or new candidates.",
+    "absolute_dense_mse": "Still high on fresh inputs; preserving Dense is not a claim that absolute color accuracy is sufficient."
   }
 }

@@ -1,0 +1,16 @@
+{
+  "received_date_japan": "2026-11-06",
+  "hidden_size": 40,
+  "format": "DENSE",
+  "sketch": "memory_probe",
+  "identification_basis": "Default H=40 PROBE_CSR=0 settings just instructed in chat; settings were not separately included in the two output lines.",
+  "scope": "Single-model inference wrapper build; const FP32 arrays, no sensor/reference image arrays.",
+  "flash_used_bytes": 60268,
+  "flash_max_bytes": 262144,
+  "static_ram_used_bytes": 6764,
+  "ram_max_bytes": 32768,
+  "remaining_for_stack_and_locals_bytes": 26004,
+  "peak_runtime_ram_bytes": null,
+  "source_log": "memory_h40_dense_compile_01.txt",
+  "source_log_sha256": "664fb89804fbd1c96f98cd1b34a8672499bc9401b14550a352c4525b51b801b2"
+}

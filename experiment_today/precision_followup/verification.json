@@ -1,0 +1,42 @@
+{
+  "scope": "Host C++11 tests only. All timings produced by these tests are excluded from experiment results.",
+  "arduino_hardware_results": "NOT_RECORDED",
+  "models": {
+    "40": {
+      "cpp_compile": "PASS",
+      "sanitizers": "ASan+UBSan",
+      "runtime_saved_input_check": "PASS (128 inputs)",
+      "differential_inputs": 417,
+      "max_abs_fp32_difference": 4.97894281359379e-09,
+      "rgb8_match": "EXACT, Dense and CSR",
+      "serial_t_and_mse_rows": "PASS",
+      "csr_index_rejection": "PASS",
+      "timing_statistics": "PASS",
+      "model_header_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b"
+    },
+    "60": {
+      "cpp_compile": "PASS",
+      "sanitizers": "ASan+UBSan",
+      "runtime_saved_input_check": "PASS (128 inputs)",
+      "differential_inputs": 417,
+      "max_abs_fp32_difference": 4.995727609369283e-09,
+      "rgb8_match": "EXACT, Dense and CSR",
+      "serial_t_and_mse_rows": "PASS",
+      "csr_index_rejection": "PASS",
+      "timing_statistics": "PASS",
+      "model_header_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803"
+    },
+    "100": {
+      "cpp_compile": "PASS",
+      "sanitizers": "ASan+UBSan",
+      "runtime_saved_input_check": "PASS (128 inputs)",
+      "differential_inputs": 417,
+      "max_abs_fp32_difference": 4.968871980537415e-09,
+      "rgb8_match": "EXACT, Dense and CSR",
+      "serial_t_and_mse_rows": "PASS",
+      "csr_index_rejection": "PASS",
+      "timing_statistics": "PASS",
+      "model_header_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5"
+    }
+  }
+}

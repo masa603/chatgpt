@@ -27,9 +27,10 @@ def replace_function(text, name, replacement):
     return text[:start] + replacement + text[end:]
 
 
-def build():
-    target = HERE / "fresh_scan_all"
-    target.mkdir(exist_ok=True)
+def build(selection_root=None, target=None, stage_label=None):
+    selection_root = HERE / "selection" if selection_root is None else Path(selection_root)
+    target = HERE / "fresh_scan_all" if target is None else Path(target)
+    target.mkdir(parents=True, exist_ok=True)
     with (ROOT / "retraining/data/current33.csv").open(newline="") as f:
         training = list(csv.DictReader(f))
     x = np.array([[r[f"input_{c}"] for c in "rgb"] for r in training], np.float32)
@@ -39,7 +40,7 @@ def build():
     models = []
     for h in (40, 60, 100):
         source = ROOT / f"retraining/results/h{h}/model_parameters.h"
-        selection = HERE / f"selection/h{h}/summary.json"
+        selection = selection_root / f"h{h}/summary.json"
         report = json.loads(selection.read_text())
         dense = load_model(source)
         sparse = prune(dense, report["selected"]["threshold"])
@@ -99,6 +100,9 @@ def build():
     sketch = sketch.replace("ニューラルネット版準備完了", "全6条件の3x3スキャナ準備完了（画像サイズ入力不要）")
     sketch = sketch.replace("--- NN補正後 ---", "--- CSR40補正後（全6条件は9色後に出力）---")
     sketch = replace_function(sketch, "inputImageSize", "")
+    if stage_label is not None:
+        marker = '  Serial.println("MODEL_GENERATION=CURRENT33_SEED42_EPOCH50000");'
+        sketch = sketch.replace(marker, marker + f'\n  Serial.println("PRUNING_STAGE={stage_label}");')
     (target / "fresh_scan_all.ino").write_text(sketch)
     print("Generated", target)
 

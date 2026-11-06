@@ -1,0 +1,7 @@
+hidden_size,format,model_array_bytes,status,flash_used_bytes,flash_max_bytes,static_ram_used_bytes,ram_max_bytes,source_log
+40,DENSE,7692,ARDUINO_COMPILE_RECEIVED,60268,262144,6764,32768,hardware/memory_h40_dense_compile_01.txt
+40,CSR,1109,ARDUINO_COMPILE_NOT_RECORDED,,,,,
+60,DENSE,16332,ARDUINO_COMPILE_NOT_RECORDED,,,,,
+60,CSR,1279,ARDUINO_COMPILE_NOT_RECORDED,,,,,
+100,DENSE,43212,ARDUINO_COMPILE_NOT_RECORDED,,,,,
+100,CSR,1739,ARDUINO_COMPILE_NOT_RECORDED,,,,,

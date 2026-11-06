@@ -1,0 +1,19 @@
+{
+  "date_japan": "2026-11-06",
+  "stage": "EXPLORATORY_PRECISION_FOLLOW_UP",
+  "reason": "User asks to prioritize MSE. Original capacity-first CSR candidates worsened mean fresh learning-chart MSE by about 19-25%.",
+  "frozen_dense_models": "Keep retraining/results/h40,h60,h100/model_parameters.h unchanged. No retraining in this step.",
+  "selection_inputs": ["Original 33 learning inputs and targets", "Previously measured separate validation chart (two reads)", "Predefined unlabeled Cartesian grid: 0,0.125,...,1 in each input channel (729 inputs)"],
+  "selection_constraints": {
+    "csr_model_bytes": "strictly smaller than original Dense arrays",
+    "learning_all33_rgb8_mse": "no more than original Dense MSE times 1.05",
+    "validation_each_read_rgb8_mse": "no more than original Dense MSE of that read times 1.05",
+    "uniform_grid_clipped_output_max_abs_difference": "no more than 0.5/255 from Dense, before RGB8 rounding"
+  },
+  "candidate_rule": "Existing midpoints between distinct absolute frozen weights, common to three layers, biases unchanged; not five preset thresholds.",
+  "objective": "Smallest CSR array bytes satisfying all constraints. Inspect candidates in ascending storage size; stop at first passing candidate. Error need not be monotonic.",
+  "fresh_readings_capture_1_and_3": "Already observed before this method change; not used for candidate filtering or ranking. Replay after candidate freeze is a post-hoc diagnostic, not independent confirmation.",
+  "scope": "Try to preserve Dense predictions while reducing storage. This does not address high absolute Dense MSE from physical re-reading and does not guarantee improvement on every possible input.",
+  "confirmation": "A newly acquired chart read after freezing the follow-up candidate is needed to check repeat-read accuracy; same learning-chart colors still do not form independent final chart evaluation.",
+  "original_results": "Preserve all original candidates, hardware logs and result tables; record this as a separate exploratory method."
+}

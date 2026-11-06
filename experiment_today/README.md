@@ -1,5 +1,8 @@
 # 2026年11月6日：40→60→100次元の比較
 
+MSE維持を優先する追加探索は [precision_followup](precision_followup/README.md) です。
+元の候補・測定結果を保存したまま枝刈りを弱めた候補を作成し、新たな実機確認を行います。
+
 実機ログの受領状況は [hardware](hardware/README.md)、実測値の集計は
 [device_results.csv](device_results.csv) に保存しています。40・60・100次元の計算確認・速度測定はPASSです。
 

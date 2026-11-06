@@ -17,13 +17,14 @@ from export_csr_arduino import array_definition, dense_layer_references, export
 from threshold_tools import load_model, load_validation, prune
 
 
-def export_one(h):
-    selection = HERE / f"selection/h{h}/summary.json"
+def export_one(h, selection_root=None, output_dir=None, stage_label=None):
+    selection_root = HERE / "selection" if selection_root is None else Path(selection_root)
+    selection = selection_root / f"h{h}/summary.json"
     report = json.loads(selection.read_text())
     source = ROOT / f"retraining/results/h{h}/model_parameters.h"
     validation_csv = ROOT / "pruning/validation.csv"
-    output = HERE / f"compare_h{h}"
-    output.mkdir(exist_ok=True)
+    output = HERE / f"compare_h{h}" if output_dir is None else Path(output_dir)
+    output.mkdir(parents=True, exist_ok=True)
     dense = load_model(source)
     sparse = prune(dense, report["selected"]["threshold"])
     validation = load_validation(validation_csv, expected_reads=2)
@@ -74,6 +75,9 @@ def export_one(h):
                             f'  Serial.println("Current-33 H={h}: send t for MSE, model bytes and device speed.");')
     sketch = sketch.replace('SCOPE: inference on saved inputs; provisional model; color accuracy assessed separately.',
                             'SCOPE: saved learning/validation inputs; no new sensor capture; independent final evaluation not performed.')
+    if stage_label is not None:
+        marker = '  Serial.println("MODEL_GENERATION=CURRENT33_SEED42_EPOCH50000");'
+        sketch = sketch.replace(marker, marker + f'\n  Serial.println("PRUNING_STAGE={stage_label}");')
     (output / f"compare_h{h}.ino").write_text(sketch, encoding="utf-8")
     print("Exported", output, flush=True)
 

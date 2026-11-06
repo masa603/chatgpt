@@ -116,8 +116,9 @@ def function_body(text, name):
     return text[first:last]
 
 
-def main():
-    source = HERE / "fresh_scan_all"
+def main(base=None):
+    base = HERE if base is None else Path(base)
+    source = base / "fresh_scan_all"
     original = (ROOT / "hdjsk/hdjsk.ino").read_text()
     scanner = (source / "fresh_scan_all.ino").read_text()
     for name in ("ledOff", "readAverage", "readRGB", "normalizeInput", "outputTo255", "handleCalibration"):
@@ -126,7 +127,7 @@ def main():
     layers = []
     for h in (40, 60, 100):
         dense = load_model(ROOT / f"retraining/results/h{h}/model_parameters.h")
-        selection = json.loads((HERE / f"selection/h{h}/summary.json").read_text())
+        selection = json.loads((base / f"selection/h{h}/summary.json").read_text())
         layers.extend([dense, prune(dense, selection["selected"]["threshold"])])
     records = []
     for path in [ROOT / "retraining/data/current33.csv", ROOT / "pruning/validation.csv"]:
@@ -186,7 +187,7 @@ def main():
               "startup_checks": "PASS for all three frozen model pairs",
               "mock_capture": "Two complete 3x3 acquisitions, black/white calibration, raw channel values, all six PPMs, MSE rows, NN input summary, n restart and no extra reads after completion PASS.",
               "arduino_hardware_check": "PENDING", "physical_repeat_readings_received": 0}
-    (HERE / "fresh_scan_verification.json").write_text(json.dumps(report, indent=2) + "\n")
+    (base / "fresh_scan_verification.json").write_text(json.dumps(report, indent=2) + "\n")
     print("PASS: six models x 417 inputs; two fresh-scanner mock captures and all PPM/MSE/NN rows; ASan/UBSan.")
 
 

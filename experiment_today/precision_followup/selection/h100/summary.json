@@ -1,0 +1,161 @@
+{
+  "model_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5",
+  "hidden_size": 100,
+  "weight_count": 10600,
+  "candidate_count_including_zero_baseline": 10596,
+  "candidate_rule": "Zero baseline plus all midpoints between distinct adjacent absolute weights; one global threshold; biases unchanged.",
+  "capacity_scope": "FP32 values/bias + uint8 columns + uint16 row pointers; excludes whole-build alignment, buffers, NPZ container overhead.",
+  "validation_status": "evaluated",
+  "validation_csv_sha256": "def95fe209dde0cadab874aa77fd26744e23b2b7aaf0971c2b384af25bb4c7ad",
+  "validation_read_ids": [
+    "1",
+    "2"
+  ],
+  "expected_validation_reads": 2,
+  "validation_read_count": 2,
+  "validation_colors_per_read": 64,
+  "input_collisions": [
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r6c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c5",
+        "r7c6"
+      ]
+    }
+  ],
+  "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of the measured reading MSEs.",
+  "dense_validation_mse": 3119.1458333333335,
+  "dense_mse_by_read": [
+    4290.125,
+    1948.1666666666667
+  ],
+  "selected": {
+    "threshold": 0.001160839688964188,
+    "nonzero": 4616,
+    "sparsity_pct": 56.452830188679236,
+    "csr_bytes": 24304,
+    "dense_bytes": 43212,
+    "saving_pct": 43.75636397297047,
+    "memory_ok": true,
+    "validation_mse": 3120.6015625,
+    "mse_difference": 1.455729166666515,
+    "mse_increase_pct": 0.04667076322977248,
+    "quality_ok": true,
+    "eligible": true,
+    "read_1_mse": 4292.015625,
+    "read_2_mse": 1949.1875,
+    "training_mse": 70.01010101010101,
+    "grid_max_abs_clipped_difference": 0.0019258856773376465
+  },
+  "selection_status": "provisional_input_collisions",
+  "diagnostic_only": null,
+  "note": "Exploratory method change after observing original results. Existing fresh captures are not an independent final test. No new hardware timing or accuracy result yet.",
+  "follow_up_stage": "EXPLORATORY_PRECISION_FOLLOW_UP",
+  "selection_policy_sha256": "bf2e0ce9b32e2fa5bdbce253b9943b4ea329f53eef6eaea02f4c82327896ddd8",
+  "learning_data_sha256": "fa34647c535b124d5cc4bb49b6be9029abdb1999f2e031bc0fc15cb1e9d0602c",
+  "selection_inputs": "Original 33 learning inputs; original 2 validation reads; fixed unlabeled 729-point grid. No fresh captures used for filtering/ranking.",
+  "dense_learning_all33_mse": 70.01010101010101,
+  "grid_points": 729,
+  "grid_limit_raw_normalized": 0.00196078431372549,
+  "candidates_checked_in_storage_ascending_order": 4614,
+  "selection_explanation": "First passing candidate in increasing byte order. Smaller candidates were checked and rejected. Does not assume error is monotonic.",
+  "wall_seconds": 61.81314040900179
+}

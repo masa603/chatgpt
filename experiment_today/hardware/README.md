@@ -59,5 +59,12 @@ CSRだけが100次元を搭載可能だったという結論にはしません�
 原文のSHA256と記録条件は同名JSON、一覧は [firmware_memory.csv](../firmware_memory.csv) に保存しました。
 
 各モデルを1つずつ含むビルドの比較は [memory_probe](../memory_probe/README.md) に用意しました。
-6条件のPC上のコンパイル・数値確認は完了し、Arduino IDEのビルド使用量は未受領です。
+6条件のPC上のコンパイル・数値確認は完了しています。
 比較用の画像データを含まない共通ラッパーで、Dense/CSR両方のモデル配列をconstとして比較します。
+
+`memory_h40_dense_compile_01.txt` は、案内した初期設定（H=40、Dense）の検証後に受領したコンパイル出力です。
+Flash 60,268 / 262,144 byte、静的RAM 6,764 / 32,768 byte、残り26,004 byteです。
+スケッチの特定は直前の設定案内に基づき、利用者の2行の出力には条件名自体は含まれていません。
+原文・構造化JSONと [single_model_memory.csv](../single_model_memory.csv) に保存しました。
+元のCSR候補は再読取精度の悪化が大きかったため、以降のメモリ記録より
+[精度優先の追加探索](../precision_followup/README.md) を優先します。

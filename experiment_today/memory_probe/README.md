@@ -1,5 +1,9 @@
 # 各モデル単独のFlash・静的RAMを記録する
 
+精度条件の確認を優先するため、現在は [precision_followup](../precision_followup/README.md) の実機確認へ進みます。
+このフォルダのCSRは元の候補です。追加候補のメモリ使用量と混同しないでください。
+40 DenseのFlash 60,268 byte・静的RAM 6,764 byteは受領し、[single_model_memory.csv](../single_model_memory.csv) に保存しています。
+
 測定済みの速度・紙の再読取の後に、各モデルを1つずつ含むプログラムのビルド使用量を比較します。
 全6モデル入りの `fresh_scan_all` の133,424 byte・7,268 byteとは、スケッチと用途を分けて記録します。
 

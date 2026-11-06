@@ -66,9 +66,14 @@ def main(render_plot=True):
 RAMの使用量はグローバル変数等の静的領域で、ピークRAMは未測定である。
 40・60・100各Hの2モデル比較スケッチ単独のFlash・RAMは未記録のまま区別する。
 各方式を1つずつ含むビルドの測定用コードは [memory_probe](memory_probe/README.md) に用意した。
-その6条件のArduino IDEのビルド使用量は未受領で、現時点の表には含めていない。
+その使用量は全6モデル入りの値と区別する。
 原文と構造化データは [firmware_memory.csv](firmware_memory.csv) とhardwareフォルダに保存した。
 """
+    single_memory = HERE / "single_model_memory.csv"
+    if single_memory.exists():
+        recorded = [r for r in read_csv(single_memory) if r["status"] == "ARDUINO_COMPILE_RECEIVED"]
+        table = "\n".join(f"| {r['hidden_size']} {r['format']} | {int(r['flash_used_bytes']):,} | {int(r['static_ram_used_bytes']):,} |" for r in recorded)
+        memory_text += "\nモデル単独の共通ラッパーで受領したビルド使用量は以下で、残りの条件は未記録である。\n\n| 単独条件 | Flash [byte] | 静的RAM [byte] |\n| --- | ---: | ---: |\n" + table + "\n\n[single_model_memory.csv](single_model_memory.csv) に別記録として保存した。\n"
     report = f"""# 受領した実験結果：2026年11月6日
 
 40・60・100次元について、Arduino UNO R4 WiFiでの計算確認と推論時間、モデル配列容量、
@@ -123,6 +128,14 @@ CSRは枝刈り後Denseの参照値と照合しており、保存形式の正し
 新スキャナの起動時チェック部分のログは未受領だが、受領した新しい全入力についてPC再計算と実機RGB8は完全一致した。
 チャートは学習に使った9色なので、独立した最終評価は未実施である。
 当初計画のH=50と各条件10回の物理読取は今回の測定に含めていない。
+
+## 精度改善の追加探索（別記録）
+
+上記は元の容量優先候補の測定結果である。
+MSE維持を優先する追加探索は [precision_followup](precision_followup/README.md) に分けた。
+同じDenseの重みから枝刈りを弱め、学習データ・検証各回・固定入力グリッドで出力の近さを確認する。
+追加候補の過去入力によるPC再計算は独立した評価ではなく、新しい実機測定もまだ未受領である。
+元の測定値を追加候補の値へ置き換えず、別段階の結果として扱う。
 
 ## 保存先
 

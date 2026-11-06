@@ -91,7 +91,8 @@ int main(int argc, char** argv) {
 '''
 
 
-def main():
+def main(base=None):
+    base = HERE if base is None else Path(base)
     with (ROOT / "retraining/data/current33.csv").open(newline="") as f:
         learning = list(csv.DictReader(f))
     with (ROOT / "pruning/validation.csv").open(newline="") as f:
@@ -105,7 +106,7 @@ def main():
         (directory / "Arduino.h").write_text(ARDUINO_STUB)
         (directory / "main.cpp").write_text(HOST_RUNNER)
         for h in (40, 60, 100):
-            source = HERE / f"compare_h{h}"
+            source = base / f"compare_h{h}"
             (directory / "firmware.ino").write_text((source / f"compare_h{h}.ino").read_text())
             exe = directory / "check"
             subprocess.run(["g++", "-std=c++11", "-O2", "-ffp-contract=off", "-fsanitize=address,undefined",
@@ -114,8 +115,8 @@ def main():
             output = subprocess.run([str(exe), "predict"], input="\n".join(" ".join(format(float(v), ".9g") for v in row) for row in cases) + "\n",
                                     check=True, capture_output=True, text=True).stdout
             result = np.loadtxt(io.StringIO(output))
-            selection = json.loads((HERE / f"selection/h{h}/summary.json").read_text())
-            comparison = json.loads((HERE / f"selection/h{h}/comparison.json").read_text())
+            selection = json.loads((base / f"selection/h{h}/summary.json").read_text())
+            comparison = json.loads((base / f"selection/h{h}/comparison.json").read_text())
             dense = load_model(ROOT / f"retraining/results/h{h}/model_parameters.h")
             sparse = prune(dense, selection["selected"]["threshold"])
             max_error = 0.0
@@ -140,7 +141,7 @@ def main():
                 "serial_t_and_mse_rows": "PASS", "csr_index_rejection": "PASS", "timing_statistics": "PASS",
                 "model_header_sha256": selection["model_sha256"]}
             print(f"PASS: H={h}, 417 Dense/CSR input pairs, MSE rows, serial t, ASan/UBSan", flush=True)
-    (HERE / "verification.json").write_text(json.dumps(report, indent=2) + "\n")
+    (base / "verification.json").write_text(json.dumps(report, indent=2) + "\n")
 
 
 if __name__ == "__main__":
