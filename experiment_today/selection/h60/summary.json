@@ -1,0 +1,149 @@
+{
+  "model_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803",
+  "hidden_size": 60,
+  "weight_count": 3960,
+  "candidate_count_including_zero_baseline": 3960,
+  "candidate_rule": "Zero baseline plus all midpoints between distinct adjacent absolute weights; one global threshold; biases unchanged.",
+  "capacity_scope": "FP32 values/bias + uint8 columns + uint16 row pointers; excludes whole-build alignment, buffers, NPZ container overhead.",
+  "validation_status": "evaluated",
+  "validation_csv_sha256": "def95fe209dde0cadab874aa77fd26744e23b2b7aaf0971c2b384af25bb4c7ad",
+  "validation_read_ids": [
+    "1",
+    "2"
+  ],
+  "expected_validation_reads": 2,
+  "validation_read_count": 2,
+  "validation_colors_per_read": 64,
+  "input_collisions": [
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r6c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c5",
+        "r7c6"
+      ]
+    }
+  ],
+  "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of the measured reading MSEs.",
+  "dense_validation_mse": 2065.90625,
+  "dense_mse_by_read": [
+    2486.1197916666665,
+    1645.6927083333333
+  ],
+  "selected": {
+    "threshold": 0.1484270989894867,
+    "nonzero": 107,
+    "sparsity_pct": 97.29797979797979,
+    "csr_bytes": 1279,
+    "dense_bytes": 16332,
+    "saving_pct": 92.1687484692628,
+    "memory_ok": true,
+    "validation_mse": 2142.4192708333335,
+    "mse_difference": 76.51302083333348,
+    "mse_increase_pct": 3.7036056613572566,
+    "quality_ok": true,
+    "eligible": true,
+    "read_1_mse": 2687.8489583333335,
+    "read_2_mse": 1596.9895833333333
+  },
+  "selection_status": "provisional_input_collisions",
+  "diagnostic_only": null,
+  "note": "No threshold is selected without independent validation. Training/final-evaluation data must not be supplied as validation. Training data and random seed are not encoded in the header; record model provenance separately. Re-run for each frozen trained model."
+}

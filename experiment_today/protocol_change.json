@@ -1,0 +1,18 @@
+{
+  "date_japan": "2026-11-06",
+  "reason": "User has three hours on the final experiment day and prioritizes completing H=40, then H=60 and H=100.",
+  "hidden_size_order": [40, 60, 100],
+  "h50": "Already trained; device comparison deferred under today's requested priority.",
+  "models": "Frozen retraining/results/hH/model_parameters.h, current 33 learning inputs, seed 42, 50000 epochs. No retraining performed for compression.",
+  "threshold_selection": "Same planned rule: all magnitude midpoints, validation mean MSE <= Dense*1.05 and CSR bytes < Dense; minimum bytes then minimum MSE. Recomputed independently per H. Biases unchanged.",
+  "validation": "Existing 128 records, two physical readings of the separate 8x8 reference_image4 chart. Threshold selection uses these data. Conflicting identical inputs retain provisional status.",
+  "new_measurement": "Arduino inference times: saved-input Dense/CSR comparison, 10 warmup calls, 100 calls per group, 5 groups, alternating method order.",
+  "accuracy_measurement_scope": "Saved learning and validation inputs replayed on Arduino. Not a new sensor capture. No claim of independently validated final color accuracy.",
+  "final_chart_availability": "User reports no separate chart and cannot print a new chart today.",
+  "independent_final_evaluation": "NOT_PERFORMED",
+  "original_physical_mse_repeats": "Original ten physical-read blocks per H not performed by this saved-input procedure; not replaced by timing groups.",
+  "model_bytes": "FP32 weights and bias plus CSR indices. Separate from entire comparison firmware RAM/Flash.",
+  "whole_build_memory": "Paired firmware includes both models and reference data. Build size must be labeled paired-comparison firmware; not per-method minimal memory.",
+  "paper_handling": "Hand-held constraint remains; no paper fixation is required for the saved-input comparison.",
+  "reporting": "Keep PC results, actual device logs and missing final evaluation distinct. Do not fill unmeasured device values or claim the original full protocol completed."
+}

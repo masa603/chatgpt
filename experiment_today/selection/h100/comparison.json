@@ -1,0 +1,18 @@
+{
+  "hidden_size": 100,
+  "selection_status": "provisional_input_collisions",
+  "threshold": 0.25959546864032745,
+  "dense_bytes": 43212,
+  "csr_bytes": 1739,
+  "nonzero_weights": 103,
+  "validation_dense_mse": 3119.1458333333335,
+  "validation_csr_mse": 3258.8203125,
+  "validation_change_percent": 4.477972067673441,
+  "note": "Saved-input PC results; validation selected the threshold; no independent final evaluation or hardware timing yet.",
+  "learning_dense_mse_3x3": 0.0,
+  "learning_dense_mse_6x4": 96.26388888888889,
+  "learning_dense_mse_all33": 70.01010101010101,
+  "learning_csr_mse_3x3": 953.3703703703703,
+  "learning_csr_mse_6x4": 1215.5833333333333,
+  "learning_csr_mse_all33": 1144.0707070707072
+}
