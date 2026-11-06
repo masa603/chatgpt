@@ -1,7 +1,7 @@
 # 2026年11月6日：40→60→100次元の比較
 
 実機ログの受領状況は [hardware](hardware/README.md)、実測値の集計は
-[device_results.csv](device_results.csv) に保存しています。40・60次元の計算確認・速度測定はPASSです。
+[device_results.csv](device_results.csv) に保存しています。40・60・100次元の計算確認・速度測定はPASSです。
 
 3次元分の速度ログを保存した後、新たに紙を読む段階は
 [全6条件の3×3スキャナ](fresh_scan_all/README.md) を使います。

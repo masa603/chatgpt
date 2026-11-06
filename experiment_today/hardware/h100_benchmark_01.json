@@ -1,0 +1,135 @@
+{
+  "received_date_japan": "2026-11-06",
+  "execution_timestamp": null,
+  "source": "User-supplied serial output from Arduino UNO R4 WiFi",
+  "hidden_size": 100,
+  "status": "DEVICE_CHECK_AND_TIMING_PASS",
+  "model_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5",
+  "input_sha256": "def95fe209dde0cadab874aa77fd26744e23b2b7aaf0971c2b384af25bb4c7ad",
+  "threshold": 0.25959546864032745,
+  "compiler": "7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]",
+  "f_cpu_hz": 48000000,
+  "input_count": 128,
+  "warmup_calls": 10,
+  "calls_per_group": 100,
+  "groups": 5,
+  "dense_model_bytes": 43212,
+  "csr_model_bytes": 1739,
+  "model_bytes_reduction_percent": 95.97565491067296,
+  "timing": {
+    "dense": {
+      "mean_us": 2865.896,
+      "sample_stddev_us": 0.020736441353232108
+    },
+    "csr": {
+      "mean_us": 314.11,
+      "sample_stddev_us": 0.014142135623738186
+    }
+  },
+  "csr_time_change_percent": -89.0397278896373,
+  "dense_over_csr_speed_ratio": 9.123861067778805,
+  "timing_groups": [
+    {
+      "group": "1",
+      "first_model": "Dense",
+      "dense_total_us": "286593",
+      "csr_total_us": "31411",
+      "dense_us_per_inference": "2865.9300",
+      "csr_us_per_inference": "314.1100",
+      "dense_checksum": "145.88132165",
+      "csr_checksum": "121.90245953"
+    },
+    {
+      "group": "2",
+      "first_model": "CSR",
+      "dense_total_us": "286589",
+      "csr_total_us": "31409",
+      "dense_us_per_inference": "2865.8900",
+      "csr_us_per_inference": "314.0900",
+      "dense_checksum": "136.87419998",
+      "csr_checksum": "110.86088768"
+    },
+    {
+      "group": "3",
+      "first_model": "Dense",
+      "dense_total_us": "286590",
+      "csr_total_us": "31411",
+      "dense_us_per_inference": "2865.9000",
+      "csr_us_per_inference": "314.1100",
+      "dense_checksum": "136.22660481",
+      "csr_checksum": "111.07619870"
+    },
+    {
+      "group": "4",
+      "first_model": "CSR",
+      "dense_total_us": "286588",
+      "csr_total_us": "31413",
+      "dense_us_per_inference": "2865.8800",
+      "csr_us_per_inference": "314.1300",
+      "dense_checksum": "129.53731763",
+      "csr_checksum": "97.86591313"
+    },
+    {
+      "group": "5",
+      "first_model": "Dense",
+      "dense_total_us": "286588",
+      "csr_total_us": "31411",
+      "dense_us_per_inference": "2865.8800",
+      "csr_us_per_inference": "314.1100",
+      "dense_checksum": "140.03248991",
+      "csr_checksum": "112.59937895"
+    }
+  ],
+  "mse_rows": [
+    {
+      "mse_dataset": "learning_3x3",
+      "read_id": "0",
+      "colors": "9",
+      "dense_mse": "0.000000",
+      "csr_mse": "953.370370"
+    },
+    {
+      "mse_dataset": "learning_6x4",
+      "read_id": "0",
+      "colors": "24",
+      "dense_mse": "96.263889",
+      "csr_mse": "1215.583333"
+    },
+    {
+      "mse_dataset": "learning_all33",
+      "read_id": "0",
+      "colors": "33",
+      "dense_mse": "70.010101",
+      "csr_mse": "1144.070707"
+    },
+    {
+      "mse_dataset": "validation",
+      "read_id": "1",
+      "colors": "64",
+      "dense_mse": "4290.125000",
+      "csr_mse": "3093.265625"
+    },
+    {
+      "mse_dataset": "validation",
+      "read_id": "2",
+      "colors": "64",
+      "dense_mse": "1948.166667",
+      "csr_mse": "3424.375000"
+    },
+    {
+      "mse_dataset": "validation_mean",
+      "read_id": "0",
+      "colors": "128",
+      "dense_mse": "3119.145833",
+      "csr_mse": "3258.820313"
+    }
+  ],
+  "pc_mse_agreement": "All learning/validation rows agree within 1e-6",
+  "paired_firmware_flash_bytes": null,
+  "paired_firmware_static_ram_bytes": null,
+  "independent_final_evaluation": "NOT_PERFORMED",
+  "new_sensor_capture": false,
+  "limitation": "Learning MSE worsens after pruning; threshold selection used validation mean MSE. Timing variation describes only five timer-quantized groups.",
+  "raw_log": "hardware/h100_benchmark_01.txt",
+  "raw_log_sha256": "80b57b055273bd69ada3abada0dbb150bf90a85352f56d8023c2249c5ae8011c"
+}
