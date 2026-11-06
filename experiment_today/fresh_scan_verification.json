@@ -1,0 +1,20 @@
+{
+  "scope": "Host C++11 ASan/UBSan tests only; no actual sensor result or physical MSE fabricated.",
+  "source_pipeline": "Acquisition, normalization, calibration and RGB conversion unchanged from original scanner.",
+  "models": [
+    40,
+    60,
+    100
+  ],
+  "formats": [
+    "Dense",
+    "CSR"
+  ],
+  "differential_input_count": 417,
+  "max_abs_output_difference": 4.994812119463177e-09,
+  "rgb8_predictions": "EXACT for all six models",
+  "startup_checks": "PASS for all three frozen model pairs",
+  "mock_capture": "Two complete 3x3 acquisitions, black/white calibration, raw channel values, all six PPMs, MSE rows, NN input summary, n restart and no extra reads after completion PASS.",
+  "arduino_hardware_check": "PENDING",
+  "physical_repeat_readings_received": 0
+}

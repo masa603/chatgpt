@@ -1,7 +1,11 @@
 {
   "date_japan": "2026-11-06",
   "reason": "User has three hours on the final experiment day and prioritizes completing H=40, then H=60 and H=100.",
-  "hidden_size_order": [40, 60, 100],
+  "hidden_size_order": [
+    40,
+    60,
+    100
+  ],
   "h50": "Already trained; device comparison deferred under today's requested priority.",
   "models": "Frozen retraining/results/hH/model_parameters.h, current 33 learning inputs, seed 42, 50000 epochs. No retraining performed for compression.",
   "threshold_selection": "Same planned rule: all magnitude midpoints, validation mean MSE <= Dense*1.05 and CSR bytes < Dense; minimum bytes then minimum MSE. Recomputed independently per H. Biases unchanged.",
@@ -14,5 +18,23 @@
   "model_bytes": "FP32 weights and bias plus CSR indices. Separate from entire comparison firmware RAM/Flash.",
   "whole_build_memory": "Paired firmware includes both models and reference data. Build size must be labeled paired-comparison firmware; not per-method minimal memory.",
   "paper_handling": "Hand-held constraint remains; no paper fixation is required for the saved-input comparison.",
-  "reporting": "Keep PC results, actual device logs and missing final evaluation distinct. Do not fill unmeasured device values or claim the original full protocol completed."
+  "reporting": "Keep PC results, actual device logs and missing final evaluation distinct. Do not fill unmeasured device values or claim the original full protocol completed.",
+  "fresh_sensor_follow_up": {
+    "status": "SCANNER_PREPARED; NO_PHYSICAL_CAPTURE_RECEIVED_YET",
+    "chart": "Existing learning 3x3 chart; black left bottom and white right bottom used for calibration.",
+    "models": [
+      40,
+      60,
+      100
+    ],
+    "formats": [
+      "Dense",
+      "CSR"
+    ],
+    "method": "Apply all six frozen models to each newly acquired normalized input. Calibration and sensing are unchanged; no retraining or threshold reselection.",
+    "target_repeat_readings": 2,
+    "repeat_procedure": "Use n to start another independent black/white calibration and nine-patch capture.",
+    "accuracy_scope": "Fresh physical read of a chart used for learning, not independent final evaluation. Six outputs from one capture are not six independent physical repetitions.",
+    "original_ten_read_protocol": "Not fulfilled by this follow-up."
+  }
 }
