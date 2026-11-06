@@ -23,7 +23,9 @@
   "colors": 9,
   "normalization_check": "PASS",
   "normalization_max_abs_difference": 7.450580596923828e-09,
-  "model_hashes_and_ppm_mse_check": "PASS",
+  "model_hashes_and_ppm_mse_check": "PASS_AGAINST_EMBEDDED_NOTEBOOK_REFERENCE_ONLY",
+  "teacher_reference_file_verified": false,
+  "official_mse_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
   "results": [
     {
       "capture_key": "capture_01",
@@ -33,7 +35,8 @@
       "mse_device_reported": 524.074074,
       "mse_recomputed_from_ppm": 524.074074074074,
       "mse_goal_max": 300,
-      "goal_met_this_read": false,
+      "embedded_reference_below_300": false,
+      "teacher_reference_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
       "pc_replay_max_rgb8_difference": 0,
       "model_header_sha256": "5d0f26b9f382fc982620ca22eb3056acb042d772890ca29138f1e2114539031e",
       "ppm": "h40_dense.ppm"
@@ -46,7 +49,8 @@
       "mse_device_reported": 93.851852,
       "mse_recomputed_from_ppm": 93.85185185185185,
       "mse_goal_max": 300,
-      "goal_met_this_read": true,
+      "embedded_reference_below_300": true,
+      "teacher_reference_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
       "pc_replay_max_rgb8_difference": 0,
       "model_header_sha256": "957b01ae4ddc3a0f42ffa09eb15be73786b990c1ed66b652f9188f6a08fe304d",
       "ppm": "h60_dense.ppm"
@@ -59,7 +63,8 @@
       "mse_device_reported": 119.925926,
       "mse_recomputed_from_ppm": 119.92592592592592,
       "mse_goal_max": 300,
-      "goal_met_this_read": true,
+      "embedded_reference_below_300": true,
+      "teacher_reference_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
       "pc_replay_max_rgb8_difference": 0,
       "model_header_sha256": "ea01d4aa22fe00b9e82dfcd3c6e9f2ecc2d0d0e4723023ef4234764c0e78e28b",
       "ppm": "h100_dense.ppm"

@@ -1,0 +1,83 @@
+{
+  "calculator_uploaded_filename": "mse_calculator.html",
+  "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+  "verification": "Original supplied JavaScript executed unchanged; 4 analytical checks pass.",
+  "known_formula": "RGB squared differences summed then divided by pixel count and three channels.",
+  "user_reported_mse": "Approximately 3000 on teacher calculator; exact value and selected files not yet supplied.",
+  "user_selected_reference_ppm": "NOT_RECEIVED",
+  "user_selected_comparison_ppm": "NOT_RECEIVED_OR_IDENTIFIED",
+  "official_mse_goal_status": "UNVERIFIED; PREVIOUS ACHIEVEMENT CLAIM WITHDRAWN",
+  "notebook_recovered_reference_results": [
+    {
+      "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+      "reference_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+      "comparison_sha256": "ab22efd8f5d46718af56a502887c1f55d244ba9a75e1eda52eed79bb31f90ceb",
+      "engine": "Original supplied calculator JS executed with canvas ImageData stub; no DOM rendering required for MSE.",
+      "displayed_result": "MSE: 524.07",
+      "mse_displayed": 524.07,
+      "reference_size": [
+        3,
+        3
+      ],
+      "comparison_size": [
+        3,
+        3
+      ],
+      "identical_dimensions": true,
+      "valid_full_image_comparison": true,
+      "compared_pixels": 9,
+      "size_warning": null,
+      "hidden_size": 40,
+      "reference_role": "RECOVERED_NOTEBOOK_REFERENCE; NOT_USER_SELECTED_TEACHER_REFERENCE_PPM",
+      "comparison_file": "learning_followup/physical_readings/capture_01/h40_dense.ppm"
+    },
+    {
+      "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+      "reference_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+      "comparison_sha256": "8de4ace8e8c8decb86871ebb1b3032bb01867d7750d509e567e1c8433beb83fb",
+      "engine": "Original supplied calculator JS executed with canvas ImageData stub; no DOM rendering required for MSE.",
+      "displayed_result": "MSE: 93.85",
+      "mse_displayed": 93.85,
+      "reference_size": [
+        3,
+        3
+      ],
+      "comparison_size": [
+        3,
+        3
+      ],
+      "identical_dimensions": true,
+      "valid_full_image_comparison": true,
+      "compared_pixels": 9,
+      "size_warning": null,
+      "hidden_size": 60,
+      "reference_role": "RECOVERED_NOTEBOOK_REFERENCE; NOT_USER_SELECTED_TEACHER_REFERENCE_PPM",
+      "comparison_file": "learning_followup/physical_readings/capture_01/h60_dense.ppm"
+    },
+    {
+      "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+      "reference_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+      "comparison_sha256": "ca71f915d3eedd47f84bf4c07743bacdac701e17594d690908fd45648041b772",
+      "engine": "Original supplied calculator JS executed with canvas ImageData stub; no DOM rendering required for MSE.",
+      "displayed_result": "MSE: 119.93",
+      "mse_displayed": 119.93,
+      "reference_size": [
+        3,
+        3
+      ],
+      "comparison_size": [
+        3,
+        3
+      ],
+      "identical_dimensions": true,
+      "valid_full_image_comparison": true,
+      "compared_pixels": 9,
+      "size_warning": null,
+      "hidden_size": 100,
+      "reference_role": "RECOVERED_NOTEBOOK_REFERENCE; NOT_USER_SELECTED_TEACHER_REFERENCE_PPM",
+      "comparison_file": "learning_followup/physical_readings/capture_01/h100_dense.ppm"
+    }
+  ],
+  "cause": "UNDETERMINED without the two files selected in the calculator. Reference RGB, dimensions and comparison file identity need checking.",
+  "training_weights_targets_and_archived_images": "UNCHANGED"
+}

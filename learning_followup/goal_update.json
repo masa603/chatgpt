@@ -4,22 +4,25 @@
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
   "scope": "One new physical reading of the same learning 3x3 chart after V3 weights were frozen; not independent unseen-chart evaluation.",
-  "current_status": "FIRST_PROSPECTIVE_PHYSICAL_READ_RECEIVED; H60_AND_H100_MET_TARGET; H40_NOT_MET",
+  "current_status": "USER_REPORTED_ABOUT_3000_WITH_TEACHER_CALCULATOR; ACHIEVEMENT_CLAIM_WITHDRAWN",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
-  "note": "Target stated as an acceptance criterion, not a guarantee of an unseen physical outcome.",
+  "note": "Internal reference arithmetic verified; teacher-reference match not verified. Do not report official MSE <= 300 based on internal values.",
   "prospective_result_record": "physical_readings/capture_01/summary.json",
   "prospective_physical_captures": 1,
-  "measured_mse_rgb8": {
+  "original_development_cv_unchanged": true,
+  "embedded_reference_mse_rgb8": {
     "40": 524.074074,
     "60": 93.851852,
     "100": 119.925926
   },
-  "target_met_this_read": {
+  "embedded_reference_below_300": {
     "40": false,
     "60": true,
     "100": true
   },
-  "original_development_cv_unchanged": true
+  "teacher_reference_goal_status": "UNVERIFIED; NEED_EXACT_REFERENCE_AND_COMPARISON_PPM_FILES",
+  "teacher_calculator_audit": "reference_audit/calculator_check.json",
+  "user_reported_teacher_mse": "Approximately 3000; model and exact selected PPM files not yet identified."
 }

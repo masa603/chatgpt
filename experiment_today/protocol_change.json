@@ -118,20 +118,23 @@
     "new_physical_mse": {
       "physical_readings": 1,
       "record": "../learning_followup/physical_readings/capture_01/summary.json",
-      "mse_rgb8": {
+      "used_for_v3_training": false,
+      "independent_unseen_chart_final_evaluation": false,
+      "embedded_reference_mse_rgb8": {
         "40": 524.074074,
         "60": 93.851852,
         "100": 119.925926
       },
-      "met_300_this_read": [
+      "embedded_reference_below_300": [
         60,
         100
       ],
-      "not_met_300_this_read": [
+      "embedded_reference_above_300": [
         40
       ],
-      "used_for_v3_training": false,
-      "independent_unseen_chart_final_evaluation": false
+      "teacher_reference_goal_status": "UNVERIFIED; PRIOR ACHIEVEMENT CLAIM WITHDRAWN",
+      "user_reported_teacher_mse": "Approximately 3000; exact comparison files pending.",
+      "reference_audit": "../learning_followup/reference_audit/calculator_check.json"
     },
     "old_records": "Original 33-color models, CSR measurements and old replay images retained separately without replacing their results.",
     "paper_handling": "Hand-held, as required by the user."

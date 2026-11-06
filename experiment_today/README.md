@@ -6,7 +6,9 @@ Arduinoへ書き込む2ファイルは [color_retrain_v3](../learning_followup/c
 この版は3×3の9色×4回を学習したDenseモデルで、元の33色全体の改善を確認したものではありません。
 学習MSEと新しい実測MSEを分けて記録します。
 新たに受領したV3の1回の読取では **H40=524.07、H60=93.85、H100=119.93** でした。
-今回の60・100次元は300以下です。[ログと画像](../learning_followup/physical_readings/capture_01/README.md) を保存しました。
+これは内部の復元9色とのMSEで、利用者が先生のサイトで得た約3000という値と食い違っています。
+**先生の基準で300以下を達成したという判定は撤回し、比較に使った2つのPPMの確認待ちです。**
+[ログと画像](../learning_followup/physical_readings/capture_01/README.md)、[計算HTMLの調査](../learning_followup/reference_audit/README.md) を保存しました。
 同じ学習チャートの再読取であり、未見チャートの独立評価は未実施です。
 
 枝刈りを弱めた以前の追加探索は [precision_followup](precision_followup/README.md) に保存しました。

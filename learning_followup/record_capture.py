@@ -93,7 +93,8 @@ def record(path, received_date):
         Image.fromarray(pixels.astype(np.uint8).reshape(3, 3, 3)).resize((360, 360), Image.Resampling.NEAREST).save(output / f'{name}.png')
         results.append({'capture_key': output.name, 'hidden_size': h, 'format': 'DENSE', 'colors': 9,
                         'mse_device_reported': float(row['mse']), 'mse_recomputed_from_ppm': mse,
-                        'mse_goal_max': 300, 'goal_met_this_read': mse <= 300,
+                        'mse_goal_max': 300, 'embedded_reference_below_300': mse <= 300,
+                        'teacher_reference_goal_status': 'UNVERIFIED_REFERENCE_FILE_MATCH',
                         'pc_replay_max_rgb8_difference': difference,
                         'model_header_sha256': model_hash, 'ppm': f'{name}.ppm'})
         all_pixels.append(pixels)
@@ -122,7 +123,9 @@ def record(path, received_date):
                'startup_self_check_log': 'NOT_SUPPLIED',
                'black_rgb': black.tolist(), 'white_rgb': white.tolist(), 'colors': 9,
                'normalization_check': 'PASS', 'normalization_max_abs_difference': float(np.max(np.abs(x - logged_x))),
-               'model_hashes_and_ppm_mse_check': 'PASS',
+               'model_hashes_and_ppm_mse_check': 'PASS_AGAINST_EMBEDDED_NOTEBOOK_REFERENCE_ONLY',
+               'teacher_reference_file_verified': False,
+               'official_mse_goal_status': 'UNVERIFIED_REFERENCE_FILE_MATCH',
                'results': results, 'target_source': 'Recovered Notebook display; original PNG not verified.',
                'submitted_log_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
                'normalization_of_pasted_text': 'Only strip line-boundary backslashes/whitespace; original submitted text retained.'}
@@ -132,16 +135,16 @@ def record(path, received_date):
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     fig, axes = plt.subplots(1, 4, figsize=(12, 3.8))
-    for ax, image, title in zip(axes, [targets, *all_pixels], ['Reference (recovered)', *[f'H={r["hidden_size"]} Dense\nMSE {r["mse_device_reported"]:.2f}' for r in results]]):
+    for ax, image, title in zip(axes, [targets, *all_pixels], ['Notebook reference\n(original PPM unverified)', *[f'H={r["hidden_size"]} Dense\nEmbedded-ref MSE {r["mse_device_reported"]:.2f}' for r in results]]):
         ax.imshow(image.astype(np.uint8).reshape(3, 3, 3), interpolation='nearest')
         ax.set_title(title)
         ax.axis('off')
-    fig.suptitle('COLOR_RETRAIN_V3: one new physical reading, capture 1')
+    fig.suptitle('V3 capture 1: teacher-reference MSE UNVERIFIED')
     fig.tight_layout()
     fig.savefig(output / 'comparison.png', dpi=160)
     fig.savefig(output / 'comparison.pdf')
     plt.close(fig)
-    print('PASS: original log retained, model hashes, normalization, three PPM MSEs and goal flags; actual pixels exported.')
+    print('PASS: log, hashes, normalization, three PPM MSEs against embedded reference only; teacher-reference goal UNVERIFIED.')
     print(json.dumps(results))
     return summary
 

@@ -3,11 +3,15 @@
 新たに紙を読んだ9色の実測結果です。モデルはこの読取を受け取る前に固定したV3です。
 全36学習入力でのMSEや、過去入力を再生したMSEとは分けて扱います。
 
-| H | 実機MSE | 今回300以下 | PPM | PNG |
+**訂正：下表はプログラム内の復元9色とのMSEです。**
+利用者が先生のサイトで得た約3000という値の比較条件は未確認で、正式な300以下の達成判定を撤回しています。
+提供HTMLの計算式と再現結果は [reference_audit](../../reference_audit/README.md) にあります。
+
+| H | 復元9色とのMSE | 先生の基準での判定 | PPM | PNG |
 | --- | ---: | --- | --- | --- |
-| 40 | 524.074074 | 未達 | [PPM](h40_dense.ppm) | [PNG](h40_dense.png) |
-| 60 | 93.851852 | 達成 | [PPM](h60_dense.ppm) | [PNG](h60_dense.png) |
-| 100 | 119.925926 | 達成 | [PPM](h100_dense.ppm) | [PNG](h100_dense.png) |
+| 40 | 524.074074 | 未確認 | [PPM](h40_dense.ppm) | [PNG](h40_dense.png) |
+| 60 | 93.851852 | 未確認 | [PPM](h60_dense.ppm) | [PNG](h60_dense.png) |
+| 100 | 119.925926 | 未確認 | [PPM](h100_dense.ppm) | [PNG](h100_dense.png) |
 
 ![参照色と3モデルの実測出力](comparison.png)
 
@@ -18,7 +22,8 @@
 元の投稿は [submitted_log.txt](submitted_log.txt) に保持し、貼り付け時の行頭・行末のバックスラッシュだけを
 取り除いた [normalized_log.txt](normalized_log.txt) から解析しました。
 [record_capture.py](../../record_capture.py) で、元ログのSHA256、学習データ・各重みのSHA256、
-RAWからNN入力への正規化、PPMからのMSE、300以下の判定を確認しています。
+RAWからNN入力への正規化、PPMから内部の復元9色に対するMSEの再計算を確認しています。
+元ログのquality_goalのYES/NOも内部の復元9色との比較で、先生の基準との一致を確かめたものではありません。
 同じ重みをPCで計算したRGB8も全81成分で実機出力と一致しました。
 確認結果は [summary.json](summary.json)、生データ・校正情報は [inputs.csv](inputs.csv) と元ログにあります。
 
