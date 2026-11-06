@@ -44,12 +44,21 @@ Dense自体の再読取MSEが約1,700〜2,000ある問題は残り、MSEが50な
 
 ## 次の実機確認
 
-MSEを優先し、まず新しい紙の読取を行います。
-[fresh_scan_all](fresh_scan_all) の `fresh_scan_all.ino` と **`models_precision.h`** を同じフォルダへ保存します。
-UNO R4 WiFiへ書き込み、9600 bpsで起動時の `ALL MODELS CHECK: PASS` を確認します。
-3×3の黒b・白wで校正し、9色をrで読みます。
-全6条件の画像とMSEを出します。新スキャナのCAPTURE番号は書き込み後に1から始まります。
-新しい測定は別段階としてこのフォルダの配下へ保存し、元の測定平均と混ぜません。
+新候補の確認時に届いたログは閾値が旧版のままでした。
+ファイルを区別するため [precision_scan](precision_scan/README.md) の
+**`precision_scan.ino` と `precision_models.h`** へ名前を変更しました。
+UNO R4 WiFiへ書き込み、9600 bpsでRESETし、**`FIRMWARE=PRECISION_SCAN_V2`** と
+**`ALL MODELS CHECK: PASS`** を確認します。
+
+今回の生値を利用できるため、まず **`v`** を送信します。
+`PRECISION REPLAY START`〜`END` に、受領済み9入力を新しい6モデルでArduino上で再計算したMSEが出ます。
+これは保存された物理読取入力の実機再生で、v送信時に紙を新しく読む測定ではありません。
+入力と出典は [latest_replay_manifest.json](latest_replay_manifest.json) と [旧版追加ログ](../version_mismatch/README.md) に保存しています。
+この入力を使って閾値や重みを選び直していません。正確な物理取得日時は未確認です。
+
+その後にさらに紙を読む場合は同じスケッチで黒b・白wを登録し、9色をrで読みます。
+全6条件の画像とMSEを出し、CAPTURE番号は書き込み後に1から始まります。
+新候補の段階として保存し、旧版の測定平均と混ぜません。
 同じ学習用チャートの再読取なので、独立した最終評価にはなりません。
 
 精度の確認後、速度は [compare_h40](compare_h40) の `compare_h40.ino` と
@@ -70,5 +79,6 @@ python3 experiment_today/precision_followup/replay_prior_captures.py
 
 PCで3モデルの比較スケッチと全6条件のスキャナをC++11、ASan・UBSan有効で確認しました。
 各417入力の出力比較、シリアルt、MSE表示、2回の模擬校正・9色読取を通過しています。
+追加したv送信についても、6条件のMSE・出典ハッシュ・センサを読まないことをPC上で確認しました。
 [verification.json](verification.json) と [fresh_scan_verification.json](fresh_scan_verification.json) はPC上の確認記録です。
 模擬測定の数値をArduino実測として記録しません。

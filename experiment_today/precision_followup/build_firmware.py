@@ -10,10 +10,11 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "experiment_today"
 HERE = Path(__file__).resolve().parent
-sys.path[:0] = [str(BASE), str(ROOT / "pruning")]
+sys.path[:0] = [str(HERE), str(BASE), str(ROOT / "pruning")]
 from export_experiments import export_one
 from build_fresh_scanner import build
 from threshold_tools import load_model, predict_rgb8, prune
+from add_latest_replay import add_replay
 
 
 def main():
@@ -41,11 +42,12 @@ def main():
         (target / "parameters.h").rename(target / "parameters_precision.h")
         ino = target / f"compare_h{h}.ino"
         ino.write_text(ino.read_text().replace('#include "parameters.h"', '#include "parameters_precision.h"'))
-    target = HERE / "fresh_scan_all"
-    build(selection_root=HERE / "selection", target=target, stage_label="EXPLORATORY_PRECISION_FOLLOW_UP")
-    (target / "models_all.h").rename(target / "models_precision.h")
-    ino = target / "fresh_scan_all.ino"
-    ino.write_text(ino.read_text().replace('#include "models_all.h"', '#include "models_precision.h"'))
+    target = HERE / "precision_scan"
+    build(selection_root=HERE / "selection", target=target, stage_label="EXPLORATORY_PRECISION_FOLLOW_UP", firmware_id="PRECISION_SCAN_V2")
+    (target / "models_all.h").rename(target / "precision_models.h")
+    ino = target / "precision_scan.ino"
+    ino.write_text(ino.read_text().replace('#include "models_all.h"', '#include "precision_models.h"'))
+    add_replay(target)
 
 
 if __name__ == "__main__":

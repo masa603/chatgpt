@@ -1,0 +1,22 @@
+{
+  "received_date_japan": "2026-11-06",
+  "actual_acquisition_datetime": null,
+  "intended_stage": "Precision follow-up",
+  "observed_stage": "Original capacity-first CSR candidates",
+  "evidence": {
+    "received_csr_thresholds": [
+      0.13873455673456192,
+      0.1484270989894867,
+      0.25959546864032745
+    ],
+    "expected_new_csr_thresholds": [
+      0.0011764122755266726,
+      0.002061367151327431,
+      0.001160839688964188
+    ],
+    "new_stage_tag_present": false
+  },
+  "disposition": "Valid archived original-model outputs and physical inputs. Not a new-candidate hardware run. Original planned 2-read summary kept frozen; supplemental all-3-original-read summary also provided.",
+  "not_excluded_based_on_mse": true,
+  "followup_use": "Inputs may be replayed under new frozen weights. No new threshold selection using this log."
+}

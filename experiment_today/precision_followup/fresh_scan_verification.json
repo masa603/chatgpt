@@ -16,5 +16,6 @@
   "startup_checks": "PASS for all three frozen model pairs",
   "mock_capture": "Two complete 3x3 acquisitions, black/white calibration, raw channel values, all six PPMs, MSE rows, NN input summary, n restart and no extra reads after completion PASS.",
   "arduino_hardware_check": "PENDING",
-  "physical_repeat_readings_received": 0
+  "physical_repeat_readings_received": 0,
+  "latest_saved_input_replay": "HOST PASS: v command, six MSE rows, source hash and no sensor reads; actual Arduino replay pending."
 }

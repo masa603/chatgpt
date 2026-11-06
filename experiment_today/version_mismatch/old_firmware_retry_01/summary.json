@@ -1,0 +1,119 @@
+{
+  "received_date_japan": "2026-11-06",
+  "execution_timestamp": null,
+  "capture_counter": 1,
+  "capture_key": "old_firmware_retry_01",
+  "input_source": "NEW_PHYSICAL_SENSOR_READINGS",
+  "chart_role": "Learning 3x3 chart re-read; same six models per physical capture.",
+  "independent_final_evaluation": "NOT_PERFORMED",
+  "startup_check_log": "NOT_SUPPLIED",
+  "black_rgb": [
+    19.399999618530273,
+    16.899999618530273,
+    16.0
+  ],
+  "white_rgb": [
+    161.1999969482422,
+    109.0,
+    75.0
+  ],
+  "colors": 9,
+  "mse_from_ppm_check": "PASS for all six images",
+  "raw_to_normalized_input_check": "PASS",
+  "pc_model_replay_check": "RGB8 agrees within at most one quantization unit for all six models; see per-model differences.",
+  "normalization_max_abs_difference": 7.450580596923828e-09,
+  "results": [
+    {
+      "capture_key": "old_firmware_retry_01",
+      "hidden_size": 40,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_rgb8": 4260.518518518518,
+      "model_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b",
+      "threshold": 0,
+      "pc_replay_max_rgb8_difference": 0,
+      "ppm": "h40_dense.ppm"
+    },
+    {
+      "capture_key": "old_firmware_retry_01",
+      "hidden_size": 40,
+      "format": "CSR",
+      "colors": 9,
+      "mse_rgb8": 4596.333333333333,
+      "model_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b",
+      "threshold": 0.13873455673456192,
+      "pc_replay_max_rgb8_difference": 0,
+      "ppm": "h40_csr.ppm"
+    },
+    {
+      "capture_key": "old_firmware_retry_01",
+      "hidden_size": 60,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_rgb8": 3835.037037037037,
+      "model_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803",
+      "threshold": 0,
+      "pc_replay_max_rgb8_difference": 0,
+      "ppm": "h60_dense.ppm"
+    },
+    {
+      "capture_key": "old_firmware_retry_01",
+      "hidden_size": 60,
+      "format": "CSR",
+      "colors": 9,
+      "mse_rgb8": 4099.259259259259,
+      "model_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803",
+      "threshold": 0.1484270989894867,
+      "pc_replay_max_rgb8_difference": 0,
+      "ppm": "h60_csr.ppm"
+    },
+    {
+      "capture_key": "old_firmware_retry_01",
+      "hidden_size": 100,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_rgb8": 3561.0,
+      "model_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5",
+      "threshold": 0,
+      "pc_replay_max_rgb8_difference": 0,
+      "ppm": "h100_dense.ppm"
+    },
+    {
+      "capture_key": "old_firmware_retry_01",
+      "hidden_size": 100,
+      "format": "CSR",
+      "colors": 9,
+      "mse_rgb8": 3908.4074074074074,
+      "model_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5",
+      "threshold": 0.25959546864032745,
+      "pc_replay_max_rgb8_difference": 0,
+      "ppm": "h100_csr.ppm"
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "hidden_size": 40,
+      "dense_mse": 4260.518518518518,
+      "csr_mse": 4596.333333333333,
+      "csr_minus_dense_mse": 335.8148148148148,
+      "csr_change_percent": 7.882017490481075
+    },
+    {
+      "hidden_size": 60,
+      "dense_mse": 3835.037037037037,
+      "csr_mse": 4099.259259259259,
+      "csr_minus_dense_mse": 264.2222222222222,
+      "csr_change_percent": 6.889691538060383
+    },
+    {
+      "hidden_size": 100,
+      "dense_mse": 3561.0,
+      "csr_mse": 3908.4074074074074,
+      "csr_minus_dense_mse": 347.4074074074074,
+      "csr_change_percent": 9.755894619696925
+    }
+  ],
+  "target_source": "Recovered original Notebook display; original PNG not verified.",
+  "reference_sha256": "fa34647c535b124d5cc4bb49b6be9029abdb1999f2e031bc0fc15cb1e9d0602c",
+  "raw_log_sha256": "a8cb1b18c582df0a02c86effcd1c0a84794f29fc9078582b4516e9c567558c77"
+}

@@ -1,0 +1,47 @@
+{
+  "source_log": "version_mismatch/old_firmware_retry_01/raw_log.txt",
+  "source_log_sha256": "a8cb1b18c582df0a02c86effcd1c0a84794f29fc9078582b4516e9c567558c77",
+  "scope": "Physical-input log was received after follow-up thresholds were frozen; exact acquisition time is unconfirmed. It was not used for selection. Reuse input for new-coefficient inference; not a new sensor capture at replay time and not independent final evaluation.",
+  "source_counter": 1,
+  "input_reconstruction": "FP32 normalize from archived ADC means and calibration, then clip 0..1.",
+  "input_array_sha256_float32_le": "3d204a58ceb59cbb970e2766bbc9de65b49c82ee8e3bca8b922216dede41b4c5",
+  "pc_results": [
+    {
+      "hidden_size": 40,
+      "format": "DENSE",
+      "mse_pc_replay": 4260.518518518518,
+      "role": "PC_REPLAY_ONLY; NEW_DEVICE_REPLAY_NOT_YET_RECEIVED"
+    },
+    {
+      "hidden_size": 40,
+      "format": "CSR",
+      "mse_pc_replay": 4260.518518518518,
+      "role": "PC_REPLAY_ONLY; NEW_DEVICE_REPLAY_NOT_YET_RECEIVED"
+    },
+    {
+      "hidden_size": 60,
+      "format": "DENSE",
+      "mse_pc_replay": 3835.037037037037,
+      "role": "PC_REPLAY_ONLY; NEW_DEVICE_REPLAY_NOT_YET_RECEIVED"
+    },
+    {
+      "hidden_size": 60,
+      "format": "CSR",
+      "mse_pc_replay": 3838.1111111111113,
+      "role": "PC_REPLAY_ONLY; NEW_DEVICE_REPLAY_NOT_YET_RECEIVED"
+    },
+    {
+      "hidden_size": 100,
+      "format": "DENSE",
+      "mse_pc_replay": 3561.0,
+      "role": "PC_REPLAY_ONLY; NEW_DEVICE_REPLAY_NOT_YET_RECEIVED"
+    },
+    {
+      "hidden_size": 100,
+      "format": "CSR",
+      "mse_pc_replay": 3569.740740740741,
+      "role": "PC_REPLAY_ONLY; NEW_DEVICE_REPLAY_NOT_YET_RECEIVED"
+    }
+  ],
+  "device_replay": "PENDING"
+}

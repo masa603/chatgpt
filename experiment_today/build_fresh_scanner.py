@@ -27,7 +27,7 @@ def replace_function(text, name, replacement):
     return text[:start] + replacement + text[end:]
 
 
-def build(selection_root=None, target=None, stage_label=None):
+def build(selection_root=None, target=None, stage_label=None, firmware_id=None):
     selection_root = HERE / "selection" if selection_root is None else Path(selection_root)
     target = HERE / "fresh_scan_all" if target is None else Path(target)
     target.mkdir(parents=True, exist_ok=True)
@@ -103,7 +103,11 @@ def build(selection_root=None, target=None, stage_label=None):
     if stage_label is not None:
         marker = '  Serial.println("MODEL_GENERATION=CURRENT33_SEED42_EPOCH50000");'
         sketch = sketch.replace(marker, marker + f'\n  Serial.println("PRUNING_STAGE={stage_label}");')
-    (target / "fresh_scan_all.ino").write_text(sketch)
+    if firmware_id is not None:
+        sketch = sketch.replace("  delay(1000);", f'  delay(1000);\n  Serial.println("FIRMWARE={firmware_id}");', 1)
+        sketch = sketch.replace('  Serial.println("========== FRESH CAPTURE START ==========");',
+                                f'  Serial.println("========== FRESH CAPTURE START ==========");\n  Serial.println("FIRMWARE={firmware_id}");')
+    (target / f"{target.name}.ino").write_text(sketch)
     print("Generated", target)
 
 

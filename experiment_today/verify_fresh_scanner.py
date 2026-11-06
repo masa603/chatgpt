@@ -87,6 +87,12 @@ int main(int argc,char** argv) {
   setup(); assert(imageSize==3 && sensorReads==0 && buttonReads==0);
   assert(Serial.output.str().find("ALL MODELS CHECK: PASS")!=std::string::npos);
   assert(Serial.output.str().find("画像サイズを入力してください")==std::string::npos);
+#if defined(PRECISION_LATEST_REPLAY_ENABLED)
+  assert(Serial.output.str().find("FIRMWARE=PRECISION_SCAN_V2")!=std::string::npos);
+  send("v\r\n");
+  assert(sensorReads==0 && calibrationStep==0 && currentRow==0 && currentColumn==0);
+  assert(Serial.output.str().find("OUTPUT CHECK: PASS")!=std::string::npos);
+#endif
   send("r\r\n"); assert(sensorReads==0);
   int patches[9][3]={{184,55,62},{98,89,69},{27,39,74},{230,240,150},{66,138,151},{74,52,76},{0,0,0},{110,120,130},{400,400,400}};
   for(int repeat=0;repeat<2;repeat++) {
@@ -116,11 +122,11 @@ def function_body(text, name):
     return text[first:last]
 
 
-def main(base=None):
+def main(base=None, source_dir=None):
     base = HERE if base is None else Path(base)
-    source = base / "fresh_scan_all"
+    source = (base / "precision_scan" if (base / "precision_scan").exists() else base / "fresh_scan_all") if source_dir is None else Path(source_dir)
     original = (ROOT / "hdjsk/hdjsk.ino").read_text()
-    scanner = (source / "fresh_scan_all.ino").read_text()
+    scanner = (source / f"{source.name}.ino").read_text()
     for name in ("ledOff", "readAverage", "readRGB", "normalizeInput", "outputTo255", "handleCalibration"):
         assert function_body(original, name) == function_body(scanner, name), name
     assert "#define SAMPLE_COUNT 10" in scanner and "#define RGB_FLASH_DELAY 10" in scanner
@@ -138,6 +144,7 @@ def main(base=None):
     reference = np.array([[r[f"target_{c}8"] for c in "rgb"] for r in records[:9]], float)
     with tempfile.TemporaryDirectory(prefix="fresh-scanner-check-") as name:
         temporary = Path(name)
+        (temporary / "fresh_scan_all.ino").write_text(scanner)
         (temporary / "Arduino.h").write_text(STUB)
         (temporary / "main.cpp").write_text(RUNNER)
         exe = temporary / "check"
@@ -154,6 +161,18 @@ def main(base=None):
             expected = np.floor(np.clip(raw.astype(np.float64), 0, 1) * 255 + .5)
             assert np.array_equal(predicted[:, 18 + m * 3:21 + m * 3], expected)
         serial = subprocess.run([str(exe), "scan"], check=True, capture_output=True, text=True).stdout
+    replay_manifest = base / "latest_replay_manifest.json"
+    if replay_manifest.exists():
+        manifest = json.loads(replay_manifest.read_text())
+        replay = re.search(r"========== PRECISION REPLAY START ==========\n(.*?)=========== PRECISION REPLAY END ===========", serial, re.S)[1]
+        assert "FIRMWARE=PRECISION_SCAN_V2" in replay and "OUTPUT CHECK: PASS" in replay
+        assert manifest["source_log_sha256"] in replay
+        replay_lines = replay.splitlines()
+        index = replay_lines.index("replay_dataset,H,format,colors,mse")
+        replay_rows = list(csv.DictReader(io.StringIO("\n".join(replay_lines[index:index + 7]))))
+        for actual, expected in zip(replay_rows, manifest["pc_results"]):
+            assert int(actual["H"]) == expected["hidden_size"] and actual["format"] == expected["format"]
+            assert abs(float(actual["mse"]) - expected["mse_pc_replay"]) < 1e-6
     frames = re.findall(r"========== FRESH CAPTURE START ==========\n(.*?)=========== FRESH CAPTURE END ===========", serial, re.S)
     assert len(frames) == 2
     patches = np.array([[184,55,62],[98,89,69],[27,39,74],[230,240,150],[66,138,151],[74,52,76],[0,0,0],[110,120,130],[400,400,400]], np.float32)
@@ -187,6 +206,8 @@ def main(base=None):
               "startup_checks": "PASS for all three frozen model pairs",
               "mock_capture": "Two complete 3x3 acquisitions, black/white calibration, raw channel values, all six PPMs, MSE rows, NN input summary, n restart and no extra reads after completion PASS.",
               "arduino_hardware_check": "PENDING", "physical_repeat_readings_received": 0}
+    if replay_manifest.exists():
+        report["latest_saved_input_replay"] = "HOST PASS: v command, six MSE rows, source hash and no sensor reads; actual Arduino replay pending."
     (base / "fresh_scan_verification.json").write_text(json.dumps(report, indent=2) + "\n")
     print("PASS: six models x 417 inputs; two fresh-scanner mock captures and all PPM/MSE/NN rows; ASan/UBSan.")
 

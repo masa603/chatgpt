@@ -95,9 +95,12 @@
     "priority": "MSE preservation before further memory builds",
     "stage": "EXPLORATORY_PRECISION_FOLLOW_UP",
     "policy": "precision_followup/protocol.json",
-    "status": "THREE_CANDIDATES_FROZEN; HOST_TESTS_PASS; NEW_HARDWARE_RESULTS_PENDING",
+    "status": "OLD_FIRMWARE_RETRY_RECEIVED; NEW_FIRMWARE_ID_AND_LATEST_INPUT_DEVICE_REPLAY_PREPARED",
     "selection_data": "Original learning/validation data plus fixed unlabeled grid; previous fresh captures only replayed after selection as post-hoc diagnostics.",
     "original_results": "Preserved; not replaced by PC replay or new candidates.",
-    "absolute_dense_mse": "Still high on fresh inputs; preserving Dense is not a claim that absolute color accuracy is sufficient."
+    "absolute_dense_mse": "Still high on fresh inputs; preserving Dense is not a claim that absolute color accuracy is sufficient.",
+    "wrong_firmware_retry": "version_mismatch/old_firmware_retry_01",
+    "next_firmware": "precision_scan; boot ID PRECISION_SCAN_V2",
+    "latest_input_replay": "v command: actual new-coefficient Arduino inference on archived physical inputs, not another sensor capture; hardware result pending"
   }
 }

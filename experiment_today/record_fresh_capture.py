@@ -26,7 +26,7 @@ def write_csv(path, rows):
         writer.writerows(rows)
 
 
-def record(path, received_date):
+def record(path, received_date, aggregate=True):
     path = Path(path).resolve()
     directory = path.parent
     text = path.read_text()
@@ -116,7 +116,8 @@ def record(path, received_date):
                "reference_sha256": hashlib.sha256((ROOT / "retraining/data/current33.csv").read_bytes()).hexdigest(),
                "raw_log_sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
     (directory / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
-    update_totals(directory.parent)
+    if aggregate:
+        update_totals(directory.parent)
     print("PASS: all six PPM MSEs, model hashes/thresholds, raw/calibration normalization and fresh-input model replay.")
     print(json.dumps(comparison))
 
@@ -142,5 +143,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("log", type=Path)
     parser.add_argument("--received-date", required=True)
+    parser.add_argument("--no-aggregate", action="store_true", help="Archive an out-of-schedule log separately from planned repetitions.")
     args = parser.parse_args()
-    record(args.log, args.received_date)
+    record(args.log, args.received_date, aggregate=not args.no_aggregate)
