@@ -57,5 +57,38 @@
     "record": "firmware_memory.csv",
     "per_method_minimal_build_memory": "NOT_MEASURED",
     "peak_runtime_ram": "NOT_MEASURED"
+  },
+  "single_model_build_follow_up": {
+    "status": "PREPARED; ARDUINO_IDE_BUILD_COUNTS_NOT_RECEIVED",
+    "sketch": "memory_probe",
+    "conditions": [
+      [
+        40,
+        "DENSE"
+      ],
+      [
+        40,
+        "CSR"
+      ],
+      [
+        60,
+        "DENSE"
+      ],
+      [
+        60,
+        "CSR"
+      ],
+      [
+        100,
+        "DENSE"
+      ],
+      [
+        100,
+        "CSR"
+      ]
+    ],
+    "method": "Exactly one frozen model/format per preprocessing configuration; same dynamic volatile-input/output wrapper; original benchmark inference kernels. No sensor or MSE/reference image arrays.",
+    "storage": "const FP32 weights/bias for both modes; unchanged CSR uint8 columns and uint16 pointers.",
+    "scope": "Whole single-model wrapper build Flash and static RAM, not peak runtime RAM and not the six-model scanner footprint."
   }
 }

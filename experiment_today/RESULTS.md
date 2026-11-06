@@ -34,6 +34,8 @@ CSR索引と固定128入力のDense/CSR出力比較は3次元すべてPASSだっ
 この値は全6モデルを同時に含むスケッチのビルド全体であり、各方式単独の最小使用量ではない。
 RAMの使用量はグローバル変数等の静的領域で、ピークRAMは未測定である。
 40・60・100各Hの2モデル比較スケッチ単独のFlash・RAMは未記録のまま区別する。
+各方式を1つずつ含むビルドの測定用コードは [memory_probe](memory_probe/README.md) に用意した。
+その6条件のArduino IDEのビルド使用量は未受領で、現時点の表には含めていない。
 原文と構造化データは [firmware_memory.csv](firmware_memory.csv) とhardwareフォルダに保存した。
 
 

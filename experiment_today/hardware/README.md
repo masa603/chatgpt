@@ -57,3 +57,7 @@ CSRだけが100次元を搭載可能だったという結論にはしません�
 
 これは全6モデルを含む読取プログラム全体の使用量で、各Hの比較スケッチやDense/CSR各方式単独の値には転記しません。
 原文のSHA256と記録条件は同名JSON、一覧は [firmware_memory.csv](../firmware_memory.csv) に保存しました。
+
+各モデルを1つずつ含むビルドの比較は [memory_probe](../memory_probe/README.md) に用意しました。
+6条件のPC上のコンパイル・数値確認は完了し、Arduino IDEのビルド使用量は未受領です。
+比較用の画像データを含まない共通ラッパーで、Dense/CSR両方のモデル配列をconstとして比較します。

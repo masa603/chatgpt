@@ -1,0 +1,84 @@
+{
+  "scope": "Host tests only; no host executable sizes recorded as Arduino Flash/RAM.",
+  "arduino_single_model_build_measurements": "NOT_RECEIVED",
+  "conditions": [
+    {
+      "hidden_size": 40,
+      "format": "DENSE",
+      "cpp11_asan_ubsan": "PASS",
+      "exactly_one_format_in_preprocessed_program": true,
+      "model_array_bytes": 7692,
+      "model_header_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b",
+      "differential_inputs": 417,
+      "max_abs_fp32_output_difference": 4.97894281359379e-09,
+      "volatile_io_wrapper": "PASS",
+      "arduino_flash_bytes": null,
+      "arduino_static_ram_bytes": null
+    },
+    {
+      "hidden_size": 40,
+      "format": "CSR",
+      "cpp11_asan_ubsan": "PASS",
+      "exactly_one_format_in_preprocessed_program": true,
+      "model_array_bytes": 1109,
+      "model_header_sha256": "b8990e565c502781a0542be8d7a01772e91900cab1ab44880658bae6ba5f274b",
+      "differential_inputs": 417,
+      "max_abs_fp32_output_difference": 4.933471631218822e-09,
+      "volatile_io_wrapper": "PASS",
+      "arduino_flash_bytes": null,
+      "arduino_static_ram_bytes": null
+    },
+    {
+      "hidden_size": 60,
+      "format": "DENSE",
+      "cpp11_asan_ubsan": "PASS",
+      "exactly_one_format_in_preprocessed_program": true,
+      "model_array_bytes": 16332,
+      "model_header_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803",
+      "differential_inputs": 417,
+      "max_abs_fp32_output_difference": 4.907226625050498e-09,
+      "volatile_io_wrapper": "PASS",
+      "arduino_flash_bytes": null,
+      "arduino_static_ram_bytes": null
+    },
+    {
+      "hidden_size": 60,
+      "format": "CSR",
+      "cpp11_asan_ubsan": "PASS",
+      "exactly_one_format_in_preprocessed_program": true,
+      "model_array_bytes": 1279,
+      "model_header_sha256": "1f2946820454407202105fafe23d57f9f4d333becfc44598369438e33f5f3803",
+      "differential_inputs": 417,
+      "max_abs_fp32_output_difference": 4.994812119463177e-09,
+      "volatile_io_wrapper": "PASS",
+      "arduino_flash_bytes": null,
+      "arduino_static_ram_bytes": null
+    },
+    {
+      "hidden_size": 100,
+      "format": "DENSE",
+      "cpp11_asan_ubsan": "PASS",
+      "exactly_one_format_in_preprocessed_program": true,
+      "model_array_bytes": 43212,
+      "model_header_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5",
+      "differential_inputs": 417,
+      "max_abs_fp32_output_difference": 4.968871980537415e-09,
+      "volatile_io_wrapper": "PASS",
+      "arduino_flash_bytes": null,
+      "arduino_static_ram_bytes": null
+    },
+    {
+      "hidden_size": 100,
+      "format": "CSR",
+      "cpp11_asan_ubsan": "PASS",
+      "exactly_one_format_in_preprocessed_program": true,
+      "model_array_bytes": 1739,
+      "model_header_sha256": "25d56b2320115f382a53bc3899ca63898a3074543b778e684319316a216260b5",
+      "differential_inputs": 417,
+      "max_abs_fp32_output_difference": 4.966125510819097e-09,
+      "volatile_io_wrapper": "PASS",
+      "arduino_flash_bytes": null,
+      "arduino_static_ram_bytes": null
+    }
+  ]
+}
