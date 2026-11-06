@@ -11,5 +11,7 @@
   "goal": "MSE <= 300 on a new physical reading; ideally below 100. Training fit is not success evidence.",
   "prospective_target_mse_max": 300,
   "development_mean_meets_300": false,
-  "prospective_result": "PENDING"
+  "prospective_result": "FIRST_NEW_PHYSICAL_READ_RECEIVED; H60/H100 <= 300; H40 > 300",
+  "prospective_record": "physical_readings/capture_01/summary.json",
+  "prospective_read_used_for_v3_training_or_config_selection": false
 }

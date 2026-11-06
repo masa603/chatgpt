@@ -115,7 +115,24 @@
     "development_cv_worst_reading_mse": 1918.4814814814815,
     "acceptance_mse_max_inclusive": 300,
     "development_target_met": false,
-    "new_physical_mse": "PENDING; learning fit and archived replay are not a prospective hardware result.",
+    "new_physical_mse": {
+      "physical_readings": 1,
+      "record": "../learning_followup/physical_readings/capture_01/summary.json",
+      "mse_rgb8": {
+        "40": 524.074074,
+        "60": 93.851852,
+        "100": 119.925926
+      },
+      "met_300_this_read": [
+        60,
+        100
+      ],
+      "not_met_300_this_read": [
+        40
+      ],
+      "used_for_v3_training": false,
+      "independent_unseen_chart_final_evaluation": false
+    },
     "old_records": "Original 33-color models, CSR measurements and old replay images retained separately without replacing their results.",
     "paper_handling": "Hand-held, as required by the user."
   }

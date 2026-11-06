@@ -1,0 +1,71 @@
+{
+  "received_date_japan": "2026-11-06",
+  "execution_wall_timestamp": null,
+  "firmware": "COLOR_RETRAIN_V3",
+  "capture_counter": 1,
+  "input_source": "NEW_PHYSICAL_SENSOR_READINGS",
+  "physical_captures": 1,
+  "chart_role": "Repeated read of the nine-color learning chart, after freezing V3 weights.",
+  "training_role_for_v3": "NOT_USED_FOR_FITTING_OR_CONFIG_SELECTION",
+  "independent_unseen_chart_evaluation": "NOT_PERFORMED",
+  "repetition_scope": "One acquisition evaluated by three Dense models; not three physical repetitions.",
+  "startup_self_check_log": "NOT_SUPPLIED",
+  "black_rgb": [
+    35.70000076293945,
+    20.700000762939453,
+    20.200000762939453
+  ],
+  "white_rgb": [
+    270.29998779296875,
+    170.10000610351562,
+    128.39999389648438
+  ],
+  "colors": 9,
+  "normalization_check": "PASS",
+  "normalization_max_abs_difference": 7.450580596923828e-09,
+  "model_hashes_and_ppm_mse_check": "PASS",
+  "results": [
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 40,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 524.074074,
+      "mse_recomputed_from_ppm": 524.074074074074,
+      "mse_goal_max": 300,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "5d0f26b9f382fc982620ca22eb3056acb042d772890ca29138f1e2114539031e",
+      "ppm": "h40_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 60,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 93.851852,
+      "mse_recomputed_from_ppm": 93.85185185185185,
+      "mse_goal_max": 300,
+      "goal_met_this_read": true,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "957b01ae4ddc3a0f42ffa09eb15be73786b990c1ed66b652f9188f6a08fe304d",
+      "ppm": "h60_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 100,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 119.925926,
+      "mse_recomputed_from_ppm": 119.92592592592592,
+      "mse_goal_max": 300,
+      "goal_met_this_read": true,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "ea01d4aa22fe00b9e82dfcd3c6e9f2ecc2d0d0e4723023ef4234764c0e78e28b",
+      "ppm": "h100_dense.ppm"
+    }
+  ],
+  "target_source": "Recovered Notebook display; original PNG not verified.",
+  "submitted_log_sha256": "27c07444cdfa05ba3e90d8b4872ca37e2813c490918e9f93079617614ac98293",
+  "normalization_of_pasted_text": "Only strip line-boundary backslashes/whitespace; original submitted text retained."
+}
