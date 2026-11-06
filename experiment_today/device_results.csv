@@ -1,4 +1,4 @@
 hidden_size,status,dense_model_bytes,csr_model_bytes,dense_mean_us,dense_sample_stddev_us,csr_mean_us,csr_sample_stddev_us,paired_firmware_flash_bytes,paired_firmware_static_ram_bytes,compiler,source_log
 40,DEVICE_CHECK_AND_TIMING_PASS,7692,1109,544.40800000,0.00836660,160.19000000,0.00000000,,,7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204],hardware/h40_benchmark_01.txt
-60,NOT_RECORDED,16332,1279,,,,,,,,
+60,DEVICE_CHECK_AND_TIMING_PASS,16332,1279,1116.41600000,0.01140175,208.37200000,0.01303840,,,7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204],hardware/h60_benchmark_01.txt
 100,NOT_RECORDED,43212,1739,,,,,,,,
