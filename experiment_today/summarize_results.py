@@ -21,7 +21,7 @@ def read_csv(path):
         return list(csv.DictReader(f))
 
 
-def main():
+def main(render_plot=True):
     timing = {int(r["hidden_size"]): r for r in read_csv(HERE / "device_results.csv")}
     fresh = {(int(r["hidden_size"]), r["format"]): r for r in read_csv(HERE / "fresh_readings/mse_summary.csv")}
     captures = [json.loads(path.read_text()) for path in sorted((HERE / "fresh_readings").glob("capture_*/summary.json"))]
@@ -51,6 +51,22 @@ def main():
         writer.writeheader(); writer.writerows(rows)
     capacity_table = "\n".join(f"| {r['hidden_size']} | {r['dense_model_bytes']:,}→{r['csr_model_bytes']:,} | {r['model_bytes_reduction_percent']:.2f}% | {r['dense_mean_us']:.3f}→{r['csr_mean_us']:.3f} | {r['dense_over_csr_speed_ratio']:.3f}倍 |" for r in rows)
     mse_table = "\n".join(f"| {r['hidden_size']} | {r['dense_fresh_mse_mean']:.2f} ± {r['dense_fresh_mse_sample_sd']:.2f} | {r['csr_fresh_mse_mean']:.2f} ± {r['csr_fresh_mse_sample_sd']:.2f} | +{r['fresh_mse_mean_change_percent']:.2f}% |" for r in rows)
+    memory_path = HERE / "firmware_memory.csv"
+    memory_text = "ビルド全体の使用量は未受領で、ピークRAMは測定していない。"
+    if memory_path.exists():
+        memory_rows = read_csv(memory_path)
+        table = "\n".join(f"| {m['sketch_name']} | {int(m['flash_used_bytes']):,} / {int(m['flash_max_bytes']):,} | {int(m['static_ram_used_bytes']):,} / {int(m['ram_max_bytes']):,} | {int(m['ram_remaining_for_stack_and_locals_bytes']):,} |" for m in memory_rows)
+        memory_text = """全6モデル入りの読取スケッチについて、Arduino IDEのコンパイル結果を受領した。
+
+| スケッチ | Flash 使用量 / 上限 [byte] | 静的RAM 使用量 / 上限 [byte] | スタック等に残る領域 [byte] |
+| --- | ---: | ---: | ---: |
+""" + table + """
+
+この値は全6モデルを同時に含むスケッチのビルド全体であり、各方式単独の最小使用量ではない。
+RAMの使用量はグローバル変数等の静的領域で、ピークRAMは未測定である。
+40・60・100各Hの2モデル比較スケッチ単独のFlash・RAMは未記録のまま区別する。
+原文と構造化データは [firmware_memory.csv](firmware_memory.csv) とhardwareフォルダに保存した。
+"""
     report = f"""# 受領した実験結果：2026年11月6日
 
 40・60・100次元について、Arduino UNO R4 WiFiでの計算確認と推論時間、モデル配列容量、
@@ -76,7 +92,7 @@ Dense先行・CSR先行を交互にし、時間にはセンサ読取、待機、
 5組の生の合計時間、平均、標本標準偏差を原文とJSONに保存した。
 CSR索引と固定128入力のDense/CSR出力比較は3次元すべてPASSだった。
 配列容量は実配列の合計であり、スケッチ全体のFlash・静的RAM使用量とは異なる。
-ビルド全体の使用量は未受領のため空欄で、ピークRAMは測定していない。
+{memory_text}
 
 ## 新たに読み取った学習チャートの精度
 
@@ -117,8 +133,9 @@ CSRは枝刈り後Denseの参照値と照合しており、保存形式の正し
 ![受領した測定結果の比較](results_overview.png)
 """
     (HERE / "RESULTS.md").write_text(report, encoding="utf-8")
-    plot(rows, captures)
-    print("Wrote results_summary.csv, RESULTS.md and standalone PNG/PDF figure; counters", counters)
+    if render_plot:
+        plot(rows, captures)
+    print("Wrote results_summary.csv and RESULTS.md" + (" and standalone PNG/PDF figure" if render_plot else "") + "; counters", counters)
 
 
 def plot(rows, captures):

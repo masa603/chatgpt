@@ -45,3 +45,15 @@ CSRだけが100次元を搭載可能だったという結論にはしません�
 新しい紙の有効な読取2回分（CAPTURE=1と3）を受領しました。CAPTURE=2は操作ミスとして除外理由を記録し、
 別の記録として [fresh_readings](../fresh_readings/README.md) に保存しています。
 速度・容量と再読取MSEを合わせた集計は [RESULTS.md](../RESULTS.md) にあります。
+
+## 全6モデル入りの読取スケッチの使用量
+
+`fresh_scan_all_compile_01.txt` は同日に受領したArduino IDEのコンパイル出力です。
+直前に案内した `fresh_scan_all` の値として、会話の作業状況からスケッチを識別しています。
+
+- Flash：133,424 / 262,144 byte（IDE表示50%）。
+- グローバル変数等の静的RAM：7,268 / 32,768 byte（IDE表示22%）。
+- 静的領域を除いた残り：25,500 byte。実際のスタック使用量やピークRAMは未測定。
+
+これは全6モデルを含む読取プログラム全体の使用量で、各Hの比較スケッチやDense/CSR各方式単独の値には転記しません。
+原文のSHA256と記録条件は同名JSON、一覧は [firmware_memory.csv](../firmware_memory.csv) に保存しました。

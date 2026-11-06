@@ -48,5 +48,14 @@
     ],
     "exclusion_reason": "User reported wrong chart patch read during CAPTURE=2; excluded as acquisition protocol error. Raw excluded log not received; completion unknown.",
     "exclusion_record": "fresh_readings/exclusions.json"
+  },
+  "whole_build_memory_record": {
+    "scope": "Combined six-model fresh_scan_all acquisition sketch",
+    "flash_bytes": 133424,
+    "static_ram_bytes": 7268,
+    "static_ram_remaining_bytes": 25500,
+    "record": "firmware_memory.csv",
+    "per_method_minimal_build_memory": "NOT_MEASURED",
+    "peak_runtime_ram": "NOT_MEASURED"
   }
 }

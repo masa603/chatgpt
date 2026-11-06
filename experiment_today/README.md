@@ -10,6 +10,8 @@
 新しい紙の有効な読取2回分（CAPTURE=1と3）を [fresh_readings](fresh_readings/README.md) に保存・検算済みです。
 CAPTURE=2は違う色を読んだ操作ミスとして除外理由を記録しています。
 集計・グラフは [RESULTS.md](RESULTS.md) にあります。独立した最終評価は未実施のままです。
+全6モデル入りの読取スケッチのFlash 133,424 byte・静的RAM 7,268 byteも受領し、
+[firmware_memory.csv](firmware_memory.csv) に保存しています。
 
 3時間の作業では、学習済みのモデルを使って**40→60→100**の順に実機ログを残します。
 学習はすでに完了しています。新しい33組で学習した重みから、各Hの閾値を選び直しました。

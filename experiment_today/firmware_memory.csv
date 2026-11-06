@@ -1,0 +1,2 @@
+sketch_name,scope,flash_used_bytes,flash_max_bytes,flash_percent_reported,static_ram_used_bytes,ram_max_bytes,ram_percent_reported,ram_remaining_for_stack_and_locals_bytes,source_log
+fresh_scan_all,Combined fresh-reader firmware with all six models,133424,262144,50,7268,32768,22,25500,hardware/fresh_scan_all_compile_01.txt
