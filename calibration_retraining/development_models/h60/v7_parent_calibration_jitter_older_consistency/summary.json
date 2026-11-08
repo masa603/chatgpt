@@ -1,0 +1,59 @@
+{
+  "hidden_size": 60,
+  "method": "v7_parent_calibration_jitter_older_consistency",
+  "training_rows": 126,
+  "development_rows": 9,
+  "epochs": 15000,
+  "training_mse_unweighted_rgb8": 870.5767195767196,
+  "development_mse_all9": 173.22222222222223,
+  "development_rgb9": [
+    [
+      205,
+      50,
+      56
+    ],
+    [
+      118,
+      191,
+      71
+    ],
+    [
+      51,
+      89,
+      207
+    ],
+    [
+      244,
+      235,
+      21
+    ],
+    [
+      110,
+      213,
+      229
+    ],
+    [
+      194,
+      83,
+      155
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      107,
+      120,
+      130
+    ],
+    [
+      254,
+      255,
+      255
+    ]
+  ],
+  "checkpoint": "development_models/h60/v7_parent_calibration_jitter_older_consistency/checkpoint.pt",
+  "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+  "seconds": 42.57778780901572
+}

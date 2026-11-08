@@ -1,6 +1,6 @@
 # 40・60・80・100次元のV8：1ファイル版
 
-**現在は利用者の希望により [コードとパラメータを分けた2ファイル版](../color_retrain_v8/README.md) を使います。**
+**現在は [V9の全8条件比較版](../../calibration_retraining/compare_all_v9/README.md) を使います。**
 
 [color_retrain_v8_single.ino](color_retrain_v8_single.ino) に学習済み配列も全て含めています。
 ファイルを開いて全コードを新規スケッチへ貼り付けるか、同名フォルダへ保存してArduino IDEで開きます。

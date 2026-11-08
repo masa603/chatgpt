@@ -1,0 +1,111 @@
+{
+  "scope": "Actual V8 reading, all9 included in MSE. Diagnostic decomposition only.",
+  "all_four_original_teacher_html_agree": true,
+  "all108_pc_replay_rgb8_components_match": true,
+  "H60_mse": 441.1111111111111,
+  "H60_color_errors_descending": [
+    {
+      "hidden_size": "60",
+      "color_id": "r2c2",
+      "predicted_r8": "147",
+      "predicted_g8": "242",
+      "predicted_b8": "247",
+      "target_r8": "111",
+      "target_g8": "204",
+      "target_b8": "221",
+      "mse_rgb8": "1138.6666666666667"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r1c3",
+      "predicted_r8": "22",
+      "predicted_g8": "123",
+      "predicted_b8": "166",
+      "target_r8": "56",
+      "target_g8": "83",
+      "target_b8": "164",
+      "mse_rgb8": "920.0"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r1c2",
+      "predicted_r8": "148",
+      "predicted_g8": "205",
+      "predicted_b8": "70",
+      "target_r8": "105",
+      "target_g8": "189",
+      "target_b8": "69",
+      "mse_rgb8": "702.0"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r3c2",
+      "predicted_r8": "94",
+      "predicted_g8": "110",
+      "predicted_b8": "111",
+      "target_r8": "128",
+      "target_g8": "127",
+      "target_b8": "127",
+      "mse_rgb8": "567.0"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r2c3",
+      "predicted_r8": "215",
+      "predicted_g8": "86",
+      "predicted_b8": "157",
+      "target_r8": "184",
+      "target_g8": "81",
+      "target_b8": "158",
+      "mse_rgb8": "329.0"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r2c1",
+      "predicted_r8": "244",
+      "predicted_g8": "225",
+      "predicted_b8": "0",
+      "target_r8": "246",
+      "target_g8": "235",
+      "target_b8": "20",
+      "mse_rgb8": "168.0"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r1c1",
+      "predicted_r8": "227",
+      "predicted_g8": "42",
+      "predicted_b8": "48",
+      "target_r8": "237",
+      "target_g8": "30",
+      "target_b8": "36",
+      "mse_rgb8": "129.33333333333334"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r3c1",
+      "predicted_r8": "5",
+      "predicted_g8": "5",
+      "predicted_b8": "5",
+      "target_r8": "1",
+      "target_g8": "1",
+      "target_b8": "1",
+      "mse_rgb8": "16.0"
+    },
+    {
+      "hidden_size": "60",
+      "color_id": "r3c3",
+      "predicted_r8": "255",
+      "predicted_g8": "255",
+      "predicted_b8": "255",
+      "target_r8": "255",
+      "target_g8": "255",
+      "target_b8": "255",
+      "mse_rgb8": "0.0"
+    }
+  ],
+  "input_observations": "New red B and blue R are clipped at0; yellow R/G at1. New green G=.6605 and cyan G/B=.7751/.8401 are above many earlier readings. Cause not established.",
+  "next_training": "Compare three fixed data-only conditions: labelled Huber replay, calibration-like gain/offset augmentation, same augmentation with older-example consistency weights. Keep latest9 out first, then final135 fitting.",
+  "physical_goal300_met": false,
+  "independent_unseen_chart_final_evaluation": false
+}

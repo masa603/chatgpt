@@ -1,5 +1,7 @@
 # V8の2ファイル版
 
+**現在は [V9の全8条件比較版](../../calibration_retraining/compare_all_v9/README.md) を使います。以下は旧V8の操作記録です。**
+
 利用者の希望に従い、次のように分けています。
 
 - [color_retrain_v8.ino](color_retrain_v8.ino)：センサ読取・NN推論・MSE計算などの実行コード。

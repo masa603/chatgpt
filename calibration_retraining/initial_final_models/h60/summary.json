@@ -1,0 +1,26 @@
+{
+  "hidden_size": 60,
+  "config": {
+    "name": "calibration_jitter_older_consistency",
+    "huber": true,
+    "calibration_jitter": true,
+    "older_consistency": true
+  },
+  "parent_v8_checkpoint_sha256": "494ba03b7933496252ff118c3e007a271a141ace978d6fcdce4011cf7d9355bc",
+  "selected_development_checkpoint_sha256": "c698ec9beb32d71e93cc8133b1712a019d3c378677995631afc45e92c921c156",
+  "development_epochs": 15000,
+  "final_epochs": 25000,
+  "training_rows": 135,
+  "seed": 42,
+  "l1_weights_only": 1e-06,
+  "training_mse_rgb8": 640.3333333333334,
+  "training_replay_by_group": {
+    "v8_capture01": 2.7777777777777777,
+    "patch_session01_cal1": 13.311111111111112
+  },
+  "seconds": 47.00675663401489,
+  "training_data_sha256": "f867c893adf109bc71ccc50300ba2e36ef0957b90149d424fe0f26405b02e89e",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "model_header_sha256": "61afc94885acc0a36b86ef0f9c5d014eb1c978bfabb41c700b77f3e52435a13a",
+  "scope": "All135 fitting after method selection. Group replay now uses training data. No new V9 physical result."
+}

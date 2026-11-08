@@ -98,6 +98,13 @@
   "all_original102_and_patch15_samples_preserved": "PASS",
   "development117_weights_exclude_v7_nine_color_group": "PASS",
   "parent_and_selected_development_checkpoint_hashes": "PASS",
-  "new_physical_v8_mse": "NOT_YET_MEASURED",
-  "parameter_header_separated_from_executable_sketch": "PASS"
+  "new_physical_v8_mse": {
+    "40": 2745.777777777778,
+    "60": 441.1111111111111,
+    "80": 690.6296296296297,
+    "100": 1874.7777777777778
+  },
+  "parameter_header_separated_from_executable_sketch": "PASS",
+  "new_physical_v8_record": "physical_readings/capture_01/summary.json",
+  "new_physical_v8_independent_unseen_chart_evaluation": false
 }

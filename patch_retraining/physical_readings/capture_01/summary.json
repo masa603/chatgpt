@@ -1,0 +1,86 @@
+{
+  "received_date_japan": "2026-11-08",
+  "execution_wall_timestamp": null,
+  "firmware": "COLOR_RETRAIN_V8",
+  "capture_counter": 1,
+  "physical_captures": 1,
+  "input_source": "NEW_PHYSICAL_SENSOR_READINGS",
+  "role": "New read after V8 freeze; same nine-color learning chart, not unseen-chart final evaluation.",
+  "training_role": "NOT_USED_FOR_V8_FITTING_OR_DEVELOPMENT",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "reference_basis": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED",
+  "training_data_sha256": "83ff2dc4d465e4ae245e0cceafbbf2dc09af7fb8b83e072cf4a3117fe671941c",
+  "black_rgb": [
+    28.100000381469727,
+    10.100000381469727,
+    8.0
+  ],
+  "white_rgb": [
+    142.6999969482422,
+    59.0,
+    44.900001525878906
+  ],
+  "model_hashes_ppm_mse_and_goal_flags": "PASS",
+  "raw_to_normalized_input": "PASS",
+  "normalization_max_abs_difference": 7.450580596923828e-09,
+  "original_teacher_html_mse": "PASS",
+  "teacher_calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+  "results": [
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 40,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 2745.777778,
+      "mse_recomputed_from_ppm": 2745.777777777778,
+      "teacher_site_display_mse": 2745.78,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "d56a048d6e1ba74f61a87cb6f267c2265b9457bba5180e13060db652f312f296",
+      "ppm": "h40_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 60,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 441.111111,
+      "mse_recomputed_from_ppm": 441.1111111111111,
+      "teacher_site_display_mse": 441.11,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "696daee9d923824e8fc30a245910de586f21ab1c2bec8d683d8bf97e01920002",
+      "ppm": "h60_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 80,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 690.62963,
+      "mse_recomputed_from_ppm": 690.6296296296297,
+      "teacher_site_display_mse": 690.63,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "0e1cba4ad799931c6f8036a8638c12697b3a5a24e3ae2b9c1da05e2d6d10c76f",
+      "ppm": "h80_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 100,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 1874.777778,
+      "mse_recomputed_from_ppm": 1874.7777777777778,
+      "teacher_site_display_mse": 1874.78,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "ce7f1757c6e8953ea1ce752c9830e32714574c6536079098f1e856484ad8bdbf",
+      "ppm": "h100_dense.ppm"
+    }
+  ],
+  "lighting": "User requested data-only learning changes; no setup/angle changes required by this version. Actual illumination and geometry for this reading not specified in log.",
+  "startup_self_check_log": "NOT_SUPPLIED",
+  "submitted_log_sha256": "819edfae6eefc6054c8a7709da4537c296ade92023b576176dccdc589694fb02",
+  "subsequent_role_for_v9": "Held out during V9 exploratory development updates, inspected for selection and extra parent-initialization comparison, then included in final135 fitting; not a V9 physical test."
+}

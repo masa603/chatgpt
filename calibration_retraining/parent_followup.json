@@ -1,0 +1,41 @@
+{
+  "reason": "Initial three conditions left H40 development MSE879.00. Compare earlier V7 initialization with the same best robust gain/offset method, on all four H. This is extra inspected development, not an independent test.",
+  "condition": {
+    "name": "v7_parent_calibration_jitter_older_consistency",
+    "huber": true,
+    "calibration_jitter": true,
+    "older_consistency": true,
+    "parent_stage": 7
+  },
+  "hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "epochs": 15000,
+  "selection": "Replace per-H selected candidate only when all9 development MSE is strictly smaller; preserve earlier final fit and selection. No pixel filtering.",
+  "changed_h": [
+    40,
+    80,
+    60
+  ],
+  "results": [
+    {
+      "H": 40,
+      "development_mse": 149.37037037037038
+    },
+    {
+      "H": 80,
+      "development_mse": 153.0
+    },
+    {
+      "H": 60,
+      "development_mse": 173.22222222222223
+    },
+    {
+      "H": 100,
+      "development_mse": 215.44444444444446
+    }
+  ]
+}

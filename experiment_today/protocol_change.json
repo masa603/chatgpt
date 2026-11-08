@@ -314,5 +314,33 @@
     "compression": "New weights not yet pruned/benchmarked; do not reuse old thresholds or times.",
     "parameters": "../patch_retraining/color_retrain_v8/trained_models_v8.h",
     "delivery_change": "User requested separate code and learning data/parameters; numeric model arrays unchanged, inference functions moved from header to sketch. Original learning CSV kept separate."
+  },
+  "v8_new_physical_capture": {
+    "record": "../patch_retraining/physical_readings/capture_01/summary.json",
+    "actual_mse": {
+      "40": 2745.777777777778,
+      "60": 441.1111111111111,
+      "80": 690.6296296296297,
+      "100": 1874.7777777777778
+    },
+    "all4_below300": false,
+    "subsequent_role": "V9 development then final fitting."
+  },
+  "frozen_v9_compression_comparison": {
+    "source": "../calibration_retraining/README.md",
+    "status": "TRAINING_FROZEN; CSR_SELECTED; HOST_VERIFIED; NEW_BOARD_LOG_PENDING",
+    "hidden_sizes": [
+      40,
+      60,
+      80,
+      100
+    ],
+    "conditions": 8,
+    "board_actions": "One9-color capture, one t, IDE combined Flash/RAM2 lines.",
+    "goal_and_plan": "Absolute300 is user goal; plan requires comparative MSE/capacity/timing, reporting failed conditions too.",
+    "limits": "H50, original10 physical repetitions, independent final chart and most standalone firmware memory entries unperformed; do not label complete.",
+    "old_v8_data": "Latest9 used in V9 exploratory development then final fitting, not a V9 test.",
+    "thresholds": "Fixed on archived separate validation with training-only guard before paired physical reads.",
+    "no_more_training_search": true
   }
 }

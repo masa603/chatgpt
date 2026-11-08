@@ -1,0 +1,19 @@
+{
+  "sources": {
+    "training126_sha256": "83ff2dc4d465e4ae245e0cceafbbf2dc09af7fb8b83e072cf4a3117fe671941c",
+    "v8_actual_log_sha256": "819edfae6eefc6054c8a7709da4537c296ade92023b576176dccdc589694fb02",
+    "v8_actual_inputs_sha256": "555f3e820a87cf146e799062f9c79ce77325c89d9c1fbfc97988c700abef5383"
+  },
+  "training135_sha256": "f867c893adf109bc71ccc50300ba2e36ef0957b90149d424fe0f26405b02e89e",
+  "rows": 135,
+  "distinct_reference_colors": 33,
+  "calibration_groups": 14,
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "reference_source": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED",
+  "development_split": "All9 latest V8 inputs excluded from parent weights, fine-tuning updates, weights and augmentation widths; training126.",
+  "development_limit": "Latest failed read inspected to design and select methods; not an independent final test.",
+  "final_role_change": "All9 latest V8 inputs included in final135 fitting after selection. New physical V9 reading pending.",
+  "rows_removed": 0,
+  "provided_notebook_X_used": false,
+  "inference_and_sensor_pipeline_changed": false
+}

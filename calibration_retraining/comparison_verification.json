@@ -1,0 +1,28 @@
+{
+  "scope": "Host-only mock verification; no new physical readings or real board timings.",
+  "conditions": 8,
+  "hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "frozen_v9_retrained_after_selection": false,
+  "separate_code_and_numeric_header": true,
+  "sensor_and_normalization_functions": "UNCHANGED",
+  "validation_and_training_guard": "PASS",
+  "differential_inputs": 519,
+  "models_per_input": 8,
+  "max_abs_error": 4.9966430992753885e-09,
+  "all_rgb8_values_exact": true,
+  "cpp11_asan_ubsan": "PASS",
+  "csr_index_and_reference_checks": "PASS",
+  "two_full_paired_captures_and_n_restart": "PASS",
+  "sixteen_mock_ppms_match_original_teacher_html": true,
+  "t_runs_all_four_pairs_without_sensor_reads": "PASS",
+  "warmup10_calls100_groups5_checksums_and_alternating_order": "PASS",
+  "model_payload_sizes_match_selection": "PASS",
+  "benchmark_clock": "FAKE_HOST_CLOCK; no hardware timings recorded",
+  "new_physical_results": "PENDING",
+  "independent_final_evaluation": "NOT_PERFORMED"
+}

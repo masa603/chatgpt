@@ -1,0 +1,161 @@
+{
+  "model_sha256": "aba552489c15519ce448666ac9c1e0fbabcbce44ab36166c13240d7121df07a1",
+  "hidden_size": 80,
+  "weight_count": 6880,
+  "candidate_count_including_zero_baseline": 5894,
+  "candidate_rule": "Zero baseline plus all midpoints between distinct adjacent absolute weights; one global threshold; biases unchanged.",
+  "capacity_scope": "FP32 values/bias + uint8 columns + uint16 row pointers; excludes whole-build alignment, buffers, NPZ container overhead.",
+  "validation_status": "evaluated",
+  "validation_csv_sha256": "def95fe209dde0cadab874aa77fd26744e23b2b7aaf0971c2b384af25bb4c7ad",
+  "validation_read_ids": [
+    "1",
+    "2"
+  ],
+  "expected_validation_reads": 2,
+  "validation_read_count": 2,
+  "validation_colors_per_read": 64,
+  "input_collisions": [
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r6c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c2",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c1"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r6c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c3"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c1",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c5"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c3",
+        "r7c6"
+      ]
+    },
+    {
+      "read_id": "2",
+      "color_ids": [
+        "r7c5",
+        "r7c6"
+      ]
+    }
+  ],
+  "mse_scale": "RGB 0..255 after clipping and Arduino half-up rounding; equal mean of the measured reading MSEs.",
+  "dense_validation_mse": 2655.828125,
+  "dense_mse_by_read": [
+    2789.5364583333335,
+    2522.1197916666665
+  ],
+  "selected": {
+    "threshold": 0.04339354671537876,
+    "nonzero": 1580,
+    "sparsity_pct": 77.03488372093024,
+    "csr_bytes": 8884,
+    "dense_bytes": 28172,
+    "saving_pct": 68.46514269487433,
+    "memory_ok": true,
+    "validation_mse": 2736.1875,
+    "mse_difference": 80.359375,
+    "mse_increase_pct": 3.0257746818612263,
+    "quality_ok": true,
+    "eligible": true,
+    "read_1_mse": 2947.5677083333335,
+    "read_2_mse": 2524.8072916666665,
+    "cpp_padding_bytes": 0,
+    "plan_eligible": true,
+    "training9_mse": 298.77777777777777,
+    "training9_goal_ok": true
+  },
+  "selection_status": "provisional_input_collisions",
+  "diagnostic_only": null,
+  "note": "No threshold is selected without independent validation. Training/final-evaluation data must not be supplied as validation. Training data and random seed are not encoded in the header; record model provenance separately. Re-run for each frozen trained model.",
+  "postprocessing": "Sequential FP32 inference; double-literal255 scaling and half-up rounding, same as Arduino sketch.",
+  "cpp_padding_rule": "For each empty CSR layer store one float and one uint8 placeholder:5 bytes; count them in candidate capacity.",
+  "training9_guard": {
+    "source": "v8_capture01 now in training135, not independent validation/test",
+    "limit_rgb8_mse": 300,
+    "purpose": "Additional user quality target on saved learning inputs; not a new physical accuracy claim.",
+    "selection": "Start with plan-eligible candidates, test increasing CSR capacity (then validation MSE, threshold); stop at first passing training9<=300."
+  }
+}

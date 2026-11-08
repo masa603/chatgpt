@@ -1,0 +1,59 @@
+{
+  "hidden_size": 40,
+  "method": "calibration_jitter",
+  "training_rows": 126,
+  "development_rows": 9,
+  "epochs": 15000,
+  "training_mse_unweighted_rgb8": 613.8492063492064,
+  "development_mse_all9": 1132.4814814814815,
+  "development_rgb9": [
+    [
+      255,
+      89,
+      98
+    ],
+    [
+      56,
+      164,
+      48
+    ],
+    [
+      37,
+      93,
+      205
+    ],
+    [
+      255,
+      255,
+      75
+    ],
+    [
+      30,
+      181,
+      173
+    ],
+    [
+      176,
+      91,
+      163
+    ],
+    [
+      5,
+      4,
+      8
+    ],
+    [
+      80,
+      103,
+      92
+    ],
+    [
+      248,
+      254,
+      254
+    ]
+  ],
+  "checkpoint": "development_models/h40/calibration_jitter/checkpoint.pt",
+  "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+  "seconds": 20.30500741599826
+}

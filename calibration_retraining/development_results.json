@@ -1,0 +1,946 @@
+[
+  {
+    "hidden_size": 40,
+    "method": "calibration_jitter",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 613.8492063492064,
+    "development_mse_all9": 1132.4814814814815,
+    "development_rgb9": [
+      [
+        255,
+        89,
+        98
+      ],
+      [
+        56,
+        164,
+        48
+      ],
+      [
+        37,
+        93,
+        205
+      ],
+      [
+        255,
+        255,
+        75
+      ],
+      [
+        30,
+        181,
+        173
+      ],
+      [
+        176,
+        91,
+        163
+      ],
+      [
+        5,
+        4,
+        8
+      ],
+      [
+        80,
+        103,
+        92
+      ],
+      [
+        248,
+        254,
+        254
+      ]
+    ],
+    "checkpoint": "development_models/h40/calibration_jitter/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 20.30500741599826
+  },
+  {
+    "hidden_size": 40,
+    "method": "huber_replay",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 503.7354497354497,
+    "development_mse_all9": 2986.814814814815,
+    "development_rgb9": [
+      [
+        239,
+        91,
+        104
+      ],
+      [
+        36,
+        164,
+        23
+      ],
+      [
+        23,
+        109,
+        219
+      ],
+      [
+        255,
+        255,
+        221
+      ],
+      [
+        13,
+        161,
+        169
+      ],
+      [
+        152,
+        86,
+        157
+      ],
+      [
+        5,
+        3,
+        7
+      ],
+      [
+        82,
+        97,
+        98
+      ],
+      [
+        254,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h40/huber_replay/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 20.29224370798329
+  },
+  {
+    "hidden_size": 40,
+    "method": "calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 685.0661375661375,
+    "development_mse_all9": 879.0,
+    "development_rgb9": [
+      [
+        255,
+        86,
+        93
+      ],
+      [
+        50,
+        162,
+        49
+      ],
+      [
+        37,
+        93,
+        206
+      ],
+      [
+        255,
+        255,
+        62
+      ],
+      [
+        44,
+        196,
+        184
+      ],
+      [
+        167,
+        82,
+        155
+      ],
+      [
+        3,
+        2,
+        5
+      ],
+      [
+        88,
+        116,
+        107
+      ],
+      [
+        249,
+        254,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h40/calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 23.103085180016933
+  },
+  {
+    "hidden_size": 60,
+    "method": "huber_replay",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 330.8624338624339,
+    "development_mse_all9": 625.8518518518518,
+    "development_rgb9": [
+      [
+        239,
+        39,
+        43
+      ],
+      [
+        91,
+        173,
+        42
+      ],
+      [
+        53,
+        118,
+        181
+      ],
+      [
+        211,
+        214,
+        0
+      ],
+      [
+        122,
+        230,
+        246
+      ],
+      [
+        211,
+        87,
+        160
+      ],
+      [
+        5,
+        5,
+        5
+      ],
+      [
+        51,
+        76,
+        92
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h60/huber_replay/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 18.512561312003527
+  },
+  {
+    "hidden_size": 60,
+    "method": "calibration_jitter",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 518.5899470899471,
+    "development_mse_all9": 285.9259259259259,
+    "development_rgb9": [
+      [
+        221,
+        55,
+        59
+      ],
+      [
+        109,
+        188,
+        61
+      ],
+      [
+        73,
+        125,
+        216
+      ],
+      [
+        246,
+        234,
+        21
+      ],
+      [
+        114,
+        200,
+        216
+      ],
+      [
+        191,
+        74,
+        159
+      ],
+      [
+        4,
+        4,
+        4
+      ],
+      [
+        95,
+        114,
+        121
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h60/calibration_jitter/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 28.067081652989145
+  },
+  {
+    "hidden_size": 60,
+    "method": "calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 618.5925925925926,
+    "development_mse_all9": 190.5185185185185,
+    "development_rgb9": [
+      [
+        222,
+        53,
+        58
+      ],
+      [
+        106,
+        185,
+        61
+      ],
+      [
+        67,
+        118,
+        207
+      ],
+      [
+        250,
+        239,
+        21
+      ],
+      [
+        118,
+        203,
+        216
+      ],
+      [
+        195,
+        81,
+        160
+      ],
+      [
+        1,
+        2,
+        2
+      ],
+      [
+        109,
+        122,
+        124
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h60/calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 27.063910562021192
+  },
+  {
+    "hidden_size": 80,
+    "method": "huber_replay",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 250.6851851851852,
+    "development_mse_all9": 662.4444444444445,
+    "development_rgb9": [
+      [
+        203,
+        75,
+        81
+      ],
+      [
+        153,
+        226,
+        49
+      ],
+      [
+        85,
+        128,
+        209
+      ],
+      [
+        246,
+        241,
+        18
+      ],
+      [
+        87,
+        153,
+        209
+      ],
+      [
+        185,
+        82,
+        152
+      ],
+      [
+        3,
+        3,
+        3
+      ],
+      [
+        114,
+        124,
+        137
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h80/huber_replay/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 18.521735059010098
+  },
+  {
+    "hidden_size": 80,
+    "method": "calibration_jitter",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 333.9470899470899,
+    "development_mse_all9": 163.2962962962963,
+    "development_rgb9": [
+      [
+        211,
+        68,
+        69
+      ],
+      [
+        115,
+        193,
+        67
+      ],
+      [
+        69,
+        89,
+        179
+      ],
+      [
+        251,
+        236,
+        23
+      ],
+      [
+        105,
+        201,
+        219
+      ],
+      [
+        182,
+        80,
+        161
+      ],
+      [
+        3,
+        5,
+        5
+      ],
+      [
+        108,
+        117,
+        123
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h80/calibration_jitter/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 26.30660970599274
+  },
+  {
+    "hidden_size": 80,
+    "method": "calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 613.7433862433862,
+    "development_mse_all9": 174.85185185185185,
+    "development_rgb9": [
+      [
+        210,
+        67,
+        70
+      ],
+      [
+        113,
+        196,
+        71
+      ],
+      [
+        75,
+        100,
+        186
+      ],
+      [
+        246,
+        238,
+        25
+      ],
+      [
+        109,
+        201,
+        222
+      ],
+      [
+        181,
+        76,
+        160
+      ],
+      [
+        3,
+        3,
+        3
+      ],
+      [
+        119,
+        121,
+        127
+      ],
+      [
+        255,
+        255,
+        254
+      ]
+    ],
+    "checkpoint": "development_models/h80/calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 26.212030400987715
+  },
+  {
+    "hidden_size": 100,
+    "method": "huber_replay",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 248.65873015873015,
+    "development_mse_all9": 1538.851851851852,
+    "development_rgb9": [
+      [
+        221,
+        82,
+        101
+      ],
+      [
+        255,
+        252,
+        86
+      ],
+      [
+        48,
+        84,
+        160
+      ],
+      [
+        255,
+        255,
+        39
+      ],
+      [
+        101,
+        143,
+        183
+      ],
+      [
+        188,
+        81,
+        153
+      ],
+      [
+        2,
+        2,
+        4
+      ],
+      [
+        95,
+        118,
+        113
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h100/huber_replay/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 20.89496194999083
+  },
+  {
+    "hidden_size": 100,
+    "method": "calibration_jitter",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 276.69312169312167,
+    "development_mse_all9": 257.5925925925926,
+    "development_rgb9": [
+      [
+        216,
+        63,
+        78
+      ],
+      [
+        109,
+        197,
+        79
+      ],
+      [
+        57,
+        86,
+        164
+      ],
+      [
+        250,
+        238,
+        23
+      ],
+      [
+        118,
+        186,
+        201
+      ],
+      [
+        200,
+        85,
+        158
+      ],
+      [
+        3,
+        4,
+        5
+      ],
+      [
+        83,
+        111,
+        118
+      ],
+      [
+        254,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h100/calibration_jitter/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 29.274182063993067
+  },
+  {
+    "hidden_size": 100,
+    "method": "calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 415.0291005291005,
+    "development_mse_all9": 201.14814814814815,
+    "development_rgb9": [
+      [
+        220,
+        66,
+        81
+      ],
+      [
+        89,
+        184,
+        80
+      ],
+      [
+        53,
+        85,
+        166
+      ],
+      [
+        248,
+        239,
+        22
+      ],
+      [
+        106,
+        187,
+        207
+      ],
+      [
+        193,
+        76,
+        150
+      ],
+      [
+        3,
+        3,
+        3
+      ],
+      [
+        102,
+        126,
+        124
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h100/calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 29.454269154986832
+  },
+  {
+    "hidden_size": 40,
+    "method": "v7_parent_calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 1149.4391534391534,
+    "development_mse_all9": 149.37037037037038,
+    "development_rgb9": [
+      [
+        212,
+        62,
+        70
+      ],
+      [
+        104,
+        186,
+        78
+      ],
+      [
+        57,
+        72,
+        178
+      ],
+      [
+        242,
+        235,
+        17
+      ],
+      [
+        94,
+        201,
+        216
+      ],
+      [
+        198,
+        91,
+        168
+      ],
+      [
+        4,
+        4,
+        3
+      ],
+      [
+        121,
+        129,
+        127
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h40/v7_parent_calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 33.9364457000047
+  },
+  {
+    "hidden_size": 80,
+    "method": "v7_parent_calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 811.1481481481482,
+    "development_mse_all9": 153.0,
+    "development_rgb9": [
+      [
+        214,
+        68,
+        73
+      ],
+      [
+        108,
+        190,
+        64
+      ],
+      [
+        51,
+        78,
+        155
+      ],
+      [
+        248,
+        237,
+        24
+      ],
+      [
+        119,
+        213,
+        233
+      ],
+      [
+        183,
+        78,
+        166
+      ],
+      [
+        3,
+        2,
+        2
+      ],
+      [
+        117,
+        117,
+        130
+      ],
+      [
+        255,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h80/v7_parent_calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 42.04977343100472
+  },
+  {
+    "hidden_size": 60,
+    "method": "v7_parent_calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 870.5767195767196,
+    "development_mse_all9": 173.22222222222223,
+    "development_rgb9": [
+      [
+        205,
+        50,
+        56
+      ],
+      [
+        118,
+        191,
+        71
+      ],
+      [
+        51,
+        89,
+        207
+      ],
+      [
+        244,
+        235,
+        21
+      ],
+      [
+        110,
+        213,
+        229
+      ],
+      [
+        194,
+        83,
+        155
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        107,
+        120,
+        130
+      ],
+      [
+        254,
+        255,
+        255
+      ]
+    ],
+    "checkpoint": "development_models/h60/v7_parent_calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 42.57778780901572
+  },
+  {
+    "hidden_size": 100,
+    "method": "v7_parent_calibration_jitter_older_consistency",
+    "training_rows": 126,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 759.2857142857143,
+    "development_mse_all9": 215.44444444444446,
+    "development_rgb9": [
+      [
+        217,
+        57,
+        66
+      ],
+      [
+        84,
+        195,
+        82
+      ],
+      [
+        58,
+        77,
+        165
+      ],
+      [
+        250,
+        232,
+        15
+      ],
+      [
+        131,
+        222,
+        241
+      ],
+      [
+        195,
+        80,
+        150
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        90,
+        110,
+        129
+      ],
+      [
+        255,
+        255,
+        254
+      ]
+    ],
+    "checkpoint": "development_models/h100/v7_parent_calibration_jitter_older_consistency/checkpoint.pt",
+    "scope": "Saved V8 read used for inspected development; not a V9 physical measurement or independent final evaluation.",
+    "seconds": 24.362175867019687
+  }
+]

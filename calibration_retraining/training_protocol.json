@@ -1,0 +1,42 @@
+{
+  "hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "configs": [
+    {
+      "name": "huber_replay",
+      "huber": true,
+      "calibration_jitter": false,
+      "older_consistency": false
+    },
+    {
+      "name": "calibration_jitter",
+      "huber": true,
+      "calibration_jitter": true,
+      "older_consistency": false
+    },
+    {
+      "name": "calibration_jitter_older_consistency",
+      "huber": true,
+      "calibration_jitter": true,
+      "older_consistency": true
+    }
+  ],
+  "seed": 42,
+  "parent": "V8 checkpoint per H,126 fitting rows, never trained on held-out latest V8 physical capture.",
+  "development_rows": 9,
+  "development_training_rows": 126,
+  "development_epochs": 15000,
+  "final_rows": 135,
+  "final_epochs": 25000,
+  "optimizer": "Adam cosine0.0003->0.000003; weights-onlyL1 coefficient1e-6; unchanged architecture.",
+  "weights": "Group-balanced3x3 per-color weight, positive original6x4 weight0.1*consistency. In third condition additionally multiply older3x3 groups by consistency; protect patch_session01_cal1, v7_capture01 and latest v8_capture01. No rows removed.",
+  "augmentation": "Second/third conditions:50% of3x3 examples independently per-channel gain0.75..1.30, offset bounded by min0.02,0.1*nearest differently-labelled input distance; clip0..1. Also30% gray/white common gain0.5..1.15. Training only; sensor and inference remain unchanged.",
+  "selection": "Lowest all9 ordinary RGB8 development MSE per H. Fixed candidates and epochs, no cherry-picking pixels.",
+  "role_change": "V8 failed nine-color read inspected for design and method selection, then included in final fitting. Not independent final evaluation.",
+  "physical_v9": "NOT_YET_MEASURED",
+  "patch_data": "All15 actual samples retained, including variable first purple batch. Repeats within a placement are not independent chart captures."
+}

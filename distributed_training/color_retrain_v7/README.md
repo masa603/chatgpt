@@ -1,6 +1,6 @@
 # 配布画像を正解にした40・60・80・100次元（V7）
 
-**現在は [追加15件を反映したV8の2ファイル版](../../patch_retraining/color_retrain_v8/README.md) を使います。**
+**現在は [追加15件を反映したV9の全8条件比較版](../../calibration_retraining/compare_all_v9/README.md) を使います。**
 
 `color_retrain_v7.ino` と `trained_models_v7.h` をこのフォルダに置いて、UNO R4 WiFiへ書き込みます。
 `reference_image1_cmyk_3x3.ppm` は先生の計算サイトの基準画像です。
