@@ -1,0 +1,87 @@
+{
+  "received_date_japan": "2026-11-08",
+  "execution_wall_timestamps": null,
+  "role": "THREE_WHITE_DIAGNOSTIC_READS_AFTER_NEW_CALIBRATION; NOT_FULL_CHART_ACCURACY",
+  "prior_white_check_combined_as_one_calibration": false,
+  "black_rgb": [
+    31.0,
+    9.100000381469727,
+    8.5
+  ],
+  "white_rgb": [
+    221.89999389648438,
+    116.69999694824219,
+    77.0
+  ],
+  "recomputed_nn_inputs": [
+    [
+      1.0,
+      0.9786245822906494,
+      1.0
+    ],
+    [
+      1.0,
+      0.957249104976654,
+      1.0
+    ],
+    [
+      0.9198533892631531,
+      0.8271375298500061,
+      0.8978102207183838
+    ]
+  ],
+  "printed_nn_inputs": [
+    [
+      1.0,
+      0.9786,
+      1.0
+    ],
+    [
+      1.0,
+      0.9572,
+      1.0
+    ],
+    [
+      0.9199,
+      0.8271,
+      0.8978
+    ]
+  ],
+  "normalization_check": "PASS at printed four-decimal precision",
+  "h60_pc_rgb8_matches": "PASS all 9 components",
+  "device_rgb8_h60": [
+    [
+      255,
+      254,
+      255
+    ],
+    [
+      254,
+      253,
+      255
+    ],
+    [
+      249,
+      229,
+      255
+    ]
+  ],
+  "raw_first_to_last_change_percent": [
+    -8.986781452195757,
+    -14.248254225827539,
+    -10.256410256410254
+  ],
+  "white_only_mses": [
+    0.3333333333333333,
+    1.6666666666666667,
+    237.33333333333334
+  ],
+  "whole_chart_mse": "NOT_MEASURED",
+  "physical_chart_accuracy_capture_count_added": 0,
+  "used_for_training": false,
+  "model_h60_sha256": "90615950ddce99fa5feaae5925c59ffad9e84d63851d5b713befb1034eec2df2",
+  "firmware_context": "V4 per current instructions; this partial log has no firmware identifier.",
+  "conclusion": "All channels fall on third read. Cause not isolated; white-only success does not establish full-chart accuracy.",
+  "next_diagnostic": "Keep current calibration and illumination; read blue once and black once. Both diagnostic, not formal chart positions. Restart with n before a formal nine-color run.",
+  "submitted_log_sha256": "f493c293b82633ce397c44a1cd3cf3851d272cee788f2f85be60d52a409f4530"
+}
