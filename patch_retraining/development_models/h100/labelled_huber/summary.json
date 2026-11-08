@@ -1,0 +1,59 @@
+{
+  "hidden_size": 100,
+  "method": "labelled_huber",
+  "training_rows": 117,
+  "development_rows": 9,
+  "epochs": 15000,
+  "training_mse_unweighted_rgb8": 270.4871794871795,
+  "development_mse_all9": 1229.8148148148148,
+  "development_rgb9": [
+    [
+      241,
+      32,
+      41
+    ],
+    [
+      162,
+      203,
+      58
+    ],
+    [
+      52,
+      84,
+      164
+    ],
+    [
+      242,
+      232,
+      17
+    ],
+    [
+      113,
+      204,
+      222
+    ],
+    [
+      99,
+      107,
+      102
+    ],
+    [
+      3,
+      5,
+      5
+    ],
+    [
+      81,
+      92,
+      93
+    ],
+    [
+      146,
+      218,
+      230
+    ]
+  ],
+  "checkpoint": "development_models/h100/labelled_huber/checkpoint.pt",
+  "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+  "seconds": 18.97342875599861
+}

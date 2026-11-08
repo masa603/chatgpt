@@ -283,5 +283,34 @@
     "all_four_met_300": false,
     "input_role_for_v7": "NOT_USED_FOR_FITTING_OR_DEVELOPMENT; SAME_LEARNING_CHART_REPEAT",
     "next": "Labelled patch data collection; no model weights, thresholds or acquisition functions changed."
+  },
+  "labelled_patch_fine_tuning_v8": {
+    "user_data": "../patch_retraining/physical_patch_data/session01/summary.json",
+    "patch_rows": 15,
+    "patch_batches": 5,
+    "patch_calibration_groups": 1,
+    "all_rows_retained": true,
+    "training_data": "../patch_retraining/training126.csv",
+    "training_rows": 126,
+    "development": "All9 V7 physical inputs held out for15k updates on117 inputs. Three fixed conditions per H. Inspected development, not final evaluation.",
+    "selected_methods": {
+      "40": "labelled_mse",
+      "60": "labelled_huber_neutral_exposure",
+      "80": "labelled_huber_neutral_exposure",
+      "100": "labelled_huber_neutral_exposure"
+    },
+    "development_mse_all9": {
+      "40": 1850.5555555555557,
+      "60": 2258.777777777778,
+      "80": 1901.888888888889,
+      "100": 932.4444444444445
+    },
+    "final_fit": "All126 rows, including V7 old full chart,25k more epochs. No new physical V8 inputs yet.",
+    "sensor_normalization_architecture": "Unchanged,3->H->H->3 FP32; no position or output-palette lookup.",
+    "comparison_limit": "Methods selected per H; not a controlled H-only causal comparison.",
+    "delivery": "../patch_retraining/color_retrain_v8_single/color_retrain_v8_single.ino",
+    "physical_v8_mse": "NOT_YET_MEASURED",
+    "independent_final_evaluation": "NOT_PERFORMED",
+    "compression": "New weights not yet pruned/benchmarked; do not reuse old thresholds or times."
   }
 }

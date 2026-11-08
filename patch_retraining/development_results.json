@@ -1,0 +1,710 @@
+[
+  {
+    "hidden_size": 40,
+    "method": "labelled_huber_neutral_exposure",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 901.7435897435897,
+    "development_mse_all9": 2366.4444444444443,
+    "development_rgb9": [
+      [
+        238,
+        29,
+        38
+      ],
+      [
+        101,
+        197,
+        75
+      ],
+      [
+        60,
+        81,
+        169
+      ],
+      [
+        244,
+        235,
+        16
+      ],
+      [
+        104,
+        205,
+        225
+      ],
+      [
+        152,
+        83,
+        125
+      ],
+      [
+        7,
+        6,
+        7
+      ],
+      [
+        3,
+        21,
+        6
+      ],
+      [
+        128,
+        219,
+        205
+      ]
+    ],
+    "checkpoint": "development_models/h40/labelled_huber_neutral_exposure/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 17.023707215004833
+  },
+  {
+    "hidden_size": 40,
+    "method": "labelled_mse",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 544.5242165242165,
+    "development_mse_all9": 1850.5555555555557,
+    "development_rgb9": [
+      [
+        237,
+        39,
+        41
+      ],
+      [
+        90,
+        201,
+        81
+      ],
+      [
+        76,
+        92,
+        181
+      ],
+      [
+        245,
+        228,
+        13
+      ],
+      [
+        102,
+        199,
+        218
+      ],
+      [
+        151,
+        89,
+        136
+      ],
+      [
+        14,
+        18,
+        32
+      ],
+      [
+        36,
+        29,
+        30
+      ],
+      [
+        125,
+        232,
+        235
+      ]
+    ],
+    "checkpoint": "development_models/h40/labelled_mse/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 23.206176901003346
+  },
+  {
+    "hidden_size": 40,
+    "method": "labelled_huber",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 803.6752136752136,
+    "development_mse_all9": 2474.0,
+    "development_rgb9": [
+      [
+        235,
+        29,
+        35
+      ],
+      [
+        108,
+        203,
+        84
+      ],
+      [
+        65,
+        81,
+        172
+      ],
+      [
+        251,
+        242,
+        22
+      ],
+      [
+        109,
+        212,
+        224
+      ],
+      [
+        160,
+        76,
+        132
+      ],
+      [
+        6,
+        5,
+        6
+      ],
+      [
+        3,
+        33,
+        14
+      ],
+      [
+        98,
+        225,
+        211
+      ]
+    ],
+    "checkpoint": "development_models/h40/labelled_huber/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 23.450905599980615
+  },
+  {
+    "hidden_size": 60,
+    "method": "labelled_mse",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 224.24786324786325,
+    "development_mse_all9": 3613.3333333333335,
+    "development_rgb9": [
+      [
+        238,
+        24,
+        32
+      ],
+      [
+        115,
+        193,
+        81
+      ],
+      [
+        54,
+        86,
+        160
+      ],
+      [
+        244,
+        231,
+        14
+      ],
+      [
+        112,
+        205,
+        223
+      ],
+      [
+        116,
+        116,
+        114
+      ],
+      [
+        14,
+        19,
+        31
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        73,
+        191,
+        209
+      ]
+    ],
+    "checkpoint": "development_models/h60/labelled_mse/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 16.88851718697697
+  },
+  {
+    "hidden_size": 60,
+    "method": "labelled_huber",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 327.8945868945869,
+    "development_mse_all9": 3298.5555555555557,
+    "development_rgb9": [
+      [
+        252,
+        36,
+        47
+      ],
+      [
+        79,
+        162,
+        53
+      ],
+      [
+        53,
+        87,
+        162
+      ],
+      [
+        236,
+        223,
+        0
+      ],
+      [
+        110,
+        203,
+        220
+      ],
+      [
+        107,
+        109,
+        107
+      ],
+      [
+        5,
+        7,
+        6
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        99,
+        208,
+        213
+      ]
+    ],
+    "checkpoint": "development_models/h60/labelled_huber/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 17.344164581008954
+  },
+  {
+    "hidden_size": 60,
+    "method": "labelled_huber_neutral_exposure",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 508.35897435897436,
+    "development_mse_all9": 2258.777777777778,
+    "development_rgb9": [
+      [
+        238,
+        26,
+        38
+      ],
+      [
+        110,
+        189,
+        66
+      ],
+      [
+        56,
+        87,
+        165
+      ],
+      [
+        247,
+        236,
+        20
+      ],
+      [
+        111,
+        212,
+        231
+      ],
+      [
+        108,
+        103,
+        117
+      ],
+      [
+        6,
+        6,
+        6
+      ],
+      [
+        8,
+        18,
+        18
+      ],
+      [
+        136,
+        236,
+        248
+      ]
+    ],
+    "checkpoint": "development_models/h60/labelled_huber_neutral_exposure/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 19.538736893999157
+  },
+  {
+    "hidden_size": 80,
+    "method": "labelled_mse",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 212.06552706552708,
+    "development_mse_all9": 2713.6666666666665,
+    "development_rgb9": [
+      [
+        235,
+        29,
+        45
+      ],
+      [
+        108,
+        194,
+        66
+      ],
+      [
+        58,
+        64,
+        151
+      ],
+      [
+        246,
+        235,
+        21
+      ],
+      [
+        97,
+        191,
+        205
+      ],
+      [
+        99,
+        100,
+        105
+      ],
+      [
+        11,
+        14,
+        23
+      ],
+      [
+        35,
+        57,
+        56
+      ],
+      [
+        104,
+        161,
+        152
+      ]
+    ],
+    "checkpoint": "development_models/h80/labelled_mse/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 17.378892003995134
+  },
+  {
+    "hidden_size": 80,
+    "method": "labelled_huber",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 317.77777777777777,
+    "development_mse_all9": 3346.3333333333335,
+    "development_rgb9": [
+      [
+        235,
+        29,
+        33
+      ],
+      [
+        110,
+        194,
+        64
+      ],
+      [
+        56,
+        56,
+        150
+      ],
+      [
+        246,
+        234,
+        22
+      ],
+      [
+        98,
+        193,
+        207
+      ],
+      [
+        96,
+        100,
+        99
+      ],
+      [
+        6,
+        6,
+        5
+      ],
+      [
+        25,
+        5,
+        6
+      ],
+      [
+        107,
+        171,
+        165
+      ]
+    ],
+    "checkpoint": "development_models/h80/labelled_huber/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 21.263923598016845
+  },
+  {
+    "hidden_size": 80,
+    "method": "labelled_huber_neutral_exposure",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 360.72934472934475,
+    "development_mse_all9": 1901.888888888889,
+    "development_rgb9": [
+      [
+        239,
+        30,
+        38
+      ],
+      [
+        110,
+        193,
+        66
+      ],
+      [
+        62,
+        90,
+        167
+      ],
+      [
+        249,
+        236,
+        23
+      ],
+      [
+        111,
+        204,
+        222
+      ],
+      [
+        90,
+        83,
+        90
+      ],
+      [
+        5,
+        5,
+        5
+      ],
+      [
+        33,
+        35,
+        34
+      ],
+      [
+        153,
+        225,
+        240
+      ]
+    ],
+    "checkpoint": "development_models/h80/labelled_huber_neutral_exposure/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 21.096463883994147
+  },
+  {
+    "hidden_size": 100,
+    "method": "labelled_mse",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 210.3960113960114,
+    "development_mse_all9": 1505.037037037037,
+    "development_rgb9": [
+      [
+        234,
+        41,
+        49
+      ],
+      [
+        191,
+        223,
+        39
+      ],
+      [
+        53,
+        82,
+        157
+      ],
+      [
+        241,
+        229,
+        10
+      ],
+      [
+        111,
+        202,
+        220
+      ],
+      [
+        100,
+        103,
+        112
+      ],
+      [
+        11,
+        11,
+        18
+      ],
+      [
+        75,
+        72,
+        97
+      ],
+      [
+        150,
+        215,
+        221
+      ]
+    ],
+    "checkpoint": "development_models/h100/labelled_mse/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 20.649022452009376
+  },
+  {
+    "hidden_size": 100,
+    "method": "labelled_huber",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 270.4871794871795,
+    "development_mse_all9": 1229.8148148148148,
+    "development_rgb9": [
+      [
+        241,
+        32,
+        41
+      ],
+      [
+        162,
+        203,
+        58
+      ],
+      [
+        52,
+        84,
+        164
+      ],
+      [
+        242,
+        232,
+        17
+      ],
+      [
+        113,
+        204,
+        222
+      ],
+      [
+        99,
+        107,
+        102
+      ],
+      [
+        3,
+        5,
+        5
+      ],
+      [
+        81,
+        92,
+        93
+      ],
+      [
+        146,
+        218,
+        230
+      ]
+    ],
+    "checkpoint": "development_models/h100/labelled_huber/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 18.97342875599861
+  },
+  {
+    "hidden_size": 100,
+    "method": "labelled_huber_neutral_exposure",
+    "training_rows": 117,
+    "development_rows": 9,
+    "epochs": 15000,
+    "training_mse_unweighted_rgb8": 357.1994301994302,
+    "development_mse_all9": 932.4444444444445,
+    "development_rgb9": [
+      [
+        240,
+        40,
+        50
+      ],
+      [
+        128,
+        190,
+        66
+      ],
+      [
+        51,
+        82,
+        162
+      ],
+      [
+        248,
+        237,
+        21
+      ],
+      [
+        108,
+        208,
+        225
+      ],
+      [
+        98,
+        88,
+        98
+      ],
+      [
+        4,
+        5,
+        4
+      ],
+      [
+        68,
+        76,
+        77
+      ],
+      [
+        197,
+        227,
+        237
+      ]
+    ],
+    "checkpoint": "development_models/h100/labelled_huber_neutral_exposure/checkpoint.pt",
+    "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+    "seconds": 23.039495919976616
+  }
+]

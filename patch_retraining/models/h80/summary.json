@@ -1,0 +1,25 @@
+{
+  "hidden_size": 80,
+  "config": {
+    "name": "labelled_huber_neutral_exposure",
+    "huber": true,
+    "neutral_exposure": true
+  },
+  "parent_v7_checkpoint_sha256": "70b68871c3cd228a3ca9fa7b7bdfa411e9cf3841ca9f554844124a18ea41d256",
+  "selected_development_checkpoint_sha256": "b04f8fcb5bbf8de222247586f94aeedf4ef44da79c9d90aae5dc9c391b312f02",
+  "development_epochs": 15000,
+  "final_epochs": 25000,
+  "training_rows": 126,
+  "seed": 42,
+  "l1_weights_only": 1e-06,
+  "training_mse_rgb8": 278.93386243386243,
+  "training_replay_by_group": {
+    "v7_capture01": 3.2222222222222223,
+    "patch_session01_cal1": 32.666666666666664
+  },
+  "seconds": 36.28008314498584,
+  "training_data_sha256": "83ff2dc4d465e4ae245e0cceafbbf2dc09af7fb8b83e072cf4a3117fe671941c",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "model_header_sha256": "0e1cba4ad799931c6f8036a8638c12697b3a5a24e3ae2b9c1da05e2d6d10c76f",
+  "scope": "All126 fitting after method selection. Group replay now uses training data. No new V8 physical result."
+}

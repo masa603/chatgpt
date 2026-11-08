@@ -1,0 +1,59 @@
+{
+  "hidden_size": 80,
+  "method": "labelled_huber_neutral_exposure",
+  "training_rows": 117,
+  "development_rows": 9,
+  "epochs": 15000,
+  "training_mse_unweighted_rgb8": 360.72934472934475,
+  "development_mse_all9": 1901.888888888889,
+  "development_rgb9": [
+    [
+      239,
+      30,
+      38
+    ],
+    [
+      110,
+      193,
+      66
+    ],
+    [
+      62,
+      90,
+      167
+    ],
+    [
+      249,
+      236,
+      23
+    ],
+    [
+      111,
+      204,
+      222
+    ],
+    [
+      90,
+      83,
+      90
+    ],
+    [
+      5,
+      5,
+      5
+    ],
+    [
+      33,
+      35,
+      34
+    ],
+    [
+      153,
+      225,
+      240
+    ]
+  ],
+  "checkpoint": "development_models/h80/labelled_huber_neutral_exposure/checkpoint.pt",
+  "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+  "seconds": 21.096463883994147
+}

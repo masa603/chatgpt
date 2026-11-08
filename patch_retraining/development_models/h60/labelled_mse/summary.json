@@ -1,0 +1,59 @@
+{
+  "hidden_size": 60,
+  "method": "labelled_mse",
+  "training_rows": 117,
+  "development_rows": 9,
+  "epochs": 15000,
+  "training_mse_unweighted_rgb8": 224.24786324786325,
+  "development_mse_all9": 3613.3333333333335,
+  "development_rgb9": [
+    [
+      238,
+      24,
+      32
+    ],
+    [
+      115,
+      193,
+      81
+    ],
+    [
+      54,
+      86,
+      160
+    ],
+    [
+      244,
+      231,
+      14
+    ],
+    [
+      112,
+      205,
+      223
+    ],
+    [
+      116,
+      116,
+      114
+    ],
+    [
+      14,
+      19,
+      31
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      73,
+      191,
+      209
+    ]
+  ],
+  "checkpoint": "development_models/h60/labelled_mse/checkpoint.pt",
+  "scope": "Saved V7 read used for inspected development; not a V8 physical measurement or independent final evaluation.",
+  "seconds": 16.88851718697697
+}

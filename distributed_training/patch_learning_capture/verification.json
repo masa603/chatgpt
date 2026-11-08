@@ -10,5 +10,8 @@
   "serial_newlines_uppercase_n_restart": "PASS",
   "led_off_after_batch": "PASS",
   "models_changed_or_trained": false,
-  "new_physical_patch_samples_received": false
+  "new_physical_patch_samples_received": true,
+  "received_samples": 15,
+  "received_calibration_groups": 1,
+  "received_log": "../../patch_retraining/physical_patch_data/session01/summary.json"
 }

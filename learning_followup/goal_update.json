@@ -3,12 +3,12 @@
   "user_requested": "300以下には絶対にしたい",
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
-  "scope": "Current V7: four frozen Dense models, selected distributed Notebook CMYK targets, one new physical learning-chart repeat received; all four MSEs exceed300. No unseen-chart final evaluation.",
-  "current_status": "V7_PHYSICAL_CAPTURE_RECEIVED; ALL_FOUR_ABOVE_300; PATCH_TRAINING_DATA_COLLECTION_NEXT",
+  "scope": "V8 final126-row fitting completed. Same CMYK basis. The old V7 full read and all15 patch samples are now development/training data; no V8 physical result received.",
+  "current_status": "V8_TRAINED_WITH_ALL15_PATCH_SAMPLES; FOUR_MODELS_HOST_CHECKED; NEW_V8_PHYSICAL_CAPTURE_PENDING",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
-  "note": "Original teacher HTML, all9 PPM values, normalization and frozen-model replay agree. Earlier development scores did not predict this new reading. No claim of achieving300 or of an established hardware cause.",
+  "note": "V8 development did not reach300 in any H. Low fitting/replay scores are not prospective physical MSE. No independent final chart evaluation has been performed.",
   "prospective_result_record": "physical_readings/capture_01/summary.json",
   "prospective_physical_captures": 1,
   "original_development_cv_unchanged": true,
@@ -38,10 +38,10 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "Use the single-file patch_learning_capture sketch to collect labelled purple/black/gray/white batches, three rapid repeats per placement. These are additional learning data, not a full-chart MSE or an independent final evaluation.",
+  "next_step": "Open the self-contained V8 sketch in Arduino IDE; black b, white w, then read all9 colors with r. One new physical read gives all4 models. Save PATCH ADAPTED CAPTURE START through END.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
-  "current_experiment": "../distributed_training/README.md",
+  "current_experiment": "../patch_retraining/README.md",
   "v5_training_rows": 60,
   "v5_development_mean_full_chart_mse": 4302.6049382716055,
   "v5_actual_new_physical_mse": {
@@ -93,5 +93,28 @@
   "last_updated_date_japan": "2026-11-08",
   "v6_physical_record": "../data_learning_followup/physical_readings/capture_01/summary.json",
   "v7_physical_record": "../distributed_training/physical_readings/capture_01/summary.json",
-  "next_sketch": "../distributed_training/patch_learning_capture/patch_learning_capture.ino"
+  "next_sketch": "../patch_retraining/color_retrain_v8_single/color_retrain_v8_single.ino",
+  "v8_training_rows": 126,
+  "patch_samples_received": 15,
+  "patch_calibration_groups": 1,
+  "v8_development_mse": {
+    "40": 1850.5555555555557,
+    "60": 2258.777777777778,
+    "80": 1901.888888888889,
+    "100": 932.4444444444445
+  },
+  "v8_training_mse_unweighted_rgb8": {
+    "40": 418.19312169312167,
+    "60": 448.4973544973545,
+    "80": 278.93386243386243,
+    "100": 260.84391534391534
+  },
+  "v8_old_v7_chart_training_replay_mse": {
+    "40": 217.1851851851852,
+    "60": 10.0,
+    "80": 3.2222222222222223,
+    "100": 5.111111111111111
+  },
+  "v8_new_physical_mse": "NOT_YET_MEASURED",
+  "user_delivery_constraint": "GitHub site connection/access restricted; provide self-contained file in shared workspace."
 }

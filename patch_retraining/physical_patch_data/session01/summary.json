@@ -1,0 +1,95 @@
+{
+  "source": "Actual user-supplied labelled sensor logs",
+  "received_date_japan": "2026-11-08",
+  "submitted_log_sha256": "c3473103348f6b03693d9487cb326f44a5d047c28630a9a2b80c11a542994455",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "batches": 5,
+  "samples": 15,
+  "distinct_colors": 4,
+  "calibration_groups": 1,
+  "purple_samples": 6,
+  "black_samples": 3,
+  "gray_samples": 3,
+  "white_samples": 3,
+  "rows_removed": 0,
+  "first_purple_batch_with_variation_retained": true,
+  "normalization_and_unclipped_values": "PASS",
+  "within_batch_variation": [
+    {
+      "batch": 1,
+      "patch": "r2c3",
+      "label": "PURPLE",
+      "raw_min": [
+        44.0,
+        9.1,
+        9.3
+      ],
+      "raw_max": [
+        67.6,
+        10.4,
+        12.1
+      ]
+    },
+    {
+      "batch": 2,
+      "patch": "r2c3",
+      "label": "PURPLE",
+      "raw_min": [
+        73.3,
+        11.3,
+        13.9
+      ],
+      "raw_max": [
+        73.9,
+        11.8,
+        14.0
+      ]
+    },
+    {
+      "batch": 3,
+      "patch": "r3c1",
+      "label": "BLACK",
+      "raw_min": [
+        11.7,
+        6.1,
+        4.0
+      ],
+      "raw_max": [
+        13.0,
+        6.1,
+        4.0
+      ]
+    },
+    {
+      "batch": 4,
+      "patch": "r3c2",
+      "label": "GRAY",
+      "raw_min": [
+        44.0,
+        18.1,
+        14.0
+      ],
+      "raw_max": [
+        45.3,
+        21.0,
+        14.9
+      ]
+    },
+    {
+      "batch": 5,
+      "patch": "r3c3",
+      "label": "WHITE",
+      "raw_min": [
+        166.0,
+        75.7,
+        54.9
+      ],
+      "raw_max": [
+        168.5,
+        82.3,
+        56.0
+      ]
+    }
+  ],
+  "scope": "Additional training data. Three rapid repeats per placement are not independent chart captures. No nine-color MSE is available from these four colors."
+}

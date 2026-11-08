@@ -81,5 +81,6 @@
   ],
   "lighting": "User requested data-only learning changes; no setup/angle changes required by this version. Actual illumination and geometry for this reading not specified in log.",
   "startup_self_check_log": "NOT_SUPPLIED",
-  "submitted_log_sha256": "919ff0f6ba6a8b05655a8b85cdce517a927839a6e06237a3e97b3c9e4717e6d8"
+  "submitted_log_sha256": "919ff0f6ba6a8b05655a8b85cdce517a927839a6e06237a3e97b3c9e4717e6d8",
+  "subsequent_role_for_v8": "Held out during V8 development updates on117 rows, used for inspected method selection, then included in all126 final fitting. Not a V8 physical test."
 }

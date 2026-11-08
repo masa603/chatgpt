@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "v7_training102": "e519ae56e5a5d508c48bb2ba18cbb2021a76ddb8363986ba24537f8695dc8a1d",
+    "v7_physical_input": "2be6ade83aa993cdf817f0a02f9ef48f72af8a78a0ed23d1af922c13feb70675",
+    "patch_log": "c3473103348f6b03693d9487cb326f44a5d047c28630a9a2b80c11a542994455"
+  },
+  "training126_sha256": "83ff2dc4d465e4ae245e0cceafbbf2dc09af7fb8b83e072cf4a3117fe671941c",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "reference_source": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED",
+  "rows": 126,
+  "distinct_reference_colors": 33,
+  "calibration_groups": 13,
+  "development_split": "Hold V7 nine-color read out together. Train on original102 plus all15 labelled patch samples (117).",
+  "final_role_change": "After method selection, V7 nine-color read also enters all126 final training; no V8 physical read has been received.",
+  "template_notebook_X_used": false,
+  "sensor_or_inference_changes": false,
+  "models": [
+    40,
+    60,
+    80,
+    100
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "scope": "Host numerical and mock acquisition checks, not new physical accuracy.",
+  "hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "model_count": 4,
+  "training_rows": 126,
+  "distinct_reference_colors": 33,
+  "reference_source": "Distributed Notebook saved display RGB; raw original PNG bytes not locally verified.",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "notebook_sha256": "f7e197687ef128b13d334e3967434ccf1f85076a8269dd02809f763ac02c5737",
+  "all_training_targets_and_embedded_27_components_match_reference": true,
+  "template_example_X_used": false,
+  "checkpoint_npz_header_equality": "PASS",
+  "original_adc_led_calibration_normalization": "UNCHANGED",
+  "cpp11_asan_ubsan": "PASS",
+  "differential_inputs": 390,
+  "all_four_models_rgb8_exact": true,
+  "max_abs_fp32_difference": 4.569091771600142e-08,
+  "training_metrics": [
+    {
+      "hidden_size": 40,
+      "unweighted_training_mse": 418.19312169312167,
+      "array_payload_bytes": 7692
+    },
+    {
+      "hidden_size": 60,
+      "unweighted_training_mse": 448.4973544973545,
+      "array_payload_bytes": 16332
+    },
+    {
+      "hidden_size": 80,
+      "unweighted_training_mse": 278.93386243386243,
+      "array_payload_bytes": 28172
+    },
+    {
+      "hidden_size": 100,
+      "unweighted_training_mse": 260.84391534391534,
+      "array_payload_bytes": 43212
+    }
+  ],
+  "eight_mock_image_mses_match_original_teacher_html": [
+    {
+      "mock_capture": 1,
+      "hidden_size": 40,
+      "firmware_mse": 1893.3333333333333,
+      "teacher_site_mse": 1893.33
+    },
+    {
+      "mock_capture": 1,
+      "hidden_size": 60,
+      "firmware_mse": 1749.7037037037037,
+      "teacher_site_mse": 1749.7
+    },
+    {
+      "mock_capture": 1,
+      "hidden_size": 80,
+      "firmware_mse": 1785.5555555555557,
+      "teacher_site_mse": 1785.56
+    },
+    {
+      "mock_capture": 1,
+      "hidden_size": 100,
+      "firmware_mse": 1819.888888888889,
+      "teacher_site_mse": 1819.89
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 40,
+      "firmware_mse": 15411.25925925926,
+      "teacher_site_mse": 15411.26
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 60,
+      "firmware_mse": 16048.148148148148,
+      "teacher_site_mse": 16048.15
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 80,
+      "firmware_mse": 15965.703703703704,
+      "teacher_site_mse": 15965.7
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 100,
+      "firmware_mse": 16256.037037037036,
+      "teacher_site_mse": 16256.04
+    }
+  ],
+  "two_mock_captures_and_n_restart": "PASS",
+  "self_contained_sketch_compiles": "PASS",
+  "self_contained_sketch_matches_two_file_predictions_and_serial": "PASS",
+  "all_original102_and_patch15_samples_preserved": "PASS",
+  "development117_weights_exclude_v7_nine_color_group": "PASS",
+  "parent_and_selected_development_checkpoint_hashes": "PASS",
+  "new_physical_v8_mse": "NOT_YET_MEASURED",
+  "new_log_receiver_synthetic_fixture": "PASS; temporary mock only, not a new sensor measurement."
+}

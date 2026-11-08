@@ -1,14 +1,13 @@
 # 2026年11月6日：40→60→100次元の比較
 
-**現在使うのは [配布Notebook基準・40/60/80/100次元のV7](../distributed_training/README.md) です。**
-利用者の選択に従い、正解を配布NotebookのCMYK版へそろえ、80次元も追加しました。
-実測102組・33色で学習しています。配布NotebookのX配列は実測として流用していません。
-Arduinoへ書き込む2ファイルと先生のサイト用の基準PPMは [color_retrain_v7](../distributed_training/color_retrain_v7/README.md) にあります。
-装置変更や写真の提供は前提にしていません。
-受領した新しいV7実測は **H40=3535.48、H60=3060.11、H80=3428.74、H100=3636.74** で全4モデルとも300以下は未達でした。
-[実測ログと検算](../distributed_training/physical_readings/capture_01/README.md) を保存しました。
-開発比較の低い値は今回の読取には再現せず、全9色で未達と判定しています。
-次は [1ファイルの紫・黒・灰・白の追加データ収集](../distributed_training/patch_learning_capture/README.md) です。
+**現在使うのは [追加15件を反映した40/60/80/100次元のV8](../patch_retraining/README.md) です。**
+利用者が選択した配布NotebookのCMYK正解を保持し、今回の紫・黒・灰・白15件を全て追加学習に使いました。
+126組・33色のデータで、80次元を含む4モデルの学習・ホスト検算が完了しています。
+次に使うのは、学習済み配列を含めた [V8の1ファイル版](../patch_retraining/color_retrain_v8_single/README.md) です。
+**新しいV8実測のMSEは未測定です。** 学習・保存入力の再計算と、新しい物理読取を分けて記録します。
+直前のV7実測は **H40=3535.48、H60=3060.11、H80=3428.74、H100=3636.74** で全モデルとも300以下は未達でした。
+その9組は、V8の開発比較へ役割を変えた後、最終学習へ加えています。
+[実測ログと検算](../distributed_training/physical_readings/capture_01/README.md) は当時の値で保持しています。
 
 旧版の実測値も、そのとき使った正解RGBとともに保持しています。
 

@@ -1,6 +1,6 @@
 # 学習データ側を調整したV6
 
-**現在は [40・60・80・100次元のV7](../../distributed_training/color_retrain_v7/README.md) を使います。**
+**現在は [40・60・80・100次元のV8](../../patch_retraining/color_retrain_v8_single/README.md) を使います。**
 以下は旧V6の操作記録です。
 
 `color_retrain_v6.ino` と `trained_models_v6.h` を同じフォルダに置き、UNO R4 WiFiへ書き込みます。

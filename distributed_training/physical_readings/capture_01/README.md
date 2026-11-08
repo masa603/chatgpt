@@ -26,5 +26,6 @@
 - [誤差の内訳](error_breakdown.csv)、[校正値の比較](calibration_diagnostics.json)、[分析](analysis.json)
 - [H40のPPM](h40_dense.ppm)、[H60のPPM](h60_dense.ppm)、[H80のPPM](h80_dense.ppm)、[H100のPPM](h100_dense.ppm)
 
-次は [紫・黒・灰・白の追加データ収集](../../patch_learning_capture/README.md) を使います。
-新しいモデルの学習や枝刈りは、この記録更新では行っていません。
+この時点では学習・枝刈りをせず実測を保存しました。その後に追加15件を受領し、
+今回の9組も開発・最終学習へ役割を変更して [V8](../../../patch_retraining/README.md) を学習しました。
+V7の当時の重み・実測値はそのまま保持しています。
