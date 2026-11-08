@@ -132,11 +132,30 @@
       "embedded_reference_above_300": [
         40
       ],
-      "teacher_reference_goal_status": "UNVERIFIED; PRIOR ACHIEVEMENT CLAIM WITHDRAWN",
-      "user_reported_teacher_mse": "Approximately 3000; exact comparison files pending.",
-      "reference_audit": "../learning_followup/reference_audit/calculator_check.json"
+      "teacher_reference_goal_status": "ALL THREE > 300; PREVIOUS ACHIEVEMENT CLAIM WITHDRAWN",
+      "user_reported_teacher_mse": "Reproduced as 3984.00 for the uploaded H40 output; all three outputs exceed 300 on the provided reference.",
+      "reference_audit": "../learning_followup/reference_audit/calculator_check.json",
+      "teacher_reference_mse_rgb8": {
+        "40": 3984.0,
+        "60": 3442.5925925925926,
+        "100": 3522.8888888888887
+      }
     },
     "old_records": "Original 33-color models, CSR measurements and old replay images retained separately without replacing their results.",
     "paper_handling": "Hand-held, as required by the user."
+  },
+  "reference_correction_follow_up": {
+    "status": "TRAINING_AND_PC_VERIFICATION_COMPLETE; NEW_PHYSICAL_V4_MSE_PENDING",
+    "reason": "User provided the exact calculator PPM pair. Training/reference targets from the Notebook display differ from actual provided result.ppm.",
+    "reference_ppm": "../learning_followup/reference_audit/provided/result.ppm",
+    "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+    "model_directory": "../reference_corrected/models",
+    "next_firmware": "COLOR_RETRAIN_V4",
+    "training_scope": "45 measured samples of 9 colors over 5 readings. Original 6x4 colors not included.",
+    "training_role_change": "V3 capture01 now used in V4 fitting/development. New physical reading required after V4 freeze.",
+    "sensor_pipeline": "Unchanged LED, ADC, calibration and normalization.",
+    "verification": "Training and embedded reference match exact provided PPM. Host C++ and original teacher HTML agree on six mock outputs.",
+    "new_physical_accuracy": "NOT_YET_MEASURED",
+    "old_artifacts": "Retained unchanged, including old trained weights and provided comparison pixels."
   }
 }

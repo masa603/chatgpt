@@ -44,6 +44,12 @@ def record(path, received_date):
     assert f'TRAINING_DATA_SHA256={data_hash}' in lines
     with (HERE / 'data_all60.csv').open(newline='') as f:
         targets = np.array([[r[f'target_{c}8'] for c in 'rgb'] for r in list(csv.DictReader(f))[:9]], np.int32)
+    teacher_reference = HERE / 'reference_audit/provided/result.ppm'
+    teacher_targets = None
+    if teacher_reference.exists():
+        tokens = teacher_reference.read_text().split()
+        assert tokens[:4] == ['P3', '3', '3', '255'] and len(tokens) == 31
+        teacher_targets = np.array(tokens[4:], np.int32).reshape(9, 3)
     ids = [f'r{r}c{c}' for r in range(1, 4) for c in range(1, 4)]
 
     def section(header, count):
@@ -91,10 +97,13 @@ def record(path, received_date):
         name = f'h{h}_dense'
         (output / f'{name}.ppm').write_text(ppm)
         Image.fromarray(pixels.astype(np.uint8).reshape(3, 3, 3)).resize((360, 360), Image.Resampling.NEAREST).save(output / f'{name}.png')
+        teacher_mse = float(np.mean((pixels - teacher_targets) ** 2)) if teacher_targets is not None else None
+        teacher_status = ('MET_THIS_READ' if teacher_mse <= 300 else 'NOT_MET_THIS_READ') if teacher_mse is not None else 'UNVERIFIED_REFERENCE_FILE_MATCH'
         results.append({'capture_key': output.name, 'hidden_size': h, 'format': 'DENSE', 'colors': 9,
                         'mse_device_reported': float(row['mse']), 'mse_recomputed_from_ppm': mse,
                         'mse_goal_max': 300, 'embedded_reference_below_300': mse <= 300,
-                        'teacher_reference_goal_status': 'UNVERIFIED_REFERENCE_FILE_MATCH',
+                        'teacher_reference_mse_rgb8': teacher_mse,
+                        'teacher_reference_goal_status': teacher_status,
                         'pc_replay_max_rgb8_difference': difference,
                         'model_header_sha256': model_hash, 'ppm': f'{name}.ppm'})
         all_pixels.append(pixels)
@@ -124,8 +133,10 @@ def record(path, received_date):
                'black_rgb': black.tolist(), 'white_rgb': white.tolist(), 'colors': 9,
                'normalization_check': 'PASS', 'normalization_max_abs_difference': float(np.max(np.abs(x - logged_x))),
                'model_hashes_and_ppm_mse_check': 'PASS_AGAINST_EMBEDDED_NOTEBOOK_REFERENCE_ONLY',
-               'teacher_reference_file_verified': False,
-               'official_mse_goal_status': 'UNVERIFIED_REFERENCE_FILE_MATCH',
+               'teacher_reference_file_verified': teacher_targets is not None,
+               'embedded_reference_matches_provided_reference': bool(np.array_equal(targets, teacher_targets)) if teacher_targets is not None else None,
+               'provided_reference_ppm_sha256': hashlib.sha256(teacher_reference.read_bytes()).hexdigest() if teacher_reference.exists() else None,
+               'official_mse_goal_status': 'RECOMPUTED_AGAINST_PROVIDED_REFERENCE; SEE_PER_MODEL_RESULTS' if teacher_targets is not None else 'UNVERIFIED_REFERENCE_FILE_MATCH',
                'results': results, 'target_source': 'Recovered Notebook display; original PNG not verified.',
                'submitted_log_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
                'normalization_of_pasted_text': 'Only strip line-boundary backslashes/whitespace; original submitted text retained.'}
@@ -139,12 +150,12 @@ def record(path, received_date):
         ax.imshow(image.astype(np.uint8).reshape(3, 3, 3), interpolation='nearest')
         ax.set_title(title)
         ax.axis('off')
-    fig.suptitle('V3 capture 1: teacher-reference MSE UNVERIFIED')
+    fig.suptitle('V3 capture 1: MSE versus OLD Notebook targets only')
     fig.tight_layout()
     fig.savefig(output / 'comparison.png', dpi=160)
     fig.savefig(output / 'comparison.pdf')
     plt.close(fig)
-    print('PASS: log, hashes, normalization, three PPM MSEs against embedded reference only; teacher-reference goal UNVERIFIED.')
+    print('PASS: log, hashes, normalization, embedded-reference MSEs; provided-reference MSEs added when available.')
     print(json.dumps(results))
     return summary
 

@@ -11,8 +11,9 @@
   "goal": "MSE <= 300 on a new physical reading; ideally below 100. Training fit is not success evidence.",
   "prospective_target_mse_max": 300,
   "development_mean_meets_300": false,
-  "prospective_result": "PHYSICAL_LOG_RECEIVED; EMBEDDED_REFERENCE_MSES_ONLY; TEACHER_REFERENCE_GOAL_UNVERIFIED",
+  "prospective_result": "V3 PHYSICAL LOG RECOMPUTED AGAINST PROVIDED REFERENCE; ALL THREE > 300",
   "prospective_record": "physical_readings/capture_01/summary.json",
   "prospective_read_used_for_v3_training_or_config_selection": false,
-  "teacher_calculator_audit": "reference_audit/calculator_check.json"
+  "teacher_calculator_audit": "reference_audit/calculator_check.json",
+  "v3_capture01_role_for_v4": "Reclassified to fitting/development in separate reference_corrected experiment; no longer a prospective test for V4."
 }

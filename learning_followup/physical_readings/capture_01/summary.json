@@ -24,8 +24,10 @@
   "normalization_check": "PASS",
   "normalization_max_abs_difference": 7.450580596923828e-09,
   "model_hashes_and_ppm_mse_check": "PASS_AGAINST_EMBEDDED_NOTEBOOK_REFERENCE_ONLY",
-  "teacher_reference_file_verified": false,
-  "official_mse_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
+  "teacher_reference_file_verified": true,
+  "embedded_reference_matches_provided_reference": false,
+  "provided_reference_ppm_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "official_mse_goal_status": "RECOMPUTED_AGAINST_PROVIDED_REFERENCE; SEE_PER_MODEL_RESULTS",
   "results": [
     {
       "capture_key": "capture_01",
@@ -36,7 +38,8 @@
       "mse_recomputed_from_ppm": 524.074074074074,
       "mse_goal_max": 300,
       "embedded_reference_below_300": false,
-      "teacher_reference_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
+      "teacher_reference_mse_rgb8": 3984.0,
+      "teacher_reference_goal_status": "NOT_MET_THIS_READ",
       "pc_replay_max_rgb8_difference": 0,
       "model_header_sha256": "5d0f26b9f382fc982620ca22eb3056acb042d772890ca29138f1e2114539031e",
       "ppm": "h40_dense.ppm"
@@ -50,7 +53,8 @@
       "mse_recomputed_from_ppm": 93.85185185185185,
       "mse_goal_max": 300,
       "embedded_reference_below_300": true,
-      "teacher_reference_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
+      "teacher_reference_mse_rgb8": 3442.5925925925926,
+      "teacher_reference_goal_status": "NOT_MET_THIS_READ",
       "pc_replay_max_rgb8_difference": 0,
       "model_header_sha256": "957b01ae4ddc3a0f42ffa09eb15be73786b990c1ed66b652f9188f6a08fe304d",
       "ppm": "h60_dense.ppm"
@@ -64,7 +68,8 @@
       "mse_recomputed_from_ppm": 119.92592592592592,
       "mse_goal_max": 300,
       "embedded_reference_below_300": true,
-      "teacher_reference_goal_status": "UNVERIFIED_REFERENCE_FILE_MATCH",
+      "teacher_reference_mse_rgb8": 3522.8888888888887,
+      "teacher_reference_goal_status": "NOT_MET_THIS_READ",
       "pc_replay_max_rgb8_difference": 0,
       "model_header_sha256": "ea01d4aa22fe00b9e82dfcd3c6e9f2ecc2d0d0e4723023ef4234764c0e78e28b",
       "ppm": "h100_dense.ppm"

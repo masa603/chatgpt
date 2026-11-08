@@ -4,9 +4,9 @@
   "verification": "Original supplied JavaScript executed unchanged; 4 analytical checks pass.",
   "known_formula": "RGB squared differences summed then divided by pixel count and three channels.",
   "user_reported_mse": "Approximately 3000 on teacher calculator; exact value and selected files not yet supplied.",
-  "user_selected_reference_ppm": "NOT_RECEIVED",
-  "user_selected_comparison_ppm": "NOT_RECEIVED_OR_IDENTIFIED",
-  "official_mse_goal_status": "UNVERIFIED; PREVIOUS ACHIEVEMENT CLAIM WITHDRAWN",
+  "user_selected_reference_ppm": "provided/result.ppm",
+  "user_selected_comparison_ppm": "provided/resu12.ppm",
+  "official_mse_goal_status": "V3 ALL THREE MODELS > 300 AGAINST PROVIDED REFERENCE",
   "notebook_recovered_reference_results": [
     {
       "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
@@ -78,6 +78,8 @@
       "comparison_file": "learning_followup/physical_readings/capture_01/h100_dense.ppm"
     }
   ],
-  "cause": "UNDETERMINED without the two files selected in the calculator. Reference RGB, dimensions and comparison file identity need checking.",
-  "training_weights_targets_and_archived_images": "UNCHANGED"
+  "cause": "CONFIRMED: Notebook-display training/comparison RGB differs from provided result.ppm. Both uploaded files are 3x3.",
+  "training_weights_targets_and_archived_images": "UNCHANGED",
+  "resolved_by": "provided_pair_check.json",
+  "initial_pending_state": "Originally only HTML was supplied; source-file comparison was pending. Now resolved with provided PPM pair."
 }

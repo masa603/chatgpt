@@ -1,0 +1,102 @@
+{
+  "provided_reference": "provided/result.ppm",
+  "provided_comparison": "provided/resu12.ppm",
+  "provided_comparison_pixel_identity": "All 27 RGB values match V3 H40 Dense, not H60.",
+  "cause": "Training and firmware used Notebook-display CMYK-like target RGB; user reference is pure RGB primaries/secondaries, gray127. The reference images differ. Dimensions both 3x3.",
+  "user_pair_mse_displayed": 3984,
+  "results": [
+    {
+      "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+      "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+      "comparison_sha256": "3cd9d4cb200f74a39f7b95e740ef41f5895346ac803d92870d7ad4bc153fd962",
+      "engine": "Original supplied calculator JS executed with canvas ImageData stub; no DOM rendering required for MSE.",
+      "displayed_result": "MSE: 3984.00",
+      "mse_displayed": 3984,
+      "reference_size": [
+        3,
+        3
+      ],
+      "comparison_size": [
+        3,
+        3
+      ],
+      "identical_dimensions": true,
+      "valid_full_image_comparison": true,
+      "compared_pixels": 9,
+      "size_warning": null,
+      "comparison_key": "user_uploaded_pair",
+      "reference_file": "learning_followup/reference_audit/provided/result.ppm",
+      "comparison_file": "learning_followup/reference_audit/provided/resu12.ppm"
+    },
+    {
+      "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+      "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+      "comparison_sha256": "ab22efd8f5d46718af56a502887c1f55d244ba9a75e1eda52eed79bb31f90ceb",
+      "engine": "Original supplied calculator JS executed with canvas ImageData stub; no DOM rendering required for MSE.",
+      "displayed_result": "MSE: 3984.00",
+      "mse_displayed": 3984,
+      "reference_size": [
+        3,
+        3
+      ],
+      "comparison_size": [
+        3,
+        3
+      ],
+      "identical_dimensions": true,
+      "valid_full_image_comparison": true,
+      "compared_pixels": 9,
+      "size_warning": null,
+      "comparison_key": "v3_h40",
+      "reference_file": "learning_followup/reference_audit/provided/result.ppm",
+      "comparison_file": "learning_followup/physical_readings/capture_01/h40_dense.ppm"
+    },
+    {
+      "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+      "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+      "comparison_sha256": "8de4ace8e8c8decb86871ebb1b3032bb01867d7750d509e567e1c8433beb83fb",
+      "engine": "Original supplied calculator JS executed with canvas ImageData stub; no DOM rendering required for MSE.",
+      "displayed_result": "MSE: 3442.59",
+      "mse_displayed": 3442.59,
+      "reference_size": [
+        3,
+        3
+      ],
+      "comparison_size": [
+        3,
+        3
+      ],
+      "identical_dimensions": true,
+      "valid_full_image_comparison": true,
+      "compared_pixels": 9,
+      "size_warning": null,
+      "comparison_key": "v3_h60",
+      "reference_file": "learning_followup/reference_audit/provided/result.ppm",
+      "comparison_file": "learning_followup/physical_readings/capture_01/h60_dense.ppm"
+    },
+    {
+      "calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+      "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+      "comparison_sha256": "ca71f915d3eedd47f84bf4c07743bacdac701e17594d690908fd45648041b772",
+      "engine": "Original supplied calculator JS executed with canvas ImageData stub; no DOM rendering required for MSE.",
+      "displayed_result": "MSE: 3522.89",
+      "mse_displayed": 3522.89,
+      "reference_size": [
+        3,
+        3
+      ],
+      "comparison_size": [
+        3,
+        3
+      ],
+      "identical_dimensions": true,
+      "valid_full_image_comparison": true,
+      "compared_pixels": 9,
+      "size_warning": null,
+      "comparison_key": "v3_h100",
+      "reference_file": "learning_followup/reference_audit/provided/result.ppm",
+      "comparison_file": "learning_followup/physical_readings/capture_01/h100_dense.ppm"
+    }
+  ],
+  "corrective_action": "Retain old models/logs, train a new V4 on verified result.ppm target RGB and archived measured inputs. Require another new physical read after freeze."
+}

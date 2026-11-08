@@ -1,0 +1,21 @@
+{
+  "hidden_size": 100,
+  "config": {
+    "name": "provided_rgb45_mix_noise",
+    "mode": "chart",
+    "mix": true,
+    "noise": 0.01
+  },
+  "training_rows": 45,
+  "distinct_colors": 9,
+  "epochs": 50000,
+  "seed": 42,
+  "optimizer": "Adam; cosine LR 0.003 to 0.00003",
+  "l1_weights_only": 1e-06,
+  "training_mse_rgb8": 0.34074074074074073,
+  "wall_seconds": 63.022477389000414,
+  "training_data_sha256": "bbd0db0b42f052a9db6ba785a8b973389918c87da12c3ae7848bd4c4264f88a1",
+  "reference_ppm_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "model_header_sha256": "4c25b3f438c4403e3e0789ecb03bf401232344299935c33d9536f74d3e3d327e",
+  "scope": "Training fit only. V3 capture01 now used for training. No prospective V4 physical reading received."
+}

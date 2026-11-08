@@ -1,0 +1,14 @@
+{
+  "hidden_size": 60,
+  "reading_groups": 5,
+  "epochs_per_fold": 10000,
+  "mean_mse": 1132.296296296296,
+  "worst_mse": 2854.4074074074074,
+  "scope": "Development cross-validation only. A new physical reading after freeze is still required.",
+  "config_used_for_final_models": {
+    "name": "provided_rgb45_mix_noise",
+    "mode": "chart",
+    "mix": true,
+    "noise": 0.01
+  }
+}

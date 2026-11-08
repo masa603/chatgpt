@@ -1,0 +1,10 @@
+color_id,previous_target_r8,previous_target_g8,previous_target_b8,provided_target_r8,provided_target_g8,provided_target_b8
+r1c1,237,30,36,255,0,0
+r1c2,105,189,69,0,255,0
+r1c3,56,83,164,0,0,255
+r2c1,246,235,20,255,255,0
+r2c2,111,204,221,0,255,255
+r2c3,184,81,158,255,0,255
+r3c1,1,1,1,0,0,0
+r3c2,128,127,127,127,127,127
+r3c3,255,255,255,255,255,255
