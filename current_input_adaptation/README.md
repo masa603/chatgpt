@@ -1,6 +1,7 @@
 # 低い入力域を追加したV5
 
-**現在の追加学習版は [data_learning_followup / V6](../data_learning_followup/README.md) です。**
+**現在使うのは [配布Notebook基準・40/60/80/100次元のV7](../distributed_training/README.md) です。**
+以下は純色RGBの正解を使った旧V5の記録です。
 利用者の学習データ側を優先する指示を受け、V5の最新9色も開発・最終学習へ役割を変更しました。
 
 ## 新しい実測結果

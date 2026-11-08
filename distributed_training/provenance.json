@@ -1,0 +1,324 @@
+{
+  "user_selected_reference": "\u914d\u5e03Notebook\u306e\u753b\u50cf\u306b\u5408\u308f\u305b\u308b\uff08\u63a8\u5968\uff09",
+  "requested_hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "user_learning_priority": "Data/model changes; no geometry/photo prerequisite.",
+  "notebook_source_sha256": "f7e197687ef128b13d334e3967434ccf1f85076a8269dd02809f763ac02c5737",
+  "requirements_source_sha256": "06408b6b7774ec394de2158dc4151cb92d174c93c2a7f9b5ecc5e88deb7fc5fa",
+  "reference_extraction": [
+    {
+      "chart_id": "train_3x3",
+      "display_png_sha256": "357530798c57028314249ad0feb92d75bd86e8e512d09a03a8c23ee17bcc2335",
+      "reference_ppm": "distributed_training/references/reference_image1_cmyk_3x3.ppm",
+      "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+      "sample_centers": [
+        {
+          "row": 0,
+          "column": 0,
+          "display_pixel": [
+            116,
+            77
+          ]
+        },
+        {
+          "row": 0,
+          "column": 1,
+          "display_pixel": [
+            239,
+            77
+          ]
+        },
+        {
+          "row": 0,
+          "column": 2,
+          "display_pixel": [
+            362,
+            77
+          ]
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "display_pixel": [
+            116,
+            200
+          ]
+        },
+        {
+          "row": 1,
+          "column": 1,
+          "display_pixel": [
+            239,
+            200
+          ]
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "display_pixel": [
+            362,
+            200
+          ]
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "display_pixel": [
+            116,
+            323
+          ]
+        },
+        {
+          "row": 2,
+          "column": 1,
+          "display_pixel": [
+            239,
+            323
+          ]
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "display_pixel": [
+            362,
+            323
+          ]
+        }
+      ],
+      "check": "Every sampled 11x11 patch is uniform."
+    },
+    {
+      "chart_id": "train_6x4",
+      "display_png_sha256": "77167c8a2a4a688d24c157cee130f25b0eb16f4515b28823faffee9b8b6cde74",
+      "reference_ppm": "distributed_training/references/reference_image2_cmyk_6x4.ppm",
+      "reference_ppm_sha256": "e76e0f708297629560706d574dec29b41598fad785079a7d2d94f3f1199fe912",
+      "sample_centers": [
+        {
+          "row": 0,
+          "column": 0,
+          "display_pixel": [
+            96,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 1,
+          "display_pixel": [
+            178,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 2,
+          "display_pixel": [
+            261,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 3,
+          "display_pixel": [
+            344,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 4,
+          "display_pixel": [
+            426,
+            57
+          ]
+        },
+        {
+          "row": 0,
+          "column": 5,
+          "display_pixel": [
+            509,
+            57
+          ]
+        },
+        {
+          "row": 1,
+          "column": 0,
+          "display_pixel": [
+            96,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 1,
+          "display_pixel": [
+            178,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 2,
+          "display_pixel": [
+            261,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 3,
+          "display_pixel": [
+            344,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 4,
+          "display_pixel": [
+            426,
+            139
+          ]
+        },
+        {
+          "row": 1,
+          "column": 5,
+          "display_pixel": [
+            509,
+            139
+          ]
+        },
+        {
+          "row": 2,
+          "column": 0,
+          "display_pixel": [
+            96,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 1,
+          "display_pixel": [
+            178,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 2,
+          "display_pixel": [
+            261,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 3,
+          "display_pixel": [
+            344,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 4,
+          "display_pixel": [
+            426,
+            222
+          ]
+        },
+        {
+          "row": 2,
+          "column": 5,
+          "display_pixel": [
+            509,
+            222
+          ]
+        },
+        {
+          "row": 3,
+          "column": 0,
+          "display_pixel": [
+            96,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 1,
+          "display_pixel": [
+            178,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 2,
+          "display_pixel": [
+            261,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 3,
+          "display_pixel": [
+            344,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 4,
+          "display_pixel": [
+            426,
+            304
+          ]
+        },
+        {
+          "row": 3,
+          "column": 5,
+          "display_pixel": [
+            509,
+            304
+          ]
+        }
+      ],
+      "check": "Every sampled 11x11 patch is uniform."
+    }
+  ],
+  "original_reference_png_bytes_verified": false,
+  "reference_note": "RGB recovered from uniform interior pixels of the supplied Notebook saved displays; exact raw original PNG files were not uploaded as local files.",
+  "template_X_used_as_measured_input": false,
+  "actual_input_sources": [
+    {
+      "file": "data_learning_followup/training69.csv",
+      "sha256": "b821365f52f6d41af8abb711aa6ff637e707636c1b8334b7d877acc20ae0352b"
+    },
+    {
+      "file": "data_learning_followup/physical_readings/capture_01/submitted_log.txt",
+      "sha256": "904ffbdeb3178233b251c2260768b9a45a5842e075ae9d72d32d3b07a05b405c"
+    },
+    {
+      "file": "retraining/data/current33.csv",
+      "sha256": "fa34647c535b124d5cc4bb49b6be9029abdb1999f2e031bc0fc15cb1e9d0602c"
+    }
+  ],
+  "rows": 102,
+  "three_by_three_rows": 78,
+  "six_by_four_rows": 24,
+  "distinct_reference_colors": 33,
+  "previous_rgb_reference": "Retained with all previous logs. Previous pure-RGB result.ppm MSEs must not be called CMYK-reference results.",
+  "role_change": "Latest V6 nine-color read is development for condition selection then final fitting; not an independent V7 result.",
+  "development_group": "v6_capture01",
+  "development_training_rows": 93,
+  "development_held_out_rows": 9,
+  "loss_note": "Known conflicting identical inputs retained and documented, not asserted to be perfectly recoverable.",
+  "requirements_note": "Provided requirements pins numpy2.2.4, OpenCV4.11.0.86, matplotlib3.10.1 but omits torch despite importing it. It was inspected, not blindly installed."
+}

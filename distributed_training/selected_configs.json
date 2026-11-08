@@ -1,0 +1,274 @@
+{
+  "40": {
+    "config": {
+      "name": "reliability_huber_jitter",
+      "reliability": true,
+      "huber": true,
+      "jitter": true
+    },
+    "development_result": {
+      "hidden_size": 40,
+      "method": "reliability_huber_jitter",
+      "training_rows": 93,
+      "development_rows": 9,
+      "epochs": 20000,
+      "training_mse_unweighted": 1330.6559139784947,
+      "development_mse_all9": 68.96296296296296,
+      "development_black_mse": 81.0,
+      "development_gray_mse": 201.0,
+      "development_rgb9": [
+        [
+          239,
+          33,
+          41
+        ],
+        [
+          103,
+          191,
+          73
+        ],
+        [
+          49,
+          83,
+          165
+        ],
+        [
+          244,
+          228,
+          32
+        ],
+        [
+          131,
+          195,
+          209
+        ],
+        [
+          193,
+          81,
+          157
+        ],
+        [
+          10,
+          10,
+          10
+        ],
+        [
+          139,
+          108,
+          138
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "seconds": 30.097982279985445,
+      "reference": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED"
+    }
+  },
+  "60": {
+    "config": {
+      "name": "reliability_huber_jitter",
+      "reliability": true,
+      "huber": true,
+      "jitter": true
+    },
+    "development_result": {
+      "hidden_size": 60,
+      "method": "reliability_huber_jitter",
+      "training_rows": 93,
+      "development_rows": 9,
+      "epochs": 20000,
+      "training_mse_unweighted": 1062.551971326165,
+      "development_mse_all9": 37.592592592592595,
+      "development_black_mse": 4.666666666666667,
+      "development_gray_mse": 99.0,
+      "development_rgb9": [
+        [
+          237,
+          29,
+          37
+        ],
+        [
+          104,
+          190,
+          70
+        ],
+        [
+          53,
+          84,
+          163
+        ],
+        [
+          235,
+          242,
+          22
+        ],
+        [
+          119,
+          193,
+          203
+        ],
+        [
+          184,
+          83,
+          158
+        ],
+        [
+          3,
+          0,
+          4
+        ],
+        [
+          140,
+          130,
+          139
+        ],
+        [
+          255,
+          254,
+          255
+        ]
+      ],
+      "seconds": 25.031348037999123,
+      "reference": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED"
+    }
+  },
+  "80": {
+    "config": {
+      "name": "reliability_huber_jitter",
+      "reliability": true,
+      "huber": true,
+      "jitter": true
+    },
+    "development_result": {
+      "hidden_size": 80,
+      "method": "reliability_huber_jitter",
+      "training_rows": 93,
+      "development_rows": 9,
+      "epochs": 20000,
+      "training_mse_unweighted": 974.31541218638,
+      "development_mse_all9": 65.44444444444444,
+      "development_black_mse": 16.666666666666668,
+      "development_gray_mse": 163.0,
+      "development_rgb9": [
+        [
+          234,
+          29,
+          38
+        ],
+        [
+          106,
+          190,
+          68
+        ],
+        [
+          54,
+          83,
+          164
+        ],
+        [
+          244,
+          216,
+          33
+        ],
+        [
+          126,
+          187,
+          210
+        ],
+        [
+          189,
+          80,
+          161
+        ],
+        [
+          6,
+          4,
+          5
+        ],
+        [
+          145,
+          125,
+          141
+        ],
+        [
+          254,
+          254,
+          254
+        ]
+      ],
+      "seconds": 29.528336334013147,
+      "reference": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED"
+    }
+  },
+  "100": {
+    "config": {
+      "name": "reliability_huber_jitter",
+      "reliability": true,
+      "huber": true,
+      "jitter": true
+    },
+    "development_result": {
+      "hidden_size": 100,
+      "method": "reliability_huber_jitter",
+      "training_rows": 93,
+      "development_rows": 9,
+      "epochs": 20000,
+      "training_mse_unweighted": 960.3870967741935,
+      "development_mse_all9": 51.18518518518518,
+      "development_black_mse": 32.666666666666664,
+      "development_gray_mse": 98.0,
+      "development_rgb9": [
+        [
+          237,
+          29,
+          36
+        ],
+        [
+          107,
+          189,
+          66
+        ],
+        [
+          53,
+          78,
+          159
+        ],
+        [
+          249,
+          222,
+          25
+        ],
+        [
+          127,
+          185,
+          215
+        ],
+        [
+          187,
+          77,
+          152
+        ],
+        [
+          4,
+          6,
+          9
+        ],
+        [
+          141,
+          125,
+          138
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "seconds": 23.22788679099176,
+      "reference": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED"
+    }
+  }
+}

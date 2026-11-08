@@ -1,0 +1,27 @@
+{
+  "target_chart_pair_mse": 2923.777777777778,
+  "results": [
+    {
+      "physical_source": "V6 capture01, same unchanged emitted pixels",
+      "hidden_size": 40,
+      "mse_at_time_pure_rgb_reference": 2483.259259259259,
+      "retrospective_mse_distributed_cmyk_reference": 4481.481481481482,
+      "role": "SAME_OLD_PHYSICAL_READ_REEVALUATED_ON_TWO_REFERENCES; NOT_NEW_V7_MEASUREMENT"
+    },
+    {
+      "physical_source": "V6 capture01, same unchanged emitted pixels",
+      "hidden_size": 60,
+      "mse_at_time_pure_rgb_reference": 2233.8518518518517,
+      "retrospective_mse_distributed_cmyk_reference": 4924.444444444444,
+      "role": "SAME_OLD_PHYSICAL_READ_REEVALUATED_ON_TWO_REFERENCES; NOT_NEW_V7_MEASUREMENT"
+    },
+    {
+      "physical_source": "V6 capture01, same unchanged emitted pixels",
+      "hidden_size": 100,
+      "mse_at_time_pure_rgb_reference": 2884.962962962963,
+      "retrospective_mse_distributed_cmyk_reference": 4761.185185185185,
+      "role": "SAME_OLD_PHYSICAL_READ_REEVALUATED_ON_TWO_REFERENCES; NOT_NEW_V7_MEASUREMENT"
+    }
+  ],
+  "do_not_mix_reference_bases": true
+}

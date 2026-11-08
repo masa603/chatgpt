@@ -1,0 +1,100 @@
+{
+  "scope": "Host numerical and mock acquisition checks, not new physical accuracy.",
+  "hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "model_count": 4,
+  "training_rows": 102,
+  "distinct_reference_colors": 33,
+  "reference_source": "Distributed Notebook saved display RGB; raw original PNG bytes not locally verified.",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "notebook_sha256": "f7e197687ef128b13d334e3967434ccf1f85076a8269dd02809f763ac02c5737",
+  "all_training_targets_and_embedded_27_components_match_reference": true,
+  "template_example_X_used": false,
+  "checkpoint_npz_header_equality": "PASS",
+  "original_adc_led_calibration_normalization": "UNCHANGED",
+  "cpp11_asan_ubsan": "PASS",
+  "differential_inputs": 366,
+  "all_four_models_rgb8_exact": true,
+  "max_abs_fp32_difference": 4.993591318225299e-09,
+  "training_metrics": [
+    {
+      "hidden_size": 40,
+      "unweighted_training_mse": 1187.4346405228757,
+      "array_payload_bytes": 7692
+    },
+    {
+      "hidden_size": 60,
+      "unweighted_training_mse": 698.875816993464,
+      "array_payload_bytes": 16332
+    },
+    {
+      "hidden_size": 80,
+      "unweighted_training_mse": 599.59477124183,
+      "array_payload_bytes": 28172
+    },
+    {
+      "hidden_size": 100,
+      "unweighted_training_mse": 659.3725490196078,
+      "array_payload_bytes": 43212
+    }
+  ],
+  "eight_mock_image_mses_match_original_teacher_html": [
+    {
+      "mock_capture": 1,
+      "hidden_size": 40,
+      "firmware_mse": 1480.4074074074074,
+      "teacher_site_mse": 1480.41
+    },
+    {
+      "mock_capture": 1,
+      "hidden_size": 60,
+      "firmware_mse": 1459.2592592592594,
+      "teacher_site_mse": 1459.26
+    },
+    {
+      "mock_capture": 1,
+      "hidden_size": 80,
+      "firmware_mse": 1439.7037037037037,
+      "teacher_site_mse": 1439.7
+    },
+    {
+      "mock_capture": 1,
+      "hidden_size": 100,
+      "firmware_mse": 1317.148148148148,
+      "teacher_site_mse": 1317.15
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 40,
+      "firmware_mse": 15260.185185185184,
+      "teacher_site_mse": 15260.19
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 60,
+      "firmware_mse": 15463.407407407407,
+      "teacher_site_mse": 15463.41
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 80,
+      "firmware_mse": 15482.444444444445,
+      "teacher_site_mse": 15482.44
+    },
+    {
+      "mock_capture": 2,
+      "hidden_size": 100,
+      "firmware_mse": 15336.777777777777,
+      "teacher_site_mse": 15336.78
+    }
+  ],
+  "two_mock_captures_and_n_restart": "PASS",
+  "new_physical_v7_mse": "NOT_YET_MEASURED",
+  "four_model_log_reader_synthetic_fixture": "PASS; temporary fixture only, not a new physical reading",
+  "wrong_reference_basis_rejected": "PASS",
+  "download_reference_sidecar_matches_verified_reference": true
+}

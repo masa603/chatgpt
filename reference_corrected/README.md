@@ -1,6 +1,7 @@
 # 提供された正解PPMでの再学習（V4）
 
-**現在の追加学習版は [data_learning_followup / V6](../data_learning_followup/README.md) です。**
+**現在使うのは [配布Notebook基準・40/60/80/100次元のV7](../distributed_training/README.md) です。**
+以下は純色RGBの正解を使った旧V4の記録です。
 以下のV4結果はそのまま保存し、追加で得た低い青・黒入力などはV5の学習・開発へ役割を変更しています。
 
 ## 新しい実測の受領結果

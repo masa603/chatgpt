@@ -1,0 +1,41 @@
+{
+  "hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "configs": [
+    {
+      "name": "mse_baseline",
+      "reliability": false,
+      "huber": false,
+      "jitter": false
+    },
+    {
+      "name": "reliability_huber",
+      "reliability": true,
+      "huber": true,
+      "jitter": false
+    },
+    {
+      "name": "reliability_huber_jitter",
+      "reliability": true,
+      "huber": true,
+      "jitter": true
+    }
+  ],
+  "seed": 42,
+  "development_epochs": 20000,
+  "final_epochs": 50000,
+  "development_split": "Latest V6 nine-color reading held out together; training93. Its labels are not used in parameter updates or reliability weights for that phase.",
+  "selection": "Per H, lowest all-nine-color development RGB8 MSE among three declared learning conditions.",
+  "development_limit": "Inspected reading used for design and selection; not independent final test. Final fitting includes all102 afterward.",
+  "reliability": "Five nearest measured training inputs excluding self; mode of neighbour target RGB (tie: nearest distance then RGB tuple). Weight=max(0.1,1/(1+(RMS RGB difference/255/0.15)^2)). Training only, positive weights for every sample.",
+  "robust_loss": "SmoothL1 beta0.05 on normalized RGB; evaluation remains ordinary unweighted RGB8 MSE.",
+  "jitter": "Training only, uniform per-channel [-a,a], a=min(0.03,0.15*distance to nearest trusted (weight>=0.5) training point with RMS target RGB difference/255>0.15); clip0..1.",
+  "sensor_and_normalization": "Unchanged. No geometry/photo prerequisite, no target/position-based prediction, no output palette snap.",
+  "rows_removed": 0,
+  "provided_example_X_used": false,
+  "new_physical_accuracy": "NOT_YET_MEASURED"
+}

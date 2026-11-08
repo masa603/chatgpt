@@ -207,7 +207,7 @@
   "data_only_learning_follow_up": {
     "user_request": "角度とかはそんな大事じゃないから学習データでどうにかしてほしい",
     "scope": "Prioritize data/learning; do not require a photo or setup change. Angle effects remain unestablished.",
-    "status": "V6_TRAINING_AND_PC_CHECKS_COMPLETE; NEW_PHYSICAL_MSE_PENDING",
+    "status": "V6_PHYSICAL_READ_RECEIVED_ALL_THREE_UNMET_ON_ITS_PURE_RGB_BASIS; LATER_REFERENCE_SWITCH_IS_SEPARATE",
     "data": "../data_learning_followup/training69.csv",
     "rows": 69,
     "reference_colors": 9,
@@ -225,6 +225,44 @@
     "next_firmware": "COLOR_RETRAIN_V6",
     "model_directory": "../data_learning_followup/models",
     "sensor_and_normalization": "Identical to V5. No end-calibration proxy, gray override, palette snap, quantization or target-based output.",
-    "photo_or_geometry_change_required": false
+    "photo_or_geometry_change_required": false,
+    "new_physical_mse_v6_pure_rgb_basis": {
+      "40": 2483.259259,
+      "60": 2233.851852,
+      "100": 2884.962963
+    }
+  },
+  "distributed_notebook_alignment_and_h80": {
+    "user_reference_choice": "配布Notebookの画像に合わせる（推奨）",
+    "user_added_hidden_size": 80,
+    "hidden_sizes": [
+      40,
+      60,
+      80,
+      100
+    ],
+    "reference_basis": "CMYK RGB recovered from newly supplied Notebook displays, not pure-RGB result.ppm.",
+    "reference_file": "../distributed_training/references/reference_image1_cmyk_3x3.ppm",
+    "reference_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+    "provided_notebook_sha256": "f7e197687ef128b13d334e3967434ccf1f85076a8269dd02809f763ac02c5737",
+    "template_X_used": false,
+    "training_rows": 102,
+    "training_reference_colors": 33,
+    "actual_inputs": "69 previous measured rows +9 latest V6 rows +24 original measured6x4 rows.",
+    "development": "Latest V6 nine-color group held out; train93; three declared learning methods per H; evaluation is ordinary all-nine-color MSE.",
+    "development_mse_cmyk_basis": {
+      "40": 68.96296296296296,
+      "60": 37.592592592592595,
+      "80": 65.44444444444444,
+      "100": 51.18518518518518
+    },
+    "selection": "Per H min development MSE; all choose reliability-weighted SmoothL1 plus bounded input jitter. L1 weights-only1e-6 retained.",
+    "final_training": "From scratch50000epochs all102, seed42, Adam LR0.003 cosine->0.00003; same procedure for four H. No measured-only overfit finish phase.",
+    "known_input_conflicts": "Retained; all sample weights positive. Unweighted training errors reported separately.",
+    "new_physical_v7_mse": "NOT_YET_RECEIVED",
+    "firmware": "COLOR_RETRAIN_V7",
+    "sensor_normalization": "Unchanged; all4 models share same fresh input.",
+    "old_reference_results": "Keep prior pure-RGB results separate; no cross-basis improvement-rate claims.",
+    "photo_or_setup_change_required": false
   }
 }

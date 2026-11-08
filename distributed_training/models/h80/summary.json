@@ -1,0 +1,22 @@
+{
+  "hidden_size": 80,
+  "config": {
+    "name": "reliability_huber_jitter",
+    "reliability": true,
+    "huber": true,
+    "jitter": true
+  },
+  "training_rows": 102,
+  "distinct_reference_colors": 33,
+  "epochs": 50000,
+  "seed": 42,
+  "optimizer": "Adam LR0.003->0.00003 cosine; scratch initialization identical procedure for all H.",
+  "l1_weights_only": 1e-06,
+  "training_mse_unweighted_rgb8": 599.59477124183,
+  "training_mse_rgb8": 599.59477124183,
+  "wall_seconds": 71.55583957300405,
+  "training_data_sha256": "e519ae56e5a5d508c48bb2ba18cbb2021a76ddb8363986ba24537f8695dc8a1d",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "model_header_sha256": "2f3ae3b1b877e1929715e8b423581e502137393b76686a352353a72ed560b567",
+  "scope": "After development condition selection, all102 used for final fitting. New V7 physical reading not received. No measured-only memorization finish phase."
+}

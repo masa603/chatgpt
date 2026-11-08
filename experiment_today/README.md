@@ -1,25 +1,26 @@
 # 2026年11月6日：40→60→100次元の比較
 
-現在は**提供された正解PPMを使い、新しく読み取った9色でMSE300以下を目指す再学習**を優先しています。
-学習済みの追加学習版と次の手順は [data_learning_followup](../data_learning_followup/README.md)、
-Arduinoへ書き込む2ファイルは [color_retrain_v6](../data_learning_followup/color_retrain_v6/README.md) です。
-この版は3×3の9色の69組を学習したDenseモデルで、元の33色全体の改善を確認したものではありません。
-ユーザーの指示に従い、装置変更を前提にせず、最新V5の9組も開発・最終学習へ加えています。
-新しいV6実測は未受領で、MSE300以下の達成は未確認です。
-新しいV5実測1回は **H40=2690.26、H60=1812.63、H100=1640.48** で、全3モデルとも300以下は未達です。
-H100は灰色が二乗誤差の約91%を占めます。[実測ログ](../current_input_adaptation/physical_readings/capture_01/README.md) を保存しました。
-保存データでの[校正方法の開発比較](../calibration_followup/README.md)も300を超えているため、次はセンサ・LED・紙の位置関係を確認します。
-学習MSEと新しい実測MSEを分けて記録します。
-新たに受領したV3の1回の読取では **H40=524.07、H60=93.85、H100=119.93** でした。
-これは内部の復元9色とのMSEで、提供された基準PPMとRGBが異なっていました。
-先生のHTMLと提供基準PPMでのV3のMSEは **H40=3984.00、H60=3442.59、H100=3522.89** です。
-**先生の基準で300以下を達成したという判定は撤回しています。**
-その後受領したV4実測1回は **H40=13698.67、H60=13117.93、H100=13314.15** で、全3モデルとも未達でした。
-利用者は部屋の暗さを変えたと申告しています。
-校正時と読取時の白の値も大きく異なるため、照明条件をそろえた短い白の再読取を先に確認します。
-[V4実測ログ](../reference_corrected/physical_readings/capture_01/README.md) を保存しています。
-[ログと画像](../learning_followup/physical_readings/capture_01/README.md)、[計算HTMLの調査](../learning_followup/reference_audit/README.md) を保存しました。
-同じ学習チャートの再読取であり、未見チャートの独立評価は未実施です。
+**現在使うのは [配布Notebook基準・40/60/80/100次元のV7](../distributed_training/README.md) です。**
+利用者の選択に従い、正解を配布NotebookのCMYK版へそろえ、80次元も追加しました。
+実測102組・33色で学習しています。配布NotebookのX配列は実測として流用していません。
+Arduinoへ書き込む2ファイルと先生のサイト用の基準PPMは [color_retrain_v7](../distributed_training/color_retrain_v7/README.md) にあります。
+装置変更や写真の提供は前提にしていません。新しいV7実測のMSEは未測定です。
+開発比較では300以下でしたが、条件選択に使った9色の保存入力なので、実測達成とは扱いません。
+
+旧版の実測値も、そのとき使った正解RGBとともに保持しています。
+
+| 版 | 正解画像の基準 | 実測MSE H40 / H60 / H100 |
+| --- | --- | --- |
+| V3 | 配布表示から復元したCMYK | 524.07 / 93.85 / 119.93 |
+| V3の同じ出力を再計算 | 利用者の純色RGB result.ppm | 3984.00 / 3442.59 / 3522.89 |
+| V4 | 純色RGB result.ppm | 13698.67 / 13117.93 / 13314.15 |
+| V5 | 純色RGB result.ppm | 2690.26 / 1812.63 / 1640.48 |
+| V6 | 純色RGB result.ppm | 2483.26 / 2233.85 / 2884.96 |
+
+V3の先生のサイトとの正解不一致を確認せず300以下と断定した判定は撤回済みです。
+今回のCMYK選択への変更は [参照基準の履歴](../distributed_training/reference_timeline.md) に記録し、基準をまたぐ改善率は出しません。
+[V6実測ログ](../data_learning_followup/physical_readings/capture_01/README.md) の9組は、
+その後V7の開発比較と最終学習へ加えました。同じ学習チャートの再読取であり、未見チャートの独立評価は未実施です。
 
 枝刈りを弱めた以前の追加探索は [precision_followup](precision_followup/README.md) に保存しました。
 `PRECISION_SCAN_V2` の実機再生ログを受領し、[直前のMSE・9色RGB・画像](precision_followup/replay_images/README.md)
