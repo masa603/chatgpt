@@ -1,0 +1,14 @@
+[
+  {
+    "method": "original_calibration",
+    "mean_mse_seven_colors": 3694.700680272109,
+    "max_fold_mse_seven_colors": 13137.904761904761,
+    "scope": "OFFLINE EXPLORATORY PROXY; NOT NEW PHYSICAL MSE"
+  },
+  {
+    "method": "same_read_references_proxy",
+    "mean_mse_seven_colors": 2554.0272108843537,
+    "max_fold_mse_seven_colors": 6368.571428571428,
+    "scope": "OFFLINE EXPLORATORY PROXY; NOT NEW PHYSICAL MSE"
+  }
+]

@@ -1,0 +1,184 @@
+{
+  "scope": "Exploratory offline input comparison. Reuses black/white pixels as calibration proxies; not a new physical accuracy result.",
+  "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "sources": [
+    {
+      "group": "original_3x3",
+      "source": "retraining/data/current33.csv",
+      "source_sha256": "fa34647c535b124d5cc4bb49b6be9029abdb1999f2e031bc0fc15cb1e9d0602c",
+      "black_patch_raw": [
+        42.0,
+        38.0,
+        33.0
+      ],
+      "white_patch_raw": [
+        212.0,
+        126.80000305175781,
+        95.0
+      ],
+      "gray_with_original_calibration": [
+        0.22200000286102295,
+        0.26260000467300415,
+        0.25369998812675476
+      ],
+      "gray_with_same_read_black_white": [
+        0.1788235455751419,
+        0.157657653093338,
+        0.16129031777381897
+      ]
+    },
+    {
+      "group": "reread_01",
+      "source": "experiment_today/fresh_readings/capture_01/inputs.csv",
+      "source_sha256": "ed70f418f6ff947174df92f0b43de13b0dd0a23d516cf968add0cc9e8669c7c7",
+      "black_patch_raw": [
+        38.29999923706055,
+        18.200000762939453,
+        16.100000381469727
+      ],
+      "white_patch_raw": [
+        298.29998779296875,
+        168.1999969482422,
+        133.8000030517578
+      ],
+      "gray_with_original_calibration": [
+        0.18902918696403503,
+        0.1886395663022995,
+        0.18946473300457
+      ],
+      "gray_with_same_read_black_white": [
+        0.14538460969924927,
+        0.1653333306312561,
+        0.16057772934436798
+      ]
+    },
+    {
+      "group": "reread_03",
+      "source": "experiment_today/fresh_readings/capture_03/inputs.csv",
+      "source_sha256": "941639b0525eba26b88f09cf5916a8fd24f329b95f14dcfd0214e84c2975a558",
+      "black_patch_raw": [
+        42.0,
+        21.0,
+        19.0
+      ],
+      "white_patch_raw": [
+        314.3999938964844,
+        173.1999969482422,
+        135.10000610351562
+      ],
+      "gray_with_original_calibration": [
+        0.1711273491382599,
+        0.20968908071517944,
+        0.22160664200782776
+      ],
+      "gray_with_same_read_black_white": [
+        0.19566814601421356,
+        0.18462549149990082,
+        0.2067183405160904
+      ]
+    },
+    {
+      "group": "reread_latest",
+      "source": "experiment_today/version_mismatch/old_firmware_retry_01/inputs.csv",
+      "source_sha256": "b8ca1c27568fdeecd9ae8daf32574343619708fc54c5aa69951d3e0184c1959c",
+      "black_patch_raw": [
+        41.0,
+        31.0,
+        25.5
+      ],
+      "white_patch_raw": [
+        155.0,
+        104.0,
+        82.0
+      ],
+      "gray_with_original_calibration": [
+        0.23765864968299866,
+        0.23778501152992249,
+        0.26101693511009216
+      ],
+      "gray_with_same_read_black_white": [
+        0.10614033788442612,
+        0.106849305331707,
+        0.10442477464675903
+      ]
+    },
+    {
+      "group": "v3_capture01",
+      "source": "learning_followup/physical_readings/capture_01/inputs.csv",
+      "source_sha256": "ed7e905e986fc622d11fa5a9a8f2eb155673627701e2602d10c999b00e23fb43",
+      "black_patch_raw": [
+        38.400001525878906,
+        27.0,
+        27.0
+      ],
+      "white_patch_raw": [
+        269.20001220703125,
+        171.89999389648438,
+        131.1999969482422
+      ],
+      "gray_with_original_calibration": [
+        0.18030691146850586,
+        0.20883533358573914,
+        0.20609980821609497
+      ],
+      "gray_with_same_read_black_white": [
+        0.1715770959854126,
+        0.17184266448020935,
+        0.14875240623950958
+      ]
+    },
+    {
+      "group": "v4_capture01",
+      "source": "reference_corrected/physical_readings/capture_01/inputs.csv",
+      "source_sha256": "66223f71a8fd6befd9a0aa24048a0496587e7f910b9c2dc9f66b58e0f19fccdc",
+      "black_patch_raw": [
+        9.600000381469727,
+        5.099999904632568,
+        4.0
+      ],
+      "white_patch_raw": [
+        154.39999389648438,
+        57.0,
+        44.70000076293945
+      ],
+      "gray_with_original_calibration": [
+        0.07091809809207916,
+        0.08413001894950867,
+        0.1032448336482048
+      ],
+      "gray_with_same_read_black_white": [
+        0.22168509662151337,
+        0.23121386766433716,
+        0.24570024013519287
+      ]
+    },
+    {
+      "group": "v5_capture01",
+      "source": "current_input_adaptation/physical_readings/capture_01/inputs.csv",
+      "source_sha256": "e45ab82cd504e5a8177b392658efaa47a3bda6045e5a82f9793ce1368e584190",
+      "black_patch_raw": [
+        6.300000190734863,
+        4.0,
+        3.0
+      ],
+      "white_patch_raw": [
+        111.0,
+        53.0,
+        38.0
+      ],
+      "gray_with_original_calibration": [
+        0.010946550406515598,
+        0.06313416361808777,
+        0.05535715073347092
+      ],
+      "gray_with_same_read_black_white": [
+        0.16236867010593414,
+        0.1408163160085678,
+        0.14571429789066315
+      ]
+    }
+  ],
+  "primary_validation_metric": "MSE of seven non-reference colors only; excludes indices 6 black and 8 white in BOTH methods.",
+  "held_out_reference_role": "Black/white from the held-out reading are explicitly known calibration inputs, not scored test targets.",
+  "prospective_requirement": "A real revised protocol would need separate calibration measurements, with their collection timing tested. This proxy is not evidence of physical MSE <=300."
+}

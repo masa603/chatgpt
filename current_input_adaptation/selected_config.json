@@ -7,5 +7,6 @@
     "method": "local_noise_limited",
     "full_chart_mean_mse": 4302.6049382716055
   },
-  "prospective_mse": "NOT_MEASURED"
+  "prospective_mse": "ONE_NEW_PHYSICAL_READ_RECEIVED; ALL_MODELS_ABOVE_300",
+  "prospective_record": "physical_readings/capture_01/summary.json"
 }

@@ -1,0 +1,44 @@
+{
+  "white_calibration_raw": [
+    176.89999389648438,
+    94.0,
+    61.0
+  ],
+  "white_patch_raw": [
+    111.0,
+    53.0,
+    38.0
+  ],
+  "white_patch_normalized": [
+    0.5756600499153137,
+    0.537767767906189,
+    0.5892857313156128
+  ],
+  "black_calibration_raw": [
+    21.600000381469727,
+    5.300000190734863,
+    5.0
+  ],
+  "black_patch_raw": [
+    6.300000190734863,
+    4.0,
+    3.0
+  ],
+  "blue_patch_raw": [
+    27.700000762939453,
+    12.199999809265137,
+    17.600000381469727
+  ],
+  "blue_patch_normalized": [
+    0.039278820157051086,
+    0.07779030501842499,
+    0.22500000894069672
+  ],
+  "white_raw_ratio_to_calibration": [
+    0.6274731755256653,
+    0.563829779624939,
+    0.6229507923126221
+  ],
+  "blue_normalized_distance_to_black": 0.2412864714860916,
+  "interpretation": "Calibration and later same-patch values differ; cause requires a controlled check. Do not assume lighting alone explains within-capture drift."
+}

@@ -1,0 +1,73 @@
+{
+  "received_date_japan": "2026-11-08",
+  "execution_wall_timestamp": null,
+  "firmware": "COLOR_RETRAIN_V5",
+  "capture_counter": 1,
+  "physical_captures": 1,
+  "input_source": "NEW_PHYSICAL_SENSOR_READINGS",
+  "role": "New read after V5 freeze; same nine-color learning chart, not unseen-chart final evaluation.",
+  "training_role": "NOT_USED_FOR_V5_FITTING_OR_DEVELOPMENT",
+  "reference_ppm_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "training_data_sha256": "1adc525322caef517110eb3697597ccca3d503951d1d78bee62d2f9b62240290",
+  "black_rgb": [
+    21.600000381469727,
+    5.300000190734863,
+    5.0
+  ],
+  "white_rgb": [
+    176.89999389648438,
+    94.0,
+    61.0
+  ],
+  "model_hashes_ppm_mse_and_goal_flags": "PASS",
+  "raw_to_normalized_input": "PASS",
+  "normalization_max_abs_difference": 7.450580596923828e-09,
+  "original_teacher_html_mse": "PASS",
+  "teacher_calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+  "results": [
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 40,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 2690.259259,
+      "mse_recomputed_from_ppm": 2690.259259259259,
+      "teacher_site_display_mse": 2690.26,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "e8ce67329218b45e73568b2c3d925a89cd8138fa14ec24469710ef7b0ddc3a4e",
+      "ppm": "h40_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 60,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 1812.62963,
+      "mse_recomputed_from_ppm": 1812.6296296296296,
+      "teacher_site_display_mse": 1812.63,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "d2017aee97519712c124250ef6b81e1a373b1983cef27a7a69e983b40d630ebd",
+      "ppm": "h60_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 100,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 1640.481481,
+      "mse_recomputed_from_ppm": 1640.4814814814815,
+      "teacher_site_display_mse": 1640.48,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "7ec908b1d402372580f2cd94941d08929b176379877a4d4b27af7181e323cb97",
+      "ppm": "h100_dense.ppm"
+    }
+  ],
+  "lighting": "Current illumination was requested to be kept constant; exact illuminance and any further changes must be reported with this capture.",
+  "startup_self_check_log": "NOT_SUPPLIED",
+  "submitted_log_sha256": "3fd5ccf28804e0cbf99bc2600bb63a8e01d264a3288453d30c1b15fd245fcec9",
+  "sensor_part": "UNKNOWN per user reply",
+  "subsequent_development_use": "Used in calibration_followup offline input comparison; not an unused final test of that comparison method. Not used to refit V5 weights."
+}

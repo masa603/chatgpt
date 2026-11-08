@@ -1,0 +1,4 @@
+capture_key,hidden_size,format,colors,mse_device_reported,mse_recomputed_from_ppm,teacher_site_display_mse,goal_met_this_read,pc_replay_max_rgb8_difference,model_header_sha256,ppm
+capture_01,40,DENSE,9,2690.259259,2690.259259259259,2690.26,False,0,e8ce67329218b45e73568b2c3d925a89cd8138fa14ec24469710ef7b0ddc3a4e,h40_dense.ppm
+capture_01,60,DENSE,9,1812.62963,1812.6296296296296,1812.63,False,0,d2017aee97519712c124250ef6b81e1a373b1983cef27a7a69e983b40d630ebd,h60_dense.ppm
+capture_01,100,DENSE,9,1640.481481,1640.4814814814815,1640.48,False,0,7ec908b1d402372580f2cd94941d08929b176379877a4d4b27af7181e323cb97,h100_dense.ppm
