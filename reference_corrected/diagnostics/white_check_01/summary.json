@@ -1,0 +1,57 @@
+{
+  "received_date_japan": "2026-11-08",
+  "execution_wall_timestamp": null,
+  "role": "SINGLE_WHITE_DIAGNOSTIC; NOT_A_FULL_3X3_ACCURACY_REPETITION",
+  "chart_patch": "WHITE (user followed white-only diagnostic instructions)",
+  "scanner_position_in_log": [
+    0,
+    0
+  ],
+  "physical_chart_accuracy_capture_count_added": 0,
+  "used_for_training": false,
+  "firmware_context": "V4 per current instructions; firmware ID is not present in this partial log.",
+  "black_rgb": [
+    27.700000762939453,
+    8.100000381469727,
+    8.899999618530273
+  ],
+  "white_rgb": [
+    207.8000030517578,
+    107.0999984741211,
+    72.0
+  ],
+  "white_reread_raw": [
+    197.89999389648438,
+    91.0999984741211,
+    68.0
+  ],
+  "recomputed_nn_input": [
+    0.9450305104255676,
+    0.8383838534355164,
+    0.9366085529327393
+  ],
+  "printed_nn_input": [
+    0.945,
+    0.8384,
+    0.9366
+  ],
+  "normalization_matches_4_decimal_log": true,
+  "h60_device_rgb8": [
+    250,
+    227,
+    255
+  ],
+  "h60_v4_pc_rgb8": [
+    250,
+    227,
+    255
+  ],
+  "h60_pc_replay_matches": true,
+  "model_h60_sha256": "90615950ddce99fa5feaae5925c59ffad9e84d63851d5b713befb1034eec2df2",
+  "white_only_mse_vs_255": 269.6666666666667,
+  "whole_chart_mse": "NOT_MEASURED_BY_THIS_PARTIAL_LOG",
+  "observations": "R/G/B raw readings below white calibration by 4.76/14.94/5.56 percent. Two time points do not establish a trend or its cause.",
+  "illumination_restored": "NOT_EXPLICITLY_CONFIRMED_IN_REPLY",
+  "next_diagnostic": "Same white, no recalibration, three more r commands separated by a few seconds. Capture RAW and NN input; restart with n before any formal nine-color reading.",
+  "submitted_log_sha256": "fd1ef486149575535bea002caf858cf7cbc70b11775112e20297f79a1e06a9f8"
+}

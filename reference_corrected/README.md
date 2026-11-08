@@ -10,6 +10,11 @@ V4の新しい読取を1回受領し、**H40=13698.67、H60=13117.93、H100=1331
 元ログ・画像・数値は [physical_readings/capture_01](physical_readings/capture_01/README.md) に保存しました。
 この結果は学習へ追加しておらず、モデルや重みを変更していません。
 
+その後、[校正直後の白1色の確認](diagnostics/white_check_01/README.md) を受領しました。
+NN入力はR=0.9450、G=0.8384、B=0.9366で、白校正から特にGのRAWが約15%下がっています。
+正規化とV4のPC計算はログと一致しました。
+現在は同じ白の短い連続読取で変化を確認する段階で、全9色の追加MSEとしては数えていません。
+
 旧V3はNotebookのCMYK画像表示から採った9色を教師データと比較値にしていました。
 利用者が先生のサイトで使った [result.ppm](../learning_followup/reference_audit/provided/result.ppm) は別のRGB値で、
 緑は `(0,255,0)`、青は `(0,0,255)`、灰は `(127,127,127)` でした。
