@@ -1,0 +1,21 @@
+{
+  "hidden_size": 60,
+  "config": {
+    "name": "local_noise_limited",
+    "noise": 0.005
+  },
+  "training_rows": 60,
+  "distinct_colors": 9,
+  "epochs": 50000,
+  "seed": 42,
+  "optimizer": "Adam; cosine LR 0.003 to 0.00003",
+  "l1_weights_only": 1e-06,
+  "training_mse_rgb8": 1.3277777777777777,
+  "training_noise_sigma_min": 0.0008849555742926896,
+  "training_noise_sigma_max": 0.004999999888241291,
+  "wall_seconds": 51.40500185999554,
+  "training_data_sha256": "1adc525322caef517110eb3697597ccca3d503951d1d78bee62d2f9b62240290",
+  "reference_ppm_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "model_header_sha256": "d2017aee97519712c124250ef6b81e1a373b1983cef27a7a69e983b40d630ebd",
+  "scope": "Training/development only. Includes previous V4 failed capture and diagnostics. Requires a new physical V5 read."
+}

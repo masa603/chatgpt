@@ -168,5 +168,24 @@
     },
     "old_artifacts": "Retained unchanged, including old trained weights and provided comparison pixels.",
     "next_diagnostic": "Restore similar fixed illumination; b/w calibration then immediate stationary white r. Diagnostic patch is not a full-chart MSE repetition."
+  },
+  "low_input_adaptation_follow_up": {
+    "stage": "EXPLORATORY_V5_CURRENT_INPUT_ADAPTATION",
+    "status": "TRAINED_AND_HOST_VERIFIED; NEW_PHYSICAL_READ_PENDING",
+    "reference_ppm": "../learning_followup/reference_audit/provided/result.ppm",
+    "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+    "training_data": "../current_input_adaptation/training60.csv",
+    "training_data_sha256": "1adc525322caef517110eb3697597ccca3d503951d1d78bee62d2f9b62240290",
+    "training_scope": "60 measured rows; same 9 colors; 6 full-chart reading groups plus 2 partial calibration groups.",
+    "data_role_change": "V4 failed full reading and subsequent white/blue/black diagnostics now used for training/development. All former measurements retained; no V5 prospective test yet.",
+    "methods": "No noise versus local noise capped by nearest differently labelled input distance; no cross-session interpolation; equal total loss weight per target color.",
+    "selection": "H60 whole-group holdouts. Minimize average over six full-chart folds; report both partial folds separately.",
+    "selected_development_mean_mse": 4302.6049382716055,
+    "prospective_acceptance_mse_max": 300,
+    "prospective_acceptance_status": "NOT_CONFIRMED",
+    "firmware": "COLOR_RETRAIN_V5",
+    "model_directory": "../current_input_adaptation/models",
+    "sensor_and_normalization_pipeline": "Unchanged from V4; no median filtering, new settling time, quantization or target-based prediction.",
+    "new_reading": "Same current illumination held fixed; black b, white w, nine colors r; all three Dense models share each input."
   }
 }

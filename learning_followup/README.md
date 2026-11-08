@@ -1,6 +1,7 @@
 # 複数回の実測を使ったDenseモデルの再学習
 
-**現在使う修正版は [reference_corrected / V4](../reference_corrected/README.md) です。**
+**現在の追加適応版は [current_input_adaptation / V5](../current_input_adaptation/README.md) です。**
+正解PPMを直したV4の記録は [reference_corrected](../reference_corrected/README.md) に保存しています。
 以下のV3は学習・比較に使った正解RGBが提供基準PPMと異なっていたため、旧版の記録として保持します。
 
 ユーザーの目標は、**新しいセンサ読取でMSE300以下、できれば100未満**です。

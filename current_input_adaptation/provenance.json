@@ -1,0 +1,39 @@
+{
+  "reference": "learning_followup/reference_audit/provided/result.ppm",
+  "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "sources": [
+    {
+      "path": "reference_corrected/training45.csv",
+      "sha256": "bbd0db0b42f052a9db6ba785a8b973389918c87da12c3ae7848bd4c4264f88a1"
+    },
+    {
+      "path": "reference_corrected/physical_readings/capture_01/submitted_log.txt",
+      "sha256": "91fbb3ade4a3b553af851dd8a542e0713cac34525ba7cc738bd8c791b79590be"
+    },
+    {
+      "path": "reference_corrected/diagnostics/white_check_01/submitted_log.txt",
+      "sha256": "fd1ef486149575535bea002caf858cf7cbc70b11775112e20297f79a1e06a9f8"
+    },
+    {
+      "path": "reference_corrected/diagnostics/white_check_02/submitted_log.txt",
+      "sha256": "f493c293b82633ce397c44a1cd3cf3851d272cee788f2f85be60d52a409f4530"
+    },
+    {
+      "path": "reference_corrected/diagnostics/blue_black_01/submitted_log.txt",
+      "sha256": "97842882a408f0de5e9339cbab33bd113a0d33af07bcac661e4bef09277ea485"
+    }
+  ],
+  "rows": 60,
+  "full_chart_reading_groups": 6,
+  "partial_calibration_groups": 2,
+  "distinct_colors": 9,
+  "role_change": "V4 capture01 and all subsequent diagnostics now used for development/fitting. None is a prospective V5 test.",
+  "calibration_grouping": "white_check_02 and blue_black_01 share a calibration and are held out together. white_check_01 uses another calibration.",
+  "scope": "Same nine learning-chart colors; not original 33 colors or unseen-chart evaluation.",
+  "preservation": "Earlier weights, measurements, and their reported failures retained. No selection of samples by favorable MSE.",
+  "selection": "Compare two declared methods with H60, whole-calibration-group holdouts. Choose lowest mean MSE over six full-chart holdouts; partial-group metrics reported separately.",
+  "final_training": "After selection fit all60, H40/60/100, 50000 epochs, seed42; original sensor acquisition and normalization unchanged.",
+  "loss": "Equal total weight per reference color to avoid overweighting additional white diagnostics.",
+  "augmentation": "No mixing across illumination sessions. Local noise method caps per-sample sigma to min(0.005, 0.1*nearest differently labelled input distance); exact method uses no noise.",
+  "prospective_physical_accuracy": "NOT_YET_MEASURED"
+}

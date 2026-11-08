@@ -1,0 +1,11 @@
+{
+  "config": {
+    "name": "local_noise_limited",
+    "noise": 0.005
+  },
+  "selection": {
+    "method": "local_noise_limited",
+    "full_chart_mean_mse": 4302.6049382716055
+  },
+  "prospective_mse": "NOT_MEASURED"
+}

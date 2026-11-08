@@ -4,7 +4,7 @@
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
   "scope": "One new physical reading of the same learning 3x3 chart after V3 weights were frozen; not independent unseen-chart evaluation.",
-  "current_status": "V4 PHYSICAL CAPTURE RECEIVED; ALL THREE ABOVE 300; CALIBRATION CONSISTENCY CHECK NEXT",
+  "current_status": "V5 TRAINING_AND_HOST_CHECK_COMPLETE_WITH_NEW_LOW_INPUT_DATA; NEW_PHYSICAL_V5_READ_REQUIRED",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
@@ -38,6 +38,11 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "v4_physical_data_used_for_training": false,
-  "next_step": "User reports changed room darkness. Restore similar illumination, keep it constant, and check white immediately after b/w calibration. Do not assert illumination alone explains the within-capture drift."
+  "next_step": "Upload COLOR_RETRAIN_V5, keep current illumination constant, b/w calibration then a new nine-color read. Old failed V4 capture and diagnostics are now fitting/development data.",
+  "v4_physical_data_used_for_v4_training": false,
+  "v4_physical_data_used_for_v5_training": true,
+  "current_experiment": "../current_input_adaptation/README.md",
+  "v5_training_rows": 60,
+  "v5_development_mean_full_chart_mse": 4302.6049382716055,
+  "v5_actual_new_physical_mse": "NOT_YET_MEASURED"
 }

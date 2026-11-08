@@ -1,9 +1,11 @@
 # 2026年11月6日：40→60→100次元の比較
 
 現在は**提供された正解PPMを使い、新しく読み取った9色でMSE300以下を目指す再学習**を優先しています。
-学習済みの修正版と次の手順は [reference_corrected](../reference_corrected/README.md)、
-Arduinoへ書き込む2ファイルは [color_retrain_v4](../reference_corrected/color_retrain_v4/README.md) です。
-この版は3×3の9色×5回を学習したDenseモデルで、元の33色全体の改善を確認したものではありません。
+学習済みの追加適応版と次の手順は [current_input_adaptation](../current_input_adaptation/README.md)、
+Arduinoへ書き込む2ファイルは [color_retrain_v5](../current_input_adaptation/color_retrain_v5/README.md) です。
+この版は3×3の9色の60組を学習したDenseモデルで、元の33色全体の改善を確認したものではありません。
+V4の失敗した全9色読取と、後の部分診断もV5の学習・開発へ加えています。
+新しいV5実測と、MSE300以下の達成は未確認です。
 学習MSEと新しい実測MSEを分けて記録します。
 新たに受領したV3の1回の読取では **H40=524.07、H60=93.85、H100=119.93** でした。
 これは内部の復元9色とのMSEで、提供された基準PPMとRGBが異なっていました。

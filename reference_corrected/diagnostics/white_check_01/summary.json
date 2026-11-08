@@ -8,7 +8,6 @@
     0
   ],
   "physical_chart_accuracy_capture_count_added": 0,
-  "used_for_training": false,
   "firmware_context": "V4 per current instructions; firmware ID is not present in this partial log.",
   "black_rgb": [
     27.700000762939453,
@@ -53,5 +52,8 @@
   "observations": "R/G/B raw readings below white calibration by 4.76/14.94/5.56 percent. Two time points do not establish a trend or its cause.",
   "illumination_restored": "NOT_EXPLICITLY_CONFIRMED_IN_REPLY",
   "next_diagnostic": "Same white, no recalibration, three more r commands separated by a few seconds. Capture RAW and NN input; restart with n before any formal nine-color reading.",
-  "submitted_log_sha256": "fd1ef486149575535bea002caf858cf7cbc70b11775112e20297f79a1e06a9f8"
+  "submitted_log_sha256": "fd1ef486149575535bea002caf858cf7cbc70b11775112e20297f79a1e06a9f8",
+  "used_for_v4_training": false,
+  "used_for_v5_training_and_development": true,
+  "v5_role_note": "Reclassified into current_input_adaptation/training60.csv. Requires another new read to evaluate V5."
 }

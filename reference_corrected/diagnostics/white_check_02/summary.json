@@ -78,10 +78,12 @@
   ],
   "whole_chart_mse": "NOT_MEASURED",
   "physical_chart_accuracy_capture_count_added": 0,
-  "used_for_training": false,
   "model_h60_sha256": "90615950ddce99fa5feaae5925c59ffad9e84d63851d5b713befb1034eec2df2",
   "firmware_context": "V4 per current instructions; this partial log has no firmware identifier.",
   "conclusion": "All channels fall on third read. Cause not isolated; white-only success does not establish full-chart accuracy.",
   "next_diagnostic": "Keep current calibration and illumination; read blue once and black once. Both diagnostic, not formal chart positions. Restart with n before a formal nine-color run.",
-  "submitted_log_sha256": "f493c293b82633ce397c44a1cd3cf3851d272cee788f2f85be60d52a409f4530"
+  "submitted_log_sha256": "f493c293b82633ce397c44a1cd3cf3851d272cee788f2f85be60d52a409f4530",
+  "used_for_v4_training": false,
+  "used_for_v5_training_and_development": true,
+  "v5_role_note": "Reclassified into current_input_adaptation/training60.csv. Requires another new read to evaluate V5."
 }

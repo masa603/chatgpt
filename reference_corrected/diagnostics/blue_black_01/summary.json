@@ -1,0 +1,62 @@
+{
+  "received_date_japan": "2026-11-08",
+  "role": "BLUE_BLACK_DIAGNOSTIC; NOT_A_FULL_NINE_COLOR_CAPTURE",
+  "label_order": "BLUE then BLACK as requested in preceding instructions",
+  "scanner_positions_in_log": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "calibration_source": "../white_check_02/summary.json",
+  "black_rgb": [
+    31.0,
+    9.100000381469727,
+    8.5
+  ],
+  "white_rgb": [
+    221.89999389648438,
+    116.69999694824219,
+    77.0
+  ],
+  "normalization_matches_printed_4_decimals": true,
+  "h60_v4_pc_rgb8_matches": true,
+  "v4_h60_model_sha256": "90615950ddce99fa5feaae5925c59ffad9e84d63851d5b713befb1034eec2df2",
+  "rows": [
+    {
+      "patch": "BLUE",
+      "raw_r": 21.100000381469727,
+      "raw_g": 13.0,
+      "raw_b": 17.0,
+      "input_r": 0.0,
+      "input_g": 0.036245349794626236,
+      "input_b": 0.12408759444952011,
+      "h60_output_r8": 0,
+      "h60_output_g8": 2,
+      "h60_output_b8": 29,
+      "patch_only_mse": 17026.666666666668
+    },
+    {
+      "patch": "BLACK",
+      "raw_r": 13.100000381469727,
+      "raw_g": 7.0,
+      "raw_b": 5.0,
+      "input_r": 0.0,
+      "input_g": 0.0,
+      "input_b": 0.0,
+      "h60_output_r8": 0,
+      "h60_output_g8": 0,
+      "h60_output_b8": 0,
+      "patch_only_mse": 0.0
+    }
+  ],
+  "normalized_blue_black_distance": 0.12927280366420746,
+  "full_chart_mse": "NOT_MEASURED_BY_THIS_PARTIAL_LOG",
+  "physical_chart_repetitions_added": 0,
+  "role_change_for_v5": "These two rows are now included in fitting/development; grouped with white_check_02 because calibration is shared.",
+  "submitted_log_sha256": "97842882a408f0de5e9339cbab33bd113a0d33af07bcac661e4bef09277ea485"
+}

@@ -67,5 +67,6 @@
   "lighting": "User reports changing room darkness since V3; exact illuminance and whether it changed within capture are unknown.",
   "startup_self_check_log": "NOT_SUPPLIED",
   "submitted_log_sha256": "91fbb3ade4a3b553af851dd8a542e0713cac34525ba7cc738bd8c791b79590be",
-  "teacher_calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e"
+  "teacher_calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+  "subsequent_role_for_v5": "Added to V5 fitting/development. Original V4 results retained; not a prospective V5 test."
 }
