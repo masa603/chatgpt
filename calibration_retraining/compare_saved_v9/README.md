@@ -1,5 +1,7 @@
 # 今回の9色を使い、tだけでDense／CSRと速度を比較する
 
+**先生指定result.ppmへ学習を修正した [V10の2ファイル](../../teacher_result_v10/teacher_compare_v10/README.md) が現在の版です。以下は旧V9の記録です。**
+
 [compare_saved_v9.ino](compare_saved_v9.ino) と [saved_parameters_v9.h](saved_parameters_v9.h) を、
 同じ `compare_saved_v9` フォルダへ保存し、.inoをArduino IDEで開いてUNO R4 WiFiへ書き込みます。
 

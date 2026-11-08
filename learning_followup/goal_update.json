@@ -3,12 +3,12 @@
   "user_requested": "300以下には絶対にしたい",
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
-  "scope": "Dense physical goal confirmed on one nine-color reading. Frozen CSR not yet replayed on board; hardware speed pending. Existing capture reused without training or threshold changes.",
-  "current_status": "V9_PHYSICAL_GOAL_MET_ONLY_FOR_SELECTED_NOTEBOOK_CMYK; USER_SITE_PURE_RGB_GOAL_NOT_MET; T_REPLAY_PREPARED",
+  "scope": "Teacher mandates unchanged original result.ppm. V10 PC and host replay on9 archived actual inputs excluded from fitting; no new V10 physical capture or board timing yet.",
+  "current_status": "V10_TEACHER_RESULT_CORRECTION_FROZEN; PC_DENSE_ALL4_LE300; PC_CSR_H40_H60_LE300_ONLY; DEVICE_T_COMPARISON_PENDING",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
-  "note": "User site screenshot is correct: H40 same pixels score3471.00 against pure result.ppm,278.33 against selected Notebook CMYK. Do not report website pure-RGB success or silently change required target. Saved t version prints both references. No model/threshold changes.",
+  "note": "CMYK recommendation was incorrect for teacher requirement; user screenshot3471.00 was correct. Corrected all111 3x3 training labels, kept135 actual inputs and teacher result.ppm unchanged; latest physical9 remain held out. Do not call saved PC inference a new physical goal achievement.",
   "prospective_result_record": "physical_readings/capture_01/summary.json",
   "prospective_physical_captures": 1,
   "original_development_cv_unchanged": true,
@@ -22,7 +22,7 @@
     "60": true,
     "100": true
   },
-  "teacher_reference_goal_status": "V3_AND_FIRST_V4_CAPTURE_ALL_ABOVE_300",
+  "teacher_reference_goal_status": "NEW_V10_SAVED_INPUT_DENSE4_AND_CSR40_60_LE300_ON_PC; CSR80_100_GT300; NEW_PHYSICAL_V10_NOT_PERFORMED",
   "teacher_calculator_audit": "reference_audit/calculator_check.json",
   "user_reported_teacher_mse": "Reproduced exactly as 3984.00 from uploaded result.ppm and resu12.ppm; resu12 matches H40.",
   "teacher_reference_mse_rgb8": {
@@ -38,10 +38,10 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "Upload saved-input comparison; verify COLOR_SAVED_COMPARE_V9 then send t once. No b/w/r or new paper capture. Save replay and four-pair benchmark blocks plus new IDE memory2 lines.",
+  "next_step": "Keep site left reference=result.ppm; upload new V10 output on right, not old resu15. Write both V10 files, confirm TEACHER_RESULT_COMPARE_V10, send t once. Save teacher-result comparison and four-pair timing blocks plus new IDE memory2 lines. No new paper capture.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
-  "current_experiment": "../calibration_retraining/README.md",
+  "current_experiment": "../teacher_result_v10/README.md",
   "v5_training_rows": 60,
   "v5_development_mean_full_chart_mse": 4302.6049382716055,
   "v5_actual_new_physical_mse": {
@@ -64,9 +64,9 @@
     "60": 2233.851852,
     "100": 2884.962963
   },
-  "user_selected_reference": "配布Notebookの画像に合わせる（推奨）",
-  "current_reference_ppm": "../distributed_training/references/reference_image1_cmyk_3x3.ppm",
-  "current_reference_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "user_selected_reference": "先生指定は result.ppmだよ; overrides earlier CMYK choice.",
+  "current_reference_ppm": "../teacher_result_v10/reference/result.ppm",
+  "current_reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
   "current_hidden_sizes": [
     40,
     60,
@@ -90,10 +90,10 @@
     "80": 3428.7407407407404,
     "100": 3636.7407407407404
   },
-  "last_updated_date_japan": "2026-11-08",
+  "last_updated_date_japan": "2026-11-09",
   "v6_physical_record": "../data_learning_followup/physical_readings/capture_01/summary.json",
   "v7_physical_record": "../distributed_training/physical_readings/capture_01/summary.json",
-  "next_sketch": "../calibration_retraining/compare_saved_v9/compare_saved_v9.ino",
+  "next_sketch": "../teacher_result_v10/teacher_compare_v10/teacher_compare_v10.ino",
   "v8_training_rows": 126,
   "patch_samples_received": 15,
   "patch_calibration_groups": 1,
@@ -122,8 +122,8 @@
     "100": 1874.7777777777778
   },
   "user_delivery_constraint": "Provide .ino and numeric .h separately through shared workspace file links; GitHub connection/access restricted.",
-  "next_parameters": "../calibration_retraining/compare_saved_v9/saved_parameters_v9.h",
-  "learning_data_csv": "../calibration_retraining/training135.csv",
+  "next_parameters": "../teacher_result_v10/teacher_compare_v10/teacher_parameters_v10.h",
+  "learning_data_csv": "../teacher_result_v10/training135.csv",
   "v8_physical_record": "../patch_retraining/physical_readings/capture_01/summary.json",
   "v9_training_rows": 135,
   "v9_new_physical_mse": {
@@ -153,6 +153,31 @@
   },
   "site_screenshot_mse_3471_reproduced": true,
   "website_current_reference_goal_met": false,
-  "goal_met_reference_scope": "All4<=300 applies to user-selected distributed Notebook CMYK reference4f58..., not pure result.ppm582b...",
-  "latest_reference_audit": "../calibration_retraining/physical_readings/capture_01/reference_basis_audit.json"
+  "goal_met_reference_scope": "V9 CMYK success does not satisfy teacher requirement. V10 saved-input scores against teacher result.ppm only; not a new capture or independent final chart.",
+  "latest_reference_audit": "../calibration_retraining/physical_readings/capture_01/reference_basis_audit.json",
+  "previous_user_selected_reference": "配布Notebookの画像に合わせる（推奨）; superseded by explicit teacher requirement.",
+  "v10_saved_input_dense_goal_met_all4": true,
+  "v10_saved_input_csr_goal_met_all4": false,
+  "v10_training_rows": 135,
+  "v10_training_data_sha256": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a",
+  "v10_heldout_rows": 9,
+  "v10_heldout9_role": "Archived V9 physical capture1 kept out of V9/V10 fitting and threshold selection. Retrospective same learning chart validation, not independent final evaluation.",
+  "v10_pc_saved_input_dense_mse": {
+    "40": 122.44444444444444,
+    "60": 33.96296296296296,
+    "80": 60.851851851851855,
+    "100": 21.925925925925927
+  },
+  "v10_pc_saved_input_csr_mse": {
+    "40": 297.22222222222223,
+    "60": 273.18518518518516,
+    "80": 443.037037037037,
+    "100": 360.55555555555554
+  },
+  "v10_pc_summary": "../teacher_result_v10/comparison_pc_summary.json",
+  "v10_host_verification": "../teacher_result_v10/verification.json",
+  "v10_new_physical_capture_count": 0,
+  "v10_hardware_saved_replay": "PENDING",
+  "v10_hardware_speed": "PENDING",
+  "v10_hardware_memory": "PENDING; V9 Dense4 memory values stay historical."
 }

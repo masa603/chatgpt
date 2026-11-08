@@ -1,5 +1,8 @@
 # 実験の完了状況
 
+**最新の操作と残る項目は [先生指定result.ppmのV10](../teacher_result_v10/remaining_experiments.md) に移しました。**
+以下は過去のV9・CMYK基準の進捗です。先生指定result.ppmで300以下だったとは扱いません。
+
 ## 済んでいること
 
 - 旧モデルH40/60/100のDense/CSR実機速度比較：受領・検算済み。

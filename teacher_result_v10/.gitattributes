@@ -1,0 +1,3 @@
+# Preserve original uploaded reference bytes, including CRLF and trailing spaces.
+reference/result.ppm -text -whitespace
+reference/mse_calculator.html -text -whitespace

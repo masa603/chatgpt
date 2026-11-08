@@ -1,0 +1,76 @@
+{
+  "scope": "PC and C++ host verification on archived real inputs; no new sensor capture or Arduino timing.",
+  "teacher_result_exact_original_bytes": true,
+  "all111_3x3_targets_match_teacher": true,
+  "all135_measured_inputs_unchanged": true,
+  "original24_6x4_targets_retained": true,
+  "all135_loss_weights_positive": true,
+  "latest9_excluded_from_fitting_and_threshold_selection": true,
+  "frozen_headers_match_npz_and_torch_checkpoints": true,
+  "differential_inputs": 400,
+  "models_per_input": 8,
+  "max_abs_error": 4.995117208750344e-09,
+  "all_rgb8_values_exact": true,
+  "cpp11_asan_ubsan": "PASS",
+  "csr_index_and_self_tests": "PASS",
+  "t_and_T_each_print_all8_MSE_PPM_and_all4_benchmarks": "PASS",
+  "sensor_reads": 0,
+  "warmup10_with_modulo9_and100_calls5_groups_alternating_order_checksums": "PASS",
+  "sixteen_ppms_match_original_teacher_html": true,
+  "clock": "FAKE_HOST_CLOCK; hardware speed not measured.",
+  "heldout9_scores": [
+    {
+      "H": 40,
+      "format": "DENSE",
+      "mse": 122.44444444444444,
+      "teacher_html_mse_displayed": 122.44
+    },
+    {
+      "H": 60,
+      "format": "DENSE",
+      "mse": 33.96296296296296,
+      "teacher_html_mse_displayed": 33.96
+    },
+    {
+      "H": 80,
+      "format": "DENSE",
+      "mse": 60.851851851851855,
+      "teacher_html_mse_displayed": 60.85
+    },
+    {
+      "H": 100,
+      "format": "DENSE",
+      "mse": 21.925925925925927,
+      "teacher_html_mse_displayed": 21.93
+    },
+    {
+      "H": 40,
+      "format": "CSR",
+      "mse": 297.22222222222223,
+      "teacher_html_mse_displayed": 297.22
+    },
+    {
+      "H": 60,
+      "format": "CSR",
+      "mse": 273.18518518518516,
+      "teacher_html_mse_displayed": 273.19
+    },
+    {
+      "H": 80,
+      "format": "CSR",
+      "mse": 443.037037037037,
+      "teacher_html_mse_displayed": 443.04
+    },
+    {
+      "H": 100,
+      "format": "CSR",
+      "mse": 360.55555555555554,
+      "teacher_html_mse_displayed": 360.56
+    }
+  ],
+  "actual_UNO_R4_build": "NOT_PERFORMED; optional CLI download blocked by network403.",
+  "new_physical_capture_count": 0,
+  "hardware_replay": "PENDING",
+  "hardware_benchmarks": "PENDING",
+  "independent_final_chart": "NOT_PERFORMED"
+}

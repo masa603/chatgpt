@@ -1,14 +1,15 @@
 # 2026年11月6日：40→60→100次元の比較
 
-**現在使うのは [V9のDense／CSR・全8条件の比較版](../calibration_retraining/README.md) です。**
-配布NotebookのCMYK基準での最新V9のDense新規読取は、H40=278.33、H60=63.00、H80=37.59、H100=36.70で全4モデルが300以下でした。
-[元ログと検算](../calibration_retraining/physical_readings/capture_01/README.md) を保存しました。
-次は [compare_saved_v9](../calibration_retraining/compare_saved_v9/README.md) の2ファイルを書き込み、tを1回送信します。
+**現在使うのは [先生指定result.ppmへ修正したV10](../teacher_result_v10/README.md) です。**
+先生指定がresult.ppmだと利用者が明示しました。以前のCMYK版の推奨は課題の基準として誤りで、CMYK基準の成功を公式の目標達成とは扱いません。
+元のresult.ppmは変えず、学習ラベルを修正しました。学習へ加えていない保存済み実測9入力のPC再計算は、Dense40/60/80/100が122.44/33.96/60.85/21.93です。
+CSRは297.22/273.19/443.04/360.56で、80/100は目標300超えです。新規の物理読取や実機値とは区別します。
+次は [teacher_compare_v10](../teacher_result_v10/teacher_compare_v10/README.md) の2ファイルを書き込み、tを1回送信します。
 今回の入力を保存済みなので、紙を読み直さず、同じ9色のDense／CSR実機再生と4組の速度を記録できます。
 重み・閾値は変更していません。元の物理読取1回を、別の反復測定として数えません。
 受領したFlash158688byte・静的RAM7212byteはDense4モデル入りCOLOR_RETRAIN_V9の値です。
 比較8条件入りや各条件単独の使用量とは別に保存しました。比較版の新しいIDE使用量2行は次の受領待ちです。
-未実施の独立最終評価、10回反復、H50、単独Flash/RAMは [進捗記録](../calibration_retraining/remaining_experiments.md) に明記しています。
+未実施の独立最終評価、10回反復、H50、単独Flash/RAMは [進捗記録](../teacher_result_v10/remaining_experiments.md) に明記しています。
 
 旧版の実測値も、そのとき使った正解RGBとともに保持しています。
 

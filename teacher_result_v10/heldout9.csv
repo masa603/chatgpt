@@ -1,0 +1,10 @@
+sample_id,group,chart_id,color_id,input_r,input_g,input_b,target_r8,target_g8,target_b8,source_role
+v9_capture01_r1c1,v9_capture01,train_3x3,r1c1,1.00000000,0.09349594,0.05276382,255,0,0,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r1c2,v9_capture01,train_3x3,r1c2,0.20206769,0.56707317,0.10301509,0,255,0,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r1c3,v9_capture01,train_3x3,r1c3,0.08928572,0.14227642,0.35175881,0,0,255,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r2c1,v9_capture01,train_3x3,r2c1,1.00000000,1.00000000,0.19849245,255,255,0,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r2c2,v9_capture01,train_3x3,r2c2,0.26785716,0.81300813,0.68341714,0,255,255,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r2c3,v9_capture01,train_3x3,r2c3,0.48026314,0.09552845,0.17587940,255,0,255,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r3c1,v9_capture01,train_3x3,r3c1,0.00000000,0.00000000,0.00000000,0,0,0,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r3c2,v9_capture01,train_3x3,r3c2,0.28665414,0.26422763,0.22613066,127,127,127,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."
+v9_capture01_r3c3,v9_capture01,train_3x3,r3c3,1.00000000,1.00000000,1.00000000,255,255,255,"Archived physical V9 read, never fitted by V10; inspected retrospective validation, not a new capture or independent final chart."

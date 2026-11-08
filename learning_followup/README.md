@@ -1,7 +1,7 @@
 # 複数回の実測を使ったDenseモデルの再学習
 
-**現在使うのは [V9のDense／CSR・全8条件の比較版](../calibration_retraining/README.md) です。**
-以下は旧V3の記録です。今の基準PPMと書き込みファイルはV7にまとめています。
+**現在使うのは [先生指定result.ppmへ修正したV10](../teacher_result_v10/README.md) です。**
+先生指定基準の明示により、以前のCMYK版の推奨は撤回しました。以下は旧V3の記録です。
 正解PPMを直したV4の記録は [reference_corrected](../reference_corrected/README.md) に保存しています。
 以下のV3は学習・比較に使った正解RGBが提供基準PPMと異なっていたため、旧版の記録として保持します。
 
