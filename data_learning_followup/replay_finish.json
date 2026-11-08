@@ -1,0 +1,15 @@
+{
+  "reason": "Measured-row fit after neutral augmentation remained 477.76 MSE for H40. Add the same measured-only finish phase to all H, preserving every previous checkpoint.",
+  "decision_timing": "Added after seeing final fitting metrics. No prospective V6 hardware result used.",
+  "epochs": 10000,
+  "new_synthetic_rows": 0,
+  "noise": 0,
+  "augmentation": false,
+  "previous_training_mses": {
+    "40": 477.75845410628017,
+    "60": 2.2995169082125604,
+    "100": 1.536231884057971
+  },
+  "development_scores": "Original four-condition development scores retained unchanged; this finish is not an independent development/test result.",
+  "new_physical_accuracy": "NOT_YET_MEASURED"
+}

@@ -20,6 +20,7 @@ H60・10,000 epoch、同じ学習方法・7グループの全読取回ホール�
 同じ画像の黒・白を評価にも使えば自動的に有利になるため、9色すべての独立精度の証拠にはしていません。
 実機へ採用するなら、別の黒白校正測定の取り方と時刻も確認する必要があります。
 この手法を使うV6や、センサ待ち時間を変えた本番プログラムは作成・配布していません。
+後の[data_learning_followup / V6](../data_learning_followup/README.md)は、利用者の指示による学習側の変更で、この校正代理法を使っていません。
 
 [results.csv](results.csv) に全14結果、[summary.json](summary.json) に集計、
 [provenance.json](provenance.json) に全出典・灰色入力の相違、[exploratory_inputs.csv](exploratory_inputs.csv) に実際の比較入力があります。

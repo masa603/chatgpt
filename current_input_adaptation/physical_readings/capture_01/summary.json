@@ -69,5 +69,6 @@
   "startup_self_check_log": "NOT_SUPPLIED",
   "submitted_log_sha256": "3fd5ccf28804e0cbf99bc2600bb63a8e01d264a3288453d30c1b15fd245fcec9",
   "sensor_part": "UNKNOWN per user reply",
-  "subsequent_development_use": "Used in calibration_followup offline input comparison; not an unused final test of that comparison method. Not used to refit V5 weights."
+  "subsequent_development_use": "Used in calibration_followup offline input comparison; not an unused final test of that comparison method. Not used to refit V5 weights.",
+  "subsequent_role_for_v6": "Latest nine rows first held out for development condition selection; then added to all69 final fitting. Not a prospective V6 measurement."
 }

@@ -1,0 +1,70 @@
+sample_id,group,color_id,input_r,input_g,input_b,target_r8,target_g8,target_b8,source_role
+original_1,original_3x3,r1c1,0.8548,0.1775,0.1615,255,0,0,previous_v4_training
+original_2,original_3x3,r1c2,0.4381,0.3443,0.1972,0,255,0,previous_v4_training
+original_3,original_3x3,r1c3,0.0826,0.0941,0.2191,0,0,255,previous_v4_training
+original_4,original_3x3,r2c1,1.0000,1.0000,0.5998,255,255,0,previous_v4_training
+original_5,original_3x3,r2c2,0.2782,0.5909,0.6044,0,255,255,previous_v4_training
+original_6,original_3x3,r2c3,0.3178,0.1588,0.2307,255,0,255,previous_v4_training
+original_7,original_3x3,r3c1,0.0733,0.1384,0.1384,0,0,0,previous_v4_training
+original_8,original_3x3,r3c2,0.2220,0.2626,0.2537,127,127,127,previous_v4_training
+original_9,original_3x3,r3c3,0.9046,0.9264,0.8535,255,255,255,previous_v4_training
+reread_01_r1c1,reread_01,r1c1,0.661010265,0.103786819,0.0968564227,255,0,0,previous_v4_training
+reread_01_r1c2,reread_01,r1c2,0.271507502,0.446002811,0.242141038,0,255,0,previous_v4_training
+reread_01_r1c3,reread_01,r1c3,0.11641673,0.121318392,0.254885316,0,0,255,previous_v4_training
+reread_01_r2c1,reread_01,r2c1,0.857537448,0.753155768,0.308411211,255,255,0,previous_v4_training
+reread_01_r2c2,reread_01,r2c2,0.268745095,0.36886397,0.400169909,0,255,255,previous_v4_training
+reread_01_r2c3,reread_01,r2c3,0.444751352,0.140252456,0.25743416,255,0,255,previous_v4_training
+reread_01_r3c1,reread_01,r3c1,0.039857924,0.0147265112,0.0288870074,0,0,0,previous_v4_training
+reread_01_r3c2,reread_01,r3c2,0.189029187,0.188639566,0.189464733,127,127,127,previous_v4_training
+reread_01_r3c3,reread_01,r3c3,1,1,1,255,255,255,previous_v4_training
+reread_03_r1c1,reread_03,r1c1,0.773317158,0.0968908221,0.0729455128,255,0,0,previous_v4_training
+reread_03_r1c2,reread_03,r1c2,0.214517444,0.454808444,0.190212354,0,255,0,previous_v4_training
+reread_03_r1c3,reread_03,r1c3,0.0158150904,0.0983369574,0.234533712,0,0,255,previous_v4_training
+reread_03_r2c1,reread_03,r2c1,0.836171865,0.731019557,0.305632472,255,255,0,previous_v4_training
+reread_03_r2c2,reread_03,r2c2,0.236415252,0.521330476,0.580794096,0,255,255,previous_v4_training
+reread_03_r2c3,reread_03,r2c3,0.44890511,0.123644263,0.249307469,255,0,255,previous_v4_training
+reread_03_r3c1,reread_03,r3c1,0,0.00650758995,0,0,0,0,previous_v4_training
+reread_03_r3c2,reread_03,r3c2,0.171127349,0.209689081,0.221606642,127,127,127,previous_v4_training
+reread_03_r3c3,reread_03,r3c3,1,1,1,255,255,255,previous_v4_training
+reread_latest_r1c1,reread_latest,r1c1,0.650211513,0.068403922,0.0338983051,255,0,0,previous_v4_training
+reread_latest_r1c2,reread_latest,r1c2,0.190409034,0.39196524,0.0694915354,0,255,0,previous_v4_training
+reread_latest_r1c3,reread_latest,r1c3,0.133286312,0.134636268,0.237288132,0,0,255,previous_v4_training
+reread_latest_r2c1,reread_latest,r2c1,1,1,0.65423727,255,255,0,previous_v4_training
+reread_latest_r2c2,reread_latest,r2c2,0.314527482,0.457111835,0.593220353,0,255,255,previous_v4_training
+reread_latest_r2c3,reread_latest,r2c3,0.418194592,0.520086884,0.794915259,255,0,255,previous_v4_training
+reread_latest_r3c1,reread_latest,r3c1,0.152327225,0.153094471,0.161016956,0,0,0,previous_v4_training
+reread_latest_r3c2,reread_latest,r3c2,0.23765865,0.237785012,0.261016935,127,127,127,previous_v4_training
+reread_latest_r3c3,reread_latest,r3c3,0.956276476,0.945711195,1,255,255,255,previous_v4_training
+v3_capture01_r1c1,v3_capture01,r1c1,0.679028153,0.116465844,0.136783734,255,0,0,previous_v4_training
+v3_capture01_r1c2,v3_capture01,r1c2,0.141943738,0.345381528,0.115526803,0,255,0,previous_v4_training
+v3_capture01_r1c3,v3_capture01,r1c3,0.112105712,0.169344023,0.303142339,0,0,255,previous_v4_training
+v3_capture01_r2c1,v3_capture01,r2c1,0.750213146,0.698125839,0.455637723,255,255,0,previous_v4_training
+v3_capture01_r2c2,v3_capture01,r2c2,0.268115938,0.45046854,0.522181153,0,255,255,previous_v4_training
+v3_capture01_r2c3,v3_capture01,r2c3,0.421568692,0.144578293,0.256931603,255,0,255,previous_v4_training
+v3_capture01_r3c1,v3_capture01,r3c1,0.0115089547,0.0421686657,0.0628465787,0,0,0,previous_v4_training
+v3_capture01_r3c2,v3_capture01,r3c2,0.180306911,0.208835334,0.206099808,127,127,127,previous_v4_training
+v3_capture01_r3c3,v3_capture01,r3c3,0.99531126,1,1,255,255,255,previous_v4_training
+v4_capture01_r1c1,v4_capture01,r1c1,0.716327667,0.0678776279,0.0294985231,255,0,0,previous_v4_prospective_capture_now_development
+v4_capture01_r1c2,v4_capture01,r1c2,0.142385945,0.442638636,0.117994092,0,255,0,previous_v4_prospective_capture_now_development
+v4_capture01_r1c3,v4_capture01,r1c3,0,0,0.00884955563,0,0,255,previous_v4_prospective_capture_now_development
+v4_capture01_r2c1,v4_capture01,r2c1,0.550302327,0.447418749,0.060471978,255,255,0,previous_v4_prospective_capture_now_development
+v4_capture01_r2c2,v4_capture01,r2c2,0.0307861604,0.281070769,0.320059001,0,255,255,previous_v4_prospective_capture_now_development
+v4_capture01_r2c3,v4_capture01,r2c3,0.0984057263,0.00286807073,0.0294985231,255,0,255,previous_v4_prospective_capture_now_development
+v4_capture01_r3c1,v4_capture01,r3c1,0,0,0,0,0,0,previous_v4_prospective_capture_now_development
+v4_capture01_r3c2,v4_capture01,r3c2,0.0709180981,0.0841300189,0.103244834,127,127,127,previous_v4_prospective_capture_now_development
+v4_capture01_r3c3,v4_capture01,r3c3,0.690489233,0.465583175,0.556047201,255,255,255,previous_v4_prospective_capture_now_development
+white_check_01_1,white_check_01,r3c3,0.94503051,0.838383853,0.936608553,255,255,255,white_only_diagnostic_now_development
+white_check_02_1,white_check_02,r3c3,1,0.978624582,1,255,255,255,white_only_diagnostic_now_development
+white_check_02_2,white_check_02,r3c3,1,0.957249105,1,255,255,255,white_only_diagnostic_now_development
+white_check_02_3,white_check_02,r3c3,0.919853389,0.82713753,0.897810221,255,255,255,white_only_diagnostic_now_development
+blue_black_01_r1c3,white_check_02,r1c3,0,0.0362453498,0.124087594,0,0,255,blue_black_diagnostic_same_calibration_as_white_check_02
+blue_black_01_r3c1,white_check_02,r3c1,0,0,0,0,0,0,blue_black_diagnostic_same_calibration_as_white_check_02
+v5_capture01_r1c1,v5_capture01,r1c1,0.729555726,0.0676437467,0.0357142873,255,0,0,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r1c2,v5_capture01,r1c2,0.22730203,0.448703498,0.128571421,0,255,0,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r1c3,v5_capture01,r1c3,0.0392788202,0.077790305,0.225000009,0,0,255,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r2c1,v5_capture01,r2c1,0.851899564,0.749718189,0.16607143,255,255,0,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r2c2,v5_capture01,r2c2,0.189311028,0.391206324,0.5,0,255,255,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r2c3,v5_capture01,r2c3,0.216999352,0.0349492617,0.107142858,255,0,255,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r3c1,v5_capture01,r3c1,0,0,0,0,0,0,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r3c2,v5_capture01,r3c2,0.0109465485,0.0631341562,0.0553571507,127,127,127,"V5 new physical reading, now V6 development selection and final fitting"
+v5_capture01_r3c3,v5_capture01,r3c3,0.57566005,0.537767768,0.589285731,255,255,255,"V5 new physical reading, now V6 development selection and final fitting"

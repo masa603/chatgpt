@@ -4,7 +4,7 @@
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
   "scope": "One new physical reading of the same learning 3x3 chart after V3 weights were frozen; not independent unseen-chart evaluation.",
-  "current_status": "V5_NEW_PHYSICAL_READ_RECEIVED; ALL_MODELS_ABOVE_300; INVESTIGATE_CALIBRATION_AND_SETUP",
+  "current_status": "V6_DATA_ONLY_ADDITIONAL_LEARNING_AND_HOST_CHECK_COMPLETE; NEW_PHYSICAL_V6_READ_PENDING",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
@@ -38,10 +38,10 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "Identify sensor/LED/paper geometry from setup photo. Sensor part unknown. Calibration proxy comparison also exceeds target; do not promise another model fixes it.",
+  "next_step": "Upload COLOR_RETRAIN_V6, b/w calibration, new nine-color r capture. Training scores are not a new hardware result.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
-  "current_experiment": "../current_input_adaptation/README.md",
+  "current_experiment": "../data_learning_followup/README.md",
   "v5_training_rows": 60,
   "v5_development_mean_full_chart_mse": 4302.6049382716055,
   "v5_actual_new_physical_mse": {
@@ -51,5 +51,13 @@
   },
   "v5_physical_record": "../current_input_adaptation/physical_readings/capture_01/summary.json",
   "v5_physical_data_used_to_refit_v5": false,
-  "v5_physical_data_used_for_calibration_development": true
+  "v5_physical_data_used_for_calibration_development": true,
+  "user_priority": "Use learning data/model changes; no angle/setup/photo prerequisite.",
+  "v6_training_rows": 69,
+  "v6_learning_mse_rgb8": {
+    "40": 58.21256038647343,
+    "60": 0.7681159420289855,
+    "100": 0.23671497584541062
+  },
+  "v6_actual_new_physical_mse": "NOT_YET_MEASURED"
 }

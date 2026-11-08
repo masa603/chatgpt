@@ -1,10 +1,11 @@
 # 2026年11月6日：40→60→100次元の比較
 
 現在は**提供された正解PPMを使い、新しく読み取った9色でMSE300以下を目指す再学習**を優先しています。
-学習済みの追加適応版と次の手順は [current_input_adaptation](../current_input_adaptation/README.md)、
-Arduinoへ書き込む2ファイルは [color_retrain_v5](../current_input_adaptation/color_retrain_v5/README.md) です。
-この版は3×3の9色の60組を学習したDenseモデルで、元の33色全体の改善を確認したものではありません。
-V4の失敗した全9色読取と、後の部分診断もV5の学習・開発へ加えています。
+学習済みの追加学習版と次の手順は [data_learning_followup](../data_learning_followup/README.md)、
+Arduinoへ書き込む2ファイルは [color_retrain_v6](../data_learning_followup/color_retrain_v6/README.md) です。
+この版は3×3の9色の69組を学習したDenseモデルで、元の33色全体の改善を確認したものではありません。
+ユーザーの指示に従い、装置変更を前提にせず、最新V5の9組も開発・最終学習へ加えています。
+新しいV6実測は未受領で、MSE300以下の達成は未確認です。
 新しいV5実測1回は **H40=2690.26、H60=1812.63、H100=1640.48** で、全3モデルとも300以下は未達です。
 H100は灰色が二乗誤差の約91%を占めます。[実測ログ](../current_input_adaptation/physical_readings/capture_01/README.md) を保存しました。
 保存データでの[校正方法の開発比較](../calibration_followup/README.md)も300を超えているため、次はセンサ・LED・紙の位置関係を確認します。

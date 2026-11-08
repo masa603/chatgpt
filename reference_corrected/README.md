@@ -1,6 +1,6 @@
 # 提供された正解PPMでの再学習（V4）
 
-**現在の追加適応版は [current_input_adaptation / V5](../current_input_adaptation/README.md) です。**
+**現在の追加学習版は [data_learning_followup / V6](../data_learning_followup/README.md) です。**
 以下のV4結果はそのまま保存し、追加で得た低い青・黒入力などはV5の学習・開発へ役割を変更しています。
 
 ## 新しい実測の受領結果
