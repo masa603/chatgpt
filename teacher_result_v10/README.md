@@ -4,6 +4,10 @@
 正解画像を変更せず、3×3の学習ラベルを先生指定RGBへ修正して学習を行いました。
 元ファイルのバイト列を保存しています。SHA256は `582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2` です。
 
+**2026年11月9日受領：全8条件の実機再生・4組の実機速度・比較プログラム全体のFlash/RAMを記録できました。**
+[今回の実機結果表・図](RESULTS.md) と [元ログ・検算](hardware/run_01/README.md) にまとめています。
+実機出力216成分はPCと完全一致しました。以下の操作手順は再現用です。
+
 **サイトの左側は先生指定のresult.ppmのままにしてください。右側には新しいV10の出力を入れます。**
 以前のresu15.ppmの画素は変わっていないため、そちらを再度アップロードすると以前の3471.00のままです。
 過去のCMYK基準の値を先生指定基準の達成結果として扱うことは撤回します。
@@ -92,7 +96,9 @@ V9と同じ学習入力のgain/offset拡張を用いました。保存した9色
 ASan/UBSanを有効にし、CSR索引、t/T各1回の8PPM、元の先生HTMLのMSE、4組の計時制御・交互順序・チェックサムも確認しました。
 ホスト試験の時計は偽物で、実機速度として保存しません。[検算結果](verification.json) に区別しています。
 同じ検算は、NumPy・PyTorch・g++・Node.jsのある環境で `python teacher_result_v10/verify.py` を実行すると再現できます。
-Arduinoの実ビルド・今回の実機再生・実機速度は未受領です。この環境ではArduino CLIの取得がHTTP403で失敗したため、R4ビルド済みとはしていません。
+この環境でのArduino CLI取得はHTTP403で失敗したため、上のverification.jsonは当時のホスト検算の記録です。
+その後、利用者からUNO R4での実行ログとIDE使用量を受領しました。現在の実機結果は [hardware/run_01/summary.json](hardware/run_01/summary.json) です。
+受領した実機PPM・元の先生HTML・計時の平均と標本SD・チェックサムを検算済みです。全8条件入りのFlash187888byte、静的RAM6740byteも記録しました。
 
 独立した最終評価チャート、当初計画の物理的10回反復、H50、各条件単独のFlash/RAMも未実施です。
 H80・100は利用者の追加要望です。詳しい進捗は [remaining_experiments.md](remaining_experiments.md) に記録しています。

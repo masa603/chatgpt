@@ -442,5 +442,41 @@
     "memory": "No V10 Arduino IDE numbers received. Older V9/33-input firmware numbers not reused.",
     "next": "Upload new two-file teacher_compare_v10; send t once, save both output blocks plus IDE memory2 lines.",
     "teacher_site_use": "Keep left result.ppm unchanged; replace right with new V10 output. Old resu15 has old predictions."
+  },
+  "teacher_mandated_result_v10_device_run01": {
+    "received_date_japan": "2026-11-09",
+    "record": "../teacher_result_v10/hardware/run_01/summary.json",
+    "report": "../teacher_result_v10/RESULTS.md",
+    "serial_log_sha256": "3238bce437469fa44f97ce989bdd350ea9fc15080993f22a13bb956f172d08ae",
+    "all8_checks_pass": true,
+    "all216_device_rgb8_match_PC": true,
+    "original_teacher_html_match": true,
+    "timing": "User-reported realUNO R4;100 calls x5 groups,10 warmups,alternating model order;sensor/serial/MSE excluded;common checksum accumulation included.",
+    "time_change_percent": {
+      "40": -34.266284373105904,
+      "60": -28.972091095206665,
+      "80": -39.98800026108219,
+      "100": -44.00737492525412
+    },
+    "payload_reduction_percent": {
+      "40": 62.89651586063443,
+      "60": 60.51310311045799,
+      "80": 67.2405225046145,
+      "100": 69.69823197260021
+    },
+    "MSE_role": "Saved real9 inputs replayed on device;not a new sensor capture. No inputs added to fit or threshold selection.",
+    "absolute300": "Dense all4 andCSR40/60 pass;CSR80/100 fail",
+    "relative_saved9_quality": "AllH CSR MSE increase>5%;not proof of accuracy preservation despite separate selection-set criterion passing.",
+    "whole8_firmware_flash_bytes": 187888,
+    "whole8_firmware_static_ram_bytes": 6740,
+    "remaining_after_static_bytes": 26028,
+    "uploader_write_bytes_separate": 187896,
+    "runtime_stack_usage": "NOT_MEASURED",
+    "new_sensor_capture_count": 0,
+    "independent_final_chart": "NOT_PERFORMED",
+    "ten_physical_repetitions": "NOT_PERFORMED",
+    "standalone_condition_flash_ram": "NOT_PERFORMED",
+    "H50": "NOT_PERFORMED;user-added80/100 do not substitute originalH50",
+    "next": "Summarize results and limitations;do not call alloriginal planitems complete."
   }
 }

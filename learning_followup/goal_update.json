@@ -3,8 +3,8 @@
   "user_requested": "300以下には絶対にしたい",
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
-  "scope": "Teacher mandates unchanged original result.ppm. V10 PC and host replay on9 archived actual inputs excluded from fitting; no new V10 physical capture or board timing yet.",
-  "current_status": "V10_TEACHER_RESULT_CORRECTION_FROZEN; PC_DENSE_ALL4_LE300; PC_CSR_H40_H60_LE300_ONLY; DEVICE_T_COMPARISON_PENDING",
+  "scope": "User-reported V10 execution on UNO R4 verified:8 saved-input MSE/PPM outputs,4 real timing pairs,whole8-condition Flash/RAM. No new sensor capture or independent final chart.",
+  "current_status": "V10_DEVICE_REPLAY_AND4_TIMING_PAIRS_AND_WHOLE_FIRMWARE_MEMORY_RECEIVED_VERIFIED; CSR80_100_GOAL_NOT_MET; SAVED9_MSE_INCREASE_GT5PCT_ALL_H",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
@@ -38,7 +38,7 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "Keep site left reference=result.ppm; upload new V10 output on right, not old resu15. Write both V10 files, confirm TEACHER_RESULT_COMPARE_V10, send t once. Save teacher-result comparison and four-pair timing blocks plus new IDE memory2 lines. No new paper capture.",
+  "next_step": "Summarize verified V10 results and limitations in report. Existing t run already supplies all8 outputs and4 timing pairs; no duplicate t required to fill these records. Independent final chart,10 physical repetitions,H50,and standalone-condition Flash/RAM remain unperformed.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
   "current_experiment": "../teacher_result_v10/README.md",
@@ -177,7 +177,28 @@
   "v10_pc_summary": "../teacher_result_v10/comparison_pc_summary.json",
   "v10_host_verification": "../teacher_result_v10/verification.json",
   "v10_new_physical_capture_count": 0,
-  "v10_hardware_saved_replay": "PENDING",
-  "v10_hardware_speed": "PENDING",
-  "v10_hardware_memory": "PENDING; V9 Dense4 memory values stay historical."
+  "v10_hardware_saved_replay": "RECEIVED_AND_VERIFIED; all216 RGB8 components exact PC match",
+  "v10_hardware_speed": "RECEIVED_AND_VERIFIED;100 calls x5 groups per model,4 pairs",
+  "v10_hardware_memory": "RECEIVED; Flash187888,staticRAM6740,whole8-model comparison program",
+  "v10_hardware_record": "../teacher_result_v10/hardware/run_01/summary.json",
+  "v10_results_report": "../teacher_result_v10/RESULTS.md",
+  "v10_hardware_timing_runs_received": 1,
+  "v10_hardware_saved_input_dense_mse": {
+    "40": 122.44444444444444,
+    "60": 33.96296296296296,
+    "80": 60.851851851851855,
+    "100": 21.925925925925927
+  },
+  "v10_hardware_saved_input_csr_mse": {
+    "40": 297.22222222222223,
+    "60": 273.18518518518516,
+    "80": 443.037037037037,
+    "100": 360.55555555555554
+  },
+  "v10_flash_bytes_all8": 187888,
+  "v10_static_ram_bytes_all8": 6740,
+  "v10_remaining_ram_after_static_bytes": 26028,
+  "v10_runtime_stack_usage": "NOT_MEASURED;26028 is available after statics,not actual local-variable use",
+  "v10_quality_note": "CSR MSE increases on saved9 in allH, exceeding5pct relative tolerance; onlyCSR40/60 meet absolute300. Selection validation128 is a different set; do not claim general accuracy preservation.",
+  "v10_next_action": "REPORT_RESULTS_AND_LIMITATIONS"
 }
