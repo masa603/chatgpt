@@ -1,0 +1,85 @@
+{
+  "received_date_japan": "2026-11-08",
+  "execution_wall_timestamp": null,
+  "firmware": "COLOR_RETRAIN_V7",
+  "capture_counter": 1,
+  "physical_captures": 1,
+  "input_source": "NEW_PHYSICAL_SENSOR_READINGS",
+  "role": "New read after V7 freeze; same nine-color learning chart, not unseen-chart final evaluation.",
+  "training_role": "NOT_USED_FOR_V7_FITTING_OR_DEVELOPMENT",
+  "reference_ppm_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+  "reference_basis": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED",
+  "training_data_sha256": "e519ae56e5a5d508c48bb2ba18cbb2021a76ddb8363986ba24537f8695dc8a1d",
+  "black_rgb": [
+    24.5,
+    8.699999809265137,
+    8.0
+  ],
+  "white_rgb": [
+    209.39999389648438,
+    102.9000015258789,
+    67.9000015258789
+  ],
+  "model_hashes_ppm_mse_and_goal_flags": "PASS",
+  "raw_to_normalized_input": "PASS",
+  "normalization_max_abs_difference": 7.450580596923828e-09,
+  "original_teacher_html_mse": "PASS",
+  "teacher_calculator_sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e",
+  "results": [
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 40,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 3535.481481,
+      "mse_recomputed_from_ppm": 3535.4814814814813,
+      "teacher_site_display_mse": 3535.48,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "0eaa460e38065146150b3e4d72a8cfb41c0c6b21b20f1804928632c7832352ae",
+      "ppm": "h40_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 60,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 3060.111111,
+      "mse_recomputed_from_ppm": 3060.1111111111113,
+      "teacher_site_display_mse": 3060.11,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "0f55e1c3ea5c17f15c2a38f29998d034e1fc4284060faf73a3ed28efd66e7b3b",
+      "ppm": "h60_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 80,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 3428.740741,
+      "mse_recomputed_from_ppm": 3428.740740740741,
+      "teacher_site_display_mse": 3428.74,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "2f3ae3b1b877e1929715e8b423581e502137393b76686a352353a72ed560b567",
+      "ppm": "h80_dense.ppm"
+    },
+    {
+      "capture_key": "capture_01",
+      "hidden_size": 100,
+      "format": "DENSE",
+      "colors": 9,
+      "mse_device_reported": 3636.740741,
+      "mse_recomputed_from_ppm": 3636.740740740741,
+      "teacher_site_display_mse": 3636.74,
+      "goal_met_this_read": false,
+      "pc_replay_max_rgb8_difference": 0,
+      "model_header_sha256": "c0d09a98923be229192257ce6e4d3ec8f254cd73b1b00224956e9001a837e399",
+      "ppm": "h100_dense.ppm"
+    }
+  ],
+  "lighting": "User requested data-only learning changes; no setup/angle changes required by this version. Actual illumination and geometry for this reading not specified in log.",
+  "startup_self_check_log": "NOT_SUPPLIED",
+  "submitted_log_sha256": "919ff0f6ba6a8b05655a8b85cdce517a927839a6e06237a3e97b3c9e4717e6d8"
+}

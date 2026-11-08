@@ -1,0 +1,14 @@
+{
+  "scope": "Host mock acquisition only; no physical samples generated.",
+  "sensor_and_clipped_normalization_bodies_identical_to_v7": true,
+  "cpp11_asan_ubsan": "PASS",
+  "invalid_calibration_and_state_guards": "PASS",
+  "label_mapping_purple_black_gray_white": "PASS",
+  "three_samples_per_command": "PASS",
+  "raw_and_unclipped_and_clipped_inputs": "PASS",
+  "negative_and_over_one_inputs": "PASS",
+  "serial_newlines_uppercase_n_restart": "PASS",
+  "led_off_after_batch": "PASS",
+  "models_changed_or_trained": false,
+  "new_physical_patch_samples_received": false
+}

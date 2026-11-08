@@ -124,6 +124,13 @@ def verify(calculator):
             'differential_inputs':len(cases),'all_four_models_rgb8_exact':True,'max_abs_fp32_difference':max_error,
             'training_metrics':metrics,'eight_mock_image_mses_match_original_teacher_html':teacher_checks,
             'two_mock_captures_and_n_restart':'PASS','new_physical_v7_mse':'NOT_YET_MEASURED'}
+    physical=HERE/'physical_readings/capture_01/summary.json'
+    if physical.exists():
+        received=json.loads(physical.read_text())
+        assert received['firmware']=='COLOR_RETRAIN_V7' and received['reference_ppm_sha256']==sha(reference)
+        report['new_physical_v7_mse']={str(r['hidden_size']):r['mse_recomputed_from_ppm'] for r in received['results']}
+        report['new_physical_v7_record']='physical_readings/capture_01/summary.json'
+        report['new_physical_v7_independent_unseen_chart_evaluation']=False
     (HERE/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
     print('PASS: four models including H80; all reference/weight checks, 366-input differential, two mock captures and teacher-site agreement; ASan/UBSan.')
 

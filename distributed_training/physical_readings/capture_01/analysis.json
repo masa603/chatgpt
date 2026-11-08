@@ -1,0 +1,65 @@
+{
+  "scope": "Diagnostics of the received, newly measured V7 capture; goal always uses all9 colors.",
+  "four_model_host_rgb8_replay": "Exact match on all108 components.",
+  "original_teacher_html_mse": "Matches firmware for all four 3x3 PPMs and the selected CMYK reference.",
+  "breakdown": [
+    {
+      "hidden_size": 40,
+      "full9_mse": 3535.4814814814818,
+      "first5_mse_diagnostic_only": 4.0,
+      "purple_black_gray_white_mse_diagnostic_only": 7949.833333333334,
+      "purple_gray_white_error_share_percent": 99.86381445242934,
+      "all9_colors_kept_for_goal": true
+    },
+    {
+      "hidden_size": 60,
+      "full9_mse": 3060.1111111111113,
+      "first5_mse_diagnostic_only": 5.6,
+      "purple_black_gray_white_mse_diagnostic_only": 6878.25,
+      "purple_gray_white_error_share_percent": 99.76519855246119,
+      "all9_colors_kept_for_goal": true
+    },
+    {
+      "hidden_size": 80,
+      "full9_mse": 3428.7407407407404,
+      "first5_mse_diagnostic_only": 0.6666666666666667,
+      "purple_black_gray_white_mse_diagnostic_only": 7713.833333333333,
+      "purple_gray_white_error_share_percent": 99.73643276875215,
+      "all9_colors_kept_for_goal": true
+    },
+    {
+      "hidden_size": 100,
+      "full9_mse": 3636.7407407407404,
+      "first5_mse_diagnostic_only": 13.333333333333334,
+      "purple_black_gray_white_mse_diagnostic_only": 8166.0,
+      "purple_gray_white_error_share_percent": 99.65985008962033,
+      "all9_colors_kept_for_goal": true
+    }
+  ],
+  "calibration_white_rgb": [
+    209.4,
+    102.9,
+    67.9
+  ],
+  "last_white_patch_rgb": [
+    85.9,
+    41.0,
+    29.2
+  ],
+  "last_white_raw_fraction_of_calibration": [
+    0.41021967526265524,
+    0.3984450923226433,
+    0.4300441826215022
+  ],
+  "last_gray_normalized_rgb": [
+    0.01838832,
+    0.03715499,
+    0.03338898
+  ],
+  "observed": "First five colors have small errors. Purple, gray and white dominate total squared error; gray is mapped close to black. White raw values differ greatly from calibration.",
+  "not_established": "The log alone does not identify lighting, geometry, wiring, movement or a wrong-patch reading as the cause. No claim that hidden-size increase or more epochs will solve it.",
+  "next_step": "Collect labelled purple, black, gray and white raw measurements, three rapid repeats per patch, for development and additional training; do not call these a full-chart accuracy evaluation.",
+  "v7_models_frozen_unchanged": true,
+  "this_group_used_for_v7_fitting": false,
+  "new_training_or_pruning_in_this_update": false
+}

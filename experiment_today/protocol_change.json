@@ -259,10 +259,29 @@
     "selection": "Per H min development MSE; all choose reliability-weighted SmoothL1 plus bounded input jitter. L1 weights-only1e-6 retained.",
     "final_training": "From scratch50000epochs all102, seed42, Adam LR0.003 cosine->0.00003; same procedure for four H. No measured-only overfit finish phase.",
     "known_input_conflicts": "Retained; all sample weights positive. Unweighted training errors reported separately.",
-    "new_physical_v7_mse": "NOT_YET_RECEIVED",
+    "new_physical_v7_mse": {
+      "40": 3535.4814814814818,
+      "60": 3060.1111111111113,
+      "80": 3428.7407407407404,
+      "100": 3636.7407407407404
+    },
     "firmware": "COLOR_RETRAIN_V7",
     "sensor_normalization": "Unchanged; all4 models share same fresh input.",
     "old_reference_results": "Keep prior pure-RGB results separate; no cross-basis improvement-rate claims.",
-    "photo_or_setup_change_required": false
+    "photo_or_setup_change_required": false,
+    "new_physical_v7_record": "../distributed_training/physical_readings/capture_01/summary.json"
+  },
+  "v7_new_physical_capture": {
+    "record": "../distributed_training/physical_readings/capture_01/summary.json",
+    "reference_basis": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED",
+    "new_physical_mse": {
+      "40": 3535.4814814814818,
+      "60": 3060.1111111111113,
+      "80": 3428.7407407407404,
+      "100": 3636.7407407407404
+    },
+    "all_four_met_300": false,
+    "input_role_for_v7": "NOT_USED_FOR_FITTING_OR_DEVELOPMENT; SAME_LEARNING_CHART_REPEAT",
+    "next": "Labelled patch data collection; no model weights, thresholds or acquisition functions changed."
   }
 }

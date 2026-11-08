@@ -93,8 +93,15 @@
     }
   ],
   "two_mock_captures_and_n_restart": "PASS",
-  "new_physical_v7_mse": "NOT_YET_MEASURED",
+  "new_physical_v7_mse": {
+    "40": 3535.4814814814818,
+    "60": 3060.1111111111113,
+    "80": 3428.7407407407404,
+    "100": 3636.7407407407404
+  },
   "four_model_log_reader_synthetic_fixture": "PASS; temporary fixture only, not a new physical reading",
   "wrong_reference_basis_rejected": "PASS",
-  "download_reference_sidecar_matches_verified_reference": true
+  "download_reference_sidecar_matches_verified_reference": true,
+  "new_physical_v7_record": "physical_readings/capture_01/summary.json",
+  "new_physical_v7_independent_unseen_chart_evaluation": false
 }
