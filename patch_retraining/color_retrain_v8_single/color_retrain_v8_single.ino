@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <cmath>
 namespace h40 {
 // Dense FP32, V8: fine-tuned on126 measured inputs including15 labelled patch samples; distributed CMYK targets.
 static_assert(sizeof(float) == 4, "FP32 required");
@@ -3173,6 +3172,10 @@ const uint8_t REFERENCE_RGB[9][3] = {
 };
 
 
+}
+
+#include <cmath>
+namespace trained_models {
 void predict(int index, const float *input, float *output) {
   const Model &m=models[index];
   float layer1[100],layer2[100];

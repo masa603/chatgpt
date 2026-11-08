@@ -48,6 +48,8 @@ def verify(calculator):
     for name in ['ledOff','readRGB','readAverage','normalizeInput','outputTo255','handleCalibration']:
         assert function_body(original,name)==function_body(scanner,name)
     header=(HERE/'color_retrain_v8/trained_models_v8.h').read_text()
+    assert 'void predict(' not in header and 'void inferAll(' not in header and 'bool selfCheck(' not in header
+    assert 'void predict(int index,' in scanner and 'bool selfCheck()' in scanner
     match=re.search(r'REFERENCE_RGB\[9\]\[3\]\s*=\s*\{([\s\S]*?)\};',header)
     assert match and np.array_equal(np.array(re.findall(r'\d+',match[1]),int).reshape(9,3),target)
     assert 'constexpr int MODEL_COUNT=4;' in header and 'trainedImages[4][3][3][3]' in scanner
@@ -151,6 +153,7 @@ def verify(calculator):
             'all_original102_and_patch15_samples_preserved':'PASS',
             'development117_weights_exclude_v7_nine_color_group':'PASS',
             'parent_and_selected_development_checkpoint_hashes':'PASS',
+            'parameter_header_separated_from_executable_sketch':'PASS',
             'new_physical_v8_mse':'NOT_YET_MEASURED'}
     physical=HERE/'physical_readings/capture_01/summary.json'
     if physical.exists():

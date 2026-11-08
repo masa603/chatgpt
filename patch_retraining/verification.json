@@ -99,5 +99,5 @@
   "development117_weights_exclude_v7_nine_color_group": "PASS",
   "parent_and_selected_development_checkpoint_hashes": "PASS",
   "new_physical_v8_mse": "NOT_YET_MEASURED",
-  "new_log_receiver_synthetic_fixture": "PASS; temporary mock only, not a new sensor measurement."
+  "parameter_header_separated_from_executable_sketch": "PASS"
 }

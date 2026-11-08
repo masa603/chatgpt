@@ -308,9 +308,11 @@
     "final_fit": "All126 rows, including V7 old full chart,25k more epochs. No new physical V8 inputs yet.",
     "sensor_normalization_architecture": "Unchanged,3->H->H->3 FP32; no position or output-palette lookup.",
     "comparison_limit": "Methods selected per H; not a controlled H-only causal comparison.",
-    "delivery": "../patch_retraining/color_retrain_v8_single/color_retrain_v8_single.ino",
+    "delivery": "../patch_retraining/color_retrain_v8/color_retrain_v8.ino",
     "physical_v8_mse": "NOT_YET_MEASURED",
     "independent_final_evaluation": "NOT_PERFORMED",
-    "compression": "New weights not yet pruned/benchmarked; do not reuse old thresholds or times."
+    "compression": "New weights not yet pruned/benchmarked; do not reuse old thresholds or times.",
+    "parameters": "../patch_retraining/color_retrain_v8/trained_models_v8.h",
+    "delivery_change": "User requested separate code and learning data/parameters; numeric model arrays unchanged, inference functions moved from header to sketch. Original learning CSV kept separate."
   }
 }

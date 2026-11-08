@@ -6,10 +6,16 @@
 
 ## 使うファイル
 
-GitHubのページへ接続できない場合も扱えるよう、学習済み配列を含めた
-**[1ファイル版color_retrain_v8_single.ino](color_retrain_v8_single/color_retrain_v8_single.ino)** を用意しました。
-このファイルを開いて全コードをArduino IDEの新規スケッチへ貼り付けるか、同名フォルダに保存して開きます。
-別の.hファイルは不要です。
+利用者の希望に従い、実行コードと学習済みパラメータを分けました。
+
+| ファイル | 内容 |
+| --- | --- |
+| [color_retrain_v8.ino](color_retrain_v8/color_retrain_v8.ino) | センサ読取、NN推論、操作、MSE・PPM出力の処理 |
+| [trained_models_v8.h](color_retrain_v8/trained_models_v8.h) | 4モデルの重み・バイアス、検算用・正解RGBの数値配列 |
+| [training126.csv](training126.csv) | 学習に使用した入力RGBと正解RGB、測定グループの記録 |
+
+Arduinoへ書き込むのは、同じ `color_retrain_v8` フォルダに置いた `.ino` と `.h` の組です。
+CSVはPCで学習するときの元データです。
 
 1. UNO R4 WiFiへ書き込む。
 2. シリアルモニタ9600 bpsでRESETし、`FIRMWARE=COLOR_RETRAIN_V8` と `ALL MODELS CHECK: PASS` を確認。
@@ -19,7 +25,7 @@ GitHubのページへ接続できない場合も扱えるよう、学習済み�
 
 この1回の9色読取で、4モデルの実測MSEとPPMが出ます。
 先生のサイトの基準は、選択済みの配布CMYK版 `reference_image1_cmyk_3x3.ppm` です。
-[2ファイル版](color_retrain_v8) も保存していますが、1ファイル版と混ぜず、どちらかの形式だけを使います。
+[1ファイル版](color_retrain_v8_single) も保存しています。形式を混ぜず、今は上の2ファイルの組を使います。
 
 ## 学習に使ったデータと役割
 

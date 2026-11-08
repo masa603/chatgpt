@@ -38,7 +38,7 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "Open the self-contained V8 sketch in Arduino IDE; black b, white w, then read all9 colors with r. One new physical read gives all4 models. Save PATCH ADAPTED CAPTURE START through END.",
+  "next_step": "Save V8 .ino and trained_models_v8.h in the same color_retrain_v8 folder and open .ino in Arduino IDE; black b, white w, then all9 colors with r. Save PATCH ADAPTED CAPTURE START through END.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
   "current_experiment": "../patch_retraining/README.md",
@@ -93,7 +93,7 @@
   "last_updated_date_japan": "2026-11-08",
   "v6_physical_record": "../data_learning_followup/physical_readings/capture_01/summary.json",
   "v7_physical_record": "../distributed_training/physical_readings/capture_01/summary.json",
-  "next_sketch": "../patch_retraining/color_retrain_v8_single/color_retrain_v8_single.ino",
+  "next_sketch": "../patch_retraining/color_retrain_v8/color_retrain_v8.ino",
   "v8_training_rows": 126,
   "patch_samples_received": 15,
   "patch_calibration_groups": 1,
@@ -116,5 +116,7 @@
     "100": 5.111111111111111
   },
   "v8_new_physical_mse": "NOT_YET_MEASURED",
-  "user_delivery_constraint": "GitHub site connection/access restricted; provide self-contained file in shared workspace."
+  "user_delivery_constraint": "GitHub site connection/access restricted; user requested code and parameters separately. Provide two workspace file links, and original learning CSV separately.",
+  "next_parameters": "../patch_retraining/color_retrain_v8/trained_models_v8.h",
+  "learning_data_csv": "../patch_retraining/training126.csv"
 }
