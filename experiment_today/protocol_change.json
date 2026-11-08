@@ -342,5 +342,33 @@
     "old_v8_data": "Latest9 used in V9 exploratory development then final fitting, not a V9 test.",
     "thresholds": "Fixed on archived separate validation with training-only guard before paired physical reads.",
     "no_more_training_search": true
+  },
+  "v9_physical_goal_and_saved_replay": {
+    "source": "../calibration_retraining/physical_readings/capture_01/summary.json",
+    "dense_actual_mse": {
+      "40": 278.3333333333333,
+      "60": 63.0,
+      "80": 37.592592592592595,
+      "100": 36.7037037037037
+    },
+    "all4_le300_this_read": true,
+    "physical_capture_count": 1,
+    "weights_or_thresholds_updated_after_read": false,
+    "received_memory_scope": "COLOR_RETRAIN_V9, all4 Dense; Flash158688, staticRAM7212. Not8 conditions or per-H.",
+    "t_problem": "User was running Dense-only COLOR_RETRAIN_V9, which has no t handler.",
+    "next": "../calibration_retraining/compare_saved_v9/README.md",
+    "saved_replay_role": "Same physical inputs reused on board, no new sensor capture; not independent final evaluation.",
+    "hardware_csr_replay_and_timing": "PENDING"
+  },
+  "v9_reference_basis_screenshot_audit": {
+    "audit": "../calibration_retraining/physical_readings/capture_01/reference_basis_audit.json",
+    "same_h40_output": {
+      "site_pure_result_ppm_mse": 3471.0,
+      "selected_notebook_cmyk_mse": 278.33
+    },
+    "all4_300_only_on_notebook_cmyk": true,
+    "pure_site_goal_met": false,
+    "weights_pixels_original_references_unchanged": true,
+    "saved_t_output": "Both reference MSE columns for identical predictions."
   }
 }

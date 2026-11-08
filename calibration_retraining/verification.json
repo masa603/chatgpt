@@ -97,5 +97,12 @@
   "development126_weights_exclude_v8_nine_color_group": "PASS",
   "parent_and_selected_development_checkpoint_hashes": "PASS",
   "parameter_header_separated_from_executable_sketch": "PASS",
-  "new_physical_v9_mse": "NOT_YET_MEASURED"
+  "new_physical_v9_mse": {
+    "40": 278.3333333333333,
+    "60": 63.0,
+    "80": 37.592592592592595,
+    "100": 36.7037037037037
+  },
+  "new_physical_v9_record": "physical_readings/capture_01/summary.json",
+  "new_physical_v9_independent_unseen_chart_evaluation": false
 }

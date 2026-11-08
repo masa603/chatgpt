@@ -1,5 +1,8 @@
 # V9のDense／CSRを1回で比較する
 
+**今回のDense読取は受領済みです。次は紙を読まずに使える [compare_saved_v9](../compare_saved_v9/README.md) を案内しています。**
+以下は追加の新しい読取を行う場合の手順です。
+
 実行コードは [compare_all_v9.ino](compare_all_v9.ino)、学習済み数値配列は [comparison_parameters_v9.h](comparison_parameters_v9.h) です。
 この2ファイルを同じ `compare_all_v9` フォルダに保存し、.inoを開いてUNO R4 WiFiへ書き込みます。
 

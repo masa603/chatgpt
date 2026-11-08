@@ -1,0 +1,44 @@
+{
+  "trigger": "User screenshot shows left result.ppm pure RGB, right resu15.ppm andMSE3471.00.",
+  "same_output_matches_current_H40_by_exact_teacher_MSE": true,
+  "references": {
+    "site_result_pure_rgb": {
+      "path": "learning_followup/reference_audit/provided/result.ppm",
+      "sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2"
+    },
+    "selected_notebook_cmyk": {
+      "path": "distributed_training/references/reference_image1_cmyk_3x3.ppm",
+      "sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14"
+    }
+  },
+  "results": [
+    {
+      "H": 40,
+      "output_ppm": "h40_dense.ppm",
+      "site_result_pure_rgb": 3471,
+      "selected_notebook_cmyk": 278.33
+    },
+    {
+      "H": 60,
+      "output_ppm": "h60_dense.ppm",
+      "site_result_pure_rgb": 3016.85,
+      "selected_notebook_cmyk": 63
+    },
+    {
+      "H": 80,
+      "output_ppm": "h80_dense.ppm",
+      "site_result_pure_rgb": 2979.15,
+      "selected_notebook_cmyk": 37.59
+    },
+    {
+      "H": 100,
+      "output_ppm": "h100_dense.ppm",
+      "site_result_pure_rgb": 2918.41,
+      "selected_notebook_cmyk": 36.7
+    }
+  ],
+  "interpretation": "Both numbers are correct for different reference RGB. All-four<=300 claim applies only to user-selected Notebook CMYK, not result.ppm. No reference is edited to match outputs.",
+  "website_current_reference_goal_met": false,
+  "notebook_cmyk_goal_met_this_read": true,
+  "model_or_threshold_changed": false
+}

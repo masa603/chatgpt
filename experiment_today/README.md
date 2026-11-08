@@ -1,14 +1,13 @@
 # 2026年11月6日：40→60→100次元の比較
 
 **現在使うのは [V9のDense／CSR・全8条件の比較版](../calibration_retraining/README.md) です。**
-ここで重みを固定し、追加学習を繰り返すより、圧縮前後のMSE・容量・速度の記録を優先します。
-最新V9の4Hの学習・枝刈り・CSR化・PC検算は完了しています。
-次は [compare_all_v9](../calibration_retraining/compare_all_v9/README.md) の2ファイルを書き込み、9色を1回読み、tを1回送信します。
-この操作でDense／CSR各4Hの同じ新規入力による精度比較と、4組の実機速度・配列容量が得られます。
-Arduino IDEの使用量2行は全8条件入りプログラム全体のFlash・静的RAMとして別に保存します。
-**最新V9比較版の実機結果はまだ受領していません。** 旧版の速度・メモリを転記しません。
-直前V8の実測はH40=2745.78、H60=441.11、H80=690.63、H100=1874.78で全モデルとも300以下は未達でした。
-[旧V8の実測](../patch_retraining/physical_readings/capture_01/README.md) は当時の値で保持し、その9組はV9の開発・最終学習へ役割を変更しています。
+配布NotebookのCMYK基準での最新V9のDense新規読取は、H40=278.33、H60=63.00、H80=37.59、H100=36.70で全4モデルが300以下でした。
+[元ログと検算](../calibration_retraining/physical_readings/capture_01/README.md) を保存しました。
+次は [compare_saved_v9](../calibration_retraining/compare_saved_v9/README.md) の2ファイルを書き込み、tを1回送信します。
+今回の入力を保存済みなので、紙を読み直さず、同じ9色のDense／CSR実機再生と4組の速度を記録できます。
+重み・閾値は変更していません。元の物理読取1回を、別の反復測定として数えません。
+受領したFlash158688byte・静的RAM7212byteはDense4モデル入りCOLOR_RETRAIN_V9の値です。
+比較8条件入りや各条件単独の使用量とは別に保存しました。比較版の新しいIDE使用量2行は次の受領待ちです。
 未実施の独立最終評価、10回反復、H50、単独Flash/RAMは [進捗記録](../calibration_retraining/remaining_experiments.md) に明記しています。
 
 旧版の実測値も、そのとき使った正解RGBとともに保持しています。
@@ -139,3 +138,5 @@ python3 experiment_today/verify_host.py
 シリアルt、MSE各行、索引検査、標本標準偏差の計算を確認しました（ASan・UBSan有効）。
 [verification.json](verification.json) はPC上の確認記録です。
 PC上の時間をArduinoの時間として保存する処理はありません。実機結果はログ受領後に追記します。
+
+最新のサイト画面では純色result.ppmが基準で、同じH40出力のMSE3471.00を再現しました。上の300以下はCMYK基準だけの値で、基準を混ぜません。

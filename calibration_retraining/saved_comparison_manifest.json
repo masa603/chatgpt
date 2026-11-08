@@ -1,0 +1,12 @@
+{
+  "input_source": "Archived physical COLOR_RETRAIN_V9 capture1; no new sensor reading.",
+  "source_log_sha256": "4b577f22fbaa69589ac78a6bad70c8a5a8bd9cc248cae586c517a3b745b192cb",
+  "inputs_csv_sha256": "1909d077f39c2494fd4717b8e6345599edcd8015b72f1b24a0a018154436f827",
+  "input_count": 9,
+  "original_dense_rgb_exactly_reproduced": true,
+  "model_or_threshold_changed": false,
+  "code_sha256": "6846460e495f532f8ab997b20cfe7849af8770484940f0c82b29eaf6f4c603c4",
+  "parameters_sha256": "d185bec832125af216bdb2a819593b27e05f8171143b5cef209bb9957c6bad43",
+  "hardware_saved_replay": "PENDING",
+  "hardware_benchmark": "PENDING"
+}

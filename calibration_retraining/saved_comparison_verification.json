@@ -1,0 +1,59 @@
+{
+  "scope": "Host mock t-command controls and actual saved-input numerical checks; not hardware speed or a new sensor capture.",
+  "cpp11_asan_ubsan": "PASS",
+  "model_header_prefix_unchanged": true,
+  "weights_and_thresholds_changed": false,
+  "t_and_uppercase_T_each_emit_replay_and_all4_benchmarks": "PASS",
+  "sensor_reads": 0,
+  "original4_dense_rgb_exact_match": true,
+  "all8_replay_rgb_match_pc": true,
+  "sixteen_ppms_match_original_teacher_html": true,
+  "five_groups_each_and_alternating_order_checksums": "PASS",
+  "both_reference_mse_columns_match_same_pixels": true,
+  "screenshot_H40_pure_rgb_3471_reproduced": true,
+  "replay_mses": [
+    {
+      "H": 40,
+      "format": "DENSE",
+      "mse": 278.3333333333333
+    },
+    {
+      "H": 60,
+      "format": "DENSE",
+      "mse": 63.0
+    },
+    {
+      "H": 80,
+      "format": "DENSE",
+      "mse": 37.592592592592595
+    },
+    {
+      "H": 100,
+      "format": "DENSE",
+      "mse": 36.7037037037037
+    },
+    {
+      "H": 40,
+      "format": "CSR",
+      "mse": 525.9629629629629
+    },
+    {
+      "H": 60,
+      "format": "CSR",
+      "mse": 192.11111111111111
+    },
+    {
+      "H": 80,
+      "format": "CSR",
+      "mse": 222.44444444444446
+    },
+    {
+      "H": 100,
+      "format": "CSR",
+      "mse": 387.14814814814815
+    }
+  ],
+  "clock": "FAKE_HOST_CLOCK; not measured board times.",
+  "hardware_saved_replay": "PENDING",
+  "hardware_benchmark": "PENDING"
+}

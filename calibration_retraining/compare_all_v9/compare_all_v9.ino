@@ -59,7 +59,7 @@ bool selfCheck() {
 }
 
 namespace comparison_models {
-void sparseLayer(const SparseLayer &layer,const float *input,float *output,bool relu) {
+void sparseLayer(const comparison_models::SparseLayer &layer,const float *input,float *output,bool relu) {
   for(int r=0;r<layer.rows;r++) {
     float value=layer.bias[r];
     for(uint16_t k=layer.row[r];k<layer.row[r+1];k++) value+=layer.values[k]*input[layer.col[k]];

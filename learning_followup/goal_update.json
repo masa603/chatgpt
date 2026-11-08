@@ -3,12 +3,12 @@
   "user_requested": "300以下には絶対にしたい",
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
-  "scope": "V9 fixed,135 actual input rows,33 reference colors; separate code and numeric header. No new V9 physical or timing result yet. Old V8 nine-color read now development/training; independent final chart unavailable.",
-  "current_status": "V9_WEIGHTS_AND_THRESHOLDS_FROZEN; EIGHT_CONDITION_COMPARISON_HOST_VERIFIED; BOARD_CAPTURE_TIMING_PENDING",
+  "scope": "Dense physical goal confirmed on one nine-color reading. Frozen CSR not yet replayed on board; hardware speed pending. Existing capture reused without training or threshold changes.",
+  "current_status": "V9_PHYSICAL_GOAL_MET_ONLY_FOR_SELECTED_NOTEBOOK_CMYK; USER_SITE_PURE_RGB_GOAL_NOT_MET; T_REPLAY_PREPARED",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
-  "note": "Plan compares compression MSE/capacity/speed and contains no absolute300 requirement. User target300 remains recorded; do not call PC development/fitting scores new physical success.",
+  "note": "User site screenshot is correct: H40 same pixels score3471.00 against pure result.ppm,278.33 against selected Notebook CMYK. Do not report website pure-RGB success or silently change required target. Saved t version prints both references. No model/threshold changes.",
   "prospective_result_record": "physical_readings/capture_01/summary.json",
   "prospective_physical_captures": 1,
   "original_development_cv_unchanged": true,
@@ -38,7 +38,7 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "One upload of compare_all_v9: b,w,nine r for eight matched physical MSEs; t once for all four Dense/CSR speed comparisons; save combined IDE Flash/RAM lines. No further learning-condition search.",
+  "next_step": "Upload saved-input comparison; verify COLOR_SAVED_COMPARE_V9 then send t once. No b/w/r or new paper capture. Save replay and four-pair benchmark blocks plus new IDE memory2 lines.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
   "current_experiment": "../calibration_retraining/README.md",
@@ -93,7 +93,7 @@
   "last_updated_date_japan": "2026-11-08",
   "v6_physical_record": "../data_learning_followup/physical_readings/capture_01/summary.json",
   "v7_physical_record": "../distributed_training/physical_readings/capture_01/summary.json",
-  "next_sketch": "../calibration_retraining/compare_all_v9/compare_all_v9.ino",
+  "next_sketch": "../calibration_retraining/compare_saved_v9/compare_saved_v9.ino",
   "v8_training_rows": 126,
   "patch_samples_received": 15,
   "patch_calibration_groups": 1,
@@ -122,10 +122,37 @@
     "100": 1874.7777777777778
   },
   "user_delivery_constraint": "Provide .ino and numeric .h separately through shared workspace file links; GitHub connection/access restricted.",
-  "next_parameters": "../calibration_retraining/compare_all_v9/comparison_parameters_v9.h",
+  "next_parameters": "../calibration_retraining/compare_saved_v9/saved_parameters_v9.h",
   "learning_data_csv": "../calibration_retraining/training135.csv",
   "v8_physical_record": "../patch_retraining/physical_readings/capture_01/summary.json",
   "v9_training_rows": 135,
-  "v9_new_physical_mse": "NOT_YET_MEASURED",
-  "v9_csr_selection": "Provisional separate validation128 plus training-only guard; thresholds frozen before new paired measurement."
+  "v9_new_physical_mse": {
+    "40": 278.3333333333333,
+    "60": 63.0,
+    "80": 37.592592592592595,
+    "100": 36.7037037037037
+  },
+  "v9_csr_selection": "Provisional separate validation128 plus training-only guard; thresholds frozen before new paired measurement.",
+  "v9_physical_record": "../calibration_retraining/physical_readings/capture_01/summary.json",
+  "v9_physical_capture_count": 1,
+  "v9_physical_role": "Same learning chart repeat; not independent unseen-chart final evaluation; no model/threshold update.",
+  "v9_dense4_flash_bytes": 158688,
+  "v9_dense4_static_ram_bytes": 7212,
+  "memory_scope": "Reported Dense4 firmware, not comparison8 or per-H.",
+  "v9_new_physical_mse_cmyk_basis": {
+    "40": 278.33,
+    "60": 63,
+    "80": 37.59,
+    "100": 36.7
+  },
+  "v9_new_physical_mse_site_pure_rgb_basis": {
+    "40": 3471,
+    "60": 3016.85,
+    "80": 2979.15,
+    "100": 2918.41
+  },
+  "site_screenshot_mse_3471_reproduced": true,
+  "website_current_reference_goal_met": false,
+  "goal_met_reference_scope": "All4<=300 applies to user-selected distributed Notebook CMYK reference4f58..., not pure result.ppm582b...",
+  "latest_reference_audit": "../calibration_retraining/physical_readings/capture_01/reference_basis_audit.json"
 }

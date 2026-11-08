@@ -1,0 +1,16 @@
+{
+  "received_date_japan": "2026-11-08",
+  "associated_firmware": "COLOR_RETRAIN_V9",
+  "associated_scope": "All4 Dense models; not all8 comparison models, not one standalone H.",
+  "sketch_name": "color_retrain_v9; inferred from matching firmware tag in same user message",
+  "flash_used_bytes": 158688,
+  "flash_max_bytes": 262144,
+  "static_ram_used_bytes": 7212,
+  "ram_max_bytes": 32768,
+  "ram_remaining_for_stack_and_locals_bytes": 25556,
+  "upload_image_bytes": 158696,
+  "upload_image_note": "Uploader transfer size is distinct from compiler-reported sketch Flash usage.",
+  "runtime_peak_stack_or_total_ram_measured": false,
+  "source_log": "color_retrain_v9_compile_01.txt",
+  "source_log_sha256": "de3e459a5d69a7df013d362325a7766c8023864ffafd2d791b0f85f152e2b739"
+}
