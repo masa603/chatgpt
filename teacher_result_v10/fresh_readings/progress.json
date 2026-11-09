@@ -1,10 +1,10 @@
 {
   "firmware": "TEACHER_FRESH_V10",
   "target_physical_captures": 10,
-  "actual_verified_physical_captures": 8,
-  "physical_captures_remaining": 2,
-  "per_model_received_MSE_count": 8,
-  "MSE_records_total": 64,
+  "actual_verified_physical_captures": 9,
+  "physical_captures_remaining": 1,
+  "per_model_received_MSE_count": 9,
+  "MSE_records_total": 72,
   "ten_physical_captures_complete": false,
   "input_sets_shared_by_all8_models": true,
   "same_chart_repetition": "LEARNING_3X3_REPEAT; NOT_INDEPENDENT_FINAL_CHART",
@@ -59,6 +59,12 @@
       "boot_id": "boot_01",
       "counter": 8,
       "source_sha256": "1523e0eeafb570260cac1c7bee1a6e4eecad309b8ab6e377cef88bde98876884"
+    },
+    {
+      "capture_key": "capture_09",
+      "boot_id": "boot_01",
+      "counter": 9,
+      "source_sha256": "1bf493c821189af9e8a50ad515d24f7675f4e646518518711f69df0d84e49e6d"
     }
   ],
   "excluded_captures": [],
