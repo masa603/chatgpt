@@ -6,7 +6,7 @@
 CSRは297.22/273.19/443.04/360.56で、80/100は目標300超えです。新規の物理読取や実機値とは区別します。
 V10の8条件の保存入力実機再生・4組の実機速度・全体Flash187888byte／静的RAM6740byteは受領・検算済みです。
 [実機結果表・図](../teacher_result_v10/RESULTS.md) と [元ログ・検算](../teacher_result_v10/hardware/run_01/README.md) に保存しました。
-次は利用者の希望により [紙を実際に10回読むteacher_fresh_v10](../teacher_result_v10/teacher_fresh_v10/README.md) を使います。新規10回の実測はまだ未受領です。
+現在は利用者の希望により [紙を実際に10回読むteacher_fresh_v10](../teacher_result_v10/teacher_fresh_v10/README.md) を使っています。[実際の受領数・各回の結果](../teacher_result_v10/fresh_readings/README.md) を更新しています。
 今回の入力を保存済みなので、紙を読み直さず、同じ9色のDense／CSR実機再生と4組の速度を記録できます。
 重み・閾値は変更していません。元の物理読取1回を、別の反復測定として数えません。
 受領したFlash158688byte・静的RAM7212byteはDense4モデル入りCOLOR_RETRAIN_V9の値です。

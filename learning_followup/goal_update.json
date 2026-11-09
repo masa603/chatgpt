@@ -4,7 +4,7 @@
   "acceptance_mse_max_inclusive": 300,
   "preferred_mse_below": 100,
   "scope": "User-reported V10 execution on UNO R4 verified:8 saved-input MSE/PPM outputs,4 real timing pairs,whole8-condition Flash/RAM. No new sensor capture or independent final chart.",
-  "current_status": "FROZEN_V10_REAL10_PAPER_CAPTURES_PREPARED;WAITING_FOR_USER_PHYSICAL_LOGS",
+  "current_status": "V10_ACTUAL_PHYSICAL_CAPTURE_COLLECTION_2_OF_10",
   "development_cv_mean": 645.75,
   "development_cv_worst_read": 1918.4814814814815,
   "development_target_met": false,
@@ -38,7 +38,7 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "Use teacher_fresh_v10 two files;confirm TEACHER_FRESH_V10.Each repetition:black b,white w,then9 colors each r.Save complete TEACHER FRESH CAPTURE block;send n for next.Repeat10 physical charts;no retraining/threshold updates.Count only actual complete new captures.",
+  "next_step": "Continue n,black b,white w,all9 colors each r; save each complete fresh block. Keep frozen models/thresholds and include high-MSE reads.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
   "current_experiment": "../teacher_result_v10/README.md",
@@ -202,9 +202,12 @@
   "v10_quality_note": "CSR MSE increases on saved9 in allH, exceeding5pct relative tolerance; onlyCSR40/60 meet absolute300. Selection validation128 is a different set; do not claim general accuracy preservation.",
   "v10_next_action": "COLLECT10_ACTUAL_NEW_PHYSICAL_CHART_READS",
   "real10_protocol": "../teacher_result_v10/fresh_protocol.json",
-  "real10_new_physical_captures_received": 0,
-  "real10_actual_build": "PENDING_USER_ARDUINO_IDE",
+  "real10_new_physical_captures_received": 2,
+  "real10_actual_build": "Execution confirmed by received fresh firmware logs.",
   "real10_actual_memory": "PENDING;previous t-firmware187888/6740 stays separate",
   "real10_numeric_header_unchanged": true,
-  "real10_measurement_scope": "Same learning3x3 chart repeated10 times,not independent final chart.Each newly measured9-color set goes to all8 frozen models."
+  "real10_measurement_scope": "Same learning3x3 chart repeated10 times,not independent final chart.Each newly measured9-color set goes to all8 frozen models.",
+  "real10_progress": "../teacher_result_v10/fresh_readings/progress.json",
+  "real10_MSE_summary": "../teacher_result_v10/fresh_readings/mse_summary.csv",
+  "real10_next_action": "COLLECT_REMAINING_8_PHYSICAL_CHART_READS"
 }
