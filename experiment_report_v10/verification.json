@@ -1,0 +1,17 @@
+{
+  "actual_physical_captures": 10,
+  "MSE_records": 80,
+  "RGB_components": 2160,
+  "all_received_captures_included": true,
+  "all80_MSE_recomputed_from_copied_PPM": "PASS",
+  "all8_means_sampleSD_min_max_goal_counts": "PASS",
+  "all4_paired_differences_and_sampleSD": "PASS",
+  "frozen_numeric_headers_byte_identical": "PASS",
+  "code_copies_match_source_snapshot": "PASS",
+  "two_firmware_memory_records_separate": "PASS",
+  "report_values_match_actual_all10_aggregates": "PASS",
+  "source_snapshot_replay_test": "PASS in an isolated temporary copy; no original repository paths required.",
+  "CSR_mean300_goal": "NOT_MET",
+  "CSR_relative5pct_preservation": "NOT_MET",
+  "independent_final_chart": "NOT_PERFORMED"
+}

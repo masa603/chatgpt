@@ -1,0 +1,23 @@
+{
+  "reason": "Teacher mandates original result.ppm; previous CMYK recommendation corrected. Never change reference to lower reported MSE.",
+  "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "training_rows": 135,
+  "heldout_rows": 9,
+  "one_fixed_condition_per_H": true,
+  "epochs": 40000,
+  "seed": 42,
+  "parent": "Frozen V9 checkpoint for same H; never fitted latest V9 capture1.",
+  "optimizer": "Adam0.0005->0.000005 cosine",
+  "loss": "Weighted SmoothL1 beta0.05+weights-onlyL1 coefficient1e-6",
+  "weights": "Same positive group-balanced/older-consistency rule as V9, recomputed from corrected training135 labels only.",
+  "augmentation": "Same as V9 robust gain/offset condition;50% independent-channel0.75..1.30 gains plus bounded offsets;30% gray/white common0.5..1.15 gain, training only.",
+  "target_changes": "All111 training3x3 rows now exact teacher result.ppm.24 original6x4 rows keep their original supplied Notebook targets.",
+  "heldout_policy": "Latest9 are never added to final fitting. Evaluate frozen final model once; no epoch/condition selection using their MSE.",
+  "measurement_scope": "Archived real sensor inputs, retrospective validation. No new physical V10 or independent final chart evaluation yet."
+}

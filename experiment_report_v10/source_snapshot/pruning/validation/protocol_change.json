@@ -1,0 +1,18 @@
+{
+  "decision_date_jst": "2026-10-30",
+  "previous_planned_validation_reads": 3,
+  "validation_reads": 2,
+  "reason": "User requested two readings due to measurement time.",
+  "decision_phase": "After both readings were received, before threshold candidates were compared on these readings.",
+  "all_received_reads_and_colors_retained": true,
+  "excluded_color_ids": [],
+  "quality_criterion": "Mean MSE increase <=5% relative to Dense, RGB 0..255, with zero-baseline exception unchanged.",
+  "memory_criterion": "CSR array bytes strictly less than Dense, then smallest CSR capacity; ties by smaller mean MSE.",
+  "final_evaluation_repeats": 10,
+  "limitations": [
+    "Two readings give limited information about variability.",
+    "Read 2 has six all-zero input triplets for distinct reference colors; both calibration values and the input distribution differ between readings.",
+    "The provided H40 header predates the newly collected training data and its training seed is not verified."
+  ],
+  "selection_interpretation": "Provisional for these recorded conditions; not a declaration that calibration and absolute color accuracy are satisfactory."
+}

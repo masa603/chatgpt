@@ -1,0 +1,19 @@
+{
+  "received_date_japan": "2026-11-09",
+  "firmware": "TEACHER_FRESH_V10",
+  "board": "Arduino UNO R4 WiFi",
+  "scope": "ALL8_MODEL_FRESH_SENSOR_CAPTURE_FIRMWARE;NOT_PER_MODEL",
+  "sketch_flash_bytes": 191320,
+  "flash_capacity_bytes": 262144,
+  "ide_flash_percent": 72,
+  "static_global_ram_bytes": 7324,
+  "ram_capacity_bytes": 32768,
+  "ide_static_ram_percent": 22,
+  "remaining_ram_after_static_bytes": 25444,
+  "actual_stack_usage": "NOT_MEASURED",
+  "uploader_write_bytes": 191328,
+  "uploader_bytes_not_sketch_usage": true,
+  "source_log_sha256": "c7aab91336710189be60f2b6fd498a553a5b4b403f28ab866dd586382407357f",
+  "sketch_sha256": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
+  "parameter_header_sha256": "2516a64a3acea49c10a2a26e4c8ffa5f8e1f5092270c7fba0ece0b02b4edcb4e"
+}

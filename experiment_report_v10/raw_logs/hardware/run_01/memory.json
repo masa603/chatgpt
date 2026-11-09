@@ -1,0 +1,16 @@
+{
+  "firmware": "TEACHER_RESULT_COMPARE_V10",
+  "scope": "WHOLE_8_MODEL_COMPARISON_FIRMWARE; NOT_PER_CONDITION",
+  "board": "Arduino UNO R4 WiFi",
+  "flash_capacity_bytes": 262144,
+  "sketch_flash_bytes": 187888,
+  "ide_flash_percent": 71,
+  "ram_capacity_bytes": 32768,
+  "static_global_ram_bytes": 6740,
+  "ide_static_ram_percent": 20,
+  "remaining_ram_after_static_bytes": 26028,
+  "actual_stack_usage": "NOT_MEASURED",
+  "uploader_write_bytes": 187896,
+  "uploader_write_bytes_not_sketch_flash": true,
+  "source_sha256": "cff0a0704c594f185fcad75b2720f23fe430fc7227ad62a5b1952911b0c58aa6"
+}

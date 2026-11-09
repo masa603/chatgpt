@@ -6,12 +6,12 @@
 CSRは297.22/273.19/443.04/360.56で、80/100は目標300超えです。新規の物理読取や実機値とは区別します。
 V10の8条件の保存入力実機再生・4組の実機速度・全体Flash187888byte／静的RAM6740byteは受領・検算済みです。
 [実機結果表・図](../teacher_result_v10/RESULTS.md) と [元ログ・検算](../teacher_result_v10/hardware/run_01/README.md) に保存しました。
-現在は利用者の希望により [紙を実際に10回読むteacher_fresh_v10](../teacher_result_v10/teacher_fresh_v10/README.md) を使っています。[実際の受領数・各回の結果](../teacher_result_v10/fresh_readings/README.md) を更新しています。
+紙の新規10回測定は [全回のログ・平均・標本SD](../teacher_result_v10/fresh_readings/README.md) に保存・検算済みです。[報告書とコード・データ一式](../experiment_report_v10/README.md) を作成しました。
 今回の入力を保存済みなので、紙を読み直さず、同じ9色のDense／CSR実機再生と4組の速度を記録できます。
 重み・閾値は変更していません。元の物理読取1回を、別の反復測定として数えません。
 受領したFlash158688byte・静的RAM7212byteはDense4モデル入りCOLOR_RETRAIN_V9の値です。
-比較8条件入りや各条件単独の使用量とは別に保存しました。比較版の新しいIDE使用量2行は次の受領待ちです。
-未実施の独立最終評価、10回反復、H50、単独Flash/RAMは [進捗記録](../teacher_result_v10/remaining_experiments.md) に明記しています。
+比較8条件入りや各条件単独の使用量とは別に保存しました。保存入力比較版の187888／6740byteを受領済みで、新規読取版のIDE使用量は別記録です。
+未実施の独立最終評価、H50、単独Flash/RAMは [進捗記録](../teacher_result_v10/remaining_experiments.md) に明記しています。
 
 旧版の実測値も、そのとき使った正解RGBとともに保持しています。
 

@@ -1,0 +1,67 @@
+{
+  "hidden_size": 60,
+  "training_rows": 135,
+  "heldout_rows": 9,
+  "epochs": 40000,
+  "seed": 42,
+  "method": "Fixed single condition;V9 parent, weighted SmoothL1 beta0.05,L1 weights-only1e-6, gain/offset training augmentation.",
+  "teacher_reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "reference_ppm_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "reference_source": "TEACHER_REQUIRED_ORIGINAL_RESULT_PPM",
+  "training_data_sha256": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a",
+  "parent_checkpoint_sha256": "f63318817de4c08cf97d494dea8fbbc2dcbe179612f40f33c495612beece7186",
+  "model_header_sha256": "d6117f1410afa0339cda916d444d3853f7e2faaefa8938b75424aae5582eb4c8",
+  "training_mse_rgb8": 1346.7135802469136,
+  "training3x3_mse_rgb8": 867.2522522522522,
+  "parent_heldout9_mse_same_teacher_reference": 3016.8518518518517,
+  "heldout9_mse_teacher_reference": 33.96296296296296,
+  "heldout9_rgb": [
+    [
+      255,
+      0,
+      0
+    ],
+    [
+      0,
+      253,
+      0
+    ],
+    [
+      2,
+      0,
+      253
+    ],
+    [
+      254,
+      255,
+      0
+    ],
+    [
+      2,
+      254,
+      249
+    ],
+    [
+      253,
+      7,
+      255
+    ],
+    [
+      2,
+      2,
+      2
+    ],
+    [
+      138,
+      153,
+      128
+    ],
+    [
+      255,
+      255,
+      255
+    ]
+  ],
+  "wall_seconds": 117.42654993900214,
+  "scope": "Archived latest physical9 remain excluded from training135 and all augmentation/weight calculations. Retrospective inspected validation, no new V10 physical capture, not an independent final chart."
+}

@@ -486,13 +486,63 @@
     "code": "../teacher_result_v10/teacher_fresh_v10/teacher_fresh_v10.ino",
     "parameters_sha256": "2516a64a3acea49c10a2a26e4c8ffa5f8e1f5092270c7fba0ece0b02b4edcb4e",
     "models_thresholds_reference_frozen": true,
-    "actual_new_physical_captures_received": 9,
+    "actual_new_physical_captures_received": 10,
     "scope": "10 newly measured full9-color charts,with per-chart black/white calibration;each input shared by8 model conditions;not10 replays andnot independent final chart.",
     "host_tests": "10 synthetic cycles,80PPMs match original teacher HTML,ASan/UBSan;not counted as real measurements.",
     "before_completion": "Do not claim10 physical captures completed or success.Original saved replay and actual speed/memory logs remain unchanged.",
     "progress": "../teacher_result_v10/fresh_readings/progress.json",
-    "state": "COLLECTING_REAL_MEASUREMENTS",
+    "state": "ACTUAL10_COMPLETE",
     "all_received_completed_captures_included": true,
     "each_received_capture_verified": "RAW normalization,frozen model/threshold hashes,8 receivedPPMs/MSEs,and original teacher HTML."
+  },
+  "v10_actual10_and_report_package": {
+    "received_date_japan": "2026-11-09",
+    "actual_physical_capture_count": 10,
+    "per_model_MSE_count": 10,
+    "total_MSE_records": 80,
+    "excluded_physical_captures": 0,
+    "second_capture_user_note": "気づいた操作ミスはない;included without alteration",
+    "all80_device_RGB8_match_frozen_PC": "EXACT",
+    "all80_MSE_match_original_teacher_HTML": "PASS",
+    "teacher_reference_unchanged": true,
+    "models_thresholds_and_training135_unchanged": true,
+    "meanMSE": {
+      "DENSE": {
+        "40": 319.56296296296296,
+        "60": 238.33703703703705,
+        "80": 231.68148148148148,
+        "100": 260.4259259259259
+      },
+      "CSR": {
+        "40": 452.0407407407407,
+        "60": 493.5111111111111,
+        "80": 465.72962962962964,
+        "100": 651.9296296296295
+      }
+    },
+    "conclusion": "Array capacity and fixed-input real device time reduced;CSR meanMSE300 target and5pct precision preservation not met.",
+    "report": "../experiment_report_v10/README.md",
+    "independent_final_chart": "NOT_PERFORMED",
+    "H50": "NOT_PERFORMED",
+    "standalone_flash_ram": "NOT_PERFORMED",
+    "fresh_firmware_memory": {
+      "received_date_japan": "2026-11-09",
+      "firmware": "TEACHER_FRESH_V10",
+      "board": "Arduino UNO R4 WiFi",
+      "scope": "ALL8_MODEL_FRESH_SENSOR_CAPTURE_FIRMWARE;NOT_PER_MODEL",
+      "sketch_flash_bytes": 191320,
+      "flash_capacity_bytes": 262144,
+      "ide_flash_percent": 72,
+      "static_global_ram_bytes": 7324,
+      "ram_capacity_bytes": 32768,
+      "ide_static_ram_percent": 22,
+      "remaining_ram_after_static_bytes": 25444,
+      "actual_stack_usage": "NOT_MEASURED",
+      "uploader_write_bytes": 191328,
+      "uploader_bytes_not_sketch_usage": true,
+      "source_log_sha256": "c7aab91336710189be60f2b6fd498a553a5b4b403f28ab866dd586382407357f",
+      "sketch_sha256": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
+      "parameter_header_sha256": "2516a64a3acea49c10a2a26e4c8ffa5f8e1f5092270c7fba0ece0b02b4edcb4e"
+    }
   }
 }

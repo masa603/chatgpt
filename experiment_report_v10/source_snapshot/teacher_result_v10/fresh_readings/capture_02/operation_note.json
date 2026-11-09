@@ -1,0 +1,7 @@
+{
+  "received_date_japan": "2026-11-09",
+  "capture_counter": 2,
+  "question": "2回目の読取で、色を取り違えた・紙が外れたなど、気づいた操作ミスはありましたか？",
+  "user_answer": "気づいた操作ミスはない",
+  "disposition": "INCLUDED; no reported operation error. High MSE is retained as a measured result."
+}

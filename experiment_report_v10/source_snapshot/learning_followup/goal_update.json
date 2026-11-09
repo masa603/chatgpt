@@ -1,0 +1,234 @@
+{
+  "date_japan": "2026-11-06",
+  "user_requested": "300以下には絶対にしたい",
+  "acceptance_mse_max_inclusive": 300,
+  "preferred_mse_below": 100,
+  "scope": "Ten actual new paper-chart reads,all8 frozen V10 models per read;separate fixed-input real device timing/capacity. Same learning chart,not independent final chart.",
+  "current_status": "V10_ACTUAL10_VERIFIED_AND_REPORT_CODE_DATA_PACKAGE_COMPLETE",
+  "development_cv_mean": 645.75,
+  "development_cv_worst_read": 1918.4814814814815,
+  "development_target_met": false,
+  "note": "CMYK recommendation was incorrect for teacher requirement; user screenshot3471.00 was correct. Corrected all111 3x3 training labels, kept135 actual inputs and teacher result.ppm unchanged; latest physical9 remain held out. Do not call saved PC inference a new physical goal achievement.",
+  "prospective_result_record": "physical_readings/capture_01/summary.json",
+  "prospective_physical_captures": 1,
+  "original_development_cv_unchanged": true,
+  "embedded_reference_mse_rgb8": {
+    "40": 524.074074,
+    "60": 93.851852,
+    "100": 119.925926
+  },
+  "embedded_reference_below_300": {
+    "40": false,
+    "60": true,
+    "100": true
+  },
+  "teacher_reference_goal_status": "NEW_V10_SAVED_INPUT_DENSE4_AND_CSR40_60_LE300_ON_PC; CSR80_100_GT300; NEW_PHYSICAL_V10_NOT_PERFORMED",
+  "teacher_calculator_audit": "reference_audit/calculator_check.json",
+  "user_reported_teacher_mse": "Reproduced exactly as 3984.00 from uploaded result.ppm and resu12.ppm; resu12 matches H40.",
+  "teacher_reference_mse_rgb8": {
+    "40": 3984.0,
+    "60": 3442.5925925925926,
+    "100": 3522.8888888888887
+  },
+  "provided_reference_ppm_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "corrected_experiment": "../reference_corrected/README.md",
+  "v4_physical_mse_rgb8": {
+    "40": 13698.666667,
+    "60": 13117.925926,
+    "100": 13314.148148
+  },
+  "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
+  "next_step": "Read and use the report with all10 real measurements and recorded limitations;do not claim CSR accuracy goal or fulloriginal plan met.",
+  "v4_physical_data_used_for_v4_training": false,
+  "v4_physical_data_used_for_v5_training": true,
+  "current_experiment": "../teacher_result_v10/README.md",
+  "v5_training_rows": 60,
+  "v5_development_mean_full_chart_mse": 4302.6049382716055,
+  "v5_actual_new_physical_mse": {
+    "40": 2690.259259,
+    "60": 1812.62963,
+    "100": 1640.481481
+  },
+  "v5_physical_record": "../current_input_adaptation/physical_readings/capture_01/summary.json",
+  "v5_physical_data_used_to_refit_v5": false,
+  "v5_physical_data_used_for_calibration_development": true,
+  "user_priority": "Use learning data/model changes; no angle/setup/photo prerequisite.",
+  "v6_training_rows": 69,
+  "v6_learning_mse_rgb8": {
+    "40": 58.21256038647343,
+    "60": 0.7681159420289855,
+    "100": 0.23671497584541062
+  },
+  "v6_actual_new_physical_mse": {
+    "40": 2483.259259,
+    "60": 2233.851852,
+    "100": 2884.962963
+  },
+  "user_selected_reference": "先生指定は result.ppmだよ; overrides earlier CMYK choice.",
+  "current_reference_ppm": "../teacher_result_v10/reference/result.ppm",
+  "current_reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+  "current_hidden_sizes": [
+    40,
+    60,
+    80,
+    100
+  ],
+  "v6_actual_new_physical_mse_pure_rgb_basis": {
+    "40": 2483.259259,
+    "60": 2233.851852,
+    "100": 2884.962963
+  },
+  "v7_development_mse_cmyk_basis": {
+    "40": 68.96296296296296,
+    "60": 37.592592592592595,
+    "80": 65.44444444444444,
+    "100": 51.18518518518518
+  },
+  "v7_new_physical_mse": {
+    "40": 3535.4814814814818,
+    "60": 3060.1111111111113,
+    "80": 3428.7407407407404,
+    "100": 3636.7407407407404
+  },
+  "last_updated_date_japan": "2026-11-09",
+  "v6_physical_record": "../data_learning_followup/physical_readings/capture_01/summary.json",
+  "v7_physical_record": "../distributed_training/physical_readings/capture_01/summary.json",
+  "next_sketch": "../teacher_result_v10/teacher_fresh_v10/teacher_fresh_v10.ino",
+  "v8_training_rows": 126,
+  "patch_samples_received": 15,
+  "patch_calibration_groups": 1,
+  "v8_development_mse": {
+    "40": 1850.5555555555557,
+    "60": 2258.777777777778,
+    "80": 1901.888888888889,
+    "100": 932.4444444444445
+  },
+  "v8_training_mse_unweighted_rgb8": {
+    "40": 418.19312169312167,
+    "60": 448.4973544973545,
+    "80": 278.93386243386243,
+    "100": 260.84391534391534
+  },
+  "v8_old_v7_chart_training_replay_mse": {
+    "40": 217.1851851851852,
+    "60": 10.0,
+    "80": 3.2222222222222223,
+    "100": 5.111111111111111
+  },
+  "v8_new_physical_mse": {
+    "40": 2745.777777777778,
+    "60": 441.1111111111111,
+    "80": 690.6296296296297,
+    "100": 1874.7777777777778
+  },
+  "user_delivery_constraint": "Provide .ino and numeric .h separately through shared workspace file links; GitHub connection/access restricted.",
+  "next_parameters": "../teacher_result_v10/teacher_fresh_v10/teacher_parameters_v10.h",
+  "learning_data_csv": "../teacher_result_v10/training135.csv",
+  "v8_physical_record": "../patch_retraining/physical_readings/capture_01/summary.json",
+  "v9_training_rows": 135,
+  "v9_new_physical_mse": {
+    "40": 278.3333333333333,
+    "60": 63.0,
+    "80": 37.592592592592595,
+    "100": 36.7037037037037
+  },
+  "v9_csr_selection": "Provisional separate validation128 plus training-only guard; thresholds frozen before new paired measurement.",
+  "v9_physical_record": "../calibration_retraining/physical_readings/capture_01/summary.json",
+  "v9_physical_capture_count": 1,
+  "v9_physical_role": "Same learning chart repeat; not independent unseen-chart final evaluation; no model/threshold update.",
+  "v9_dense4_flash_bytes": 158688,
+  "v9_dense4_static_ram_bytes": 7212,
+  "memory_scope": "Reported Dense4 firmware, not comparison8 or per-H.",
+  "v9_new_physical_mse_cmyk_basis": {
+    "40": 278.33,
+    "60": 63,
+    "80": 37.59,
+    "100": 36.7
+  },
+  "v9_new_physical_mse_site_pure_rgb_basis": {
+    "40": 3471,
+    "60": 3016.85,
+    "80": 2979.15,
+    "100": 2918.41
+  },
+  "site_screenshot_mse_3471_reproduced": true,
+  "website_current_reference_goal_met": false,
+  "goal_met_reference_scope": "Actual10 all included,teacher original result.ppm unchanged;Dense60/80/100 mean<=300,allCSRmean>300 andallrelative increases>5%. Earlier saved-replay/CMYK values retained only with their original scope.",
+  "latest_reference_audit": "../calibration_retraining/physical_readings/capture_01/reference_basis_audit.json",
+  "previous_user_selected_reference": "配布Notebookの画像に合わせる（推奨）; superseded by explicit teacher requirement.",
+  "v10_saved_input_dense_goal_met_all4": true,
+  "v10_saved_input_csr_goal_met_all4": false,
+  "v10_training_rows": 135,
+  "v10_training_data_sha256": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a",
+  "v10_heldout_rows": 9,
+  "v10_heldout9_role": "Archived V9 physical capture1 kept out of V9/V10 fitting and threshold selection. Retrospective same learning chart validation, not independent final evaluation.",
+  "v10_pc_saved_input_dense_mse": {
+    "40": 122.44444444444444,
+    "60": 33.96296296296296,
+    "80": 60.851851851851855,
+    "100": 21.925925925925927
+  },
+  "v10_pc_saved_input_csr_mse": {
+    "40": 297.22222222222223,
+    "60": 273.18518518518516,
+    "80": 443.037037037037,
+    "100": 360.55555555555554
+  },
+  "v10_pc_summary": "../teacher_result_v10/comparison_pc_summary.json",
+  "v10_host_verification": "../teacher_result_v10/verification.json",
+  "v10_new_physical_capture_count": 10,
+  "v10_hardware_saved_replay": "RECEIVED_AND_VERIFIED; all216 RGB8 components exact PC match",
+  "v10_hardware_speed": "RECEIVED_AND_VERIFIED;100 calls x5 groups per model,4 pairs",
+  "v10_hardware_memory": "RECEIVED; Flash187888,staticRAM6740,whole8-model comparison program",
+  "v10_hardware_record": "../teacher_result_v10/hardware/run_01/summary.json",
+  "v10_results_report": "../teacher_result_v10/RESULTS.md",
+  "v10_hardware_timing_runs_received": 1,
+  "v10_hardware_saved_input_dense_mse": {
+    "40": 122.44444444444444,
+    "60": 33.96296296296296,
+    "80": 60.851851851851855,
+    "100": 21.925925925925927
+  },
+  "v10_hardware_saved_input_csr_mse": {
+    "40": 297.22222222222223,
+    "60": 273.18518518518516,
+    "80": 443.037037037037,
+    "100": 360.55555555555554
+  },
+  "v10_flash_bytes_all8": 187888,
+  "v10_static_ram_bytes_all8": 6740,
+  "v10_remaining_ram_after_static_bytes": 26028,
+  "v10_runtime_stack_usage": "NOT_MEASURED;26028 is available after statics,not actual local-variable use",
+  "v10_quality_note": "CSR MSE increases on saved9 in allH, exceeding5pct relative tolerance; onlyCSR40/60 meet absolute300. Selection validation128 is a different set; do not claim general accuracy preservation.",
+  "v10_next_action": "USE_COMPLETED_FACTUAL_REPORT_PACKAGE",
+  "real10_protocol": "../teacher_result_v10/fresh_protocol.json",
+  "real10_new_physical_captures_received": 10,
+  "real10_actual_build": "Execution confirmed by received fresh firmware logs.",
+  "real10_actual_memory": "RECEIVED;whole8-model fresh firmware Flash191320/staticRAM7324;not per-model",
+  "real10_numeric_header_unchanged": true,
+  "real10_measurement_scope": "Same learning3x3 chart repeated10 times,not independent final chart.Each newly measured9-color set goes to all8 frozen models.",
+  "real10_progress": "../teacher_result_v10/fresh_readings/progress.json",
+  "real10_MSE_summary": "../teacher_result_v10/fresh_readings/mse_summary.csv",
+  "real10_next_action": "REPORT_ACTUAL10_RESULTS",
+  "v10_initial_saved_replay_new_physical_capture_count": 0,
+  "real10_dense_mean_mse": {
+    "40": 319.56296296296296,
+    "60": 238.33703703703705,
+    "80": 231.68148148148148,
+    "100": 260.4259259259259
+  },
+  "real10_csr_mean_mse": {
+    "40": 452.0407407407407,
+    "60": 493.5111111111111,
+    "80": 465.72962962962964,
+    "100": 651.9296296296295
+  },
+  "real10_all_csr_mean_le300": false,
+  "real10_all_relative_precision5pct_met": false,
+  "report_package": "../experiment_report_v10/README.md",
+  "report_pdf": "../experiment_report_v10/report.pdf",
+  "real10_flash_bytes_all8_fresh": 191320,
+  "real10_static_ram_bytes_all8_fresh": 7324,
+  "real10_remaining_ram_after_static_bytes": 25444,
+  "real10_memory_record": "../teacher_result_v10/hardware/teacher_fresh_v10_compile_01.json"
+}

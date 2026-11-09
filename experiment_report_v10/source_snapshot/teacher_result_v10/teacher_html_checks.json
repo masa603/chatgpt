@@ -1,0 +1,22 @@
+[
+  {
+    "H": 40,
+    "mse_teacher_original_html": 122.44,
+    "scope": "PC inference on held-out saved actual inputs; not a new physical capture or board timing."
+  },
+  {
+    "H": 60,
+    "mse_teacher_original_html": 33.96,
+    "scope": "PC inference on held-out saved actual inputs; not a new physical capture or board timing."
+  },
+  {
+    "H": 80,
+    "mse_teacher_original_html": 60.85,
+    "scope": "PC inference on held-out saved actual inputs; not a new physical capture or board timing."
+  },
+  {
+    "H": 100,
+    "mse_teacher_original_html": 21.93,
+    "scope": "PC inference on held-out saved actual inputs; not a new physical capture or board timing."
+  }
+]

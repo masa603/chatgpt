@@ -199,7 +199,7 @@ def summarize():
 各captureフォルダに受領ログ、正規化確認、入力9組、8PPM／PNG、先生HTMLによる検算結果を残します。高いMSEの回も含めて集計します。
 過去の保存入力再生と速度・容量は [別の実機記録](../hardware/run_01/README.md) に保持し、今回の新規物理読取数へ加算しません。
 
-次の回は **n → 黒b → 白w → 赤・緑・青・黄・水色・紫・黒・灰・白を各r** です。[測定手順](../teacher_fresh_v10/README.md)
+{'10回の新規物理読取が完了しました。追加のn/r操作は不要です。[報告書・コード・データ一式](../../experiment_report_v10/README.md)' if n>=10 else '次の回は **n → 黒b → 白w → 赤・緑・青・黄・水色・紫・黒・灰・白を各r** です。[測定手順](../teacher_fresh_v10/README.md)'}
 ''')
     print(f'Summarized {n}/10 actual received physical captures;8 results per capture; no generated repetitions.')
     return progress

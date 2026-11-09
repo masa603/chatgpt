@@ -1,0 +1,548 @@
+{
+  "date_japan": "2026-11-06",
+  "reason": "User has three hours on the final experiment day and prioritizes completing H=40, then H=60 and H=100.",
+  "hidden_size_order": [
+    40,
+    60,
+    100
+  ],
+  "h50": "Already trained; device comparison deferred under today's requested priority.",
+  "models": "Frozen retraining/results/hH/model_parameters.h, current 33 learning inputs, seed 42, 50000 epochs. No retraining performed for compression.",
+  "threshold_selection": "Same planned rule: all magnitude midpoints, validation mean MSE <= Dense*1.05 and CSR bytes < Dense; minimum bytes then minimum MSE. Recomputed independently per H. Biases unchanged.",
+  "validation": "Existing 128 records, two physical readings of the separate 8x8 reference_image4 chart. Threshold selection uses these data. Conflicting identical inputs retain provisional status.",
+  "new_measurement": "Arduino inference times: saved-input Dense/CSR comparison, 10 warmup calls, 100 calls per group, 5 groups, alternating method order.",
+  "accuracy_measurement_scope": "Initial benchmark: saved learning/validation inputs replayed on Arduino. Subsequent fresh 3x3 learning-chart capture recorded separately under fresh_sensor_follow_up; not independent final evaluation.",
+  "final_chart_availability": "User reports no separate chart and cannot print a new chart today.",
+  "independent_final_evaluation": "NOT_PERFORMED",
+  "original_physical_mse_repeats": "Original ten physical-read blocks per H not performed by this saved-input procedure; not replaced by timing groups.",
+  "model_bytes": "FP32 weights and bias plus CSR indices. Separate from entire comparison firmware RAM/Flash.",
+  "whole_build_memory": "Paired firmware includes both models and reference data. Build size must be labeled paired-comparison firmware; not per-method minimal memory.",
+  "paper_handling": "Hand-held constraint remains; no paper fixation is required for the saved-input comparison.",
+  "reporting": "Keep PC results, actual device logs and missing final evaluation distinct. Do not fill unmeasured device values or claim the original full protocol completed.",
+  "fresh_sensor_follow_up": {
+    "status": "TWO_VALID_PHYSICAL_CAPTURES_RECEIVED_AND_VERIFIED",
+    "chart": "Existing learning 3x3 chart; black left bottom and white right bottom used for calibration.",
+    "models": [
+      40,
+      60,
+      100
+    ],
+    "formats": [
+      "Dense",
+      "CSR"
+    ],
+    "method": "Apply all six frozen models to each newly acquired normalized input. Calibration and sensing are unchanged; no retraining or threshold reselection.",
+    "target_repeat_readings": 2,
+    "repeat_procedure": "Use n to start another independent black/white calibration and nine-patch capture.",
+    "accuracy_scope": "Fresh physical read of a chart used for learning, not independent final evaluation. Six outputs from one capture are not six independent physical repetitions.",
+    "original_ten_read_protocol": "Not fulfilled by this follow-up.",
+    "actual_repeat_readings": 2,
+    "result_directory": "fresh_readings",
+    "startup_check_log": "NOT_SUPPLIED",
+    "valid_received_capture_counters": [
+      1,
+      3
+    ],
+    "excluded_capture_counters": [
+      2
+    ],
+    "exclusion_reason": "User reported wrong chart patch read during CAPTURE=2; excluded as acquisition protocol error. Raw excluded log not received; completion unknown.",
+    "exclusion_record": "fresh_readings/exclusions.json"
+  },
+  "whole_build_memory_record": {
+    "scope": "Combined six-model fresh_scan_all acquisition sketch",
+    "flash_bytes": 133424,
+    "static_ram_bytes": 7268,
+    "static_ram_remaining_bytes": 25500,
+    "record": "firmware_memory.csv",
+    "per_method_minimal_build_memory": "NOT_MEASURED",
+    "peak_runtime_ram": "NOT_MEASURED"
+  },
+  "single_model_build_follow_up": {
+    "status": "H40_DENSE_RECORDED; PAUSED_FOR_PRECISION_FOLLOW_UP",
+    "sketch": "memory_probe",
+    "conditions": [
+      [
+        40,
+        "DENSE"
+      ],
+      [
+        40,
+        "CSR"
+      ],
+      [
+        60,
+        "DENSE"
+      ],
+      [
+        60,
+        "CSR"
+      ],
+      [
+        100,
+        "DENSE"
+      ],
+      [
+        100,
+        "CSR"
+      ]
+    ],
+    "method": "Exactly one frozen model/format per preprocessing configuration; same dynamic volatile-input/output wrapper; original benchmark inference kernels. No sensor or MSE/reference image arrays.",
+    "storage": "const FP32 weights/bias for both modes; unchanged CSR uint8 columns and uint16 pointers.",
+    "scope": "Whole single-model wrapper build Flash and static RAM, not peak runtime RAM and not the six-model scanner footprint."
+  },
+  "precision_follow_up": {
+    "priority": "MSE preservation before further memory builds",
+    "stage": "EXPLORATORY_PRECISION_FOLLOW_UP",
+    "policy": "precision_followup/protocol.json",
+    "status": "PRECISION_SCAN_V2_DEVICE_REPLAY_RECEIVED_PASS; ARCHIVED_BEFORE_RETRAINING",
+    "selection_data": "Original learning/validation data plus fixed unlabeled grid; previous fresh captures only replayed after selection as post-hoc diagnostics.",
+    "original_results": "Preserved; not replaced by PC replay or new candidates.",
+    "absolute_dense_mse": "Still high on fresh inputs; preserving Dense is not a claim that absolute color accuracy is sufficient.",
+    "wrong_firmware_retry": "version_mismatch/old_firmware_retry_01",
+    "next_firmware": "precision_scan; boot ID PRECISION_SCAN_V2",
+    "latest_input_replay": "Actual Arduino replay received: hardware/latest_replay_01.txt under precision_followup. No new sensor reading; previous frozen models."
+  },
+  "learning_first_follow_up": {
+    "user_goal": "MSE <= 300 on a new physical 3x3 reading, ideally below 100.",
+    "stage": "EXPLORATORY_MULTIREAD_DENSE_RETRAINING",
+    "priority": "Learning and new physical accuracy check before more pruning, timing or memory builds.",
+    "model_directory": "../learning_followup/models",
+    "next_firmware": "COLOR_RETRAIN_V3",
+    "dataset": "Original 33 plus 27 measured repeat samples retained; four development configurations compared by whole-reading holdout.",
+    "selected_training_scope": "36 samples: same 3x3 nine colors across four readings. The original 6x4 colors are not part of this selected fit; no 33-color/unseen-chart performance claim.",
+    "development_cv_mean_mse": 645.75,
+    "development_cv_worst_reading_mse": 1918.4814814814815,
+    "acceptance_mse_max_inclusive": 300,
+    "development_target_met": false,
+    "new_physical_mse": {
+      "physical_readings": 1,
+      "record": "../learning_followup/physical_readings/capture_01/summary.json",
+      "used_for_v3_training": false,
+      "independent_unseen_chart_final_evaluation": false,
+      "embedded_reference_mse_rgb8": {
+        "40": 524.074074,
+        "60": 93.851852,
+        "100": 119.925926
+      },
+      "embedded_reference_below_300": [
+        60,
+        100
+      ],
+      "embedded_reference_above_300": [
+        40
+      ],
+      "teacher_reference_goal_status": "ALL THREE > 300; PREVIOUS ACHIEVEMENT CLAIM WITHDRAWN",
+      "user_reported_teacher_mse": "Reproduced as 3984.00 for the uploaded H40 output; all three outputs exceed 300 on the provided reference.",
+      "reference_audit": "../learning_followup/reference_audit/calculator_check.json",
+      "teacher_reference_mse_rgb8": {
+        "40": 3984.0,
+        "60": 3442.5925925925926,
+        "100": 3522.8888888888887
+      }
+    },
+    "old_records": "Original 33-color models, CSR measurements and old replay images retained separately without replacing their results.",
+    "paper_handling": "Hand-held, as required by the user."
+  },
+  "reference_correction_follow_up": {
+    "status": "FIRST_NEW_PHYSICAL_V4_CAPTURE_RECEIVED; ALL_THREE_ABOVE_300",
+    "reason": "User provided the exact calculator PPM pair. Training/reference targets from the Notebook display differ from actual provided result.ppm.",
+    "reference_ppm": "../learning_followup/reference_audit/provided/result.ppm",
+    "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+    "model_directory": "../reference_corrected/models",
+    "next_firmware": "COLOR_RETRAIN_V4",
+    "training_scope": "45 measured samples of 9 colors over 5 readings. Original 6x4 colors not included.",
+    "training_role_change": "V3 capture01 now used in V4 fitting/development. New physical reading required after V4 freeze.",
+    "sensor_pipeline": "Unchanged LED, ADC, calibration and normalization.",
+    "verification": "Training and embedded reference match exact provided PPM. Host C++ and original teacher HTML agree on six mock outputs.",
+    "new_physical_accuracy": {
+      "mse_rgb8": {
+        "40": 13698.666667,
+        "60": 13117.925926,
+        "100": 13314.148148
+      },
+      "record": "../reference_corrected/physical_readings/capture_01/summary.json",
+      "physical_captures": 1,
+      "used_for_v4_training": false,
+      "lighting": "User reports changing room darkness since V3; exact illuminance unknown."
+    },
+    "old_artifacts": "Retained unchanged, including old trained weights and provided comparison pixels.",
+    "next_diagnostic": "Restore similar fixed illumination; b/w calibration then immediate stationary white r. Diagnostic patch is not a full-chart MSE repetition."
+  },
+  "low_input_adaptation_follow_up": {
+    "stage": "EXPLORATORY_V5_CURRENT_INPUT_ADAPTATION",
+    "status": "V5_PHYSICAL_READ_RECEIVED_ALL_THREE_ABOVE_300",
+    "reference_ppm": "../learning_followup/reference_audit/provided/result.ppm",
+    "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+    "training_data": "../current_input_adaptation/training60.csv",
+    "training_data_sha256": "1adc525322caef517110eb3697597ccca3d503951d1d78bee62d2f9b62240290",
+    "training_scope": "60 measured rows; same 9 colors; 6 full-chart reading groups plus 2 partial calibration groups.",
+    "data_role_change": "V4 failed full reading and subsequent white/blue/black diagnostics now used for training/development. All former measurements retained; no V5 prospective test yet.",
+    "methods": "No noise versus local noise capped by nearest differently labelled input distance; no cross-session interpolation; equal total loss weight per target color.",
+    "selection": "H60 whole-group holdouts. Minimize average over six full-chart folds; report both partial folds separately.",
+    "selected_development_mean_mse": 4302.6049382716055,
+    "prospective_acceptance_mse_max": 300,
+    "prospective_acceptance_status": "NOT_MET_IN_RECEIVED_CAPTURE",
+    "firmware": "COLOR_RETRAIN_V5",
+    "model_directory": "../current_input_adaptation/models",
+    "sensor_and_normalization_pipeline": "Unchanged from V4; no median filtering, new settling time, quantization or target-based prediction.",
+    "new_reading": "Same current illumination held fixed; black b, white w, nine colors r; all three Dense models share each input.",
+    "new_physical_mse_rgb8": {
+      "40": 2690.259259,
+      "60": 1812.62963,
+      "100": 1640.481481
+    },
+    "new_physical_record": "../current_input_adaptation/physical_readings/capture_01/summary.json"
+  },
+  "calibration_input_exploration": {
+    "scope": "OFFLINE ONLY; no changed hardware or V6 firmware distributed.",
+    "data": "Seven full archived readings, including latest V5 measurement.",
+    "method": "Compare original normalized inputs with same-read black/white calibration proxies; score seven non-reference colors in both methods.",
+    "original_calibration_mean_mse_seven_colors": 3694.700680272109,
+    "proxy_calibration_mean_mse_seven_colors": 2554.0272108843537,
+    "target_300_met": false,
+    "result_directory": "../calibration_followup",
+    "next_step": "User subsequently requested data-only learning; analysis retained but not deployed, and no setup photo required as a prerequisite."
+  },
+  "data_only_learning_follow_up": {
+    "user_request": "角度とかはそんな大事じゃないから学習データでどうにかしてほしい",
+    "scope": "Prioritize data/learning; do not require a photo or setup change. Angle effects remain unestablished.",
+    "status": "V6_PHYSICAL_READ_RECEIVED_ALL_THREE_UNMET_ON_ITS_PURE_RGB_BASIS; LATER_REFERENCE_SWITCH_IS_SEPARATE",
+    "data": "../data_learning_followup/training69.csv",
+    "rows": 69,
+    "reference_colors": 9,
+    "data_sha256": "b821365f52f6d41af8abb711aa6ff637e707636c1b8334b7d877acc20ae0352b",
+    "reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+    "development": "Latest V5 full nine-color reading held out from 60-row updates; parent V5 checkpoints also excluded it. Used for method design/selection, not independent final evaluation.",
+    "conditions": "Four declared gray/white loss and neutral-input augmentation settings, independently selected per H by all-nine-color development MSE.",
+    "final": "Add latest9 to fit all69 for30000 epochs, preserve resulting checkpoints, then finish all H with10000 measured-only epochs. weights-only L1=1e-6; reference RGB unchanged.",
+    "learning_mses": {
+      "40": 58.21256038647343,
+      "60": 0.7681159420289855,
+      "100": 0.23671497584541062
+    },
+    "new_physical_mse": "NOT_YET_RECEIVED",
+    "next_firmware": "COLOR_RETRAIN_V6",
+    "model_directory": "../data_learning_followup/models",
+    "sensor_and_normalization": "Identical to V5. No end-calibration proxy, gray override, palette snap, quantization or target-based output.",
+    "photo_or_geometry_change_required": false,
+    "new_physical_mse_v6_pure_rgb_basis": {
+      "40": 2483.259259,
+      "60": 2233.851852,
+      "100": 2884.962963
+    }
+  },
+  "distributed_notebook_alignment_and_h80": {
+    "user_reference_choice": "配布Notebookの画像に合わせる（推奨）",
+    "user_added_hidden_size": 80,
+    "hidden_sizes": [
+      40,
+      60,
+      80,
+      100
+    ],
+    "reference_basis": "CMYK RGB recovered from newly supplied Notebook displays, not pure-RGB result.ppm.",
+    "reference_file": "../distributed_training/references/reference_image1_cmyk_3x3.ppm",
+    "reference_sha256": "4f58e236c2e114ed64e6e4128b94265ea66de1ee23413a7ef8b6a3c999f2ff14",
+    "provided_notebook_sha256": "f7e197687ef128b13d334e3967434ccf1f85076a8269dd02809f763ac02c5737",
+    "template_X_used": false,
+    "training_rows": 102,
+    "training_reference_colors": 33,
+    "actual_inputs": "69 previous measured rows +9 latest V6 rows +24 original measured6x4 rows.",
+    "development": "Latest V6 nine-color group held out; train93; three declared learning methods per H; evaluation is ordinary all-nine-color MSE.",
+    "development_mse_cmyk_basis": {
+      "40": 68.96296296296296,
+      "60": 37.592592592592595,
+      "80": 65.44444444444444,
+      "100": 51.18518518518518
+    },
+    "selection": "Per H min development MSE; all choose reliability-weighted SmoothL1 plus bounded input jitter. L1 weights-only1e-6 retained.",
+    "final_training": "From scratch50000epochs all102, seed42, Adam LR0.003 cosine->0.00003; same procedure for four H. No measured-only overfit finish phase.",
+    "known_input_conflicts": "Retained; all sample weights positive. Unweighted training errors reported separately.",
+    "new_physical_v7_mse": {
+      "40": 3535.4814814814818,
+      "60": 3060.1111111111113,
+      "80": 3428.7407407407404,
+      "100": 3636.7407407407404
+    },
+    "firmware": "COLOR_RETRAIN_V7",
+    "sensor_normalization": "Unchanged; all4 models share same fresh input.",
+    "old_reference_results": "Keep prior pure-RGB results separate; no cross-basis improvement-rate claims.",
+    "photo_or_setup_change_required": false,
+    "new_physical_v7_record": "../distributed_training/physical_readings/capture_01/summary.json"
+  },
+  "v7_new_physical_capture": {
+    "record": "../distributed_training/physical_readings/capture_01/summary.json",
+    "reference_basis": "DISTRIBUTED_NOTEBOOK_CMYK_DISPLAY_RECOVERED",
+    "new_physical_mse": {
+      "40": 3535.4814814814818,
+      "60": 3060.1111111111113,
+      "80": 3428.7407407407404,
+      "100": 3636.7407407407404
+    },
+    "all_four_met_300": false,
+    "input_role_for_v7": "NOT_USED_FOR_FITTING_OR_DEVELOPMENT; SAME_LEARNING_CHART_REPEAT",
+    "next": "Labelled patch data collection; no model weights, thresholds or acquisition functions changed."
+  },
+  "labelled_patch_fine_tuning_v8": {
+    "user_data": "../patch_retraining/physical_patch_data/session01/summary.json",
+    "patch_rows": 15,
+    "patch_batches": 5,
+    "patch_calibration_groups": 1,
+    "all_rows_retained": true,
+    "training_data": "../patch_retraining/training126.csv",
+    "training_rows": 126,
+    "development": "All9 V7 physical inputs held out for15k updates on117 inputs. Three fixed conditions per H. Inspected development, not final evaluation.",
+    "selected_methods": {
+      "40": "labelled_mse",
+      "60": "labelled_huber_neutral_exposure",
+      "80": "labelled_huber_neutral_exposure",
+      "100": "labelled_huber_neutral_exposure"
+    },
+    "development_mse_all9": {
+      "40": 1850.5555555555557,
+      "60": 2258.777777777778,
+      "80": 1901.888888888889,
+      "100": 932.4444444444445
+    },
+    "final_fit": "All126 rows, including V7 old full chart,25k more epochs. No new physical V8 inputs yet.",
+    "sensor_normalization_architecture": "Unchanged,3->H->H->3 FP32; no position or output-palette lookup.",
+    "comparison_limit": "Methods selected per H; not a controlled H-only causal comparison.",
+    "delivery": "../patch_retraining/color_retrain_v8/color_retrain_v8.ino",
+    "physical_v8_mse": "NOT_YET_MEASURED",
+    "independent_final_evaluation": "NOT_PERFORMED",
+    "compression": "New weights not yet pruned/benchmarked; do not reuse old thresholds or times.",
+    "parameters": "../patch_retraining/color_retrain_v8/trained_models_v8.h",
+    "delivery_change": "User requested separate code and learning data/parameters; numeric model arrays unchanged, inference functions moved from header to sketch. Original learning CSV kept separate."
+  },
+  "v8_new_physical_capture": {
+    "record": "../patch_retraining/physical_readings/capture_01/summary.json",
+    "actual_mse": {
+      "40": 2745.777777777778,
+      "60": 441.1111111111111,
+      "80": 690.6296296296297,
+      "100": 1874.7777777777778
+    },
+    "all4_below300": false,
+    "subsequent_role": "V9 development then final fitting."
+  },
+  "frozen_v9_compression_comparison": {
+    "source": "../calibration_retraining/README.md",
+    "status": "TRAINING_FROZEN; CSR_SELECTED; HOST_VERIFIED; NEW_BOARD_LOG_PENDING",
+    "hidden_sizes": [
+      40,
+      60,
+      80,
+      100
+    ],
+    "conditions": 8,
+    "board_actions": "One9-color capture, one t, IDE combined Flash/RAM2 lines.",
+    "goal_and_plan": "Absolute300 is user goal; plan requires comparative MSE/capacity/timing, reporting failed conditions too.",
+    "limits": "H50, original10 physical repetitions, independent final chart and most standalone firmware memory entries unperformed; do not label complete.",
+    "old_v8_data": "Latest9 used in V9 exploratory development then final fitting, not a V9 test.",
+    "thresholds": "Fixed on archived separate validation with training-only guard before paired physical reads.",
+    "no_more_training_search": true
+  },
+  "v9_physical_goal_and_saved_replay": {
+    "source": "../calibration_retraining/physical_readings/capture_01/summary.json",
+    "dense_actual_mse": {
+      "40": 278.3333333333333,
+      "60": 63.0,
+      "80": 37.592592592592595,
+      "100": 36.7037037037037
+    },
+    "all4_le300_this_read": true,
+    "physical_capture_count": 1,
+    "weights_or_thresholds_updated_after_read": false,
+    "received_memory_scope": "COLOR_RETRAIN_V9, all4 Dense; Flash158688, staticRAM7212. Not8 conditions or per-H.",
+    "t_problem": "User was running Dense-only COLOR_RETRAIN_V9, which has no t handler.",
+    "next": "../calibration_retraining/compare_saved_v9/README.md",
+    "saved_replay_role": "Same physical inputs reused on board, no new sensor capture; not independent final evaluation.",
+    "hardware_csr_replay_and_timing": "PENDING",
+    "mse_reference_scope": "Historical CMYK basis only; not teacher-required result.ppm goal achievement."
+  },
+  "v9_reference_basis_screenshot_audit": {
+    "audit": "../calibration_retraining/physical_readings/capture_01/reference_basis_audit.json",
+    "same_h40_output": {
+      "site_pure_result_ppm_mse": 3471.0,
+      "selected_notebook_cmyk_mse": 278.33
+    },
+    "all4_300_only_on_notebook_cmyk": true,
+    "pure_site_goal_met": false,
+    "weights_pixels_original_references_unchanged": true,
+    "saved_t_output": "Both reference MSE columns for identical predictions."
+  },
+  "teacher_mandated_result_v10": {
+    "authority": "Latest user:先生指定は result.ppmだよ; supersedes earlier CMYK selection and assistant recommendation.",
+    "source": "../teacher_result_v10/README.md",
+    "teacher_reference_sha256": "582b783b099db5bd6fae89ee0355a17f427fb4a4fc3f2750a8acb8398e5383e2",
+    "reference_file_unchanged": true,
+    "prior_cmyk_recommendation_withdrawn_for_assignment": true,
+    "screenshot_old_h40_mse3471_correct": true,
+    "training135_inputs_unchanged": true,
+    "corrected3x3_labels": 111,
+    "retained6x4_labels": 24,
+    "new_training_data_sha256": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a",
+    "training_condition": "One fixed40000-epoch run per H, frozen V9 parent; no latest9 in updates, weighting, augmentation widths or threshold selection.",
+    "heldout9": "Existing actual V9 inputs; retrospective same-chart validation. Previously inspected; not independent final evaluation.",
+    "saved_input_pc_results": [
+      {
+        "H": 40,
+        "format": "DENSE",
+        "mse": 122.44444444444444,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      },
+      {
+        "H": 60,
+        "format": "DENSE",
+        "mse": 33.96296296296296,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      },
+      {
+        "H": 80,
+        "format": "DENSE",
+        "mse": 60.851851851851855,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      },
+      {
+        "H": 100,
+        "format": "DENSE",
+        "mse": 21.925925925925927,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      },
+      {
+        "H": 40,
+        "format": "CSR",
+        "mse": 297.22222222222223,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      },
+      {
+        "H": 60,
+        "format": "CSR",
+        "mse": 273.18518518518516,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      },
+      {
+        "H": 80,
+        "format": "CSR",
+        "mse": 443.037037037037,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      },
+      {
+        "H": 100,
+        "format": "CSR",
+        "mse": 360.55555555555554,
+        "scope": "PC inference on held-out actual inputs; not a new physical or device result."
+      }
+    ],
+    "whole_training_mse_reported": "../teacher_result_v10/results.csv; do not claim all135 or all33 colors achieve300.",
+    "csr_thresholds": "Recomputed from frozen V10 weights, separate validation128 and training-only V8 guard. Provisional because validation2 has input collisions. Latest9 excluded.",
+    "new_physical_capture_count": 0,
+    "board_replay_and_timing": "PENDING",
+    "memory": "No V10 Arduino IDE numbers received. Older V9/33-input firmware numbers not reused.",
+    "next": "Upload new two-file teacher_compare_v10; send t once, save both output blocks plus IDE memory2 lines.",
+    "teacher_site_use": "Keep left result.ppm unchanged; replace right with new V10 output. Old resu15 has old predictions."
+  },
+  "teacher_mandated_result_v10_device_run01": {
+    "received_date_japan": "2026-11-09",
+    "record": "../teacher_result_v10/hardware/run_01/summary.json",
+    "report": "../teacher_result_v10/RESULTS.md",
+    "serial_log_sha256": "3238bce437469fa44f97ce989bdd350ea9fc15080993f22a13bb956f172d08ae",
+    "all8_checks_pass": true,
+    "all216_device_rgb8_match_PC": true,
+    "original_teacher_html_match": true,
+    "timing": "User-reported realUNO R4;100 calls x5 groups,10 warmups,alternating model order;sensor/serial/MSE excluded;common checksum accumulation included.",
+    "time_change_percent": {
+      "40": -34.266284373105904,
+      "60": -28.972091095206665,
+      "80": -39.98800026108219,
+      "100": -44.00737492525412
+    },
+    "payload_reduction_percent": {
+      "40": 62.89651586063443,
+      "60": 60.51310311045799,
+      "80": 67.2405225046145,
+      "100": 69.69823197260021
+    },
+    "MSE_role": "Saved real9 inputs replayed on device;not a new sensor capture. No inputs added to fit or threshold selection.",
+    "absolute300": "Dense all4 andCSR40/60 pass;CSR80/100 fail",
+    "relative_saved9_quality": "AllH CSR MSE increase>5%;not proof of accuracy preservation despite separate selection-set criterion passing.",
+    "whole8_firmware_flash_bytes": 187888,
+    "whole8_firmware_static_ram_bytes": 6740,
+    "remaining_after_static_bytes": 26028,
+    "uploader_write_bytes_separate": 187896,
+    "runtime_stack_usage": "NOT_MEASURED",
+    "new_sensor_capture_count": 0,
+    "independent_final_chart": "NOT_PERFORMED",
+    "ten_physical_repetitions": "NOT_PERFORMED",
+    "standalone_condition_flash_ram": "NOT_PERFORMED",
+    "H50": "NOT_PERFORMED;user-added80/100 do not substitute originalH50",
+    "next": "Summarize results and limitations;do not call alloriginal planitems complete."
+  },
+  "v10_real10_physical_capture_protocol": {
+    "date_japan": "2026-11-09",
+    "user_request": "じゃあ10回測定しよ",
+    "protocol": "../teacher_result_v10/fresh_protocol.json",
+    "code": "../teacher_result_v10/teacher_fresh_v10/teacher_fresh_v10.ino",
+    "parameters_sha256": "2516a64a3acea49c10a2a26e4c8ffa5f8e1f5092270c7fba0ece0b02b4edcb4e",
+    "models_thresholds_reference_frozen": true,
+    "actual_new_physical_captures_received": 10,
+    "scope": "10 newly measured full9-color charts,with per-chart black/white calibration;each input shared by8 model conditions;not10 replays andnot independent final chart.",
+    "host_tests": "10 synthetic cycles,80PPMs match original teacher HTML,ASan/UBSan;not counted as real measurements.",
+    "before_completion": "Do not claim10 physical captures completed or success.Original saved replay and actual speed/memory logs remain unchanged.",
+    "progress": "../teacher_result_v10/fresh_readings/progress.json",
+    "state": "ACTUAL10_COMPLETE",
+    "all_received_completed_captures_included": true,
+    "each_received_capture_verified": "RAW normalization,frozen model/threshold hashes,8 receivedPPMs/MSEs,and original teacher HTML."
+  },
+  "v10_actual10_and_report_package": {
+    "received_date_japan": "2026-11-09",
+    "actual_physical_capture_count": 10,
+    "per_model_MSE_count": 10,
+    "total_MSE_records": 80,
+    "excluded_physical_captures": 0,
+    "second_capture_user_note": "気づいた操作ミスはない;included without alteration",
+    "all80_device_RGB8_match_frozen_PC": "EXACT",
+    "all80_MSE_match_original_teacher_HTML": "PASS",
+    "teacher_reference_unchanged": true,
+    "models_thresholds_and_training135_unchanged": true,
+    "meanMSE": {
+      "DENSE": {
+        "40": 319.56296296296296,
+        "60": 238.33703703703705,
+        "80": 231.68148148148148,
+        "100": 260.4259259259259
+      },
+      "CSR": {
+        "40": 452.0407407407407,
+        "60": 493.5111111111111,
+        "80": 465.72962962962964,
+        "100": 651.9296296296295
+      }
+    },
+    "conclusion": "Array capacity and fixed-input real device time reduced;CSR meanMSE300 target and5pct precision preservation not met.",
+    "report": "../experiment_report_v10/README.md",
+    "independent_final_chart": "NOT_PERFORMED",
+    "H50": "NOT_PERFORMED",
+    "standalone_flash_ram": "NOT_PERFORMED",
+    "fresh_firmware_memory": {
+      "received_date_japan": "2026-11-09",
+      "firmware": "TEACHER_FRESH_V10",
+      "board": "Arduino UNO R4 WiFi",
+      "scope": "ALL8_MODEL_FRESH_SENSOR_CAPTURE_FIRMWARE;NOT_PER_MODEL",
+      "sketch_flash_bytes": 191320,
+      "flash_capacity_bytes": 262144,
+      "ide_flash_percent": 72,
+      "static_global_ram_bytes": 7324,
+      "ram_capacity_bytes": 32768,
+      "ide_static_ram_percent": 22,
+      "remaining_ram_after_static_bytes": 25444,
+      "actual_stack_usage": "NOT_MEASURED",
+      "uploader_write_bytes": 191328,
+      "uploader_bytes_not_sketch_usage": true,
+      "source_log_sha256": "c7aab91336710189be60f2b6fd498a553a5b4b403f28ab866dd586382407357f",
+      "sketch_sha256": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
+      "parameter_header_sha256": "2516a64a3acea49c10a2a26e4c8ffa5f8e1f5092270c7fba0ece0b02b4edcb4e"
+    }
+  }
+}

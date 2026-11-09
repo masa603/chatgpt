@@ -1,0 +1,4 @@
+# Preserve byte-identical copies of original references, submitted logs and source evidence.
+reference/** -text -whitespace
+raw_logs/** -text -whitespace
+source_snapshot/** -text -whitespace

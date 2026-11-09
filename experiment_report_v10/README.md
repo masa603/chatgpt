@@ -1,0 +1,48 @@
+# 実際の10回測定に基づく報告書・コード・データ一式
+
+[報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
+学籍番号・氏名は元の計画書にある情報を引き継いでいます。
+
+実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。
+容量・固定入力での推論速度は改善しました。CSRの10回平均MSE300以下・精度維持は達成していない結果として記載しています。
+独立した最終チャート、H50、各条件単独のFlash/RAMと最大スタック使用量は未実施です。
+この資料は実施した内容をまとめたもので、当初計画の全項目完了や採点結果を保証するものではありません。
+
+## 必要なファイル
+
+- 紙を読んだコード：[teacher_fresh_v10.ino](code/teacher_fresh_v10/teacher_fresh_v10.ino)、[数値ヘッダ](code/teacher_fresh_v10/teacher_parameters_v10.h)
+- 速度を計ったコード：[teacher_compare_v10.ino](code/teacher_compare_v10/teacher_compare_v10.ino)、[数値ヘッダ](code/teacher_compare_v10/teacher_parameters_v10.h)
+- 全10回・8条件（MSE80個）：[MSE一覧](data/physical10_mse_all80.csv)、[平均・標本SD](data/physical10_mse_summary.csv)、[同じ回の圧縮前後差](data/physical10_paired_differences.csv)
+- 学習データ：[training135.csv](data/training135.csv)、[行重み](data/training_sample_weights.csv)
+- 閾値選択の別入力：[threshold_validation128.csv](data/threshold_validation128.csv)
+- 速度・容量：[集計CSV](data/fixed_input_device_timing_capacity.csv)
+- 正解：[元のresult.ppm](reference/result.ppm)、[元の先生HTML](reference/mse_calculator.html)
+- 各回の元ログ・80枚のPPM/PNG：[raw_logs/physical10](raw_logs/physical10)
+- 速度の5組とIDE使用量の元ログ：[raw_logs/hardware](raw_logs/hardware)
+- 図：[10回のMSE](figures/physical_mse10.png)、[容量・速度](figures/capacity_and_time.png)。同名PDFも同梱。
+
+コードと学習済み数値は別ファイルです。Arduinoでは使う版の2ファイルを同名フォルダに置きます。
+元のデータは変更せず複製し、manifest.jsonへ各ファイルのSHA256を保存しています。
+このフォルダで `python verify_package.py` を実行すると、全80MSE・10回の平均と標本SD・コードの対応・ファイルハッシュを再確認できます。
+
+## 保存ログの再計算
+
+Python3.12、NumPy・PyTorch・Pillow・Matplotlib、Node.js、C++11対応g++を使います。
+requirements.txtはクラウドで使った主要Python版です。OS・CPUが違う場合は、凍結済みヘッダと受領した実機PPMを結果の照合基準にします。
+
+source_snapshotを作業ディレクトリとして、次を実行できます。
+
+```sh
+python teacher_result_v10/record_fresh_capture.py teacher_result_v10/fresh_readings/capture_10/submitted_log.txt --received-date 2026-11-09
+```
+
+既に各回の検算済みsummaryと出力も同梱しています。上のコマンドは最後の回を再検算し、全10回を集計し直します。
+数値ヘッダのモデル検査は `python teacher_result_v10/verify.py`、新規読取プログラムのホスト検査は `python teacher_result_v10/verify_fresh.py` です。
+後者の模擬入力は実験の測定回数に含めません。
+
+## 学習・枝刈りの使用ソース
+
+source_snapshot内のteacher_result_v10にprepare.py、train.py、data_weights.py、select_compression.py、finalize_compression.py、build_program.py、build_fresh.pyを同梱しています。
+学習を開始した親V9のチェックポイントと、最終V10のチェックポイント・NPZ・Denseヘッダ・CSRヘッダ・全候補CSVも含みます。
+凍結済み成果物の誤上書きを避けるガードがあるため、そのままtrain.pyや選択処理を再実行する用途には使わず、再学習時は別の作業コピーを用意します。
+記録済み結果の検算には再学習は不要です。

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPM画像ビューア & MSE計算</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 20px;
+        }
+        .image-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .upload-area {
+            border: 2px dashed #aaa;
+            padding: 15px;
+            width: 300px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .upload-area:hover {
+            background-color: #e0e0e0;
+        }
+        .upload-area.dragover {
+            background-color: #d0ffd0;
+            border-color: #00aa00;
+        }
+        canvas {
+            border: 2px solid #333;
+            margin-top: 10px;
+            width: 400px;
+            image-rendering: pixelated;
+        }
+        #file-info {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        #mse-result {
+            font-size: 48px;
+            font-weight: bold;
+            color: #d9534f;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>PPM画像ビューア & MSE計算</h1>
+
+    <!-- 画像選択エリア -->
+    <div class="image-container">
+        <!-- 基準画像（Reference） -->
+        <div class="image-box">
+            <h3>基準画像（Reference）</h3>
+            <div id="upload-area-ref" class="upload-area">
+                <p>ここにファイルをドラッグ＆ドロップ</p>
+                <p>または</p>
+                <input type="file" id="ref-input" accept=".ppm">
+            </div>
+            <canvas id="canvas-ref"></canvas>
+        </div>
+
+        <!-- アップロード画像 -->
+        <div class="image-box">
+            <h3>アップロード画像</h3>
+            <div id="upload-area-upload" class="upload-area">
+                <p>ここにファイルをドラッグ＆ドロップ</p>
+                <p>または</p>
+                <input type="file" id="file-input" accept=".ppm">
+            </div>
+            <canvas id="canvas-upload"></canvas>
+        </div>
+    </div>
+
+    <div id="file-info"></div>
+    <h3 id="mse-result">MSE: -</h3>
+
+    <script>
+        const refInput = document.getElementById("ref-input");
+        const fileInput = document.getElementById("file-input");
+        const uploadAreaRef = document.getElementById("upload-area-ref");
+        const uploadAreaUpload = document.getElementById("upload-area-upload");
+        const canvasRef = document.getElementById("canvas-ref");
+        const ctxRef = canvasRef.getContext("2d");
+        const canvasUpload = document.getElementById("canvas-upload");
+        const ctxUpload = canvasUpload.getContext("2d");
+        const mseResult = document.getElementById("mse-result");
+
+        let refImageData = null;
+
+        function parsePPM(file, isReference) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const text = new TextDecoder("utf-8").decode(event.target.result);
+                const lines = text.split(/\n+/);
+
+                if (!lines[0].startsWith("P3")) {
+                    alert("P3 フォーマットの PPM 画像のみ対応しています。");
+                    return;
+                }
+
+                let index = 1;
+                while (lines[index].startsWith("#")) index++;
+
+                const [width, height] = lines[index].split(" ").map(Number);
+                index++;
+                const maxVal = Number(lines[index]);
+                index++;
+                const pixelData = lines.slice(index).join(" ").split(/\s+/).map(Number);
+
+                const canvas = isReference ? canvasRef : canvasUpload;
+                const ctx = isReference ? ctxRef : ctxUpload;
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const imageData = ctx.createImageData(width, height);
+                for (let i = 0, j = 0; i < pixelData.length; i += 3, j += 4) {
+                    imageData.data[j] = pixelData[i];       
+                    imageData.data[j + 1] = pixelData[i+1];
+                    imageData.data[j + 2] = pixelData[i+2];
+                    imageData.data[j + 3] = 255;            
+                }
+
+                ctx.imageSmoothingEnabled = false;
+                ctx.putImageData(imageData, 0, 0);
+
+                if (isReference) {
+                    refImageData = imageData;
+                } else {
+                    computeMSE(imageData);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function computeMSE(uploadImageData) {
+            if (!refImageData) {
+                alert("基準画像を選択してください。");
+                return;
+            }
+
+            const refData = refImageData.data;
+            const uploadData = uploadImageData.data;
+
+            const width = Math.min(refImageData.width, uploadImageData.width);
+            const height = Math.min(refImageData.height, uploadImageData.height);
+
+            let mse = 0;
+            for (let i = 0; i < width * height * 4; i += 4) {
+                const rDiff = refData[i] - uploadData[i];
+                const gDiff = refData[i + 1] - uploadData[i + 1];
+                const bDiff = refData[i + 2] - uploadData[i + 2];
+
+                mse += (rDiff * rDiff + gDiff * gDiff + bDiff * bDiff) / 3;
+            }
+            mse /= (width * height);
+            mseResult.innerText = `MSE: ${mse.toFixed(2)}`;
+        }
+
+        function setupDragAndDrop(area, isReference) {
+            area.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                area.classList.add("dragover");
+            });
+
+            area.addEventListener("dragleave", () => {
+                area.classList.remove("dragover");
+            });
+
+            area.addEventListener("drop", (event) => {
+                event.preventDefault();
+                area.classList.remove("dragover");
+                const file = event.dataTransfer.files[0];
+                if (file) parsePPM(file, isReference);
+            });
+        }
+
+        setupDragAndDrop(uploadAreaRef, true);
+        setupDragAndDrop(uploadAreaUpload, false);
+
+        refInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) parsePPM(file, true);
+        });
+
+        fileInput.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if (file) parsePPM(file, false);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "report_created_date_japan": "2026-11-09",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "numpy": "2.3.5",
+  "matplotlib": "3.10.8",
+  "training_torch_recorded": "2.8.0+cpu",
+  "source_base_commit": "d3e6d91f0389dbefa90d09d736c66daed3a225d5",
+  "snapshot_scope": "Current workspace including newly received actualcapture10 and final report additions; original frozen models preserved.",
+  "physical_captures": 10,
+  "excluded_captures": 0,
+  "new_training_after_physical10": false,
+  "quality_result": "CSR meanMSE>300 and increase>5% for allH; capacity and fixed-input time reduced.",
+  "actual_new_firmware_memory_received": true
+}

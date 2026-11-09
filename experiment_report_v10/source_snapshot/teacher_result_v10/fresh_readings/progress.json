@@ -1,0 +1,78 @@
+{
+  "firmware": "TEACHER_FRESH_V10",
+  "target_physical_captures": 10,
+  "actual_verified_physical_captures": 10,
+  "physical_captures_remaining": 0,
+  "per_model_received_MSE_count": 10,
+  "MSE_records_total": 80,
+  "ten_physical_captures_complete": true,
+  "input_sets_shared_by_all8_models": true,
+  "same_chart_repetition": "LEARNING_3X3_REPEAT; NOT_INDEPENDENT_FINAL_CHART",
+  "all_received_captures_included": true,
+  "model_or_threshold_updates_after_start": false,
+  "sample_SD": "Unavailable for one physical repetition; never substitute0 or treat9 colors/8models/10 internal sensor samples as independent chart repetitions.",
+  "captures": [
+    {
+      "capture_key": "capture_01",
+      "boot_id": "boot_01",
+      "counter": 1,
+      "source_sha256": "51a56ba7fe6c0caa28b353aa273e99e9988358892972face9497754d914fc7cb"
+    },
+    {
+      "capture_key": "capture_02",
+      "boot_id": "boot_01",
+      "counter": 2,
+      "source_sha256": "313233a628351148c5afe206aa85eba4761f849e35a939420ecda36fd53a1bc7"
+    },
+    {
+      "capture_key": "capture_03",
+      "boot_id": "boot_01",
+      "counter": 3,
+      "source_sha256": "baa86ed87b8b6a22d1b0de41bad87ac3e0724cf5b00c6dc8845cdb5967c34b34"
+    },
+    {
+      "capture_key": "capture_04",
+      "boot_id": "boot_01",
+      "counter": 4,
+      "source_sha256": "cfb6194b35a385292a769a5016a53d6daed11aa565fc7fff4603b9af72b6b46e"
+    },
+    {
+      "capture_key": "capture_05",
+      "boot_id": "boot_01",
+      "counter": 5,
+      "source_sha256": "ba23f9a54cb613b4c6707ade06da836d94632ef36025caa98c14d592f7f4c258"
+    },
+    {
+      "capture_key": "capture_06",
+      "boot_id": "boot_01",
+      "counter": 6,
+      "source_sha256": "9890ca76ab620644871a9f762ebdb96f62baa5091fed7d63d9075478b11b95f1"
+    },
+    {
+      "capture_key": "capture_07",
+      "boot_id": "boot_01",
+      "counter": 7,
+      "source_sha256": "c460f092aba356b42d79217027a5f819ee49c44940b97374f5f9c035027ce2cb"
+    },
+    {
+      "capture_key": "capture_08",
+      "boot_id": "boot_01",
+      "counter": 8,
+      "source_sha256": "1523e0eeafb570260cac1c7bee1a6e4eecad309b8ab6e377cef88bde98876884"
+    },
+    {
+      "capture_key": "capture_09",
+      "boot_id": "boot_01",
+      "counter": 9,
+      "source_sha256": "1bf493c821189af9e8a50ad515d24f7675f4e646518518711f69df0d84e49e6d"
+    },
+    {
+      "capture_key": "capture_10",
+      "boot_id": "boot_01",
+      "counter": 10,
+      "source_sha256": "3fd65533c0f91e3ecbd024f5c41542867e0bed04d75a574433ba9f9ab8fac190"
+    }
+  ],
+  "excluded_captures": [],
+  "duplicate_input_fingerprints_flagged": false
+}

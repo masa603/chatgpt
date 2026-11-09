@@ -38,6 +38,8 @@ def main():
     stats='\n'.join(f"| {r['H']} | {r['dense_mean_us']:.4f} ± {r['dense_group_sample_stddev_us']:.4f} | {r['csr_mean_us']:.4f} ± {r['csr_group_sample_stddev_us']:.4f} |" for r in pairs)
     report=f'''# V10の実機比較結果
 
+このファイルは保存入力の再生・速度・容量の記録です。新規の紙の10回測定は [fresh_readings](fresh_readings/README.md)、[報告書一式](../experiment_report_v10/README.md) に分けて保存しています。
+
 2026年11月9日（日本時間）に受領したArduino UNO R4 WiFiのログを保存・検算しました。
 40・60・80・100次元のDense／枝刈り＋CSR、全8条件で自己検査・RGB一致検査がPASSし、4組すべての実機速度を取得しました。
 先生指定の元の **result.ppm** を正解とし、CMYK版の基準へ変更していません。
@@ -108,7 +110,7 @@ CPU48MHz、コンパイラ `{summary['compiler']}` です。
 ## 計画から残る項目
 
 新V10の実機再生・速度・全8条件入りFlash/RAMは記録できました。
-当初計画の独立した最終評価チャート、10回の物理読取、H50、各条件単独のFlash/RAMは未実施です。
+紙の新規読取の実施回数は [fresh_readings](fresh_readings/README.md) に記録しています。独立した最終評価チャート、H50、各条件単独のFlash/RAMは未実施です。
 学習全135行の重みなしMSEが300以下だったという結果でもありません。学習全体の値は [学習結果](results.csv) に残しています。
 [進捗と制約](remaining_experiments.md) を含めて報告し、当初計画の全項目完了とはしません。
 '''

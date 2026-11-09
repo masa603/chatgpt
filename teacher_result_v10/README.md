@@ -1,7 +1,8 @@
 # 先生指定のresult.ppmへ学習を修正したV10
 
-**現在は、利用者の希望で [紙を実際に10回読む版](teacher_fresh_v10/README.md) を用意しています。**
-受領した新規実測は [fresh_readingsの進捗・集計](fresh_readings/README.md) に保存しています。以下の保存入力再生と混ぜず、実際に受領した回数だけを集計します。
+**紙の新規10回読取を受領・検算し、[実測に基づく報告書・コード・データ一式](../experiment_report_v10/README.md) を作成しました。**
+全10回の [MSE平均・標本SD・元ログ](fresh_readings/README.md) を保存しています。高いMSEの第2回も含め、除外はありません。
+10回平均はDense60・80・100が300以下、CSRは全Hで300超えです。以下の保存入力再生とは別の結果として扱います。
 
 先生指定は元の **[result.ppm](reference/result.ppm)** です。CMYK版を勧めた以前の案内は、この課題の基準として誤りでした。
 正解画像を変更せず、3×3の学習ラベルを先生指定RGBへ修正して学習を行いました。
@@ -103,5 +104,5 @@ ASan/UBSanを有効にし、CSR索引、t/T各1回の8PPM、元の先生HTMLのM
 その後、利用者からUNO R4での実行ログとIDE使用量を受領しました。現在の実機結果は [hardware/run_01/summary.json](hardware/run_01/summary.json) です。
 受領した実機PPM・元の先生HTML・計時の平均と標本SD・チェックサムを検算済みです。全8条件入りのFlash187888byte、静的RAM6740byteも記録しました。
 
-独立した最終評価チャート、当初計画の物理的10回反復、H50、各条件単独のFlash/RAMも未実施です。
+物理的10回反復は実施・検算済みです。独立した最終評価チャート、H50、各条件単独のFlash/RAMは未実施です。
 H80・100は利用者の追加要望です。詳しい進捗は [remaining_experiments.md](remaining_experiments.md) に記録しています。
