@@ -478,5 +478,17 @@
     "standalone_condition_flash_ram": "NOT_PERFORMED",
     "H50": "NOT_PERFORMED;user-added80/100 do not substitute originalH50",
     "next": "Summarize results and limitations;do not call alloriginal planitems complete."
+  },
+  "v10_real10_physical_capture_protocol": {
+    "date_japan": "2026-11-09",
+    "user_request": "じゃあ10回測定しよ",
+    "protocol": "../teacher_result_v10/fresh_protocol.json",
+    "code": "../teacher_result_v10/teacher_fresh_v10/teacher_fresh_v10.ino",
+    "parameters_sha256": "2516a64a3acea49c10a2a26e4c8ffa5f8e1f5092270c7fba0ece0b02b4edcb4e",
+    "models_thresholds_reference_frozen": true,
+    "actual_new_physical_captures_received": 0,
+    "scope": "10 newly measured full9-color charts,with per-chart black/white calibration;each input shared by8 model conditions;not10 replays andnot independent final chart.",
+    "host_tests": "10 synthetic cycles,80PPMs match original teacher HTML,ASan/UBSan;not counted as real measurements.",
+    "before_completion": "Do not claim10 physical captures completed or success.Original saved replay and actual speed/memory logs remain unchanged."
   }
 }

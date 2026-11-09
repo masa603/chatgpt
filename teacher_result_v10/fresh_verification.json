@@ -1,0 +1,20 @@
+{
+  "scope": "Synthetic host functional tests only. These are not ten real paper readings and no synthetic captures are exported as measurement data.",
+  "frozen_parameter_header_sha256": "2516a64a3acea49c10a2a26e4c8ffa5f8e1f5092270c7fba0ece0b02b4edcb4e",
+  "parameter_header_byte_identical_to_verified_V10": true,
+  "inference_kernels_unchanged": true,
+  "six_sensor_functions_unchanged": true,
+  "cpp11_asan_ubsan": "PASS",
+  "calibration_failure_then_retry": "PASS",
+  "read_before_calibration_does_not_sample": "PASS",
+  "incomplete_capture_abort_logged_not_counted": "PASS",
+  "ten_complete_host_cycles_each_read9_fresh_inputs": "PASS",
+  "extra_r_or_t_does_not_repeat_completed_capture": "PASS",
+  "all80_PPMs_match_frozen_PC_and_original_teacher_HTML": "PASS",
+  "no_physical_buttons_read": true,
+  "no_archived_inputs_used_for_outputs": true,
+  "synthetic_raw_sensor_reads": 3450,
+  "max_printed_mse_rounding_error": 4.814814928977285e-07,
+  "physical_V10_captures_received": 0,
+  "actual_fresh_firmware_build": "PENDING_USER_ARDUINO_IDE"
+}
