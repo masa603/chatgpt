@@ -1,0 +1,10 @@
+{
+  "scope": "Parser fixtures and temporary mock CLI calls only; all temporary results deleted. No Arduino measurements.",
+  "json_english_japanese_memory_parsers": "PASS",
+  "invalid_or_wrong_board_sizes_rejected": "PASS",
+  "all8_condition_source_selection": "PASS",
+  "compile_failure_leaves_numbers_blank": "PASS",
+  "never_uploads_or_installs": true,
+  "original_files_unchanged": true,
+  "existing_results_not_overwritten": true
+}

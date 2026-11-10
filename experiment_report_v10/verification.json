@@ -9,6 +9,7 @@
   "frozen_numeric_headers_byte_identical": "PASS",
   "code_copies_match_source_snapshot": "PASS",
   "two_firmware_memory_records_separate": "PASS",
+  "single_model_memory_probe": "HOST_VERIFIED; ACTUAL_ARDUINO_BUILD_VALUES_PENDING; TEMPLATE_FIELDS_BLANK",
   "report_values_match_actual_all10_aggregates": "PASS",
   "source_snapshot_replay_test": "PASS in an isolated temporary copy; no original repository paths required.",
   "CSR_mean300_goal": "NOT_MET",

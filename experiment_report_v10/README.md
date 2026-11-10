@@ -12,6 +12,7 @@
 
 - 紙を読んだコード：[teacher_fresh_v10.ino](code/teacher_fresh_v10/teacher_fresh_v10.ino)、[数値ヘッダ](code/teacher_fresh_v10/teacher_parameters_v10.h)
 - 速度を計ったコード：[teacher_compare_v10.ino](code/teacher_compare_v10/teacher_compare_v10.ino)、[数値ヘッダ](code/teacher_compare_v10/teacher_parameters_v10.h)
+- 各モデル単独のFlash・静的RAM：[測定手順・コード](code/memory_probe_v10/README.md)。8条件のコードはPC検証済み、実際のビルド値はMacでの取得待ちです。[記入用CSV](data/single_model_memory_template.csv) は未測定欄を空欄にしています。
 - 全10回・8条件（MSE80個）：[MSE一覧](data/physical10_mse_all80.csv)、[平均・標本SD](data/physical10_mse_summary.csv)、[同じ回の圧縮前後差](data/physical10_paired_differences.csv)
 - 学習データ：[training135.csv](data/training135.csv)、[行重み](data/training_sample_weights.csv)
 - 閾値選択の別入力：[threshold_validation128.csv](data/threshold_validation128.csv)

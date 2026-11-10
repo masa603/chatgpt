@@ -384,7 +384,8 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 '''
     (OUT/'header.tex').write_text(header)
     # Stable portable copies, while leaving original files untouched.
-    for name in ['teacher_fresh_v10','teacher_compare_v10']:copy_path(HERE/name,OUT/'code'/name)
+    for name in ['teacher_fresh_v10','teacher_compare_v10','memory_probe_v10']:copy_path(HERE/name,OUT/'code'/name)
+    copy_path(HERE/'single_model_memory_template.csv',OUT/'data/single_model_memory_template.csv')
     for source,name in [(HERE/'fresh_readings/mse_results.csv','physical10_mse_all80.csv'),
         (HERE/'fresh_readings/mse_summary.csv','physical10_mse_summary.csv'),(HERE/'fresh_readings/paired_comparisons.csv','physical10_paired_differences.csv'),
         (HERE/'training135.csv','training135.csv'),(HERE/'sample_weights.csv','training_sample_weights.csv'),
@@ -397,7 +398,7 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
         'pruning/export_csr_arduino.py','pruning/validation.csv','pruning/validation','hdjsk',
         'calibration_retraining/models','calibration_retraining/training135.csv','calibration_retraining/physical_readings/capture_01',
         'calibration_retraining/color_retrain_v9','calibration_retraining/compare_all_v9','calibration_retraining/comparison_kernels.cpp',
-        'calibration_retraining/comparison_benchmark.cpp','experiment_today/build_fresh_scanner.py','experiment_today/verify_fresh_scanner.py',
+        'calibration_retraining/comparison_benchmark.cpp','experiment_today/build_fresh_scanner.py','experiment_today/verify_fresh_scanner.py','experiment_today/verify_host.py',
         'learning_followup/reference_audit/run_teacher_calculator.cjs','learning_followup/reference_audit/provided/result.ppm',
         'distributed_training/materials/train_L1_normalization.ipynb','distributed_training/materials/requirements_provided.txt',
         'learning_followup/goal_update.json','experiment_today/protocol_change.json','experiment_plan.tex']
@@ -433,6 +434,7 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 
 - 紙を読んだコード：[teacher_fresh_v10.ino](code/teacher_fresh_v10/teacher_fresh_v10.ino)、[数値ヘッダ](code/teacher_fresh_v10/teacher_parameters_v10.h)
 - 速度を計ったコード：[teacher_compare_v10.ino](code/teacher_compare_v10/teacher_compare_v10.ino)、[数値ヘッダ](code/teacher_compare_v10/teacher_parameters_v10.h)
+- 各モデル単独のFlash・静的RAM：[測定手順・コード](code/memory_probe_v10/README.md)。8条件のコードはPC検証済み、実際のビルド値はMacでの取得待ちです。[記入用CSV](data/single_model_memory_template.csv) は未測定欄を空欄にしています。
 - 全10回・8条件（MSE80個）：[MSE一覧](data/physical10_mse_all80.csv)、[平均・標本SD](data/physical10_mse_summary.csv)、[同じ回の圧縮前後差](data/physical10_paired_differences.csv)
 - 学習データ：[training135.csv](data/training135.csv)、[行重み](data/training_sample_weights.csv)
 - 閾値選択の別入力：[threshold_validation128.csv](data/threshold_validation128.csv)

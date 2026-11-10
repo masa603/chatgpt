@@ -63,6 +63,13 @@ def verify(refresh=False):
             assert path.read_bytes()==(HERE/'source_snapshot/teacher_result_v10'/name/path.name).read_bytes()
     for source,target_name in [('training135.csv','training135.csv'),('fresh_readings/mse_results.csv','physical10_mse_all80.csv'),('fresh_readings/mse_summary.csv','physical10_mse_summary.csv')]:
         assert (HERE/'source_snapshot/teacher_result_v10'/source).read_bytes()==(HERE/'data'/target_name).read_bytes()
+    probe=HERE/'code/memory_probe_v10'
+    for path in probe.iterdir():
+        if path.is_file():assert path.read_bytes()==(HERE/'source_snapshot/teacher_result_v10/memory_probe_v10'/path.name).read_bytes()
+    template=rows(HERE/'data/single_model_memory_template.csv');assert len(template)==8
+    for item in template:
+        assert item['status']=='PENDING_MAC_ARDUINO_BUILD'
+        assert item['flash_used_bytes']==item['static_ram_used_bytes']==''
     for name,flash,ram in [('run_01/memory.json',187888,6740),('teacher_fresh_v10_compile_01.json',191320,7324)]:
         memory=json.loads((HERE/'raw_logs/hardware'/name).read_text())
         assert memory['sketch_flash_bytes']==flash and memory['static_global_ram_bytes']==ram
@@ -75,6 +82,7 @@ def verify(refresh=False):
         'all80_MSE_recomputed_from_copied_PPM':'PASS','all8_means_sampleSD_min_max_goal_counts':'PASS',
         'all4_paired_differences_and_sampleSD':'PASS','frozen_numeric_headers_byte_identical':'PASS',
         'code_copies_match_source_snapshot':'PASS','two_firmware_memory_records_separate':'PASS',
+        'single_model_memory_probe':'HOST_VERIFIED; ACTUAL_ARDUINO_BUILD_VALUES_PENDING; TEMPLATE_FIELDS_BLANK',
         'report_values_match_actual_all10_aggregates':'PASS','source_snapshot_replay_test':'PASS in an isolated temporary copy; no original repository paths required.',
         'CSR_mean300_goal':'NOT_MET','CSR_relative5pct_preservation':'NOT_MET','independent_final_chart':'NOT_PERFORMED'}
     if refresh:

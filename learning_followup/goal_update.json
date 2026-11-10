@@ -38,7 +38,7 @@
     "100": 13314.148148
   },
   "v4_physical_record": "../reference_corrected/physical_readings/capture_01/summary.json",
-  "next_step": "Read and use the report with all10 real measurements and recorded limitations;do not claim CSR accuracy goal or fulloriginal plan met.",
+  "next_step": "Compile8 selections with existing Mac Arduino IDE or included auto-build script; retain raw memory logs and environment.",
   "v4_physical_data_used_for_v4_training": false,
   "v4_physical_data_used_for_v5_training": true,
   "current_experiment": "../teacher_result_v10/README.md",
@@ -200,7 +200,7 @@
   "v10_remaining_ram_after_static_bytes": 26028,
   "v10_runtime_stack_usage": "NOT_MEASURED;26028 is available after statics,not actual local-variable use",
   "v10_quality_note": "CSR MSE increases on saved9 in allH, exceeding5pct relative tolerance; onlyCSR40/60 meet absolute300. Selection validation128 is a different set; do not claim general accuracy preservation.",
-  "v10_next_action": "USE_COMPLETED_FACTUAL_REPORT_PACKAGE",
+  "v10_next_action": "MEASURE_SINGLE_MODEL_FLASH_AND_STATIC_RAM_ON_MAC",
   "real10_protocol": "../teacher_result_v10/fresh_protocol.json",
   "real10_new_physical_captures_received": 10,
   "real10_actual_build": "Execution confirmed by received fresh firmware logs.",
@@ -230,5 +230,19 @@
   "real10_flash_bytes_all8_fresh": 191320,
   "real10_static_ram_bytes_all8_fresh": 7324,
   "real10_remaining_ram_after_static_bytes": 25444,
-  "real10_memory_record": "../teacher_result_v10/hardware/teacher_fresh_v10_compile_01.json"
+  "real10_memory_record": "../teacher_result_v10/hardware/teacher_fresh_v10_compile_01.json",
+  "v10_single_model_memory": {
+    "date_japan": "2026-11-10",
+    "user_request": "じゃあ１やって（各モデル単独のFlash・静的RAM）",
+    "scope": "One frozen V10 model per build; 40/60/80/100 times Dense/CSR. No new training or sensor capture.",
+    "code": "../teacher_result_v10/memory_probe_v10/README.md",
+    "host_verification": "8 conditions,626 FP32/RGB8 cases each,ASan/UBSan and optimized retention PASS",
+    "actual_arduino_condition_build_values_received": 0,
+    "actual_arduino_condition_build_values_required": 8,
+    "status": "HOST_VERIFIED_PENDING_MAC_ARDUINO_BUILDS",
+    "cloud_toolchain_limitation": "No installed UNO R4 toolchain; official Arduino CLI download returned HTTP403 via proxy.",
+    "next_action": "Compile8 selections with existing Mac Arduino IDE or included auto-build script; retain raw memory logs and environment.",
+    "runtime_stack_peak": "NOT_MEASURED",
+    "existing_physical10_and_timing_unchanged": true
+  }
 }
