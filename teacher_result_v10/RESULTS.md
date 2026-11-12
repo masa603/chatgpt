@@ -1,6 +1,6 @@
 # V10の実機比較結果
 
-このファイルは保存入力の再生・速度・容量の記録です。新規の紙の10回測定は [fresh_readings](fresh_readings/README.md)、[完成した報告書一式](../experiment_report_v10/README.md) に分けて保存しています。
+このファイルは保存入力の再生・速度・容量の記録です。新規の紙の10回測定は [fresh_readings](fresh_readings/README.md)、[報告書一式](../experiment_report_v10/README.md) に分けて保存しています。
 
 2026年11月9日（日本時間）に受領したArduino UNO R4 WiFiのログを保存・検算しました。
 40・60・80・100次元のDense／枝刈り＋CSR、全8条件で自己検査・RGB一致検査がPASSし、4組すべての実機速度を取得しました。
@@ -64,6 +64,22 @@ CPU48MHz、コンパイラ `7.2.1 20170904 (release) [ARM/embedded-7-branch revi
 残るRAM26,028byteは、ローカル変数が実際に26,028byte使ったという意味ではありません。実行時のスタック使用量は未測定です。
 書込ツールの187,896byteは別の値として保存し、スケッチFlash187,888byteと区別します。
 
+## 各モデル単独のFlash・静的RAM
+
+2026年11月12日、同じ単独モデル用コードへ1条件ずつ搭載した8ビルドのIDE表示を受領しました。
+
+| H | Dense Flash byte | CSR Flash byte | Flash削減 byte | Flash削減率 | 両方式の静的RAM byte |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 40 | 60,852 | 56,020 | 4,832 | 7.94% | 6,764 |
+| 60 | 69,492 | 59,612 | 9,880 | 14.22% | 6,764 |
+| 80 | 81,348 | 62,396 | 18,952 | 23.30% | 6,764 |
+| 100 | 96,388 | 66,260 | 30,128 | 31.26% | 6,764 |
+
+Flash全体を7.94〜31.26%削減しました。静的RAMは全条件で6,764 byteと変わらず、静的割当後の残りは26,004 byteです。
+このFlashはArduinoコア・共通処理を含み、上の数値配列だけの削減率とは異なります。実行時最大スタックは未測定です。
+[8条件CSV](single_model_memory_results.csv)、[削減率CSV](single_model_memory_comparison.csv)、[元のIDE表示と検算](hardware/single_model_memory_run_01/README.md) を保存しました。
+この記録はコンパイル使用量で、紙の新規測定や追加の速度測定には数えません。
+
 ## 元データと検算
 
 [受領したシリアルログ](hardware/run_01/submitted_log.txt)、[表示用のバックスラッシュを除いたログ](hardware/run_01/normalized_log.txt)、
@@ -78,6 +94,6 @@ CPU48MHz、コンパイラ `7.2.1 20170904 (release) [ARM/embedded-7-branch revi
 ## 計画から残る項目
 
 新V10の実機再生・速度・全8条件入りFlash/RAMは記録できました。
-その後の紙の新規10回読取は受領・検算済みです。独立した最終評価チャート、H50、各条件単独のFlash/RAMは未実施です。
+紙の新規10回と各条件単独Flash・静的RAM8条件を受領済みです。独立した最終評価チャート、H50、搭載限界と実行時最大スタックは未実施です。
 学習全135行の重みなしMSEが300以下だったという結果でもありません。学習全体の値は [学習結果](results.csv) に残しています。
 [進捗と制約](remaining_experiments.md) を含めて報告し、当初計画の全項目完了とはしません。

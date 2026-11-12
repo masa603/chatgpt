@@ -1,6 +1,6 @@
 {
   "scope": "Factual package of10 actual user-reported physical reads; all80 model outputs and unmodified code/data.",
-  "file_count": 741,
+  "file_count": 760,
   "files": [
     {
       "path": ".gitattributes",
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4508,
-      "sha256": "55c8631e22cfac6edf30a760b74045e568015ca723c95ed7d2c1b3638c6c4ed8"
+      "bytes": 4711,
+      "sha256": "5ab87a654abb6040587b9f320b1fa470b050f54de43a0806ef4ae76852d0c13b"
     },
     {
       "path": "build_docx.log",
@@ -19,8 +19,8 @@
     },
     {
       "path": "build_pdf.log",
-      "bytes": 2784,
-      "sha256": "52b8cf7239f5a3924688fba94b5461e43b418a04af1b8e13c4d1dfaa3bdf72d4"
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "path": "build_tex.log",
@@ -29,8 +29,8 @@
     },
     {
       "path": "code/memory_probe_v10/README.md",
-      "bytes": 4534,
-      "sha256": "a54638aac80e8c4fa19af4a6010b7755e7914184e57fb506f501a6ef7e3265fa"
+      "bytes": 4812,
+      "sha256": "e5f0a172ad5ebdfc2d540a3e87c7adaa2e3b96c199bbbdbaf8208bc4260f629a"
     },
     {
       "path": "code/memory_probe_v10/conditions.json",
@@ -108,6 +108,16 @@
       "sha256": "08752722a819094fab78d6f3a3faaa59d410d3133be28fe02b2b1d5b8033bec7"
     },
     {
+      "path": "data/single_model_memory_comparison.csv",
+      "bytes": 350,
+      "sha256": "f7caf665b48d20fc4b2aaf0eccfc338d56783841849855bb86736badf0165805"
+    },
+    {
+      "path": "data/single_model_memory_results.csv",
+      "bytes": 2193,
+      "sha256": "4246b955e1b6be6d24dd74bee2e8edc30ab5318c1ba49601ca0710a6efd3b03c"
+    },
+    {
       "path": "data/single_model_memory_template.csv",
       "bytes": 407,
       "sha256": "4a664f306e5fa28d3b12ac33f94c5bb4bab949677e3d7acdbf93f92756fdae46"
@@ -129,13 +139,13 @@
     },
     {
       "path": "environment_used.json",
-      "bytes": 716,
-      "sha256": "93fd4394ba28cb8987cd23c204ddabaa38ab9c9a394b64040bd4ca3ead77a16e"
+      "bytes": 935,
+      "sha256": "4c1ad6e136db100a38c6bd731446e8785a744becb05802e6626af24bec9cbb1e"
     },
     {
       "path": "figures/capacity_and_time.pdf",
       "bytes": 15961,
-      "sha256": "2c76133eb0935ad79fca12c5a44bf78969593918a9e2cdabca559a424fe3ba84"
+      "sha256": "96552f459cb4793590bc9142db13f44c9704e61183b8ad75d7f3e8c52f9a85f4"
     },
     {
       "path": "figures/capacity_and_time.png",
@@ -145,12 +155,22 @@
     {
       "path": "figures/physical_mse10.pdf",
       "bytes": 22257,
-      "sha256": "efc715406288af1c0ed67219a819b8e0c139d7c6ce6d1aab7c2b836d9a1f0826"
+      "sha256": "2edded39823e4c086cf9c990bf71cbcddec1683f6a056c9b905d04e547c481aa"
     },
     {
       "path": "figures/physical_mse10.png",
       "bytes": 212540,
       "sha256": "c9c1512130884609cf9b7e03a70a63f59185178a035eebd783a14822dd8e29df"
+    },
+    {
+      "path": "figures/single_model_flash.pdf",
+      "bytes": 13958,
+      "sha256": "3a2d31ba5088fb0f5aca9bb39251b06f262cf13c2fb5bc522a7d13286a456152"
+    },
+    {
+      "path": "figures/single_model_flash.png",
+      "bytes": 43067,
+      "sha256": "f3b9d3bb8aa09d667cc5378d7de52f366d9eb5bbae37c54c61075ce707f2cd7f"
     },
     {
       "path": "header.tex",
@@ -281,6 +301,36 @@
       "path": "raw_logs/hardware/run_01/timing_groups.csv",
       "bytes": 1479,
       "sha256": "9b7722dfa7fa04476b0f4f308a1f65e0cd6165fe54f043310c31a2a7578496f4"
+    },
+    {
+      "path": "raw_logs/hardware/single_model_memory_run_01/README.md",
+      "bytes": 1759,
+      "sha256": "2f46483f2db98173e9a4a9262ca385fd6497af4b23dcc4e765895ed3885af227"
+    },
+    {
+      "path": "raw_logs/hardware/single_model_memory_run_01/conditions.csv",
+      "bytes": 2193,
+      "sha256": "4246b955e1b6be6d24dd74bee2e8edc30ab5318c1ba49601ca0710a6efd3b03c"
+    },
+    {
+      "path": "raw_logs/hardware/single_model_memory_run_01/normalized_log.txt",
+      "bytes": 2520,
+      "sha256": "ece41113917572304b58360dd28dc9fa4f8ba410efc0f6a64df3f20b236ad6f7"
+    },
+    {
+      "path": "raw_logs/hardware/single_model_memory_run_01/paired_comparison.csv",
+      "bytes": 350,
+      "sha256": "f7caf665b48d20fc4b2aaf0eccfc338d56783841849855bb86736badf0165805"
+    },
+    {
+      "path": "raw_logs/hardware/single_model_memory_run_01/submitted_log.txt",
+      "bytes": 2529,
+      "sha256": "16ba93e595af8ebecab80f7f0f387ffcf5130ab0277f421359332881976d1970"
+    },
+    {
+      "path": "raw_logs/hardware/single_model_memory_run_01/summary.json",
+      "bytes": 7628,
+      "sha256": "4309153fb1a3b7498b0196d5c820157853d2c077ff15699cc5e08165924496fb"
     },
     {
       "path": "raw_logs/hardware/teacher_fresh_v10_compile_01.json",
@@ -1459,23 +1509,23 @@
     },
     {
       "path": "report.docx",
-      "bytes": 285524,
-      "sha256": "3fd6aa625b8dd71cdfe1fd1e9d294b7f97c7418a8a08e1a9eed57f881a11cd6e"
+      "bytes": 321277,
+      "sha256": "b0dfb610cd4d862fee3b083ab344c9727cae013741261860c876f2ffc96b5664"
     },
     {
       "path": "report.md",
-      "bytes": 23029,
-      "sha256": "fc92277c1907141e9dda4e5a6aa7acf91fba6d59f17f0af0e729c2f9e792d04b"
+      "bytes": 25616,
+      "sha256": "8bc3f0af2763e7d7aab12d3769882989c51f77147de934ccbbe8628505ff8c96"
     },
     {
       "path": "report.pdf",
-      "bytes": 445774,
-      "sha256": "6e76175b66a85b2eacf6176466e5d4d1ab3d8e5652644fee935138b306970063"
+      "bytes": 489719,
+      "sha256": "789ef7b45dab148523824bd74e2c7ef9de3e567477bba24f6de1dbc3d9e01e88"
     },
     {
       "path": "report.tex",
-      "bytes": 29455,
-      "sha256": "d1d3395815dbcdfa54763e26a2a579d6bd7b2a7c4c03f3297219552eed72ffc9"
+      "bytes": 32173,
+      "sha256": "c428db86fabc3f6310be57792463d8b97b64302d3d5e2d4acb74b604132d5577"
     },
     {
       "path": "requirements.txt",
@@ -1749,8 +1799,8 @@
     },
     {
       "path": "source_snapshot/experiment_today/protocol_change.json",
-      "bytes": 30152,
-      "sha256": "f5a29bd2424b4eebc433f17ad8eb5249ccf1227058c0351b68001ef7f908eeb1"
+      "bytes": 30750,
+      "sha256": "8b6b7d904c662cb1e187cd0078015a84a04cacf731e8eff8c9f0257570c17bb2"
     },
     {
       "path": "source_snapshot/experiment_today/verify_fresh_scanner.py",
@@ -1779,8 +1829,8 @@
     },
     {
       "path": "source_snapshot/learning_followup/goal_update.json",
-      "bytes": 11450,
-      "sha256": "d88ce57ef2dbc018bd07f42ff4fb1d359725469f8fa45e0dde3a2632815ff711"
+      "bytes": 12020,
+      "sha256": "c7b659b0383a7e034cbb66eb1ba8b26b6b854781929bb3bdcaf5af9f37278caf"
     },
     {
       "path": "source_snapshot/learning_followup/reference_audit/provided/result.ppm",
@@ -1879,13 +1929,13 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/README.md",
-      "bytes": 9838,
-      "sha256": "ce57ed8e29d06988f2c299b32847a407311d8303776cb1257a4c1d4ff3d89bf0"
+      "bytes": 10077,
+      "sha256": "5583fbaa9bf84cf87d6c1c7318c5ec3397fcda0de740b543f0aae7b7e923b4d6"
     },
     {
       "path": "source_snapshot/teacher_result_v10/RESULTS.md",
-      "bytes": 6277,
-      "sha256": "ad7283a2b7047fd55daea7728061b1030f056c50462470b860e94a2e078ae1ca"
+      "bytes": 7444,
+      "sha256": "71c1ba24bbe54ddd02b1add45aa2b69ae9075ac12abbce0fcd03460cc8deb991"
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_fresh.py",
@@ -1904,8 +1954,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_report_package.py",
-      "bytes": 37027,
-      "sha256": "efd998fd0fa07ff850e4b2f3f2ddd02e3b616fa41b7a07e8a2ee0cd09900e791"
+      "bytes": 41084,
+      "sha256": "35b969c6b39d44b63a0878f9f3590db534404aa7eaf574e97115ea15d5a97259"
     },
     {
       "path": "source_snapshot/teacher_result_v10/comparison_pc_summary.json",
@@ -1930,7 +1980,7 @@
     {
       "path": "source_snapshot/teacher_result_v10/figures/device_comparison.pdf",
       "bytes": 18587,
-      "sha256": "fdfb743e20e849d89b8072966061f4e98c452f495d49401cf860e473126ad6c4"
+      "sha256": "d30727cb4514ce29561f757d5e025e976ba00e54baa39993a09d2bfe4931e9a6"
     },
     {
       "path": "source_snapshot/teacher_result_v10/figures/device_comparison.png",
@@ -3258,6 +3308,36 @@
       "sha256": "9b7722dfa7fa04476b0f4f308a1f65e0cd6165fe54f043310c31a2a7578496f4"
     },
     {
+      "path": "source_snapshot/teacher_result_v10/hardware/single_model_memory_run_01/README.md",
+      "bytes": 1759,
+      "sha256": "2f46483f2db98173e9a4a9262ca385fd6497af4b23dcc4e765895ed3885af227"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/hardware/single_model_memory_run_01/conditions.csv",
+      "bytes": 2193,
+      "sha256": "4246b955e1b6be6d24dd74bee2e8edc30ab5318c1ba49601ca0710a6efd3b03c"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/hardware/single_model_memory_run_01/normalized_log.txt",
+      "bytes": 2520,
+      "sha256": "ece41113917572304b58360dd28dc9fa4f8ba410efc0f6a64df3f20b236ad6f7"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/hardware/single_model_memory_run_01/paired_comparison.csv",
+      "bytes": 350,
+      "sha256": "f7caf665b48d20fc4b2aaf0eccfc338d56783841849855bb86736badf0165805"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/hardware/single_model_memory_run_01/submitted_log.txt",
+      "bytes": 2529,
+      "sha256": "16ba93e595af8ebecab80f7f0f387ffcf5130ab0277f421359332881976d1970"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/hardware/single_model_memory_run_01/summary.json",
+      "bytes": 7628,
+      "sha256": "4309153fb1a3b7498b0196d5c820157853d2c077ff15699cc5e08165924496fb"
+    },
+    {
       "path": "source_snapshot/teacher_result_v10/hardware/teacher_fresh_v10_compile_01.json",
       "bytes": 808,
       "sha256": "bf203935f6d88e0e0b1ecd00568ce6ee3154c5e4789ce4c4c2c7c2bee71c4894"
@@ -3274,8 +3354,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/make_report.py",
-      "bytes": 9033,
-      "sha256": "c82a165840c3e3033e016107320ef4afe23759b2eae6b6a7d98e3ef0b04ca155"
+      "bytes": 10319,
+      "sha256": "eb5bf1b65e0533ce7b1307615c018d66c6ceb9a015479ae724f29020b9f3e154"
     },
     {
       "path": "source_snapshot/teacher_result_v10/memory_builds_verification.json",
@@ -3284,8 +3364,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/memory_probe_v10/README.md",
-      "bytes": 4534,
-      "sha256": "a54638aac80e8c4fa19af4a6010b7755e7914184e57fb506f501a6ef7e3265fa"
+      "bytes": 4812,
+      "sha256": "e5f0a172ad5ebdfc2d540a3e87c7adaa2e3b96c199bbbdbaf8208bc4260f629a"
     },
     {
       "path": "source_snapshot/teacher_result_v10/memory_probe_v10/conditions.json",
@@ -3453,6 +3533,11 @@
       "sha256": "9e852874fb15ae5c424efbcf63df1a8cc116c9d011fab4733c39c17bc3776c75"
     },
     {
+      "path": "source_snapshot/teacher_result_v10/record_single_model_memory.py",
+      "bytes": 8519,
+      "sha256": "ade7f1ad190f832ba4b1368d12be12a2a8aec996ec87d4848b1c5c083ae0db3a"
+    },
+    {
       "path": "source_snapshot/teacher_result_v10/reference/mse_calculator.html",
       "bytes": 7008,
       "sha256": "37a6d9e935cdfa7e6ecf495bea9b46ae5ea9701aaed8caea9ba91d683fda968e"
@@ -3464,8 +3549,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/remaining_experiments.md",
-      "bytes": 3308,
-      "sha256": "f7ca4986242bf95be433dd1a2f2b207f61ac143edd6dc360d41794d24ca7b271"
+      "bytes": 3521,
+      "sha256": "16e01302134a37e003e685060c5a899b9be64be5e8a481f695e3349de2cede96"
     },
     {
       "path": "source_snapshot/teacher_result_v10/results.csv",
@@ -3561,6 +3646,16 @@
       "path": "source_snapshot/teacher_result_v10/selection/h80/summary.json",
       "bytes": 4078,
       "sha256": "8cb58aab694c2cd5e768753d9611492caee45d9cb868653623379ebb4f5c9b4c"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/single_model_memory_comparison.csv",
+      "bytes": 350,
+      "sha256": "f7caf665b48d20fc4b2aaf0eccfc338d56783841849855bb86736badf0165805"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/single_model_memory_results.csv",
+      "bytes": 2193,
+      "sha256": "4246b955e1b6be6d24dd74bee2e8edc30ab5318c1ba49601ca0710a6efd3b03c"
     },
     {
       "path": "source_snapshot/teacher_result_v10/single_model_memory_template.csv",
@@ -3694,13 +3789,13 @@
     },
     {
       "path": "verification.json",
-      "bytes": 828,
-      "sha256": "9a6db3141c15ee50746e76317e0f7cd7d652dbb2016cec3679a56898f06027cb"
+      "bytes": 999,
+      "sha256": "61a4c92fdcb65826e5045f3d0477e280efef3b3442acca684c3c64fe3862570a"
     },
     {
       "path": "verify_package.py",
-      "bytes": 7070,
-      "sha256": "8086ee26929712743f7b3fef8281a2329dcb10ee0a229b27e9250c90eb491cda"
+      "bytes": 9237,
+      "sha256": "5172d12e264c70b73f5e3170da2f2e350d6c4973b80fff00c8845fcfeb734a10"
     },
     {
       "path": "word_reference.docx",

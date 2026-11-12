@@ -36,7 +36,7 @@ def copy_path(source,destination):
         destination.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,destination)
 
 
-def figures(reads,device):
+def figures(reads,device,single_memory):
     folder=OUT/'figures';folder.mkdir(parents=True,exist_ok=True)
     plt.rcParams.update({'font.size':10,'axes.spines.top':False,'axes.spines.right':False,'pdf.fonttype':42})
     fig,axes=plt.subplots(2,2,figsize=(11.2,7.0),sharex=True,sharey=True)
@@ -64,6 +64,14 @@ def figures(reads,device):
     fig.tight_layout()
     for ext in ['png','pdf']:fig.savefig(folder/f'capacity_and_time.{ext}',dpi=180)
     plt.close(fig)
+    fig,ax=plt.subplots(figsize=(8.5,3.5))
+    ax.bar(x-width/2,[r['dense_flash_bytes']/1024 for r in single_memory['pairs']],width,label='Dense',color='#3569a5')
+    ax.bar(x+width/2,[r['csr_flash_bytes']/1024 for r in single_memory['pairs']],width,label='Pruning + CSR',color='#d58439')
+    ax.set_xticks(x,['40','60','80','100']);ax.set_xlabel('Hidden size H');ax.set_ylabel('Whole single-model firmware Flash (KiB)')
+    ax.set_title('UNO R4: one model per build');ax.set_axisbelow(True);ax.grid(axis='y',alpha=.2);ax.legend()
+    fig.tight_layout()
+    for ext in ['png','pdf']:fig.savefig(folder/f'single_model_flash.{ext}',dpi=180)
+    plt.close(fig)
 
 
 def build():
@@ -76,8 +84,11 @@ def build():
     run=json.loads((HERE/'hardware/run_01/summary.json').read_text());device=run['pairs']
     fresh_memory_path=HERE/'hardware/teacher_fresh_v10_compile_01.json'
     fresh_memory=json.loads(fresh_memory_path.read_text()) if fresh_memory_path.exists() else None
+    single_memory=json.loads((HERE/'hardware/single_model_memory_run_01/summary.json').read_text())
+    assert single_memory['received_conditions']==8
     OUT.mkdir(exist_ok=True)
-    figures(reads,device)
+    figures(reads,device,single_memory)
+    single_rows='\n'.join(f"| {r['H']} | {r['dense_flash_bytes']:,} | {r['csr_flash_bytes']:,} | {r['flash_saved_bytes']:,} | {r['flash_reduction_percent']:.2f}% | {r['dense_static_ram_bytes']:,} |" for r in single_memory['pairs'])
     summary_rows='\n'.join(f"| {r['H']} | {r['format']} | {float(r['mean_mse']):.2f} | {float(r['sample_stddev_mse']):.2f} | {float(r['min_mse']):.2f} | {float(r['max_mse']):.2f} | {r['reads_with_mse_le300']}/10 |" for r in stats)
     payload_rows=[]
     validation_rows=[]
@@ -98,14 +109,14 @@ def build():
 title: "枝刈り・CSRによる色補正モデルの圧縮"
 subtitle: "アジャイルワーク2　実験報告書"
 author: "@@ID@@　@@NAME@@"
-date: "記録整理日：2026年11月9日"
+date: "記録整理日：2026年11月12日"
 ---
 
 # 概要
 
 Arduino UNO R4 WiFi上で動作する色補正ニューラルネットワークについて、Dense-FP32と枝刈り＋CSRを比較した。隠れ層次元は40・60・80・100とし、実際に紙の3×3チャートを10回読み取り、各回の同じ9入力を全8条件で共有した。学習済み重み・閾値は測定中に変更せず、全10回を集計した。別途、同一の固定入力を用いた実機推論時間とモデル配列容量を測定した。
 
-モデル配列容量は60.51〜69.70%、固定入力での推論時間は28.97〜44.01%削減できた。一方、10回平均MSEはDenseで231.68〜319.56、枝刈り＋CSRで452.04〜651.93となり、全次元で圧縮後の誤差が増加した。したがって、容量・速度の改善を確認したが、今回の閾値での精度維持は達成しなかった。同じ学習チャートの反復読取であり、未見チャートによる独立した最終評価は実施していない。
+モデル配列容量は60.51〜69.70%、固定入力での推論時間は28.97〜44.01%削減できた。単独モデル入りプログラム全体のFlash使用量も7.94〜31.26%削減したが、静的RAMは全8条件で6,764 byteと変わらなかった。一方、10回平均MSEはDenseで231.68〜319.56、枝刈り＋CSRで452.04〜651.93となり、全次元で圧縮後の誤差が増加した。したがって、容量・速度の改善を確認したが、今回の閾値での精度維持は達成しなかった。同じ学習チャートの反復読取であり、未見チャートによる独立した最終評価は実施していない。
 
 # 目的
 
@@ -228,6 +239,8 @@ s_m=\sqrt{\frac1{9}\sum_{r=1}^{10}(m_r-\overline m)^2} $$
 
 配列容量にはFP32重み・バイアス・CSR列番号・行ポインタを含めた。Arduino IDEのFlash・グローバル変数の使用量は、8条件入りプログラム全体の値として別に記録した。
 
+その後、単独モデル用 `memory_probe_v10` を用い、H=40・60・80・100とDense／CSRの8条件を1条件ずつコンパイルした。重み・閾値は最終V10のままとし、各条件名に対応するArduino IDEの「スケッチ」「グローバル変数」の表示を記録した。共通の初期化・推論呼出し・シリアル出力を含む1モデル入りプログラム全体の比較であり、センサ読取とMSE計算を含まない。この追加操作で紙の測定回数は増えていない。単独ビルドのIDE・ボードコア版とバイナリは未記録である。
+
 # 結果
 
 ## 新規10回のMSE
@@ -278,6 +291,8 @@ CSR索引を含めても、全Hで配列容量が小さくなった。最大削�
 
 図2　モデル配列容量と実機推論時間。時間の誤差棒は5組の平均時間の標本SDである。計時入力は新規10回とは別の固定9入力である。
 
+\Needspace{14\baselineskip}
+
 ## Flash・RAMと動作確認
 
 表5　8条件入りプログラム全体のArduino IDE使用量。
@@ -287,7 +302,23 @@ CSR索引を含めても、全Hで配列容量が小さくなった。最大削�
 | 保存入力再生・速度版 | 187,888 | 6,740 | 26,028 |
 @@MEMORY@@
 
-公称容量はFlash262,144 byte、SRAM32,768 byteである。残りRAMはローカル変数が実際に使用した量ではなく、実行時スタックの最大使用量は未測定である。1モデルの隠れ層用配列は固定長float[100]を2本、宣言上800 byteとしたが、これだけで実際の最大スタック使用量を表すことはできない。各条件だけを搭載した単独ビルドのFlash/RAMも測定していない。
+公称容量はFlash262,144 byte、SRAM32,768 byteである。表5は全8条件を含むプログラムの使用量である。
+
+表6　各モデル単独ビルドの使用量。単位はbyte。静的RAM列はDense・CSR共通。
+
+| H | Dense Flash | CSR Flash | Flash削減量 | 削減率 | 両方式の静的RAM |
+| --- | ---: | ---: | ---: | ---: | ---: |
+@@SINGLE_MEMORY@@
+
+2026年11月12日に受領した条件名付きIDE表示に基づく。全HでFlashが減少し、H100では30,128 byte（31.26%）削減した。一方、静的RAMは全8条件で6,764 byte（IDE表示20%）のままで、削減量は0 byteだった。静的割当後に残るRAMは全条件で26,004 byteである。
+
+![単独モデルのFlash](figures/single_model_flash.png)
+
+図3　単独モデル入りプログラムのFlash使用量。
+
+Flash全体はArduinoコアや共通処理を含むため、表3の数値配列だけの削減率とは異なる。モデル配列はconstであり、関数内の中間配列は静的RAMに含まれないため、モデル配列の削減から静的RAMの削減を直接導くことはできない。
+
+残りRAMはローカル変数が実際に使用した量ではなく、実行時スタックの最大使用量は未測定である。1モデルの隠れ層用配列は固定長float[100]を2本、宣言上800 byteとしたが、これだけで実際の最大スタック使用量を表すことはできない。今回の追加ログはコンパイル時の使用量表示であり、単独版の実行確認・新しい速度測定を行った記録ではない。
 
 全モデルの自己検査とCSR索引検査は保存入力版の実機ログでPASSした。新規10回の全80PPM、計2,160 RGB成分が固定V10のPC再計算と完全一致した。80個のMSEを先生の元の計算HTMLでも照合し、表示桁の範囲で一致した。
 
@@ -313,13 +344,13 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 
 ## 計画との差分と限界
 
-物理的な10回反復は実施した。一方、未見チャートの独立最終評価、当初計画のH50、各条件単独のFlash/RAM、実行時スタックの最大量は未測定である。紙は手持ちであり、距離・角度・照度を数値で統制していない。測定は同一チャート・同一装置の連続した反復で、統計的に独立な利用環境の標本とまでは主張しない。
+物理的な10回反復と、全8条件の単独Flash・静的RAMビルド比較は実施した。一方、未見チャートの独立最終評価、当初計画のH50、各方式の搭載限界、実行時スタックの最大量は未測定である。紙は手持ちであり、距離・角度・照度を数値で統制していない。測定は同一チャート・同一装置の連続した反復で、統計的に独立な利用環境の標本とまでは主張しない。
 
 学習も当初の33組・MSE損失から、135行・重み付きSmooth L1へ変更した。全学習行での通常の重みなしMSEは付録に示し、10回の再読取結果や学習損失と混ぜない。こうした変更と制約を含めて、本結果は実施した条件内の比較として位置づける。
 
 # 結論
 
-紙の3×3チャートを実際に10回読み取り、40・60・80・100次元のDense／枝刈り＋CSRを同じ入力で比較した。枝刈り＋CSRはモデル配列容量を60.51〜69.70%、固定入力での実機推論時間を28.97〜44.01%削減した。一方、10回平均MSEは全次元で増加し、精度維持およびCSRの平均MSE300以下は達成しなかった。
+紙の3×3チャートを実際に10回読み取り、40・60・80・100次元のDense／枝刈り＋CSRを同じ入力で比較した。枝刈り＋CSRはモデル配列容量を60.51〜69.70%、固定入力での実機推論時間を28.97〜44.01%削減した。単独ビルドのFlash使用量は7.94〜31.26%減少し、静的RAMは全条件で6,764 byteと変わらなかった。一方、10回平均MSEは全次元で増加し、精度維持およびCSRの平均MSE300以下は達成しなかった。
 
 したがって、今回の条件では容量と速度の改善を確認したが、精度維持を含む目的を全面的に達成したとはいえない。今後は入力の再現性を確認し、評価条件を分けて閾値を決め、独立した未見チャートで精度を検証する必要がある。
 
@@ -361,11 +392,13 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 
 新規10回は `fresh_readings/capture_01` から `capture_10` の元ログに対応する。保存済み入力の実機再生・速度・使用量は `hardware/run_01` の別記録であり、新規10回へ追加カウントしていない。
 
+単独モデルのFlash・静的RAMは `hardware/single_model_memory_run_01` の利用者受領文と条件別CSVに対応する。使用コードは `code/memory_probe_v10/`、集計は `data/single_model_memory_results.csv` と `data/single_model_memory_comparison.csv` に保存した。
+
 再現用コードはPythonによる学習・枝刈り・CSR出力・ログ検算とC++推論コードを含む。新しい紙の読み取り値は同梱ログから再計算できるが、プログラムを実行するだけで新たな物理測定を作ることはできない。ファイル対応と実行手順は同梱のREADMEに記載した。
 '''
     substitutions={'ID':student_id,'NAME':student_name,'SUMMARY':summary_rows,'PAIRED':paired_rows,
         'PAYLOAD':'\n'.join(payload_rows),'VALIDATION':'\n'.join(validation_rows),'TIMING':timing_rows,'MEMORY':memory_row,
-        'RAW_DENSE':raw_table('DENSE'),'RAW_CSR':raw_table('CSR'),'TRAINING':training_rows}
+        'RAW_DENSE':raw_table('DENSE'),'RAW_CSR':raw_table('CSR'),'TRAINING':training_rows,'SINGLE_MEMORY':single_rows}
     for key,value in substitutions.items():report=report.replace('@@'+key+'@@',value)
     assert '@@' not in report
     (OUT/'report.md').write_text(report)
@@ -386,6 +419,7 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
     # Stable portable copies, while leaving original files untouched.
     for name in ['teacher_fresh_v10','teacher_compare_v10','memory_probe_v10']:copy_path(HERE/name,OUT/'code'/name)
     copy_path(HERE/'single_model_memory_template.csv',OUT/'data/single_model_memory_template.csv')
+    for name in ['single_model_memory_results.csv','single_model_memory_comparison.csv']:copy_path(HERE/name,OUT/'data'/name)
     for source,name in [(HERE/'fresh_readings/mse_results.csv','physical10_mse_all80.csv'),
         (HERE/'fresh_readings/mse_summary.csv','physical10_mse_summary.csv'),(HERE/'fresh_readings/paired_comparisons.csv','physical10_paired_differences.csv'),
         (HERE/'training135.csv','training135.csv'),(HERE/'sample_weights.csv','training_sample_weights.csv'),
@@ -404,13 +438,14 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
         'learning_followup/goal_update.json','experiment_today/protocol_change.json','experiment_plan.tex']
     for source in sources:copy_path(ROOT/source,OUT/'source_snapshot'/source)
     (OUT/'requirements.txt').write_text('numpy==2.3.5\ntorch==2.8.0\nPillow==12.3.0\nmatplotlib==3.10.8\n')
-    environment={'report_created_date_japan':'2026-11-09','python':sys.version,'platform':platform.platform(),
+    environment={'report_created_date_japan':'2026-11-09','report_updated_date_japan':'2026-11-12','python':sys.version,'platform':platform.platform(),
         'numpy':np.__version__,'matplotlib':matplotlib.__version__,'training_torch_recorded':'2.8.0+cpu',
         'source_base_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
-        'snapshot_scope':'Current workspace including newly received actualcapture10 and final report additions; original frozen models preserved.',
+        'snapshot_scope':'Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.',
         'physical_captures':10,'excluded_captures':0,'new_training_after_physical10':False,
         'quality_result':'CSR meanMSE>300 and increase>5% for allH; capacity and fixed-input time reduced.',
-        'actual_new_firmware_memory_received':fresh_memory is not None}
+        'actual_new_firmware_memory_received':fresh_memory is not None,'single_model_memory_builds_received':8,
+        'single_model_memory_source':'User-pasted Arduino IDE usage summaries;IDE/core versions and build binaries not supplied.'}
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '-V','mainfont=Noto Serif CJK JP','-V','sansfont=Noto Sans CJK JP','-V','monofont=Noto Sans Mono CJK JP',
@@ -427,14 +462,14 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。
 容量・固定入力での推論速度は改善しました。CSRの10回平均MSE300以下・精度維持は達成していない結果として記載しています。
-独立した最終チャート、H50、各条件単独のFlash/RAMと最大スタック使用量は未実施です。
+各条件単独のFlash・静的RAMは8条件を受領・集計済みです。独立した最終チャート、H50、搭載限界と最大スタック使用量は未実施です。
 この資料は実施した内容をまとめたもので、当初計画の全項目完了や採点結果を保証するものではありません。
 
 ## 必要なファイル
 
 - 紙を読んだコード：[teacher_fresh_v10.ino](code/teacher_fresh_v10/teacher_fresh_v10.ino)、[数値ヘッダ](code/teacher_fresh_v10/teacher_parameters_v10.h)
 - 速度を計ったコード：[teacher_compare_v10.ino](code/teacher_compare_v10/teacher_compare_v10.ino)、[数値ヘッダ](code/teacher_compare_v10/teacher_parameters_v10.h)
-- 各モデル単独のFlash・静的RAM：[測定手順・コード](code/memory_probe_v10/README.md)。8条件のコードはPC検証済み、実際のビルド値はMacでの取得待ちです。[記入用CSV](data/single_model_memory_template.csv) は未測定欄を空欄にしています。
+- 各モデル単独のFlash・静的RAM：[8条件の結果](data/single_model_memory_results.csv)、[4組の削減率](data/single_model_memory_comparison.csv)、[受領文・検算](raw_logs/hardware/single_model_memory_run_01/README.md)、[測定手順・コード](code/memory_probe_v10/README.md)。記入用template.csvは実験結果とは別の空欄ひな形です。
 - 全10回・8条件（MSE80個）：[MSE一覧](data/physical10_mse_all80.csv)、[平均・標本SD](data/physical10_mse_summary.csv)、[同じ回の圧縮前後差](data/physical10_paired_differences.csv)
 - 学習データ：[training135.csv](data/training135.csv)、[行重み](data/training_sample_weights.csv)
 - 閾値選択の別入力：[threshold_validation128.csv](data/threshold_validation128.csv)
@@ -442,7 +477,7 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 - 正解：[元のresult.ppm](reference/result.ppm)、[元の先生HTML](reference/mse_calculator.html)
 - 各回の元ログ・80枚のPPM/PNG：[raw_logs/physical10](raw_logs/physical10)
 - 速度の5組とIDE使用量の元ログ：[raw_logs/hardware](raw_logs/hardware)
-- 図：[10回のMSE](figures/physical_mse10.png)、[容量・速度](figures/capacity_and_time.png)。同名PDFも同梱。
+- 図：[10回のMSE](figures/physical_mse10.png)、[容量・速度](figures/capacity_and_time.png)、[単独モデルのFlash](figures/single_model_flash.png)。同名PDFも同梱。
 
 コードと学習済み数値は別ファイルです。Arduinoでは使う版の2ファイルを同名フォルダに置きます。
 元のデータは変更せず複製し、manifest.jsonへ各ファイルのSHA256を保存しています。
@@ -476,7 +511,7 @@ source_snapshot内のteacher_result_v10にprepare.py、train.py、data_weights.p
     manifest={'scope':'Factual package of10 actual user-reported paper readings,all80 measured model outputs,real saved-input timing and original code/data.',
         'file_count':len(files),'files':[{'path':p.relative_to(OUT).as_posix(),'bytes':p.stat().st_size,'sha256':sha(p)} for p in files]}
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    print(f'Built report PDF/DOCX/MD/TeX,2 standalone figures,actual10 logs,code/data and reproducible source snapshot: {len(files)} files.')
+    print(f'Built report PDF/DOCX/MD/TeX,3 standalone figures,actual10 logs,8 memory build summaries,code/data and source snapshot: {len(files)} files.')
 
 
 if __name__=='__main__':build()

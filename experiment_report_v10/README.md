@@ -5,14 +5,14 @@
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。
 容量・固定入力での推論速度は改善しました。CSRの10回平均MSE300以下・精度維持は達成していない結果として記載しています。
-独立した最終チャート、H50、各条件単独のFlash/RAMと最大スタック使用量は未実施です。
+各条件単独のFlash・静的RAMは8条件を受領・集計済みです。独立した最終チャート、H50、搭載限界と最大スタック使用量は未実施です。
 この資料は実施した内容をまとめたもので、当初計画の全項目完了や採点結果を保証するものではありません。
 
 ## 必要なファイル
 
 - 紙を読んだコード：[teacher_fresh_v10.ino](code/teacher_fresh_v10/teacher_fresh_v10.ino)、[数値ヘッダ](code/teacher_fresh_v10/teacher_parameters_v10.h)
 - 速度を計ったコード：[teacher_compare_v10.ino](code/teacher_compare_v10/teacher_compare_v10.ino)、[数値ヘッダ](code/teacher_compare_v10/teacher_parameters_v10.h)
-- 各モデル単独のFlash・静的RAM：[測定手順・コード](code/memory_probe_v10/README.md)。8条件のコードはPC検証済み、実際のビルド値はMacでの取得待ちです。[記入用CSV](data/single_model_memory_template.csv) は未測定欄を空欄にしています。
+- 各モデル単独のFlash・静的RAM：[8条件の結果](data/single_model_memory_results.csv)、[4組の削減率](data/single_model_memory_comparison.csv)、[受領文・検算](raw_logs/hardware/single_model_memory_run_01/README.md)、[測定手順・コード](code/memory_probe_v10/README.md)。記入用template.csvは実験結果とは別の空欄ひな形です。
 - 全10回・8条件（MSE80個）：[MSE一覧](data/physical10_mse_all80.csv)、[平均・標本SD](data/physical10_mse_summary.csv)、[同じ回の圧縮前後差](data/physical10_paired_differences.csv)
 - 学習データ：[training135.csv](data/training135.csv)、[行重み](data/training_sample_weights.csv)
 - 閾値選択の別入力：[threshold_validation128.csv](data/threshold_validation128.csv)
@@ -20,7 +20,7 @@
 - 正解：[元のresult.ppm](reference/result.ppm)、[元の先生HTML](reference/mse_calculator.html)
 - 各回の元ログ・80枚のPPM/PNG：[raw_logs/physical10](raw_logs/physical10)
 - 速度の5組とIDE使用量の元ログ：[raw_logs/hardware](raw_logs/hardware)
-- 図：[10回のMSE](figures/physical_mse10.png)、[容量・速度](figures/capacity_and_time.png)。同名PDFも同梱。
+- 図：[10回のMSE](figures/physical_mse10.png)、[容量・速度](figures/capacity_and_time.png)、[単独モデルのFlash](figures/single_model_flash.png)。同名PDFも同梱。
 
 コードと学習済み数値は別ファイルです。Arduinoでは使う版の2ファイルを同名フォルダに置きます。
 元のデータは変更せず複製し、manifest.jsonへ各ファイルのSHA256を保存しています。

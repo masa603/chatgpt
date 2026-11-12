@@ -36,6 +36,8 @@ def main():
     plt.close(fig)
     rows='\n'.join(f"| {r['H']} | {r['dense_mse']:.2f} | {r['csr_mse']:.2f} | {r['dense_model_bytes']:,}→{r['csr_model_bytes']:,} | {r['model_payload_reduction_percent']:.2f}% | {r['dense_mean_us']:.3f}→{r['csr_mean_us']:.3f} | {-r['csr_time_change_percent']:.2f}% |" for r in pairs)
     stats='\n'.join(f"| {r['H']} | {r['dense_mean_us']:.4f} ± {r['dense_group_sample_stddev_us']:.4f} | {r['csr_mean_us']:.4f} ± {r['csr_group_sample_stddev_us']:.4f} |" for r in pairs)
+    standalone=json.loads((HERE/'hardware/single_model_memory_run_01/summary.json').read_text())
+    standalone_rows='\n'.join(f"| {r['H']} | {r['dense_flash_bytes']:,} | {r['csr_flash_bytes']:,} | {r['flash_saved_bytes']:,} | {r['flash_reduction_percent']:.2f}% | {r['dense_static_ram_bytes']:,} |" for r in standalone['pairs'])
     report=f'''# V10の実機比較結果
 
 このファイルは保存入力の再生・速度・容量の記録です。新規の紙の10回測定は [fresh_readings](fresh_readings/README.md)、[報告書一式](../experiment_report_v10/README.md) に分けて保存しています。
@@ -96,6 +98,19 @@ CPU48MHz、コンパイラ `{summary['compiler']}` です。
 残るRAM26,028byteは、ローカル変数が実際に26,028byte使ったという意味ではありません。実行時のスタック使用量は未測定です。
 書込ツールの187,896byteは別の値として保存し、スケッチFlash187,888byteと区別します。
 
+## 各モデル単独のFlash・静的RAM
+
+2026年11月12日、同じ単独モデル用コードへ1条件ずつ搭載した8ビルドのIDE表示を受領しました。
+
+| H | Dense Flash byte | CSR Flash byte | Flash削減 byte | Flash削減率 | 両方式の静的RAM byte |
+| --- | ---: | ---: | ---: | ---: | ---: |
+{standalone_rows}
+
+Flash全体を7.94〜31.26%削減しました。静的RAMは全条件で6,764 byteと変わらず、静的割当後の残りは26,004 byteです。
+このFlashはArduinoコア・共通処理を含み、上の数値配列だけの削減率とは異なります。実行時最大スタックは未測定です。
+[8条件CSV](single_model_memory_results.csv)、[削減率CSV](single_model_memory_comparison.csv)、[元のIDE表示と検算](hardware/single_model_memory_run_01/README.md) を保存しました。
+この記録はコンパイル使用量で、紙の新規測定や追加の速度測定には数えません。
+
 ## 元データと検算
 
 [受領したシリアルログ](hardware/run_01/submitted_log.txt)、[表示用のバックスラッシュを除いたログ](hardware/run_01/normalized_log.txt)、
@@ -110,7 +125,7 @@ CPU48MHz、コンパイラ `{summary['compiler']}` です。
 ## 計画から残る項目
 
 新V10の実機再生・速度・全8条件入りFlash/RAMは記録できました。
-紙の新規読取の実施回数は [fresh_readings](fresh_readings/README.md) に記録しています。独立した最終評価チャート、H50、各条件単独のFlash/RAMは未実施です。
+紙の新規10回と各条件単独Flash・静的RAM8条件を受領済みです。独立した最終評価チャート、H50、搭載限界と実行時最大スタックは未実施です。
 学習全135行の重みなしMSEが300以下だったという結果でもありません。学習全体の値は [学習結果](results.csv) に残しています。
 [進捗と制約](remaining_experiments.md) を含めて報告し、当初計画の全項目完了とはしません。
 '''

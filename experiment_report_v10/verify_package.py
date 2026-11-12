@@ -5,6 +5,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+import re
 import statistics
 
 HERE=Path(__file__).resolve().parent
@@ -70,6 +71,29 @@ def verify(refresh=False):
     for item in template:
         assert item['status']=='PENDING_MAC_ARDUINO_BUILD'
         assert item['flash_used_bytes']==item['static_ram_used_bytes']==''
+    single=rows(HERE/'data/single_model_memory_results.csv')
+    comparisons=rows(HERE/'data/single_model_memory_comparison.csv')
+    record=HERE/'raw_logs/hardware/single_model_memory_run_01'
+    single_summary=json.loads((record/'summary.json').read_text())
+    assert len(single)==8 and len(comparisons)==4 and single_summary['received_conditions']==8
+    assert single_summary['source_log_sha256']==sha(record/'submitted_log.txt')
+    assert single_summary['actual_runtime_stack_peak']=='NOT_MEASURED'
+    pattern=r'(40|60|80|100)次元\s+(Dense|枝刈り＋CSR)\s+最大262144バイト.*?スケッチが(\d+)バイト.*?グローバル変数が(\d+)バイト.*?ローカル変数で(\d+)バイト'
+    found=re.findall(pattern,(record/'submitted_log.txt').read_text(),re.S)
+    assert len(found)==8
+    for h,fmt,flash,ram,remaining in found:
+        fmt='DENSE' if fmt=='Dense' else 'CSR'
+        r=next(r for r in single if r['H']==h and r['format']==fmt)
+        assert (r['flash_used_bytes'],r['static_ram_used_bytes'],r['remaining_after_static_bytes'])==(flash,ram,remaining)
+        assert int(ram)+int(remaining)==32768 and r['source_log_sha256']==single_summary['source_log_sha256']
+    for r in comparisons:
+        dense=next(v for v in single if v['H']==r['H'] and v['format']=='DENSE')
+        csr=next(v for v in single if v['H']==r['H'] and v['format']=='CSR')
+        delta=int(dense['flash_used_bytes'])-int(csr['flash_used_bytes'])
+        assert int(r['flash_saved_bytes'])==delta and int(r['static_ram_saved_bytes'])==0
+        close(r['flash_reduction_percent'],100*delta/int(dense['flash_used_bytes']))
+    for name in ['single_model_memory_results.csv','single_model_memory_comparison.csv']:
+        assert (HERE/'data'/name).read_bytes()==(HERE/'source_snapshot/teacher_result_v10'/name).read_bytes()
     for name,flash,ram in [('run_01/memory.json',187888,6740),('teacher_fresh_v10_compile_01.json',191320,7324)]:
         memory=json.loads((HERE/'raw_logs/hardware'/name).read_text())
         assert memory['sketch_flash_bytes']==flash and memory['static_global_ram_bytes']==ram
@@ -78,11 +102,15 @@ def verify(refresh=False):
     for r in summary:
         assert f"{float(r['mean_mse']):.2f}" in report and f"{float(r['sample_stddev_mse']):.2f}" in report
     for text in ['第2回','除外した回はない','精度維持','達成しなかった','独立','191,320','7,324']:assert text in report
+    for r in single:assert f"{int(r['flash_used_bytes']):,}" in report
+    for text in ['6,764','26,004','31.26%','7.94','表6']:assert text in report
     verification={'actual_physical_captures':10,'MSE_records':80,'RGB_components':2160,'all_received_captures_included':True,
         'all80_MSE_recomputed_from_copied_PPM':'PASS','all8_means_sampleSD_min_max_goal_counts':'PASS',
         'all4_paired_differences_and_sampleSD':'PASS','frozen_numeric_headers_byte_identical':'PASS',
         'code_copies_match_source_snapshot':'PASS','two_firmware_memory_records_separate':'PASS',
-        'single_model_memory_probe':'HOST_VERIFIED; ACTUAL_ARDUINO_BUILD_VALUES_PENDING; TEMPLATE_FIELDS_BLANK',
+        'single_model_memory_probe':'8 USER_REPORTED_ARDUINO_IDE_BUILD_SUMMARIES_RECEIVED; LOG_ARITHMETIC_CSV_REPORT_MATCH_PASS',
+        'single_model_memory_conditions':8,'single_model_memory_template_is_separate_blank_form':True,
+        'single_model_memory_stack_peak':'NOT_MEASURED',
         'report_values_match_actual_all10_aggregates':'PASS','source_snapshot_replay_test':'PASS in an isolated temporary copy; no original repository paths required.',
         'CSR_mean300_goal':'NOT_MET','CSR_relative5pct_preservation':'NOT_MET','independent_final_chart':'NOT_PERFORMED'}
     if refresh:

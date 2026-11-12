@@ -1,7 +1,7 @@
 # 先生指定のresult.ppmへ学習を修正したV10
 
-**各モデル単独のFlash・静的RAM測定：** [測定用コードと手順](memory_probe_v10/README.md) を用意しました。40/60/80/100次元×Dense/CSRの8条件です。
-紙の再測定は不要です。コードのPC検証は完了、UNO R4のビルド値はMac側での取得待ちです。
+**2026年11月12日受領：各モデル単独のFlash・静的RAM、全8条件を記録しました。** [結果表・元のIDE表示](hardware/single_model_memory_run_01/README.md)、[8条件CSV](single_model_memory_results.csv)、[測定コードと手順](memory_probe_v10/README.md) を保存しています。
+Flashは7.94〜31.26%削減、静的RAMは全条件で6,764 byteでした。紙の再測定は行っておらず、既存の10回測定結果は変えていません。
 
 **紙の新規10回読取を受領・検算し、[実測に基づく報告書・コード・データ一式](../experiment_report_v10/README.md) を作成しました。**
 全10回の [MSE平均・標本SD・元ログ](fresh_readings/README.md) を保存しています。高いMSEの第2回も含め、除外はありません。
@@ -107,5 +107,5 @@ ASan/UBSanを有効にし、CSR索引、t/T各1回の8PPM、元の先生HTMLのM
 その後、利用者からUNO R4での実行ログとIDE使用量を受領しました。現在の実機結果は [hardware/run_01/summary.json](hardware/run_01/summary.json) です。
 受領した実機PPM・元の先生HTML・計時の平均と標本SD・チェックサムを検算済みです。全8条件入りのFlash187888byte、静的RAM6740byteも記録しました。
 
-物理的10回反復は実施・検算済みです。独立した最終評価チャート、H50、各条件単独のFlash/RAMは未実施です。
+物理的10回反復と各条件単独のFlash・静的RAM8条件は実施・集計済みです。独立した最終評価チャート、H50、搭載限界と実行時最大スタックは未実施です。
 H80・100は利用者の追加要望です。詳しい進捗は [remaining_experiments.md](remaining_experiments.md) に記録しています。

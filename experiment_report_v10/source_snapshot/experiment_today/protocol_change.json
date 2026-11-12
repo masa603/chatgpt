@@ -551,12 +551,26 @@
     "scope": "One frozen V10 model per build; 40/60/80/100 times Dense/CSR. No new training or sensor capture.",
     "code": "../teacher_result_v10/memory_probe_v10/README.md",
     "host_verification": "8 conditions,626 FP32/RGB8 cases each,ASan/UBSan and optimized retention PASS",
-    "actual_arduino_condition_build_values_received": 0,
+    "actual_arduino_condition_build_values_received": 8,
     "actual_arduino_condition_build_values_required": 8,
-    "status": "HOST_VERIFIED_PENDING_MAC_ARDUINO_BUILDS",
+    "status": "ALL8_USER_REPORTED_ARDUINO_IDE_BUILD_SUMMARIES_RECEIVED_AND_ARITHMETIC_CHECKED",
     "cloud_toolchain_limitation": "No installed UNO R4 toolchain; official Arduino CLI download returned HTTP403 via proxy.",
-    "next_action": "Compile8 selections with existing Mac Arduino IDE or included auto-build script; retain raw memory logs and environment.",
+    "next_action": "Use the updated report with8 standalone memory build results. No repeat build required for this item.",
     "runtime_stack_peak": "NOT_MEASURED",
-    "existing_physical10_and_timing_unchanged": true
+    "existing_physical10_and_timing_unchanged": true,
+    "received_date_japan": "2026-11-12",
+    "record": "../teacher_result_v10/hardware/single_model_memory_run_01/README.md",
+    "results_csv": "../teacher_result_v10/single_model_memory_results.csv",
+    "flash_reduction_percent": {
+      "40": 7.940577137974101,
+      "60": 14.217463880734472,
+      "80": 23.29743816688794,
+      "100": 31.257002946424866
+    },
+    "static_ram_each_condition_bytes": 6764,
+    "static_ram_reduction_bytes": 0,
+    "remaining_after_static_bytes": 26004,
+    "build_ide_core_versions": "NOT_REPORTED",
+    "new_physical_sensor_captures": 0
   }
 }
