@@ -1,0 +1,100 @@
+{
+  "organized_date_japan": "2026-11-12",
+  "before_commit": "861b37167b3ee5563e3eb9266a7170573624daf1",
+  "current_package_path": "experiment_report_v10",
+  "moves": [
+    {
+      "before": "CE5",
+      "after": "archive/CE5"
+    },
+    {
+      "before": "assignment4.py",
+      "after": "archive/assignment4.py"
+    },
+    {
+      "before": "assignment4_solution.pdf",
+      "after": "archive/assignment4_solution.pdf"
+    },
+    {
+      "before": "assignment4_solution.tex",
+      "after": "archive/assignment4_solution.tex"
+    },
+    {
+      "before": "calibration_followup",
+      "after": "archive/calibration_followup"
+    },
+    {
+      "before": "calibration_retraining",
+      "after": "archive/calibration_retraining"
+    },
+    {
+      "before": "current_input_adaptation",
+      "after": "archive/current_input_adaptation"
+    },
+    {
+      "before": "data_learning_followup",
+      "after": "archive/data_learning_followup"
+    },
+    {
+      "before": "diagnostics",
+      "after": "archive/diagnostics"
+    },
+    {
+      "before": "distributed_training",
+      "after": "archive/distributed_training"
+    },
+    {
+      "before": "experiment_plan.pdf",
+      "after": "archive/experiment_plan.pdf"
+    },
+    {
+      "before": "experiment_plan.tex",
+      "after": "archive/experiment_plan.tex"
+    },
+    {
+      "before": "experiment_today",
+      "after": "archive/experiment_today"
+    },
+    {
+      "before": "hdjsk",
+      "after": "archive/hdjsk"
+    },
+    {
+      "before": "hdjsk_benchmark",
+      "after": "archive/hdjsk_benchmark"
+    },
+    {
+      "before": "hdjsk_csr",
+      "after": "archive/hdjsk_csr"
+    },
+    {
+      "before": "hdjsk_retrained",
+      "after": "archive/hdjsk_retrained"
+    },
+    {
+      "before": "learning_followup",
+      "after": "archive/learning_followup"
+    },
+    {
+      "before": "patch_retraining",
+      "after": "archive/patch_retraining"
+    },
+    {
+      "before": "pruning",
+      "after": "archive/pruning"
+    },
+    {
+      "before": "reference_corrected",
+      "after": "archive/reference_corrected"
+    },
+    {
+      "before": "retraining",
+      "after": "archive/retraining"
+    },
+    {
+      "before": "teacher_result_v10",
+      "after": "archive/teacher_result_v10"
+    }
+  ],
+  "notes": "All23 historical/development/coursework entries moved together. Relative experimental source/data structure preserved. No file or Git history deleted."
+}

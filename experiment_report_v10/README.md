@@ -1,5 +1,7 @@
 # 実際の10回測定に基づく報告書・コード・データ一式
 
+[リポジトリの案内へ戻る](../README.md)
+
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。

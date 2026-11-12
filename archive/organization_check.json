@@ -1,0 +1,27 @@
+{
+  "organized_date_japan": "2026-11-12",
+  "before_commit": "861b37167b3ee5563e3eb9266a7170573624daf1",
+  "original_tracked_files_all_present": 1970,
+  "original_files_byte_identical_after_move": 1960,
+  "changed_original_files_navigation_or_build_paths_only": [
+    "experiment_report_v10/README.md",
+    "experiment_report_v10/manifest.json",
+    "archive/experiment_today/README.md",
+    "archive/teacher_result_v10/README.md",
+    "archive/teacher_result_v10/RESULTS.md",
+    "archive/teacher_result_v10/build_report_package.py",
+    "archive/teacher_result_v10/fresh_readings/README.md",
+    "archive/teacher_result_v10/make_report.py",
+    "archive/teacher_result_v10/record_fresh_capture.py",
+    "archive/teacher_result_v10/remaining_experiments.md"
+  ],
+  "previously_existing_local_markdown_targets_preserved": 591,
+  "current_report_PDF_DOCX_LaTeX_and_measurement_values": "BYTE_IDENTICAL_TO_BEFORE_ORGANIZATION",
+  "current_report_package_verification": "PASS:10 actual captures,80 MSE records,8 standalone memory builds and771 file hashes",
+  "relocated_source_reproduction": "PASS in a disposable relocated copy:8 models x400 inputs;16 PPMs match original teacher HTML;ASan/UBSan. Host test only.",
+  "archived_report_builder_output": "Repository-root experiment_report_v10; no archive copy generated.",
+  "deleted_files": 0,
+  "git_history_rewritten": false,
+  "new_measurements_or_retraining": false,
+  "main_current_archive_guide_links_checked": 70
+}

@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ROOT=Path(__file__).resolve().parents[1];HERE=Path(__file__).resolve().parent
-OUT=ROOT/'experiment_report_v10'
+OUT=(ROOT.parent if (ROOT/'moved_paths.json').is_file() else ROOT)/'experiment_report_v10'
 
 
 def load_csv(path):
@@ -506,6 +506,8 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
         if result.returncode:raise RuntimeError(result.stderr)
         (OUT/('build_'+extra[-1].split('.')[-1]+'.log')).write_text(result.stderr)
     (OUT/'README.md').write_text('''# 実際の10回測定に基づく報告書・コード・データ一式
+
+[リポジトリの案内へ戻る](../README.md)
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。

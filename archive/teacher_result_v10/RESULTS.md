@@ -1,6 +1,6 @@
 # V10の実機比較結果
 
-このファイルは保存入力の再生・速度・容量の記録です。新規の紙の10回測定は [fresh_readings](fresh_readings/README.md)、[報告書一式](../experiment_report_v10/README.md) に分けて保存しています。
+このファイルは保存入力の再生・速度・容量の記録です。新規の紙の10回測定は [fresh_readings](fresh_readings/README.md)、[報告書一式](../../experiment_report_v10/README.md) に分けて保存しています。
 
 2026年11月9日（日本時間）に受領したArduino UNO R4 WiFiのログを保存・検算しました。
 40・60・80・100次元のDense／枝刈り＋CSR、全8条件で自己検査・RGB一致検査がPASSし、4組すべての実機速度を取得しました。
