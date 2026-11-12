@@ -8,6 +8,7 @@
 | 提出用の報告書を見る | [報告書PDF](experiment_report_v10/report.pdf) |
 | LaTeXで編集する | [report.tex](experiment_report_v10/report.tex) |
 | Wordで編集する | [report.docx](experiment_report_v10/report.docx) |
+| 各次元の色画像とMSEを見る | [色画像の一覧](experiment_report_v10/color_images/README.md) |
 | 使ったArduinoプログラムを見る | [code](experiment_report_v10/code) |
 | 学習データを見る | [training135.csv](experiment_report_v10/data/training135.csv) |
 | 10回測定の平均MSEを見る | [MSE集計](experiment_report_v10/data/physical10_mse_summary.csv) |

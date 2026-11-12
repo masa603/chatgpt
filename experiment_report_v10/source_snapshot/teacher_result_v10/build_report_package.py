@@ -180,6 +180,7 @@ def build():
     copy_path(HERE/'reference',OUT/'reference')
     for source in sorted((HERE/'fresh_readings').glob('capture_*')):copy_path(source,OUT/'raw_logs'/'physical10'/source.name)
     copy_path(HERE/'hardware',OUT/'raw_logs'/'hardware')
+    subprocess.run([sys.executable,str(HERE/'build_color_images.py'),'--package',str(OUT)],check=True)
     sources=['teacher_result_v10','retraining/train_current33.py','retraining/data/current33.csv','pruning/threshold_tools.py',
         'pruning/export_csr_arduino.py','pruning/validation.csv','pruning/validation','hdjsk',
         'calibration_retraining/models','calibration_retraining/training135.csv','calibration_retraining/physical_readings/capture_01',
@@ -226,6 +227,7 @@ def build():
 ## 必要なファイル
 
 - 紙を読んだコード：[teacher_fresh_v10.ino](code/teacher_fresh_v10/teacher_fresh_v10.ino)、[数値ヘッダ](code/teacher_fresh_v10/teacher_parameters_v10.h)
+- 各次元の色画像：[MSE付きの画像一覧](color_images/README.md)。最後の10回目の8条件と、全10回の個別PNG／PPMを掲載。画像ごとのMSEと10回平均を分けています。
 - 速度を計ったコード：[teacher_compare_v10.ino](code/teacher_compare_v10/teacher_compare_v10.ino)、[数値ヘッダ](code/teacher_compare_v10/teacher_parameters_v10.h)
 - 各モデル単独のFlash・静的RAM：[8条件の結果](data/single_model_memory_results.csv)、[4組の削減率](data/single_model_memory_comparison.csv)、[受領文・検算](raw_logs/hardware/single_model_memory_run_01/README.md)、[測定手順・コード](code/memory_probe_v10/README.md)。記入用template.csvは実験結果とは別の空欄ひな形です。
 - 全10回・8条件（MSE80個）：[MSE一覧](data/physical10_mse_all80.csv)、[平均・標本SD](data/physical10_mse_summary.csv)、[同じ回の圧縮前後差](data/physical10_paired_differences.csv)

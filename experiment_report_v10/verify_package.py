@@ -125,6 +125,17 @@ def verify(refresh=False):
     assert all(name in bibliography for name in ['Tibshirani','Han','Bell','Arduino','PyTorch'])
     assert '講義' not in bibliography and '第6週' not in bibliography
     assert sha(HERE/'requirements/week6.pdf')==sha(HERE/'source_snapshot/teacher_result_v10/report_requirements/week6.pdf')
+    color_images=rows(HERE/'color_images/images.csv');assert len(color_images)==80
+    assert len({(r['capture'],r['H'],r['format']) for r in color_images})==80
+    for item in color_images:
+        capture=int(item['capture']);h=item['H'];fmt=item['format'];folder=f'capture_{capture:02d}'
+        source=HERE/f"raw_logs/physical10/{folder}/h{h}_{fmt.lower()}"
+        copied=HERE/f"color_images/{folder}/h{h}_{fmt.lower()}"
+        for extension in ['.png','.ppm']:
+            assert source.with_suffix(extension).read_bytes()==copied.with_suffix(extension).read_bytes()
+        assert sha(source.with_suffix('.ppm'))==item['source_ppm_sha256']
+        r=next(r for r in all_mse if int(r['capture_counter'])==capture and r['H']==h and r['format']==fmt)
+        close(item['mse_of_this_image'],r['mse_from_received_ppm'])
     verification={'actual_physical_captures':10,'MSE_records':80,'RGB_components':2160,'all_received_captures_included':True,
         'all80_MSE_recomputed_from_copied_PPM':'PASS','all8_means_sampleSD_min_max_goal_counts':'PASS',
         'all4_paired_differences_and_sampleSD':'PASS','frozen_numeric_headers_byte_identical':'PASS',
@@ -135,6 +146,8 @@ def verify(refresh=False):
         'week6_report_requirements':'ALGORITHM_CODE_PLAN_CHANGE_REASONS_HAND_CALCULATIONS_QUANTITATIVE_DISCUSSION_FUTURE_WORK_LATEX_REFERENCES_PRESENT',
         'published_code_excerpts_match_frozen_firmware':True,'all4_manual_memory_breakdowns_match_numeric_array_sizes':True,
         'lecture_slides_excluded_from_bibliography':True,
+        'published_color_images':80,'color_PNG_PPM_copies_byte_identical_to_raw_records':True,
+        'each_color_image_MSE_matches_corresponding_physical_read':True,
         'report_values_match_actual_all10_aggregates':'PASS','source_snapshot_replay_test':'PASS in an isolated temporary copy; no original repository paths required.',
         'CSR_mean300_goal':'NOT_MET','CSR_relative5pct_preservation':'NOT_MET','independent_final_chart':'NOT_PERFORMED'}
     if refresh:
