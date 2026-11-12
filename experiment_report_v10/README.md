@@ -4,6 +4,7 @@
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
+用語の説明と比較の流れを先に置き、式・コード・表の読み方を本文で説明しています。測定値と結論は保持しています。
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。
@@ -23,7 +24,7 @@
 - 正解：[元のresult.ppm](reference/result.ppm)、[元の先生HTML](reference/mse_calculator.html)
 - 各回の元ログ・80枚のPPM/PNG：[raw_logs/physical10](raw_logs/physical10)
 - 速度の5組とIDE使用量の元ログ：[raw_logs/hardware](raw_logs/hardware)
-- 図：[10回のMSE](figures/physical_mse10.png)、[容量・速度](figures/capacity_and_time.png)、[単独モデルのFlash](figures/single_model_flash.png)。同名PDFも同梱。
+- 図：[比較の流れ](figures/comparison_flow.png)、[10回のMSE](figures/physical_mse10.png)、[容量・速度](figures/capacity_and_time.png)、[単独モデルのFlash](figures/single_model_flash.png)。同名PDFも同梱。
 
 コードと学習済み数値は別ファイルです。Arduinoでは使う版の2ファイルを同名フォルダに置きます。
 元のデータは変更せず複製し、manifest.jsonへ各ファイルのSHA256を保存しています。

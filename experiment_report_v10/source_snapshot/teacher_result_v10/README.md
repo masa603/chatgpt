@@ -1,11 +1,11 @@
 # 先生指定のresult.ppmへ学習を修正したV10
 
-**第6週の資料指定を反映：** [報告書PDF](../experiment_report_v10/report.pdf) に、実装と実際の関数、計画変更の理由、容量の手計算、定量的考察、Future workを追記しました。[要求と本文の対応](report_requirements/coverage.md) は別資料です。講義資料は参考文献へ入れていません。
+**第6週の資料指定を反映：** [報告書PDF](../../experiment_report_v10/report.pdf) に、実装と実際の関数、計画変更の理由、容量の手計算、定量的考察、Future workを追記しました。[要求と本文の対応](report_requirements/coverage.md) は別資料です。講義資料は参考文献へ入れていません。
 
 **2026年11月12日受領：各モデル単独のFlash・静的RAM、全8条件を記録しました。** [結果表・元のIDE表示](hardware/single_model_memory_run_01/README.md)、[8条件CSV](single_model_memory_results.csv)、[測定コードと手順](memory_probe_v10/README.md) を保存しています。
 Flashは7.94〜31.26%削減、静的RAMは全条件で6,764 byteでした。紙の再測定は行っておらず、既存の10回測定結果は変えていません。
 
-**紙の新規10回読取を受領・検算し、[実測に基づく報告書・コード・データ一式](../experiment_report_v10/README.md) を作成しました。**
+**紙の新規10回読取を受領・検算し、[実測に基づく報告書・コード・データ一式](../../experiment_report_v10/README.md) を作成しました。**
 全10回の [MSE平均・標本SD・元ログ](fresh_readings/README.md) を保存しています。高いMSEの第2回も含め、除外はありません。
 10回平均はDense60・80・100が300以下、CSRは全Hで300超えです。以下の保存入力再生とは別の結果として扱います。
 

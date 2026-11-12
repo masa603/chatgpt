@@ -6,7 +6,7 @@
   "numpy": "2.3.5",
   "matplotlib": "3.10.8",
   "training_torch_recorded": "2.8.0+cpu",
-  "source_base_commit": "39188c443b6dbdf1569138977e5b7e60cf6db648",
+  "source_base_commit": "9857a84edd430ba8097511911fd5d2897e8df9f1",
   "snapshot_scope": "Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.",
   "physical_captures": 10,
   "excluded_captures": 0,
@@ -15,5 +15,6 @@
   "actual_new_firmware_memory_received": true,
   "single_model_memory_builds_received": 8,
   "single_model_memory_source": "User-pasted Arduino IDE usage summaries;IDE/core versions and build binaries not supplied.",
-  "report_requirements": "Week6 supplied PDF pages6-7; requirement mapping in requirements/coverage.md. Lecture slides excluded from bibliography by user request."
+  "report_requirements": "Week6 supplied PDF pages6-7; requirement mapping in requirements/coverage.md. Lecture slides excluded from bibliography by user request.",
+  "editorial_update": "Plain Japanese definitions, shared-input diagram, Japanese plot labels and explanations of formulas/code/tables; measurements and frozen models unchanged."
 }
