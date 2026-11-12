@@ -104,6 +104,27 @@ def verify(refresh=False):
     for text in ['第2回','除外した回はない','精度維持','達成しなかった','独立','191,320','7,324']:assert text in report
     for r in single:assert f"{int(r['flash_used_bytes']):,}" in report
     for text in ['6,764','26,004','31.26%','7.94','表6']:assert text in report
+    for heading in ['実装アルゴリズムとソースコード','計画から変更した実装とその理由','メモリ容量の手計算',
+                    'メモリ・速度・推論性能の定量的な対応','今後の改善（Future work）']:
+        assert heading in report
+    implementation=(HERE/'code/teacher_compare_v10/teacher_compare_v10.ino').read_text()
+    for signature in ['void sparseLayer(','uint32_t timeModel(']:
+        start=implementation.index(signature);brace=implementation.index('{',start);depth=1;end=brace+1
+        while depth:
+            if implementation[end]=='{':depth+=1
+            elif implementation[end]=='}':depth-=1
+            end+=1
+        assert implementation[start:end] in report
+    for h in [40,60,80,100]:
+        chosen=json.loads((HERE/f'source_snapshot/teacher_result_v10/selection/h{h}/summary.json').read_text())['selected']
+        k=chosen['nonzero'];parts=[4*k,k,2*(2*h+6),4*(2*h+3)]
+        assert sum(parts)==chosen['csr_bytes'] and 4*(h*h+8*h+3)==chosen['dense_bytes']
+        expected='| '+str(h)+' | '+' | '.join(f'{n:,}' for n in parts+[sum(parts)])+' |'
+        assert expected in report
+    bibliography=report.split('# 参考文献\n',1)[1].split('# 付録',1)[0]
+    assert all(name in bibliography for name in ['Tibshirani','Han','Bell','Arduino','PyTorch'])
+    assert '講義' not in bibliography and '第6週' not in bibliography
+    assert sha(HERE/'requirements/week6.pdf')==sha(HERE/'source_snapshot/teacher_result_v10/report_requirements/week6.pdf')
     verification={'actual_physical_captures':10,'MSE_records':80,'RGB_components':2160,'all_received_captures_included':True,
         'all80_MSE_recomputed_from_copied_PPM':'PASS','all8_means_sampleSD_min_max_goal_counts':'PASS',
         'all4_paired_differences_and_sampleSD':'PASS','frozen_numeric_headers_byte_identical':'PASS',
@@ -111,6 +132,9 @@ def verify(refresh=False):
         'single_model_memory_probe':'8 USER_REPORTED_ARDUINO_IDE_BUILD_SUMMARIES_RECEIVED; LOG_ARITHMETIC_CSV_REPORT_MATCH_PASS',
         'single_model_memory_conditions':8,'single_model_memory_template_is_separate_blank_form':True,
         'single_model_memory_stack_peak':'NOT_MEASURED',
+        'week6_report_requirements':'ALGORITHM_CODE_PLAN_CHANGE_REASONS_HAND_CALCULATIONS_QUANTITATIVE_DISCUSSION_FUTURE_WORK_LATEX_REFERENCES_PRESENT',
+        'published_code_excerpts_match_frozen_firmware':True,'all4_manual_memory_breakdowns_match_numeric_array_sizes':True,
+        'lecture_slides_excluded_from_bibliography':True,
         'report_values_match_actual_all10_aggregates':'PASS','source_snapshot_replay_test':'PASS in an isolated temporary copy; no original repository paths required.',
         'CSR_mean300_goal':'NOT_MET','CSR_relative5pct_preservation':'NOT_MET','independent_final_chart':'NOT_PERFORMED'}
     if refresh:

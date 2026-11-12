@@ -1,0 +1,20 @@
+{
+  "received_date_japan": "2026-11-12",
+  "uploaded_filename": "2026アジャイル2（第6週）.pdf",
+  "uploaded_file_id": "file_00000000278482099f879d615a8bcf06",
+  "original_pdf_sha256": "c464f467443b4d4592fbd457d78b074c6692f570fccfb8f29e92bbd27d3a0af3",
+  "pages": 8,
+  "report_requirements_pages": [
+    6,
+    7
+  ],
+  "role": "User-supplied report requirements; not experiment data and not a bibliography entry.",
+  "user_request": "ここに書かれてることは絶対に入れてね",
+  "preserved_user_preferences": [
+    "Lecture materials excluded from bibliography",
+    "No final checklist",
+    "Do not alter measured results"
+  ],
+  "source_page2_reviewed_as_image": true,
+  "mapping": "coverage.md"
+}

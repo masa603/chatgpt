@@ -572,5 +572,27 @@
     "remaining_after_static_bytes": 26004,
     "build_ide_core_versions": "NOT_REPORTED",
     "new_physical_sensor_captures": 0
+  },
+  "v10_week6_report_requirements": {
+    "date_japan": "2026-11-12",
+    "source": "../teacher_result_v10/report_requirements/source.json",
+    "coverage": "../experiment_report_v10/requirements/coverage.md",
+    "scope": "Report explanations and citations only; all frozen models,thresholds and received measurements unchanged.",
+    "added": [
+      "Detailed algorithm and actual source excerpts",
+      "Logical reasons for plan changes",
+      "Hand-derived memory components",
+      "Quantitative memory/time/MSE discussion",
+      "Future work",
+      "LaTeX/PDF and reference names/URLs"
+    ],
+    "lecture_slides_in_bibliography": false,
+    "submission_dates": [
+      "2026-11-13",
+      "2026-12-04",
+      "2026-12-11"
+    ],
+    "physical_captures_remain": 10,
+    "single_model_memory_builds_remain": 8
   }
 }

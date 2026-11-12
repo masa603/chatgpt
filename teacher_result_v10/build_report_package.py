@@ -36,6 +36,15 @@ def copy_path(source,destination):
         destination.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,destination)
 
 
+def cpp_function(source,signature):
+    start=source.index(signature);brace=source.index('{',start);depth=1;end=brace+1
+    while depth:
+        if source[end]=='{':depth+=1
+        elif source[end]=='}':depth-=1
+        end+=1
+    return source[start:end]
+
+
 def figures(reads,device,single_memory):
     folder=OUT/'figures';folder.mkdir(parents=True,exist_ok=True)
     plt.rcParams.update({'font.size':10,'axes.spines.top':False,'axes.spines.right':False,'pdf.fonttype':42})
@@ -89,6 +98,7 @@ def build():
     OUT.mkdir(exist_ok=True)
     figures(reads,device,single_memory)
     single_rows='\n'.join(f"| {r['H']} | {r['dense_flash_bytes']:,} | {r['csr_flash_bytes']:,} | {r['flash_saved_bytes']:,} | {r['flash_reduction_percent']:.2f}% | {r['dense_static_ram_bytes']:,} |" for r in single_memory['pairs'])
+    memory_components=[]
     summary_rows='\n'.join(f"| {r['H']} | {r['format']} | {float(r['mean_mse']):.2f} | {float(r['sample_stddev_mse']):.2f} | {float(r['min_mse']):.2f} | {float(r['max_mse']):.2f} | {r['reads_with_mse_le300']}/10 |" for r in stats)
     payload_rows=[]
     validation_rows=[]
@@ -96,6 +106,21 @@ def build():
         s=json.loads((HERE/f"selection/h{r['H']}/summary.json").read_text());c=s['selected']
         payload_rows.append(f"| {r['H']} | {c['threshold']:.8f} | {c['nonzero']} | {c['sparsity_pct']:.2f}% | {r['dense_model_bytes']:,} | {r['csr_model_bytes']:,} | {r['model_payload_reduction_percent']:.2f}% |")
         validation_rows.append(f"| {r['H']} | {s['dense_validation_mse']:.2f} | {c['validation_mse']:.2f} | {c['mse_increase_pct']:+.2f}% | {c['training9_mse']:.2f} |")
+        h=r['H'];k=c['nonzero'];parts=[4*k,k,2*(2*h+6),4*(2*h+3)]
+        assert sum(parts)==r['csr_model_bytes'] and 4*(h*h+8*h+3)==r['dense_model_bytes']
+        memory_components.append('| '+str(h)+' | '+' | '.join(f'{n:,}' for n in parts+[sum(parts)])+' |')
+    validation=load_csv(ROOT/'pruning/validation.csv')
+    zeros=[r for r in validation if all(float(r[f'input_{c}'])==0 for c in 'rgb')]
+    assert len(zeros)==6 and len({tuple(r[f'target_{c}8'] for c in 'rgb') for r in zeros})==6
+    implementation=(HERE/'teacher_compare_v10/teacher_compare_v10.ino').read_text()
+    snippets={'CSR_LAYER_SOURCE':cpp_function(implementation,'void sparseLayer('),
+              'TIMER_SOURCE':cpp_function(implementation,'uint32_t timeModel('),
+              'MEMORY_COMPONENT_ROWS':'\n'.join(memory_components)}
+    extra_sections={}
+    for key,name in [('IMPLEMENTATION','implementation'),('PLAN_CHANGES','plan_changes'),('HAND_CALCULATION','hand_calculation'),('QUANTITATIVE','quantitative_discussion'),('FUTURE_WORK','future_work')]:
+        section=(HERE/f'report_sections/{name}.md').read_text()
+        for token,value in snippets.items():section=section.replace('@@'+token+'@@',value)
+        extra_sections[key]=section.strip()
     timing_rows='\n'.join(f"| {r['H']} | {r['dense_mean_us']:.3f} ± {r['dense_group_sample_stddev_us']:.4f} | {r['csr_mean_us']:.3f} ± {r['csr_group_sample_stddev_us']:.4f} | {-r['csr_time_change_percent']:.2f}% |" for r in device)
     paired_rows='\n'.join(f"| {r['H']} | {float(r['mean_paired_difference']):.2f} | {float(r['sample_stddev_paired_difference']):.2f} | {float(r['relative_change_of_mean_mse_percent']):+.2f}% |" for r in paired)
     def raw_table(fmt):
@@ -168,6 +193,8 @@ S=1-\frac{K}{H^2+6H} $$
 
 CSRの1層分の計算は、各行についてバイアスから積和を開始し、その行の非ゼロ値だけを順に加算する。CSRの結果は、同じ重みを0化したDense計算とも照合した。
 
+@@HAND_CALCULATION@@
+
 ## 評価指標
 
 出力を0〜1へクリップし、255倍して四捨五入する。正解と同じ色順の9画素について、MSEを
@@ -184,6 +211,8 @@ s_m=\sqrt{\frac1{9}\sum_{r=1}^{10}(m_r-\overline m)^2} $$
 容量削減率は $100(1-B_{\mathrm{CSR}}/B_{\mathrm{Dense}})$、推論時間短縮率は $100(1-T_{\mathrm{CSR}}/T_{\mathrm{Dense}})$ とする。追加目標はMSE300以下、精度維持の比較条件はDenseからのMSE増加5%以下とし、両者を別に判定する。
 
 # 実験方法
+
+独立変数は隠れ層次元Hと方式（Dense／枝刈り＋CSR）、従属変数はMSE・配列容量・Flash・静的RAM・推論時間である。同じHの比較では元の学習済みモデル、入力、出力の丸め、ボード、計時条件を共通にした。H間では親モデルが異なるため、Hだけの因果効果を示す実験とは区別する。
 
 ## 装置と実行環境
 
@@ -215,6 +244,8 @@ s_m=\sqrt{\frac1{9}\sum_{r=1}^{10}(m_r-\overline m)^2} $$
 
 学習へ追加していない保存済み実測9入力を用いてPC・実機再生の照合も行ったが、これは以降の新規10回とは別の記録である。新規10回の入力は学習・閾値選択へ一切加えていない。
 
+@@IMPLEMENTATION@@
+
 ## 閾値選択
 
 新規10回の測定前に、各HのV10重みから全候補を作り、別に保存した8×8検証チャート2読取・128入力でMSEを計算した。検証MSEの増加5%以下、CSR容量がDenseより小さい候補を対象とし、さらに学習内のV8の9入力でMSE300以下を満たす候補のうち最小容量を選んだ。この追加条件は当初計画からの変更である。
@@ -237,9 +268,17 @@ s_m=\sqrt{\frac1{9}\sum_{r=1}^{10}(m_r-\overline m)^2} $$
 
 速度は別の `TEACHER_RESULT_COMPARE_V10` で、固定した保存実測9入力を巡回して実機で計時した。各モデルを10回ウォームアップし、100推論を1組として5組計時した。Dense先行とCSR先行を交互に切り替えた。推論と共通のチェックサム加算を含み、センサ読取・シリアル出力・MSE計算を除いた。新規10回の各回で推論時間を計ったわけではない。
 
+`micros()` [4]を推論ループの前後で読み、差を100で割った。実際の計時関数は次のとおりである。比較対象で共通の入力選択とチェックサム加算も区間内に含むため、この測定値を推論関数単体だけの時間と読み替えない。
+
+```cpp
+@@TIMER_SOURCE@@
+```
+
 配列容量にはFP32重み・バイアス・CSR列番号・行ポインタを含めた。Arduino IDEのFlash・グローバル変数の使用量は、8条件入りプログラム全体の値として別に記録した。
 
 その後、単独モデル用 `memory_probe_v10` を用い、H=40・60・80・100とDense／CSRの8条件を1条件ずつコンパイルした。重み・閾値は最終V10のままとし、各条件名に対応するArduino IDEの「スケッチ」「グローバル変数」の表示を記録した。共通の初期化・推論呼出し・シリアル出力を含む1モデル入りプログラム全体の比較であり、センサ読取とMSE計算を含まない。この追加操作で紙の測定回数は増えていない。単独ビルドのIDE・ボードコア版とバイナリは未記録である。
+
+@@PLAN_CHANGES@@
 
 # 結果
 
@@ -330,6 +369,8 @@ Flash全体はArduinoコアや共通処理を含むため、表3の数値配列�
 
 検証128入力ではMSEの増加5%以下という選択条件を満たした一方、新規10回では満たさなかった。検証入力の0への潰れ、学習・検証・新しい読取の分布差などにより、閾値選択の結果が測定全体へ一般化しなかった可能性がある。どの要因が支配的かは本実験だけでは特定できない。
 
+@@QUANTITATIVE@@
+
 ## 第2回とばらつき
 
 第2回の全モデルでMSEが大きく、平均と標本SDへ強く影響した。例えばH60のDenseは最小1.22に対して最大2,339.37、平均238.34、標本SD738.24である。このようなデータでは、最良の1回だけで性能を説明できない。
@@ -348,6 +389,8 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 
 学習も当初の33組・MSE損失から、135行・重み付きSmooth L1へ変更した。全学習行での通常の重みなしMSEは付録に示し、10回の再読取結果や学習損失と混ぜない。こうした変更と制約を含めて、本結果は実施した条件内の比較として位置づける。
 
+@@FUTURE_WORK@@
+
 # 結論
 
 紙の3×3チャートを実際に10回読み取り、40・60・80・100次元のDense／枝刈り＋CSRを同じ入力で比較した。枝刈り＋CSRはモデル配列容量を60.51〜69.70%、固定入力での実機推論時間を28.97〜44.01%削減した。単独ビルドのFlash使用量は7.94〜31.26%減少し、静的RAMは全条件で6,764 byteと変わらなかった。一方、10回平均MSEは全次元で増加し、精度維持およびCSRの平均MSE300以下は達成しなかった。
@@ -361,6 +404,10 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 [2] S. Han, J. Pool, J. Tran, and W. J. Dally, “Learning Both Weights and Connections for Efficient Neural Networks,” Advances in Neural Information Processing Systems 28, pp. 1135–1143, 2015.
 
 [3] N. Bell and M. Garland, “Implementing Sparse Matrix-Vector Multiplication on Throughput-Oriented Processors,” Proceedings of SC '09, Article 18, pp. 1–11, 2009.
+
+[4] Arduino, “micros(),” Arduino Documentation, <https://docs.arduino.cc/language-reference/en/functions/time/micros/>.
+
+[5] PyTorch Contributors, “SmoothL1Loss,” PyTorch Documentation, <https://docs.pytorch.org/docs/stable/generated/torch.nn.SmoothL1Loss.html>.
 
 # 付録：各回の実測値と再現資料
 
@@ -398,7 +445,8 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 '''
     substitutions={'ID':student_id,'NAME':student_name,'SUMMARY':summary_rows,'PAIRED':paired_rows,
         'PAYLOAD':'\n'.join(payload_rows),'VALIDATION':'\n'.join(validation_rows),'TIMING':timing_rows,'MEMORY':memory_row,
-        'RAW_DENSE':raw_table('DENSE'),'RAW_CSR':raw_table('CSR'),'TRAINING':training_rows,'SINGLE_MEMORY':single_rows}
+        'RAW_DENSE':raw_table('DENSE'),'RAW_CSR':raw_table('CSR'),'TRAINING':training_rows,'SINGLE_MEMORY':single_rows,
+        'TIMER_SOURCE':snippets['TIMER_SOURCE'],**extra_sections}
     for key,value in substitutions.items():report=report.replace('@@'+key+'@@',value)
     assert '@@' not in report
     (OUT/'report.md').write_text(report)
@@ -420,6 +468,7 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
     for name in ['teacher_fresh_v10','teacher_compare_v10','memory_probe_v10']:copy_path(HERE/name,OUT/'code'/name)
     copy_path(HERE/'single_model_memory_template.csv',OUT/'data/single_model_memory_template.csv')
     for name in ['single_model_memory_results.csv','single_model_memory_comparison.csv']:copy_path(HERE/name,OUT/'data'/name)
+    copy_path(HERE/'report_requirements',OUT/'requirements')
     for source,name in [(HERE/'fresh_readings/mse_results.csv','physical10_mse_all80.csv'),
         (HERE/'fresh_readings/mse_summary.csv','physical10_mse_summary.csv'),(HERE/'fresh_readings/paired_comparisons.csv','physical10_paired_differences.csv'),
         (HERE/'training135.csv','training135.csv'),(HERE/'sample_weights.csv','training_sample_weights.csv'),
@@ -446,6 +495,7 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
         'quality_result':'CSR meanMSE>300 and increase>5% for allH; capacity and fixed-input time reduced.',
         'actual_new_firmware_memory_received':fresh_memory is not None,'single_model_memory_builds_received':8,
         'single_model_memory_source':'User-pasted Arduino IDE usage summaries;IDE/core versions and build binaries not supplied.'}
+    environment['report_requirements']='Week6 supplied PDF pages6-7; requirement mapping in requirements/coverage.md. Lecture slides excluded from bibliography by user request.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '-V','mainfont=Noto Serif CJK JP','-V','sansfont=Noto Sans CJK JP','-V','monofont=Noto Sans Mono CJK JP',
@@ -459,6 +509,7 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
+提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。
 容量・固定入力での推論速度は改善しました。CSRの10回平均MSE300以下・精度維持は達成していない結果として記載しています。
@@ -482,6 +533,12 @@ H40のCSRは最小容量・最短時間、H100のCSRは最大の容量削減率�
 コードと学習済み数値は別ファイルです。Arduinoでは使う版の2ファイルを同名フォルダに置きます。
 元のデータは変更せず複製し、manifest.jsonへ各ファイルのSHA256を保存しています。
 このフォルダで `python verify_package.py` を実行すると、全80MSE・10回の平均と標本SD・コードの対応・ファイルハッシュを再確認できます。
+
+## 資料指定の提出日
+
+2026年11月13日：作成中の実験報告書（書けている部分まで）、12月4日：完成原稿、12月11日：最終版。
+資料ではTAへ提出して添削を受け、その指摘を反映する工程も含みます。提出後の指摘はこの原稿へ反映します。
+提出用はreport.pdf、LaTeXソースはreport.texです。Word版は編集補助として同梱しています。
 
 ## 保存ログの再計算
 
