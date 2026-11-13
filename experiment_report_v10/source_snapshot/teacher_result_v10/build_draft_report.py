@@ -5,7 +5,6 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import re
 import subprocess
 
 HERE = Path(__file__).resolve().parent
@@ -27,8 +26,6 @@ def build(package=PACKAGE):
     metadata = text[:text.index('\n# 概要')]
     metadata = metadata.replace('アジャイルワーク2　実験報告書', 'アジャイルワーク2　実験報告書草稿（確認用抜粋）')
     methods = text.split('# 目的\n', 1)[1].split('\n# 結果\n', 1)[0]
-    # The complete report places a keep-space directive immediately before Results.
-    methods = re.sub(r'\n\\Needspace\{18\\baselineskip\}\s*$', '', methods)
     results = text.split('# 結果\n', 1)[1].split('\n\\Needspace{10\\baselineskip}', 1)[0]
     bibliography = text.split('# 参考文献\n', 1)[1].split('\n# 付録', 1)[0]
     draft = metadata + '''
