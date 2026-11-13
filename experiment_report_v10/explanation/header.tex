@@ -1,0 +1,11 @@
+\usepackage{setspace,needspace,etoolbox}
+\setstretch{1.10}
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 1pt
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.4em}
+\renewcommand{\arraystretch}{1.12}
+\pretocmd{\section}{\Needspace{7\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{5\baselineskip}}{}{}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}}

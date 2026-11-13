@@ -1,11 +1,12 @@
 # 色補正実験：最新版の案内
 
 **提出する報告書は [report.pdf](experiment_report_v10/report.pdf) です。**
-2026年11月12日更新。用語の説明・比較の流れ・式や表の読み方を加え、第6週資料の指定内容を反映しています。
+2026年11月13日更新。第6週資料の指定内容を反映した報告書に加え、本人が式・コード・結果を理解するための解説PDFを用意しました。
 
 | やりたいこと | 開く場所 |
 | --- | --- |
 | 提出用の報告書を見る | [報告書PDF](experiment_report_v10/report.pdf) |
+| レポートの内容を理解する | [本人用の解説PDF（8ページ）](experiment_report_v10/explanation/guide.pdf) |
 | LaTeXで編集する | [report.tex](experiment_report_v10/report.tex) |
 | Wordで編集する | [report.docx](experiment_report_v10/report.docx) |
 | 各次元の色画像とMSEを見る | [色画像の一覧](experiment_report_v10/color_images/README.md) |

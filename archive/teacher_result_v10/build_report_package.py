@@ -215,6 +215,7 @@ def build():
 [リポジトリの案内へ戻る](../README.md)
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
+内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語の説明と比較の流れを先に置き、式・コード・表の読み方を本文で説明しています。測定値と結論は保持しています。
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
@@ -271,6 +272,7 @@ source_snapshot内のteacher_result_v10にprepare.py、train.py、data_weights.p
 凍結済み成果物の誤上書きを避けるガードがあるため、そのままtrain.pyや選択処理を再実行する用途には使わず、再学習時は別の作業コピーを用意します。
 記録済み結果の検算には再学習は不要です。
 ''')
+    subprocess.run([sys.executable,str(HERE/'build_explanation_guide.py'),'--package',str(OUT)],check=True)
     for path in OUT.rglob('*'):
         if path.is_file():path.chmod(0o644)
     files=[p for p in sorted(OUT.rglob('*')) if p.is_file() and p.name!='manifest.json']

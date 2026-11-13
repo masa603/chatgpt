@@ -115,6 +115,22 @@ def verify(refresh=False):
             elif implementation[end]=='}':depth-=1
             end+=1
         assert implementation[start:end] in report
+        assert implementation[start:end] in (HERE/'explanation/guide.md').read_text()
+    guide=(HERE/'explanation/guide.md').read_text()
+    guide_record=json.loads((HERE/'explanation/verification.json').read_text())
+    assert guide_record['source_report_pdf_sha256']==sha(HERE/'report.pdf')
+    assert guide_record['source_mean_MSE_csv_sha256']==sha(HERE/'data/physical10_mse_summary.csv')
+    assert guide_record['original_report_unchanged'] and not guide_record['new_measurement'] and not guide_record['retraining']
+    assert guide_record['Arduino_code_excerpts_match_frozen_source']
+    assert (HERE/'explanation/guide.pdf').read_bytes().startswith(b'%PDF-') and '@@' not in guide
+    assert len(re.findall(r'^# [1-8]．',guide,re.M))==8
+    for r in summary:
+        assert f"{float(r['mean_mse']):.2f}" in guide
+    for capture in [2,10]:
+        r=next(r for r in all_mse if int(r['capture_counter'])==capture and r['H']=='60' and r['format']=='DENSE')
+        assert f"MSE {float(r['mse_from_received_ppm']):.2f}" in guide
+    start=implementation.index('    float value=m.b1[r];');end=implementation.index('\n  }',start)
+    assert ' '.join(implementation[start:end].split()) in ' '.join(guide.split())
     for h in [40,60,80,100]:
         chosen=json.loads((HERE/f'source_snapshot/teacher_result_v10/selection/h{h}/summary.json').read_text())['selected']
         k=chosen['nonzero'];parts=[4*k,k,2*(2*h+6),4*(2*h+3)]
@@ -148,6 +164,8 @@ def verify(refresh=False):
         'lecture_slides_excluded_from_bibliography':True,
         'published_color_images':80,'color_PNG_PPM_copies_byte_identical_to_raw_records':True,
         'each_color_image_MSE_matches_corresponding_physical_read':True,
+        'personal_explanation_guide_matches_original_report_hash_and_all8_means':True,
+        'explanation_code_excerpts_match_frozen_firmware':True,
         'report_values_match_actual_all10_aggregates':'PASS','source_snapshot_replay_test':'PASS in an isolated temporary copy; no original repository paths required.',
         'CSR_mean300_goal':'NOT_MET','CSR_relative5pct_preservation':'NOT_MET','independent_final_chart':'NOT_PERFORMED'}
     if refresh:
