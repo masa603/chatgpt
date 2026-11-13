@@ -127,24 +127,37 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={枝刈り・CSRによる色補正モデルの圧縮},
-  pdfauthor={25G1017　岩澤大心},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{枝刈り・CSRによる色補正モデルの圧縮}
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-\subtitle{アジャイルワーク2　実験報告書草稿（確認用抜粋）}
-\author{25G1017　岩澤大心}
-\date{記録整理日：2026年11月13日}
+\author{}
+\date{}
 
 \begin{document}
-\maketitle
+
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\centering
+\vspace*{22mm}
+{\Large アジャイルワーク2　実験報告書草稿（確認用抜粋）\par}
+\vspace{24mm}
+\rule{0.88\linewidth}{0.7pt}\par
+\vspace{9mm}
+{\Huge\bfseries 枝刈り・CSRによる\par 色補正モデルの圧縮\par}
+\vspace{9mm}
+\rule{0.88\linewidth}{0.7pt}\par
+\vfill
+\renewcommand{\arraystretch}{1.6}
+{\large
+\begin{tabular}{rl}
+学籍番号 & 25G1017 \\
+氏名 & 岩澤大心 \\
+作成日 & 2026年11月13日\end{tabular}
+}
+\vspace*{25mm}
+\end{titlepage}
+\hypersetup{pageanchor=true}
+\setcounter{page}{1}
 
 \section{本稿の範囲}\label{ux672cux7a3fux306eux7bc4ux56f2}
 
@@ -194,69 +207,162 @@ Arduino上の色補正モデルについて，枝刈り＋CSRによる保存容�
 
 \subsection{ネットワークと学習}\label{ux30cdux30c3ux30c8ux30efux30fcux30afux3068ux5b66ux7fd2}
 
-ネットワークは3−H−H−3の全結合構造とした．入力を
-\(\boldsymbol x\)，重みを \(W\)，バイアスを \(\boldsymbol b\) とすると，
+センサの読取値を黒白校正で正規化し，3−H−H−3の全結合ネットワークへ入力した．図2は層の構成と，計算単位1個の処理を示す模式図である．Hは各隠れ層の計算単位数であり，入力・出力はRGBの3成分である．
 
-\[
+\Needspace{18\baselineskip}
+
+\noindent\begin{minipage}{\linewidth}
+
+\includegraphics[width=0.95\textwidth,height=\textheight]{figures/theory_network.png}
+
+\begingroup\centering\setlength{\parindent}{0pt}
+
+図2　ネットワークと計算単位
+
+\par\endgroup
+
+\end{minipage}
+
+RGB成分cの読取値を \(v_c\)，黒・白の校正値を \(v_{B,c},v_{W,c}\)
+とすると，入力は式\hyperref[eq:normalization]{(1)}で求める．clipは範囲外の値を0または1へ収める処理である．
+
+\begin{equation}\label{eq:normalization}
+x_c=\operatorname{clip}_{[0,1]}\left(\frac{v_c-v_{B,c}}{v_{W,c}-v_{B,c}}\right)
+\end{equation}
+
+重みは接続ごとに入力へ掛ける係数，バイアスは各計算単位へ加える調整値である．最初の隠れ層の計算単位1個では，式\hyperref[eq:affine]{(2)}のように入力と重みの積を合計する．例えば入力(0.7,0.2,0.1)，重み(0.5,−0.2,0.3)，バイアス0.01なら，合計は0.35となる．これは仕組みの説明用の値である．
+
+\begin{equation}\label{eq:affine}
+z=w_Rx_R+w_Gx_G+w_Bx_B+b
+\end{equation}
+
+全計算単位を行列でまとめたものが式\hyperref[eq:network]{(3)}である．\(W_1,W_2,W_3\)
+の大きさは順に \(H\times3,H\times H,3\times H\) となる．
+
+\begin{equation}\label{eq:network}
 \begin{aligned}
 \boldsymbol h_1&=\operatorname{ReLU}(W_1\boldsymbol x+\boldsymbol b_1),\\
 \boldsymbol h_2&=\operatorname{ReLU}(W_2\boldsymbol h_1+\boldsymbol b_2),\\
-\boldsymbol y&=W_3\boldsymbol h_2+\boldsymbol b_3.
+\boldsymbol y&=W_3\boldsymbol h_2+\boldsymbol b_3
 \end{aligned}
-\]
+\end{equation}
 
-隠れ層にReLUを用い，出力層は線形とした．学習には，重み付きSmooth
-L1損失{[}5{]}と，バイアスを除く重みへのL1正則化{[}1{]}を用いた．
+隠れ層には式\hyperref[eq:relu]{(4)}を用い，負の値を0にする．非線形処理を挟むことで，複数の線形変換だけでは表せない入力と出力の関係を学習できる．出力層は線形とし，評価時にクリップする．
 
-\[
-\mathcal L=\frac{1}{\sum_{i=1}^{M}a_i}
-\sum_{i=1}^{M}\frac{a_i}{3}\sum_{c\in\{R,G,B\}}
-\ell_\beta(\widehat y_{i,c}-t_{i,c})
-+10^{-6}\sum_{\ell=1}^{3}\sum_{j,k}|(W_\ell)_{jk}|,
-\]
+\begin{equation}\label{eq:relu}
+\operatorname{ReLU}(z)=\max(0,z)
+\end{equation}
 
-\[
-\ell_\beta(e)=\begin{cases}e^2/(2\beta)&(|e|<\beta),\\|e|-\beta/2&(|e|\geq\beta),\end{cases}\qquad \beta=0.05
-\]
+図3はPCでの学習の流れである．予測と正解から損失を計算し，\texttt{backward()}で勾配を求め，Adamで重み・バイアスを更新する．学習時は正解RGBを255で割った尺度を使用した．
 
-\(M=135\) は学習行数，\(a_i>0\) は行ごとの重要度，\(\widehat y\)
-は予測，\(t\) は正解，\(c\)
-はRGB成分を表す．学習時の尺度は0〜1とした．\(\ell\)
-は層番号，jとkは行列内の位置である．L1項は全3層の重みの絶対値を合計し，小さい重みを作る方向に作用する．学習損失と，評価時の整数RGBのMSEは区別する．
+\Needspace{18\baselineskip}
+
+\noindent\begin{minipage}{\linewidth}
+
+\includegraphics[width=0.95\textwidth,height=\textheight]{figures/theory_learning.png}
+
+\begingroup\centering\setlength{\parindent}{0pt}
+
+図3　学習と損失の関係
+
+\par\endgroup
+
+\end{minipage}
+
+損失は式\hyperref[eq:loss]{(5)}とした．\(E_i\)
+は学習行iのRGB誤差の平均，\(a_i>0\) はその行の重要度，\(M=135\)
+は学習行数である．前半は行の重要度付き平均，後半はL1正則化{[}1{]}であり，重要度
+\(a_i\) とモデルの重み \(W\) は区別する．
+
+\begin{equation}\label{eq:loss}
+\begin{aligned}
+E_i&=\frac13\sum_{c\in\{R,G,B\}}\rho_\beta(\widehat y_{i,c}-t_{i,c}),\\
+\mathcal L&=\frac{\sum_{i=1}^{M}a_iE_i}{\sum_{i=1}^{M}a_i}
++\lambda\sum_{\ell=1}^{3}\sum_{j,k}|(W_\ell)_{jk}|,\qquad\lambda=10^{-6}
+\end{aligned}
+\end{equation}
+
+RGB誤差には式\hyperref[eq:smooth-l1]{(6)}のSmooth
+L1{[}5{]}を用いた．\(e\)
+は予測と正解の差である．小さい誤差では二乗，大きい誤差では直線的に損失が増え，一部の大きな残差の影響を抑える．\(\beta=0.05\)
+はその切替値である．
+
+\begin{equation}\label{eq:smooth-l1}
+\rho_\beta(e)=\begin{cases}e^2/(2\beta)&(|e|<\beta),\\|e|-\beta/2&(|e|\geq\beta),\end{cases}\qquad \beta=0.05
+\end{equation}
+
+L1項は3層の重みの絶対値を足し，大きな重みへ罰則を与える．層番号を
+\(\ell\)，行列内の位置をj,kとし，バイアスは罰則の対象から除いた．小さな重みを作る方向に作用するが，重みを実際に0へ変更する処理は次節の枝刈りで行う．
 
 \subsection{枝刈りとCSR}\label{ux679dux5208ux308aux3068csr}
 
-枝刈り{[}2{]}では \(|w|<\tau\)
-の重みを0にし，バイアスは保持した．残った重みを，値・列番号・行開始位置の3配列からなるCSR{[}3{]}へ変換した．保存・計算対象を非ゼロ重みに限定する．3層の非ゼロ重み数をKとすると，疎性Sは次式である．
+枝刈り{[}2{]}では，学習後の重みへ式\hyperref[eq:pruning]{(7)}を適用する．\(\tau\)
+は閾値であり，絶対値が小さい重みを0にする．バイアスは変更しない．
 
-\[S=1-\frac{K}{H^2+6H}\]
+\begin{equation}\label{eq:pruning}
+w^{(\tau)}=\begin{cases}0&(|w|<\tau),\\w&(|w|\geq\tau)\end{cases}
+\end{equation}
+
+図4は閾値0.05を用いた説明例である．0.03や−0.02は0になり，0.5や−0.2は残る．実験で採用した閾値は表3に示す．枝刈りの
+\(\tau\) と，Smooth L1の \(\beta\) は用途が異なる．
+
+\Needspace{14\baselineskip}
+
+\noindent\begin{minipage}{\linewidth}
+
+\includegraphics[width=0.98\textwidth,height=\textheight]{figures/theory_pruning_csr.png}
+
+\begingroup\centering\setlength{\parindent}{0pt}
+
+図4　枝刈りとCSR変換
+
+\par\endgroup
+
+\end{minipage}
+
+0を配列に残したままでは保存領域が必要なため，非ゼロ重みだけをCSR{[}3{]}で保存する．\texttt{values}
+は重みの値，\texttt{col} は元の列番号，\texttt{row}
+は各行の開始位置と終端を表す．図4の \texttt{row={[}0,1,3{]}}
+では，行0にvaluesの0番，行1に1〜2番を使う．列番号を使えば，省略した0の位置も含めて元と同じ積和計算ができる．
+
+CSR変換は枝刈り後の行列を表現し直す処理であり，精度への影響は枝刈り前のDenseとの比較で確認する．3層の非ゼロ重み数をKとしたとき，式\hyperref[eq:sparsity]{(8)}は重みを0にした割合を表す．
+
+\begin{equation}\label{eq:sparsity}
+S=1-\frac{K}{H^2+6H}
+\end{equation}
 
 \subsection{メモリ容量の手計算}\label{ux30e1ux30e2ux30eaux5bb9ux91cfux306eux624bux8a08ux7b97}
 
-Denseの重み数は \(N_w=3H+H^2+3H\)，バイアス数は \(N_b=2H+3\)
-である．FP32は1個4 byteなので，
+図2の各接続に重みが1個ずつあるため，Denseの重み数は \(N_w=3H+H^2+3H\)
+となる．各計算単位のバイアスは \(N_b=2H+3\) 個である．FP32は1個4
+byteなので，式\hyperref[eq:dense-bytes]{(9)}で配列容量を求める．
 
-\[B_{\mathrm{Dense}}=4(N_w+N_b)=4(H^2+8H+3)\quad[\mathrm{byte}]\]
+\begin{equation}\label{eq:dense-bytes}
+B_{\mathrm{Dense}}=4(N_w+N_b)=4(H^2+8H+3)\quad[\mathrm{byte}]
+\end{equation}
 
-となる．CSRは非ゼロ重みK個をFP32，列番号をuint8，行開始位置をuint16で保存する．行位置は3層の行数に各終端を加えた
-\(2H+6\) 個となる．バイアスを全て残すと，
+CSRは非ゼロ重みK個をFP32，列番号をuint8，行開始位置をuint16で保存する．容量はそれぞれ4K，K，\(2(2H+6)\)
+byteとなる．行位置の個数は各層の行数に終端を1個ずつ足した
+\((H+1)+(H+1)+(3+1)=2H+6\)
+個である．バイアスを全て残すと，総容量は式\hyperref[eq:csr-bytes]{(10)}となる．
 
-\[
+\begin{equation}\label{eq:csr-bytes}
 \begin{aligned}
 B_{\mathrm{CSR}}&=4K+K+2(2H+6)+4(2H+3)\\
 &=5K+12H+24\quad[\mathrm{byte}]
 \end{aligned}
-\]
+\end{equation}
 
-H60では重み3,960個，バイアス123個，枝刈り後K=1,141個なので，
+H60では重み3,960個，バイアス123個，枝刈り後K=1,141個なので，式\hyperref[eq:h60-capacity]{(11)}のように計算できる．CSR行位置は61＋61＋4＝126個で252
+byte，バイアスは123個で492 byteである．
 
-\[
+\begin{equation}\label{eq:h60-capacity}
 \begin{aligned}
 B_{\mathrm{Dense}}&=4(60^2+8\cdot60+3)=16,332,\\
 B_{\mathrm{CSR}}&=4,564+1,141+252+492=6,449,\\
 R_B&=100(1-6,449/16,332)=60.51\%
 \end{aligned}
-\]
+\end{equation}
 
 \Needspace{10\baselineskip}
 
@@ -275,31 +381,56 @@ H & 非ゼロ重み & 列番号 & 行位置 & バイアス & 合計byte \\
 100 & 9,496 & 2,374 & 412 & 812 & 13,094 \\
 \end{longtable}
 
-配列容量が減る条件は \(5K<4H^2+20H-12\)
-で，採用した4条件は全て満たす．この計算は数値配列のみを対象とし，構造体・アラインメント・Arduinoコア等を含むFlash全体はIDE表示で別に評価した．
+CSRでは位置情報も保存するため，非ゼロ重みが多いと容量が減らない．\(B_{\mathrm{CSR}}<B_{\mathrm{Dense}}\)
+を整理した式\hyperref[eq:capacity-condition]{(12)}を，採用した4条件は全て満たす．
+
+\begin{equation}\label{eq:capacity-condition}
+5K<4H^2+20H-12
+\end{equation}
+
+この計算は数値配列のみを対象とし，構造体・アラインメント・Arduinoコア等を含むFlash全体はIDE表示で別に評価した．
 
 \subsection{評価指標}\label{ux8a55ux4fa1ux6307ux6a19}
 
 出力を0〜1へクリップし，255倍して四捨五入した整数RGBで評価した．9色の補正値
-\(y\) と正解 \(t\) から，MSEを次式で求めた．
+\(y\) と正解 \(t\)
+から，式\hyperref[eq:mse]{(13)}でMSEを求める．9色×RGBの3成分で，比較数は27個となる．
 
-\[\mathrm{MSE}=\frac{1}{27}\sum_{i=1}^{9}\sum_{c\in\{R,G,B\}}(y_{i,c}-t_{i,c})^2\]
+\begin{equation}\label{eq:mse}
+\mathrm{MSE}=\frac{1}{27}\sum_{i=1}^{9}\sum_{c\in\{R,G,B\}}(y_{i,c}-t_{i,c})^2
+\end{equation}
 
-\Needspace{6\baselineskip}
+説明例として，1色の正解が(255,0,0)，予測が(245,10,5)で，残り8色が一致した場合，二乗誤差の合計は225，MSEは
+\(225/27=8.33\ldots\) となる．MSEは小さいほど正解に近い．
 
-各回のMSEを \(m_r\) とし，10回平均と標本標準偏差（SD）を算出した．
+各回のMSEを \(m_r\)
+とし，式\hyperref[eq:statistics]{(14)}で10回平均と標本標準偏差（SD）を算出した．平均で誤差の大きさ，SDで読取ごとのばらつきを評価する．
 
-\[\overline m=\frac1{10}\sum_{r=1}^{10}m_r,\qquad
-s_m=\sqrt{\frac1{9}\sum_{r=1}^{10}(m_r-\overline m)^2}\]
+\begin{equation}\label{eq:statistics}
+\overline m=\frac1{10}\sum_{r=1}^{10}m_r,\qquad
+s_m=\sqrt{\frac1{9}\sum_{r=1}^{10}(m_r-\overline m)^2}
+\end{equation}
 
 MSE・標本SD・対応差は小数第2位まで表示し，第3位以降を切り捨てる．集計・増加率の計算には切り捨て前の値を使用する．
 
-同じ回の差を \(d_r=m_{r,\mathrm{CSR}}-m_{r,\mathrm{Dense}}\)
-とした．MSE増加率は
-\(100(\overline m_{\mathrm{CSR}}/\overline m_{\mathrm{Dense}}-1)\)
-とし，各回の割合の平均は使わない．容量Bと時間Tの削減率は，それぞれ
-\(100(1-B_{\mathrm{CSR}}/B_{\mathrm{Dense}})\)，\(100(1-T_{\mathrm{CSR}}/T_{\mathrm{Dense}})\)
-で求めた．
+同じ読取回における差を式\hyperref[eq:paired-difference]{(15)}で求める．正の値はCSRで誤差が増えたことを示す．
+
+\begin{equation}\label{eq:paired-difference}
+d_r=m_{r,\mathrm{CSR}}-m_{r,\mathrm{Dense}}
+\end{equation}
+
+MSE増加率は式\hyperref[eq:mse-change]{(16)}で求め，5\%以下を精度維持の条件とした．各回の割合を平均するのではなく，両方式の10回平均を比較する．
+
+\begin{equation}\label{eq:mse-change}
+R_{\mathrm{MSE}}=100\left(\frac{\overline m_{\mathrm{CSR}}}{\overline m_{\mathrm{Dense}}}-1\right)\quad[\%]
+\end{equation}
+
+容量Bと推論時間Tの削減率は式\hyperref[eq:reductions]{(17)}で算出した．いずれもDenseを基準とし，正の値が容量・時間の削減を表す．
+
+\begin{equation}\label{eq:reductions}
+R_B=100\left(1-\frac{B_{\mathrm{CSR}}}{B_{\mathrm{Dense}}}\right),\qquad
+R_T=100\left(1-\frac{T_{\mathrm{CSR}}}{T_{\mathrm{Dense}}}\right)\quad[\%]
+\end{equation}
 
 \section{実験方法}\label{ux5b9fux9a13ux65b9ux6cd5}
 
@@ -402,8 +533,7 @@ H & 検証Dense MSE & 検証CSR MSE & 変化率 & 学習内V8の9入力CSR MSE \
 \subsection{紙の新規10回読取}\label{ux7d19ux306eux65b0ux898f10ux56deux8aadux53d6}
 
 \texttt{TEACHER\_FRESH\_V10}
-で，各回に黒b・白wを登録した．各RGBの読取値vから \((v-b)/(w-b)\)
-を求め，0〜1へクリップして入力とした．
+で，各回に黒b・白wを登録した．各RGBの読取値を式\hyperref[eq:normalization]{(1)}で正規化し，入力とした．
 
 赤・緑・青・黄・水色・紫・黒・灰・白の順に紙を当て直し，rを各1回送信した．同じ新規入力を全8モデルへ与え，9色終了後に8個のMSEと8枚のPPMを保存した．nで次回の校正へ進み，CAPTURE=1〜10を実施した．反復単位は9色の読取1回であり，内部10サンプル平均は反復回数に数えない．
 

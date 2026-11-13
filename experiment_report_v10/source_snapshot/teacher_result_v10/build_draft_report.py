@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from report_layout import finish_docx, write_equation_record
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
@@ -50,8 +51,10 @@ def build(package=PACKAGE):
     output = package / 'draft'
     output.mkdir(exist_ok=True)
     (output / 'report_draft.md').write_text(draft)
+    equation_count=write_equation_record(output/'equations.json',draft)
     common = ['pandoc', 'report_draft.md', '--from=markdown-implicit_figures', '--standalone',
               '--number-sections', '--resource-path=..', '--lua-filter=' + str(HERE / 'caption_layout.lua'),
+              '--lua-filter=' + str(HERE / 'report_layout.lua'),
               '-V', 'mainfont=Noto Serif CJK JP', '-V', 'sansfont=Noto Sans CJK JP',
               '-V', 'monofont=Noto Sans Mono CJK JP', '-V', 'fontsize=10pt',
               '-V', 'papersize=a4', '-V', 'geometry:margin=22mm', '--include-in-header=../header.tex']
@@ -64,12 +67,14 @@ def build(package=PACKAGE):
             raise RuntimeError(result.stderr)
         extension = extra[-1].rsplit('.', 1)[-1]
         (output / ('build_' + extension + '.log')).write_text(result.stderr)
+    finish_docx(output/'report_draft.docx',equation_count)
     assert complete_hashes == {name: sha(package / name) for name in complete_hashes}
     record = dict(created_date_japan='2026-11-13', role='EXPLICIT_REVIEW_EXCERPT_FROM_COMPLETE_REPORT',
                   included='PURPOSE_THEORY_METHODS_ALL10_MSE_SUMMARY_AND_ANNOTATED_CODE_APPENDIX',
                   omitted='PAIRED_DIFFERENCES_CAPACITY_TIMING_FLASH_RAM_DISCUSSION_CONCLUSION_RAW_DATA_APPENDIX',
                   complete_report_files_unchanged=complete_hashes, new_measurements=False,
                   retraining=False, source_measurements_unchanged=True)
+    record['cover_and_numbered_equations']=equation_count
     (output / 'verification.json').write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n')
     (output / 'README.md').write_text('''# 確認用の途中稿（完成版からの抜粋）
 

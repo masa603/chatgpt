@@ -1,0 +1,90 @@
+{
+  "count": 17,
+  "equations": [
+    {
+      "number": 1,
+      "id": "eq:normalization",
+      "text_reference_count": 2
+    },
+    {
+      "number": 2,
+      "id": "eq:affine",
+      "text_reference_count": 1
+    },
+    {
+      "number": 3,
+      "id": "eq:network",
+      "text_reference_count": 1
+    },
+    {
+      "number": 4,
+      "id": "eq:relu",
+      "text_reference_count": 1
+    },
+    {
+      "number": 5,
+      "id": "eq:loss",
+      "text_reference_count": 1
+    },
+    {
+      "number": 6,
+      "id": "eq:smooth-l1",
+      "text_reference_count": 1
+    },
+    {
+      "number": 7,
+      "id": "eq:pruning",
+      "text_reference_count": 1
+    },
+    {
+      "number": 8,
+      "id": "eq:sparsity",
+      "text_reference_count": 1
+    },
+    {
+      "number": 9,
+      "id": "eq:dense-bytes",
+      "text_reference_count": 1
+    },
+    {
+      "number": 10,
+      "id": "eq:csr-bytes",
+      "text_reference_count": 1
+    },
+    {
+      "number": 11,
+      "id": "eq:h60-capacity",
+      "text_reference_count": 1
+    },
+    {
+      "number": 12,
+      "id": "eq:capacity-condition",
+      "text_reference_count": 1
+    },
+    {
+      "number": 13,
+      "id": "eq:mse",
+      "text_reference_count": 1
+    },
+    {
+      "number": 14,
+      "id": "eq:statistics",
+      "text_reference_count": 1
+    },
+    {
+      "number": 15,
+      "id": "eq:paired-difference",
+      "text_reference_count": 1
+    },
+    {
+      "number": 16,
+      "id": "eq:mse-change",
+      "text_reference_count": 1
+    },
+    {
+      "number": 17,
+      "id": "eq:reductions",
+      "text_reference_count": 1
+    }
+  ]
+}

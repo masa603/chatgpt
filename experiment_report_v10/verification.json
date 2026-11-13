@@ -17,6 +17,7 @@
   "published_code_excerpts_match_frozen_firmware": true,
   "all4_manual_memory_breakdowns_match_numeric_array_sizes": true,
   "code_explanation_layout": "FUNCTION_ROLES_IN_BODY; TWO_LINE_BY_LINE_COMMENTED_FUNCTIONS_IN_APPENDIX; EXECUTABLE_TOKENS_MATCH_FROZEN_SOURCE",
+  "cover_and_theory_layout": "DEDICATED_COVER; THREE_EXPLANATORY_FIGURES; 17_NUMBERED_EQUATIONS_WITH_BODY_REFERENCES; EDITABLE_WORD_EQUATIONS",
   "lecture_slides_excluded_from_bibliography": true,
   "published_color_images": 80,
   "color_PNG_PPM_copies_byte_identical_to_raw_records": true,

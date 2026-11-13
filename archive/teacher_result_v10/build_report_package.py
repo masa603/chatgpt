@@ -18,6 +18,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 import numpy as np
+from report_layout import finish_docx, write_equation_record
+from theory_figures import build_theory_figures
 
 ROOT=Path(__file__).resolve().parents[1];HERE=Path(__file__).resolve().parent
 OUT=(ROOT.parent if (ROOT/'moved_paths.json').is_file() else ROOT)/'experiment_report_v10'
@@ -122,6 +124,7 @@ def build():
     assert single_memory['received_conditions']==8
     OUT.mkdir(exist_ok=True)
     figures(reads,device,single_memory)
+    build_theory_figures(OUT/'figures')
     single_rows='\n'.join(f"| {r['H']} | {r['dense_flash_bytes']:,} | {r['csr_flash_bytes']:,} | {r['flash_saved_bytes']:,} | {r['flash_reduction_percent']:.2f}% | {r['dense_static_ram_bytes']:,} |" for r in single_memory['pairs'])
     memory_components=[]
     summary_rows='\n'.join(f"| {r['H']} | {r['format']} | {mse_text(r['mean_mse'])} | {mse_text(r['sample_stddev_mse'])} | {mse_text(r['min_mse'])} | {mse_text(r['max_mse'])} | {r['reads_with_mse_le300']}/10 |" for r in stats)
@@ -180,6 +183,7 @@ def build():
     for key,value in mse_substitutions.items():report=report.replace('@@'+key+'@@',value)
     assert '@@' not in report
     (OUT/'report.md').write_text(report)
+    equation_count=write_equation_record(OUT/'equations.json',report)
     header=r'''\usepackage{setspace}
 \setstretch{1.15}
 \usepackage{needspace,etoolbox}
@@ -232,9 +236,12 @@ def build():
     environment['caption_layout']='Centered figure/table captions with no sentence punctuation in PDF/LaTeX and DOCX.'
     environment['report_MSE_display']='Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation.'
     environment['code_explanation_layout']='Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.'
+    environment['report_layout']='Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.'
+    environment['numbered_display_equations']=equation_count
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '--lua-filter='+str(HERE/'caption_layout.lua'),
+        '--lua-filter='+str(HERE/'report_layout.lua'),
         '-V','mainfont=Noto Serif CJK JP','-V','sansfont=Noto Sans CJK JP','-V','monofont=Noto Sans Mono CJK JP',
         '-V','fontsize=10pt','-V','papersize=a4','-V','geometry:margin=22mm','--include-in-header=header.tex']
     word=['--reference-doc=word_reference.docx'] if (OUT/'word_reference.docx').exists() else []
@@ -242,6 +249,7 @@ def build():
         result=subprocess.run(common+extra,cwd=OUT,capture_output=True,text=True)
         if result.returncode:raise RuntimeError(result.stderr)
         (OUT/('build_'+extra[-1].split('.')[-1]+'.log')).write_text(result.stderr)
+    finish_docx(OUT/'report.docx',equation_count)
     (OUT/'README.md').write_text('''# 実際の10回測定に基づく報告書・コード・データ一式
 
 [リポジトリの案内へ戻る](../README.md)
@@ -253,6 +261,7 @@ def build():
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
 図表キャプションは中央揃え・句読点なしです．MSEとその標本SD・対応差は小数第2位まで表示し，第3位以降を切り捨てています．平均や増加率は切り捨て前の値から計算し，元CSVは保持しています．
 使用関数の役割は本文で説明し，行ごとの説明は付録のコメント付きコードにまとめています．7.5の見出しは「今後の改善」です．
+表紙を付け，理論にはネットワーク・学習・枝刈りとCSRの説明図を追加しました．独立した数式には番号を付け，本文から参照しています．式番号の一覧は [equations.json](equations.json) に保存しています．
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。
@@ -315,7 +324,7 @@ source_snapshot内のteacher_result_v10にprepare.py、train.py、data_weights.p
     manifest={'scope':'Factual package of10 actual user-reported paper readings,all80 measured model outputs,real saved-input timing and original code/data.',
         'file_count':len(files),'files':[{'path':p.relative_to(OUT).as_posix(),'bytes':p.stat().st_size,'sha256':sha(p)} for p in files]}
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    print(f'Built readable report PDF/DOCX/MD/TeX,4 figures,actual10 logs,8 memory build summaries and source snapshot: {len(files)} files.')
+    print(f'Built report with cover,7 figures,{equation_count} numbered equations,actual10 logs and source snapshot: {len(files)} files.')
 
 
 if __name__=='__main__':build()

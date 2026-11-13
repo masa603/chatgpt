@@ -6,7 +6,7 @@
   "numpy": "2.3.5",
   "matplotlib": "3.10.8",
   "training_torch_recorded": "2.8.0+cpu",
-  "source_base_commit": "4b2ceb1a8685bf5430495ae05d6847423e1b8d18",
+  "source_base_commit": "b910af8a35f01860a81b06334708d03ce53c8d1c",
   "snapshot_scope": "Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.",
   "physical_captures": 10,
   "excluded_captures": 0,
@@ -19,5 +19,7 @@
   "editorial_update": "Removed glossary and repetitive tutorial explanations; retained experiment conditions, equations, code, results and required discussion; Japanese prose punctuation unified to fullwidth period and comma; measurements and frozen models unchanged.",
   "caption_layout": "Centered figure/table captions with no sentence punctuation in PDF/LaTeX and DOCX.",
   "report_MSE_display": "Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation.",
-  "code_explanation_layout": "Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace."
+  "code_explanation_layout": "Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.",
+  "report_layout": "Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.",
+  "numbered_display_equations": 17
 }

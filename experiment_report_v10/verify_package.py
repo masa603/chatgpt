@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 import re
 import statistics
+from xml.etree import ElementTree as ET
+from zipfile import ZipFile
 
 HERE=Path(__file__).resolve().parent
 
@@ -104,6 +106,29 @@ def verify(refresh=False):
         assert memory['sketch_flash_bytes']==flash and memory['static_global_ram_bytes']==ram
         assert memory['remaining_ram_after_static_bytes']==32768-ram
     report=(HERE/'report.md').read_text()
+    equations=json.loads((HERE/'equations.json').read_text())
+    ids=re.findall(r'^::: \{#(eq:[\w-]+) \.numbered-equation\}',report,re.M)
+    assert equations['count']==len(ids)==17 and len(set(ids))==17
+    assert len(re.findall(r'\$\$.*?\$\$',report,re.S))==17
+    tex=(HERE/'report.tex').read_text()
+    assert tex.count('\\begin{titlepage}')==1 and tex.count('\\begin{equation}')==17
+    for i,(name,entry) in enumerate(zip(ids,equations['equations']),1):
+        assert entry['number']==i and entry['id']==name and entry['text_reference_count']>0
+        assert '\\label{'+name+'}' in tex
+    for name in ['theory_network','theory_learning','theory_pruning_csr']:
+        for extension in ['.png','.pdf']:
+            assert (HERE/'figures'/(name+extension)).stat().st_size>1000
+    with ZipFile(HERE/'report.docx') as archive:
+        root=ET.fromstring(archive.read('word/document.xml'))
+    ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
+        'm':'http://schemas.openxmlformats.org/officeDocument/2006/math'}
+    word_numbers=[]
+    for table in root.findall('.//w:tbl',ns):
+        cells=table.findall('w:tr/w:tc',ns)
+        if len(cells)==3 and cells[1].find('.//m:oMath',ns) is not None:
+            value=''.join(cells[2].itertext()).strip()
+            if re.fullmatch(r'\(\d+\)',value):word_numbers.append(int(value[1:-1]))
+    assert word_numbers==list(range(1,18))
     for r in summary:
         expected='| '+r['H']+' | '+r['format']+' | '+' | '.join(mse_text(r[key]) for key in ['mean_mse','sample_stddev_mse','min_mse','max_mse'])+' | '+r['reads_with_mse_le300']+'/10 |'
         assert expected in report
@@ -179,6 +204,7 @@ def verify(refresh=False):
         'week6_report_requirements':'ALGORITHM_CODE_PLAN_CHANGE_REASONS_HAND_CALCULATIONS_QUANTITATIVE_DISCUSSION_FUTURE_WORK_LATEX_REFERENCES_PRESENT',
         'published_code_excerpts_match_frozen_firmware':True,'all4_manual_memory_breakdowns_match_numeric_array_sizes':True,
         'code_explanation_layout':'FUNCTION_ROLES_IN_BODY; TWO_LINE_BY_LINE_COMMENTED_FUNCTIONS_IN_APPENDIX; EXECUTABLE_TOKENS_MATCH_FROZEN_SOURCE',
+        'cover_and_theory_layout':'DEDICATED_COVER; THREE_EXPLANATORY_FIGURES; 17_NUMBERED_EQUATIONS_WITH_BODY_REFERENCES; EDITABLE_WORD_EQUATIONS',
         'lecture_slides_excluded_from_bibliography':True,
         'published_color_images':80,'color_PNG_PPM_copies_byte_identical_to_raw_records':True,
         'each_color_image_MSE_matches_corresponding_physical_read':True,
