@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+from decimal import Decimal, ROUND_DOWN
 import hashlib
 import json
 from pathlib import Path
@@ -19,6 +20,10 @@ def rows(path):
 
 
 def close(a,b,tolerance=1e-9):assert abs(float(a)-float(b))<tolerance,(a,b)
+
+
+def mse_text(value):
+    return format(Decimal(str(value)).quantize(Decimal('0.01'),rounding=ROUND_DOWN),'.2f')
 
 
 def verify(refresh=False):
@@ -100,7 +105,12 @@ def verify(refresh=False):
         assert memory['remaining_ram_after_static_bytes']==32768-ram
     report=(HERE/'report.md').read_text()
     for r in summary:
-        assert f"{float(r['mean_mse']):.2f}" in report and f"{float(r['sample_stddev_mse']):.2f}" in report
+        expected='| '+r['H']+' | '+r['format']+' | '+' | '.join(mse_text(r[key]) for key in ['mean_mse','sample_stddev_mse','min_mse','max_mse'])+' | '+r['reads_with_mse_le300']+'/10 |'
+        assert expected in report
+    for fmt in ['DENSE','CSR']:
+        for capture in range(1,11):
+            expected='| '+str(capture)+' | '+' | '.join(mse_text(next(r['mse_from_received_ppm'] for r in all_mse if int(r['capture_counter'])==capture and int(r['H'])==h and r['format']==fmt)) for h in [40,60,80,100])+' |'
+            assert expected in report
     for text in ['第2回','除外した回はない','精度維持','達成しなかった','独立','191,320','7,324']:assert text in report
     for r in single:assert f"{int(r['flash_used_bytes']):,}" in report
     for text in ['6,764','26,004','31.26%','7.94','表6']:assert text in report
@@ -125,10 +135,10 @@ def verify(refresh=False):
     assert (HERE/'explanation/guide.pdf').read_bytes().startswith(b'%PDF-') and '@@' not in guide
     assert len(re.findall(r'^# [1-8]．',guide,re.M))==8
     for r in summary:
-        assert f"{float(r['mean_mse']):.2f}" in guide
+        assert mse_text(r['mean_mse']) in guide
     for capture in [2,10]:
         r=next(r for r in all_mse if int(r['capture_counter'])==capture and r['H']=='60' and r['format']=='DENSE')
-        assert f"MSE {float(r['mse_from_received_ppm']):.2f}" in guide
+        assert f"MSE {mse_text(r['mse_from_received_ppm'])}" in guide
     start=implementation.index('    float value=m.b1[r];');end=implementation.index('\n  }',start)
     assert ' '.join(implementation[start:end].split()) in ' '.join(guide.split())
     for h in [40,60,80,100]:
@@ -164,6 +174,7 @@ def verify(refresh=False):
         'lecture_slides_excluded_from_bibliography':True,
         'published_color_images':80,'color_PNG_PPM_copies_byte_identical_to_raw_records':True,
         'each_color_image_MSE_matches_corresponding_physical_read':True,
+        'report_MSE_display':'TWO_DECIMAL_PLACES_TRUNCATE_THIRD_AND_LATER; ORIGINAL_CSVS_UNCHANGED',
         'personal_explanation_guide_matches_original_report_hash_and_all8_means':True,
         'explanation_code_excerpts_match_frozen_firmware':True,
         'report_values_match_actual_all10_aggregates':'PASS','source_snapshot_replay_test':'PASS in an isolated temporary copy; no original repository paths required.',

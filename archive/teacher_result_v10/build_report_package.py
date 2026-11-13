@@ -1,6 +1,7 @@
 """Package the actual ten physical reads, frozen code and a factual experiment report."""
 
 import csv
+from decimal import Decimal, ROUND_DOWN
 import hashlib
 import json
 import os
@@ -27,6 +28,11 @@ def load_csv(path):
 
 
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def mse_text(value,grouped=False):
+    value=Decimal(str(value)).quantize(Decimal('0.01'),rounding=ROUND_DOWN)
+    return format(value,',.2f' if grouped else '.2f')
 
 
 def copy_path(source,destination):
@@ -114,13 +120,13 @@ def build():
     figures(reads,device,single_memory)
     single_rows='\n'.join(f"| {r['H']} | {r['dense_flash_bytes']:,} | {r['csr_flash_bytes']:,} | {r['flash_saved_bytes']:,} | {r['flash_reduction_percent']:.2f}% | {r['dense_static_ram_bytes']:,} |" for r in single_memory['pairs'])
     memory_components=[]
-    summary_rows='\n'.join(f"| {r['H']} | {r['format']} | {float(r['mean_mse']):.2f} | {float(r['sample_stddev_mse']):.2f} | {float(r['min_mse']):.2f} | {float(r['max_mse']):.2f} | {r['reads_with_mse_le300']}/10 |" for r in stats)
+    summary_rows='\n'.join(f"| {r['H']} | {r['format']} | {mse_text(r['mean_mse'])} | {mse_text(r['sample_stddev_mse'])} | {mse_text(r['min_mse'])} | {mse_text(r['max_mse'])} | {r['reads_with_mse_le300']}/10 |" for r in stats)
     payload_rows=[]
     validation_rows=[]
     for r in device:
         s=json.loads((HERE/f"selection/h{r['H']}/summary.json").read_text());c=s['selected']
         payload_rows.append(f"| {r['H']} | {c['threshold']:.8f} | {c['nonzero']} | {c['sparsity_pct']:.2f}% | {r['dense_model_bytes']:,} | {r['csr_model_bytes']:,} | {r['model_payload_reduction_percent']:.2f}% |")
-        validation_rows.append(f"| {r['H']} | {s['dense_validation_mse']:.2f} | {c['validation_mse']:.2f} | {c['mse_increase_pct']:+.2f}% | {c['training9_mse']:.2f} |")
+        validation_rows.append(f"| {r['H']} | {mse_text(s['dense_validation_mse'])} | {mse_text(c['validation_mse'])} | {c['mse_increase_pct']:+.2f}% | {mse_text(c['training9_mse'])} |")
         h=r['H'];k=c['nonzero'];parts=[4*k,k,2*(2*h+6),4*(2*h+3)]
         assert sum(parts)==r['csr_model_bytes'] and 4*(h*h+8*h+3)==r['dense_model_bytes']
         memory_components.append('| '+str(h)+' | '+' | '.join(f'{n:,}' for n in parts+[sum(parts)])+' |')
@@ -137,10 +143,21 @@ def build():
         for token,value in snippets.items():section=section.replace('@@'+token+'@@',value)
         extra_sections[key]=section.strip()
     timing_rows='\n'.join(f"| {r['H']} | {r['dense_mean_us']:.3f} ± {r['dense_group_sample_stddev_us']:.4f} | {r['csr_mean_us']:.3f} ± {r['csr_group_sample_stddev_us']:.4f} | {-r['csr_time_change_percent']:.2f}% |" for r in device)
-    paired_rows='\n'.join(f"| {r['H']} | {float(r['mean_paired_difference']):.2f} | {float(r['sample_stddev_paired_difference']):.2f} | {float(r['relative_change_of_mean_mse_percent']):+.2f}% |" for r in paired)
+    paired_rows='\n'.join(f"| {r['H']} | {mse_text(r['mean_paired_difference'])} | {mse_text(r['sample_stddev_paired_difference'])} | {float(r['relative_change_of_mean_mse_percent']):+.2f}% |" for r in paired)
     def raw_table(fmt):
-        return '\n'.join('| '+str(i)+' | '+' | '.join(f"{float(next(r['mse_from_received_ppm'] for r in reads if int(r['capture_counter'])==i and int(r['H'])==h and r['format']==fmt)):.6f}" for h in [40,60,80,100])+' |' for i in range(1,11))
-    training_rows='\n'.join(f"| {r['hidden_size']} | {float(r['training_mse_rgb8']):.2f} | {float(r['training3x3_mse_rgb8']):.2f} |" for r in load_csv(HERE/'results.csv'))
+        return '\n'.join('| '+str(i)+' | '+' | '.join(mse_text(next(r['mse_from_received_ppm'] for r in reads if int(r['capture_counter'])==i and int(r['H'])==h and r['format']==fmt)) for h in [40,60,80,100])+' |' for i in range(1,11))
+    training_rows='\n'.join(f"| {r['hidden_size']} | {mse_text(r['training_mse_rgb8'])} | {mse_text(r['training3x3_mse_rgb8'])} |" for r in load_csv(HERE/'results.csv'))
+    h60=next(r for r in stats if r['H']=='60' and r['format']=='DENSE')
+    h60_pair=next(r for r in paired if r['H']=='60')
+    mse_substitutions={
+        'DENSE_MEAN_RANGE':mse_text(min(float(r['mean_mse']) for r in stats if r['format']=='DENSE'))+'〜'+mse_text(max(float(r['mean_mse']) for r in stats if r['format']=='DENSE')),
+        'CSR_MEAN_RANGE':mse_text(min(float(r['mean_mse']) for r in stats if r['format']=='CSR'))+'〜'+mse_text(max(float(r['mean_mse']) for r in stats if r['format']=='CSR')),
+        'H60_DENSE_MEAN':mse_text(h60['mean_mse']),
+        'H60_DENSE_MIN':mse_text(h60['min_mse']),
+        'H60_DENSE_MAX':mse_text(h60['max_mse'],grouped=True),
+        'H60_DENSE_SD':mse_text(h60['sample_stddev_mse']),
+        'H60_DIFFERENCE':mse_text(h60_pair['mean_paired_difference']),
+        'H60_DIFFERENCE_SD':mse_text(h60_pair['sample_stddev_paired_difference'])}
     plan=(ROOT/'experiment_plan.tex').read_text()
     student_id=re.search(r'\\newcommand\{\\StudentID\}\{([^}]+)\}',plan)[1]
     student_name=re.search(r'\\newcommand\{\\StudentName\}\{([^}]+)\}',plan)[1]
@@ -151,6 +168,7 @@ def build():
         'RAW_DENSE':raw_table('DENSE'),'RAW_CSR':raw_table('CSR'),'TRAINING':training_rows,'SINGLE_MEMORY':single_rows,
         'TIMER_SOURCE':snippets['TIMER_SOURCE'],**extra_sections}
     for key,value in substitutions.items():report=report.replace('@@'+key+'@@',value)
+    for key,value in mse_substitutions.items():report=report.replace('@@'+key+'@@',value)
     assert '@@' not in report
     (OUT/'report.md').write_text(report)
     header=r'''\usepackage{setspace}
@@ -201,8 +219,11 @@ def build():
         'single_model_memory_source':'User-pasted Arduino IDE usage summaries;IDE/core versions and build binaries not supplied.'}
     environment['report_requirements']='Week6 supplied PDF pages6-7; requirement mapping in requirements/coverage.md. Lecture slides excluded from bibliography by user request.'
     environment['editorial_update']='Removed glossary and repetitive tutorial explanations; retained experiment conditions, equations, code, results and required discussion; Japanese prose punctuation unified to fullwidth period and comma; measurements and frozen models unchanged.'
+    environment['caption_layout']='Centered figure/table captions with no sentence punctuation in PDF/LaTeX and DOCX.'
+    environment['report_MSE_display']='Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
+        '--lua-filter='+str(HERE/'caption_layout.lua'),
         '-V','mainfont=Noto Serif CJK JP','-V','sansfont=Noto Sans CJK JP','-V','monofont=Noto Sans Mono CJK JP',
         '-V','fontsize=10pt','-V','papersize=a4','-V','geometry:margin=22mm','--include-in-header=header.tex']
     word=['--reference-doc=word_reference.docx'] if (OUT/'word_reference.docx').exists() else []
@@ -218,6 +239,7 @@ def build():
 内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
+図表キャプションは中央揃え・句読点なしです．MSEとその標本SD・対応差は小数第2位まで表示し，第3位以降を切り捨てています．平均や増加率は切り捨て前の値から計算し，元CSVは保持しています．
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。

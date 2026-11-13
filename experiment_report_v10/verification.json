@@ -20,6 +20,7 @@
   "published_color_images": 80,
   "color_PNG_PPM_copies_byte_identical_to_raw_records": true,
   "each_color_image_MSE_matches_corresponding_physical_read": true,
+  "report_MSE_display": "TWO_DECIMAL_PLACES_TRUNCATE_THIRD_AND_LATER; ORIGINAL_CSVS_UNCHANGED",
   "personal_explanation_guide_matches_original_report_hash_and_all8_means": true,
   "explanation_code_excerpts_match_frozen_firmware": true,
   "report_values_match_actual_all10_aggregates": "PASS",

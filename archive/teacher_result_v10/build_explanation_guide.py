@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+from decimal import Decimal, ROUND_DOWN
 import hashlib
 import json
 import os
@@ -23,6 +24,10 @@ def read_rows(path):
 
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def mse_text(value):
+    return format(Decimal(str(value)).quantize(Decimal('0.01'), rounding=ROUND_DOWN), '.2f')
 
 
 def function(source, signature):
@@ -56,11 +61,11 @@ def build(package=PACKAGE):
     substitution = {
         'DENSE_CODE': dense, 'CSR_CODE': csr, 'TIMER_CODE': timer,
         'TAU60': f"{chosen['threshold']:.4f}",
-        'H60_MEAN': f"{means[60, 'DENSE']:.2f}", 'H60_MEAN_C': f"{means[60, 'CSR']:.2f}",
-        'H60_LAST': f"{metrics[10, 60, 'DENSE']:.2f}", 'H60_SECOND': f"{metrics[2, 60, 'DENSE']:.2f}",
+        'H60_MEAN': mse_text(means[60, 'DENSE']), 'H60_MEAN_C': mse_text(means[60, 'CSR']),
+        'H60_LAST': mse_text(metrics[10, 60, 'DENSE']), 'H60_SECOND': mse_text(metrics[2, 60, 'DENSE']),
         'H60_TIME_D': f"{float(device[60]['dense_mean_us']):.3f}",
         'H60_TIME_C': f"{float(device[60]['csr_mean_us']):.3f}",
-        'MEAN_TABLE': '\n'.join(f"| {h} | {means[h, 'DENSE']:.2f} | {means[h, 'CSR']:.2f} |" for h in (40,60,80,100)),
+        'MEAN_TABLE': '\n'.join(f"| {h} | {mse_text(means[h, 'DENSE'])} | {mse_text(means[h, 'CSR'])} |" for h in (40,60,80,100)),
         'FLASH_TABLE': '\n'.join(f"| {h} | {int(memory[h]['dense_flash_bytes']):,} | {int(memory[h]['csr_flash_bytes']):,} | {float(memory[h]['flash_reduction_percent']):.2f}% |" for h in (40,60,80,100)),
         'TIME_TABLE': '\n'.join(f"| {h} | {float(device[h]['dense_mean_us']):.3f} | {float(device[h]['csr_mean_us']):.3f} | {-float(device[h]['csr_time_change_percent']):.2f}% |" for h in (40,60,80,100))}
     body = (HERE / 'report_sections/explanation_guide.md').read_text()
@@ -68,7 +73,7 @@ def build(package=PACKAGE):
         body = body.replace('@@' + key + '@@', value)
     assert '@@' not in body
     for value in means.values():
-        assert f'{value:.2f}' in body
+        assert mse_text(value) in body
     assert dense in body and csr in body and timer in body
     output = package / 'explanation'; output.mkdir(exist_ok=True)
     (output / 'guide.md').write_text(body)
@@ -100,6 +105,7 @@ def build(package=PACKAGE):
     record = dict(created_date_japan='2026-11-13', role='PERSONAL_EXPLANATION_GUIDE; submission report remains report.pdf',
                   source_report_pdf_sha256=report_sha, source_mean_MSE_csv_sha256=sha(package / 'data/physical10_mse_summary.csv'),
                   all8_reported_mean_MSE_match_data=True, last_read_MSE_separate_from_ten_read_means=True,
+                  MSE_display='TWO_DECIMAL_PLACES_TRUNCATE_THIRD_AND_LATER',
                   Arduino_code_excerpts_match_frozen_source=True, dense_excerpt_indentation_normalized=True,
                   illustrative_CSR_matrix_not_measured_weights=True,
                   original_report_unchanged=True, new_measurement=False, retraining=False)
