@@ -169,27 +169,17 @@ MSE・標本SD・対応差は小数第2位まで表示し，第3位以降を切�
 
 PCで学習・閾値選択・枝刈り・CSR変換を行い，Dense重みとCSR配列を数値ヘッダへ出力した．Arduinoでは共通入力から両方式を計算した．重みの形式は両方式ともFP32とした．
 
-CSR変換では各層を行順に走査し，非ゼロ重みを `values`，列番号を `col` へ格納した．`row` は各行の開始位置と配列終端を示す．列番号は昇順とし，加算順序を元の行列にそろえた．実際の `teacher_compare_v10.ino` の関数を示す．
+CSR変換では各層を行順に走査し，非ゼロ重みを `values`，列番号を `col`，各行の開始位置と終端を `row` へ格納した．列番号は昇順とし，加算順序を元の行列にそろえた．
 
-\Needspace{13\baselineskip}
+`trained_models::predict()` はDenseの3層の推論を行う．`comparison_models::sparseLayer()` はCSR形式の1層を計算し，`comparison_models::predict()` は条件番号に応じてDenseまたは3層のCSR推論を呼び出す．隠れ層のみReLUを適用し，中間値を2本の作業配列へ保持する．
 
-```cpp
-void sparseLayer(const comparison_models::SparseLayer &layer,const float *input,float *output,bool relu) {
-  for(int r=0;r<layer.rows;r++) {
-    float value=layer.bias[r];
-    for(uint16_t k=layer.row[r];k<layer.row[r+1];k++) value+=layer.values[k]*input[layer.col[k]];
-    output[r]=(relu && value<0)?0:value;
-  }
-}
-```
-
-各行はバイアスから開始し，`row[r]` から `row[r+1]` の手前までの非ゼロ重みと，`col[k]` に対応する入力の積を加算する．隠れ層のみReLUを適用する．`comparison_models::predict()` は条件番号に応じてDenseまたは3層のCSR計算を呼び出す．中間値は2本の作業配列に保持する．
-
-新規読取では `normalizeInput()` で正規化・クリップし，`inferAll()` で全8条件を計算する．出力を整数RGBへ変換し，PPMとMSEを出力する．
+新規読取では `normalizeInput()` が黒白校正値による正規化とクリップを行い，`comparison_models::inferAll()` が同一入力から全8条件の出力を求める．`outputTo255()` は出力を0〜255の整数へ変換する．整数RGBをPPMとして保存し，正解画像とのMSEを算出する．
 
 `validIndices()` で行位置の単調性・終端・列範囲を，`selfCheckAll()` で固定入力に対する出力を検査した．CSR変換の正しさは枝刈り後のDense計算と照合し，精度への影響は枝刈り前のDenseとのMSE差で評価した．
 
 学習は `train.py`，候補比較は `select_compression.py`，追加条件による閾値固定は `finalize_compression.py`，ヘッダ出力は `build_program.py` を使用した．受領ログは `record_fresh_capture.py`，単独ビルド表示は `record_single_model_memory.py` で検算・集計した．
+
+CSR推論と計時の関数は，付録の「コメント付きコード」に行ごとの説明を付して掲載する．
 
 ## 閾値選択
 
@@ -214,22 +204,7 @@ RAW・黒白校正値・正規化入力・モデル識別値・閾値・PPMを�
 
 ## 速度と容量の測定
 
-`TEACHER_RESULT_COMPARE_V10` で保存済み実測9入力を巡回した．各モデル10回のウォームアップ後，100推論×5組を計時し，Dense先行とCSR先行を交互にした．`micros()` [4]の差を100で割り，1推論当たりの時間を求めた．
-
-\Needspace{16\baselineskip}
-
-```cpp
-uint32_t timeModel(int model,int group,double &checksum) {
-  float output[3];checksum=0;
-  uint32_t begin=static_cast<uint32_t>(micros());
-  for(int call=0;call<100;call++) {
-    int input=(group*100+call)%comparison_models::BENCHMARK_INPUT_COUNT;
-    comparison_models::predict(model,comparison_models::BENCHMARK_INPUTS[input],output);
-    checksum+=output[0]+output[1]+output[2];
-  }
-  return static_cast<uint32_t>(micros())-begin;
-}
-```
+`TEACHER_RESULT_COMPARE_V10` の `timeModel()` は，指定モデルの推論を保存済み実測9入力で100回行い，`micros()` [4]で経過時間を求める関数である．`comparison_models::predict()` で推論を呼び出し，出力の合計をチェックサムとして保持する．`runBenchmarks()` は各モデル10回のウォームアップ後に100推論×5組を計時し，Dense先行とCSR先行を交互にする．経過時間を100で割り，1推論当たりの時間を求めた．
 
 計時区間は推論・入力選択・チェックサム加算を含み，センサ読取・シリアル出力・MSE計算を除く．新規10回の読取時間や，推論関数単体の時間とは異なる．
 
@@ -409,7 +384,7 @@ Denseの平均MSEはH80で最小だったが，Hの増加に対して単調に�
 
 測定は手持ちの同一チャートを続けて10回読んだものであり，距離・角度・照度は定量統制していない．独立最終チャート，H50，各方式の搭載限界，最大スタック使用量は未測定である．学習損失，学習行を再入力したMSE，新規読取のMSEは分けて解釈する．
 
-## 今後の改善（Future work）
+## 今後の改善
 
 まず閾値を下げ，層別の閾値選択と，削除接続を0に固定した再学習を検討する．設定は検証データで選び，固定後に別の最終チャートでMSE300以下と増加5%以下を判定する．
 
@@ -485,3 +460,55 @@ H40・60・80・100の枝刈り＋CSRは，Denseに対しモデル配列容量�
 | 100 | 922.76 | 495.81 |
 
 使用コード・集計CSV・元ログと再計算手順は同梱READMEに，各ファイルのSHA256は `manifest.json` に示す．
+
+## コメント付きコード
+
+実際に使用した `teacher_compare_v10.ino` の関数に，行ごとの説明コメントを加えて示す．
+
+\Needspace{22\baselineskip}
+
+### CSR層の推論
+
+```cpp
+void sparseLayer( // CSR形式の1層を計算する関数
+  const comparison_models::SparseLayer &layer, // 層の重みと位置情報
+  const float *input, // 入力配列を受け取る
+  float *output, // 計算結果を書き込む配列
+  bool relu // ReLUを適用するかの指定
+) { // 関数の処理を開始する
+  for (int r = 0; r < layer.rows; r++) { // 出力先の各行を順に計算する
+    float value = layer.bias[r]; // その行のバイアスを合計の初期値にする
+    for (uint16_t k = layer.row[r]; // その行の非ゼロ重みの開始位置
+         k < layer.row[r+1]; // 次の行の開始位置の手前まで繰り返す
+         k++) // 次の保存位置へ進む
+      value += layer.values[k] * input[layer.col[k]]; // 重みと対応入力の積を加える
+    output[r] = (relu && value < 0) ? 0 : value; // 指定時は負の値を0にする
+  } // その行の計算を終える
+} // 関数を終える
+```
+
+\Needspace{27\baselineskip}
+
+### 推論時間の計測
+
+```cpp
+uint32_t timeModel( // 100推論の経過時間を返す関数
+  int model, // 計時するモデルの番号
+  int group, // 計時する組の番号
+  double &checksum // 出力の合計を呼出元へ返す参照
+) { // 関数の処理を開始する
+  float output[3]; // 推論結果のRGBを一時保存する
+  checksum = 0; // 出力の合計を初期化する
+  uint32_t begin = static_cast<uint32_t>(micros()); // 開始時刻を記録する
+  for (int call = 0; call < 100; call++) { // 100回の推論を繰り返す
+    int input = (group * 100 + call) // 組を通した呼出番号を求める
+      % comparison_models::BENCHMARK_INPUT_COUNT; // 9入力を巡回する番号にする
+    comparison_models::predict( // 指定モデルの推論を呼び出す
+      model, // モデル番号を渡す
+      comparison_models::BENCHMARK_INPUTS[input], // 選んだ保存入力を渡す
+      output); // 結果をoutputに受け取る
+    checksum += output[0] + output[1] + output[2]; // RGBの出力を合計へ加える
+  } // 100回の繰り返しを終える
+  return static_cast<uint32_t>(micros()) - begin; // 経過時間をµsで返す
+} // 関数を終える
+```

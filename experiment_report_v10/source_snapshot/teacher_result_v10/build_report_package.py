@@ -52,6 +52,10 @@ def cpp_function(source,signature):
     return source[start:end]
 
 
+def cpp_without_comments(source):
+    return re.sub(r'\s+','',re.sub(r'//[^\n]*','',source))
+
+
 def figures(reads,device,single_memory):
     folder=OUT/'figures';folder.mkdir(parents=True,exist_ok=True)
     plt.rcParams.update({'font.family':'Noto Sans CJK JP','font.size':13.5,'axes.spines.top':False,'axes.spines.right':False,'pdf.fonttype':42})
@@ -138,10 +142,15 @@ def build():
               'TIMER_SOURCE':cpp_function(implementation,'uint32_t timeModel('),
               'MEMORY_COMPONENT_ROWS':'\n'.join(memory_components)}
     extra_sections={}
-    for key,name in [('IMPLEMENTATION','implementation'),('PLAN_CHANGES','plan_changes'),('HAND_CALCULATION','hand_calculation'),('QUANTITATIVE','quantitative_discussion'),('FUTURE_WORK','future_work')]:
+    for key,name in [('IMPLEMENTATION','implementation'),('PLAN_CHANGES','plan_changes'),('HAND_CALCULATION','hand_calculation'),('QUANTITATIVE','quantitative_discussion'),('FUTURE_WORK','future_work'),('CODE_APPENDIX','code_appendix')]:
         section=(HERE/f'report_sections/{name}.md').read_text()
         for token,value in snippets.items():section=section.replace('@@'+token+'@@',value)
         extra_sections[key]=section.strip()
+    annotated=re.findall(r'```cpp\n(.*?)\n```',extra_sections['CODE_APPENDIX'],re.S)
+    assert len(annotated)==2
+    for code,key in zip(annotated,['CSR_LAYER_SOURCE','TIMER_SOURCE']):
+        assert cpp_without_comments(code)==cpp_without_comments(snippets[key])
+        assert all('//' in line for line in code.splitlines() if line.strip())
     timing_rows='\n'.join(f"| {r['H']} | {r['dense_mean_us']:.3f} ± {r['dense_group_sample_stddev_us']:.4f} | {r['csr_mean_us']:.3f} ± {r['csr_group_sample_stddev_us']:.4f} | {-r['csr_time_change_percent']:.2f}% |" for r in device)
     paired_rows='\n'.join(f"| {r['H']} | {mse_text(r['mean_paired_difference'])} | {mse_text(r['sample_stddev_paired_difference'])} | {float(r['relative_change_of_mean_mse_percent']):+.2f}% |" for r in paired)
     def raw_table(fmt):
@@ -183,6 +192,7 @@ def build():
 \renewcommand{\arraystretch}{1.15}
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\renewcommand{\CommentTok}[1]{\textcolor[rgb]{0.25,0.25,0.25}{#1}}
 '''
     (OUT/'header.tex').write_text(header)
     # Stable portable copies, while leaving original files untouched.
@@ -221,6 +231,7 @@ def build():
     environment['editorial_update']='Removed glossary and repetitive tutorial explanations; retained experiment conditions, equations, code, results and required discussion; Japanese prose punctuation unified to fullwidth period and comma; measurements and frozen models unchanged.'
     environment['caption_layout']='Centered figure/table captions with no sentence punctuation in PDF/LaTeX and DOCX.'
     environment['report_MSE_display']='Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation.'
+    environment['code_explanation_layout']='Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '--lua-filter='+str(HERE/'caption_layout.lua'),
@@ -241,6 +252,7 @@ def build():
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
 図表キャプションは中央揃え・句読点なしです．MSEとその標本SD・対応差は小数第2位まで表示し，第3位以降を切り捨てています．平均や増加率は切り捨て前の値から計算し，元CSVは保持しています．
+使用関数の役割は本文で説明し，行ごとの説明は付録のコメント付きコードにまとめています．7.5の見出しは「今後の改善」です．
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。

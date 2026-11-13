@@ -115,16 +115,23 @@ def verify(refresh=False):
     for r in single:assert f"{int(r['flash_used_bytes']):,}" in report
     for text in ['6,764','26,004','31.26%','7.94','表6']:assert text in report
     for heading in ['実装アルゴリズムとソースコード','計画から変更した実装とその理由','メモリ容量の手計算',
-                    'メモリ・速度・推論性能の定量的な対応','今後の改善（Future work）']:
+                    'メモリ・速度・推論性能の定量的な対応','今後の改善']:
         assert heading in report
+    body,appendix=report.split('# 付録',1)
+    assert 'Future work' not in report and '```cpp' not in body
+    annotated=re.findall(r'```cpp\n(.*?)\n```',appendix,re.S)
+    assert len(annotated)==2
+    def executable_text(code):
+        return re.sub(r'\s+','',re.sub(r'//[^\n]*','',code))
     implementation=(HERE/'code/teacher_compare_v10/teacher_compare_v10.ino').read_text()
-    for signature in ['void sparseLayer(','uint32_t timeModel(']:
+    for code,signature in zip(annotated,['void sparseLayer(','uint32_t timeModel(']):
         start=implementation.index(signature);brace=implementation.index('{',start);depth=1;end=brace+1
         while depth:
             if implementation[end]=='{':depth+=1
             elif implementation[end]=='}':depth-=1
             end+=1
-        assert implementation[start:end] in report
+        assert executable_text(implementation[start:end])==executable_text(code)
+        assert all('//' in line for line in code.splitlines() if line.strip())
         assert implementation[start:end] in (HERE/'explanation/guide.md').read_text()
     guide=(HERE/'explanation/guide.md').read_text()
     guide_record=json.loads((HERE/'explanation/verification.json').read_text())
@@ -171,6 +178,7 @@ def verify(refresh=False):
         'single_model_memory_stack_peak':'NOT_MEASURED',
         'week6_report_requirements':'ALGORITHM_CODE_PLAN_CHANGE_REASONS_HAND_CALCULATIONS_QUANTITATIVE_DISCUSSION_FUTURE_WORK_LATEX_REFERENCES_PRESENT',
         'published_code_excerpts_match_frozen_firmware':True,'all4_manual_memory_breakdowns_match_numeric_array_sizes':True,
+        'code_explanation_layout':'FUNCTION_ROLES_IN_BODY; TWO_LINE_BY_LINE_COMMENTED_FUNCTIONS_IN_APPENDIX; EXECUTABLE_TOKENS_MATCH_FROZEN_SOURCE',
         'lecture_slides_excluded_from_bibliography':True,
         'published_color_images':80,'color_PNG_PPM_copies_byte_identical_to_raw_records':True,
         'each_color_image_MSE_matches_corresponding_physical_read':True,

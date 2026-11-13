@@ -119,6 +119,7 @@
 \renewcommand{\arraystretch}{1.15}
 \usepackage{fvextra}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\renewcommand{\CommentTok}[1]{\textcolor[rgb]{0.25,0.25,0.25}{#1}}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -354,32 +355,18 @@ epoch追加学習した．seed42，Adam，cosine学習率0.0005→0.000005とし
 PCで学習・閾値選択・枝刈り・CSR変換を行い，Dense重みとCSR配列を数値ヘッダへ出力した．Arduinoでは共通入力から両方式を計算した．重みの形式は両方式ともFP32とした．
 
 CSR変換では各層を行順に走査し，非ゼロ重みを \texttt{values}，列番号を
-\texttt{col} へ格納した．\texttt{row}
-は各行の開始位置と配列終端を示す．列番号は昇順とし，加算順序を元の行列にそろえた．実際の
-\texttt{teacher\_compare\_v10.ino} の関数を示す．
+\texttt{col}，各行の開始位置と終端を \texttt{row}
+へ格納した．列番号は昇順とし，加算順序を元の行列にそろえた．
 
-\Needspace{13\baselineskip}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DataTypeTok{void}\NormalTok{ sparseLayer}\OperatorTok{(}\AttributeTok{const}\NormalTok{ comparison\_models}\OperatorTok{::}\NormalTok{SparseLayer }\OperatorTok{\&}\NormalTok{layer}\OperatorTok{,}\AttributeTok{const} \DataTypeTok{float} \OperatorTok{*}\NormalTok{input}\OperatorTok{,}\DataTypeTok{float} \OperatorTok{*}\NormalTok{output}\OperatorTok{,}\DataTypeTok{bool}\NormalTok{ relu}\OperatorTok{)} \OperatorTok{\{}
-  \ControlFlowTok{for}\OperatorTok{(}\DataTypeTok{int}\NormalTok{ r}\OperatorTok{=}\DecValTok{0}\OperatorTok{;}\NormalTok{r}\OperatorTok{\textless{}}\NormalTok{layer}\OperatorTok{.}\NormalTok{rows}\OperatorTok{;}\NormalTok{r}\OperatorTok{++)} \OperatorTok{\{}
-    \DataTypeTok{float}\NormalTok{ value}\OperatorTok{=}\NormalTok{layer}\OperatorTok{.}\NormalTok{bias}\OperatorTok{[}\NormalTok{r}\OperatorTok{];}
-    \ControlFlowTok{for}\OperatorTok{(}\DataTypeTok{uint16\_t}\NormalTok{ k}\OperatorTok{=}\NormalTok{layer}\OperatorTok{.}\NormalTok{row}\OperatorTok{[}\NormalTok{r}\OperatorTok{];}\NormalTok{k}\OperatorTok{\textless{}}\NormalTok{layer}\OperatorTok{.}\NormalTok{row}\OperatorTok{[}\NormalTok{r}\OperatorTok{+}\DecValTok{1}\OperatorTok{];}\NormalTok{k}\OperatorTok{++)}\NormalTok{ value}\OperatorTok{+=}\NormalTok{layer}\OperatorTok{.}\NormalTok{values}\OperatorTok{[}\NormalTok{k}\OperatorTok{]*}\NormalTok{input}\OperatorTok{[}\NormalTok{layer}\OperatorTok{.}\NormalTok{col}\OperatorTok{[}\NormalTok{k}\OperatorTok{]];}
-\NormalTok{    output}\OperatorTok{[}\NormalTok{r}\OperatorTok{]=(}\NormalTok{relu }\OperatorTok{\&\&}\NormalTok{ value}\OperatorTok{\textless{}}\DecValTok{0}\OperatorTok{)?}\DecValTok{0}\OperatorTok{:}\NormalTok{value}\OperatorTok{;}
-  \OperatorTok{\}}
-\OperatorTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-各行はバイアスから開始し，\texttt{row{[}r{]}} から \texttt{row{[}r+1{]}}
-の手前までの非ゼロ重みと，\texttt{col{[}k{]}}
-に対応する入力の積を加算する．隠れ層のみReLUを適用する．\texttt{comparison\_models::predict()}
-は条件番号に応じてDenseまたは3層のCSR計算を呼び出す．中間値は2本の作業配列に保持する．
+\texttt{trained\_models::predict()}
+はDenseの3層の推論を行う．\texttt{comparison\_models::sparseLayer()}
+はCSR形式の1層を計算し，\texttt{comparison\_models::predict()}
+は条件番号に応じてDenseまたは3層のCSR推論を呼び出す．隠れ層のみReLUを適用し，中間値を2本の作業配列へ保持する．
 
 新規読取では \texttt{normalizeInput()}
-で正規化・クリップし，\texttt{inferAll()}
-で全8条件を計算する．出力を整数RGBへ変換し，PPMとMSEを出力する．
+が黒白校正値による正規化とクリップを行い，\texttt{comparison\_models::inferAll()}
+が同一入力から全8条件の出力を求める．\texttt{outputTo255()}
+は出力を0〜255の整数へ変換する．整数RGBをPPMとして保存し，正解画像とのMSEを算出する．
 
 \texttt{validIndices()}
 で行位置の単調性・終端・列範囲を，\texttt{selfCheckAll()}
@@ -391,6 +378,8 @@ CSR変換では各層を行順に走査し，非ゼロ重みを \texttt{values}�
 \texttt{build\_program.py} を使用した．受領ログは
 \texttt{record\_fresh\_capture.py}，単独ビルド表示は
 \texttt{record\_single\_model\_memory.py} で検算・集計した．
+
+CSR推論と計時の関数は，付録の「コメント付きコード」に行ごとの説明を付して掲載する．
 
 \subsection{閾値選択}\label{ux95beux5024ux9078ux629e}
 
@@ -423,26 +412,11 @@ RAW・黒白校正値・正規化入力・モデル識別値・閾値・PPMを�
 
 \subsection{速度と容量の測定}\label{ux901fux5ea6ux3068ux5bb9ux91cfux306eux6e2cux5b9a}
 
-\texttt{TEACHER\_RESULT\_COMPARE\_V10}
-で保存済み実測9入力を巡回した．各モデル10回のウォームアップ後，100推論×5組を計時し，Dense先行とCSR先行を交互にした．\texttt{micros()}
-{[}4{]}の差を100で割り，1推論当たりの時間を求めた．
-
-\Needspace{16\baselineskip}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DataTypeTok{uint32\_t}\NormalTok{ timeModel}\OperatorTok{(}\DataTypeTok{int}\NormalTok{ model}\OperatorTok{,}\DataTypeTok{int}\NormalTok{ group}\OperatorTok{,}\DataTypeTok{double} \OperatorTok{\&}\NormalTok{checksum}\OperatorTok{)} \OperatorTok{\{}
-  \DataTypeTok{float}\NormalTok{ output}\OperatorTok{[}\DecValTok{3}\OperatorTok{];}\NormalTok{checksum}\OperatorTok{=}\DecValTok{0}\OperatorTok{;}
-  \DataTypeTok{uint32\_t}\NormalTok{ begin}\OperatorTok{=}\KeywordTok{static\_cast}\OperatorTok{\textless{}}\DataTypeTok{uint32\_t}\OperatorTok{\textgreater{}(}\NormalTok{micros}\OperatorTok{());}
-  \ControlFlowTok{for}\OperatorTok{(}\DataTypeTok{int}\NormalTok{ call}\OperatorTok{=}\DecValTok{0}\OperatorTok{;}\NormalTok{call}\OperatorTok{\textless{}}\DecValTok{100}\OperatorTok{;}\NormalTok{call}\OperatorTok{++)} \OperatorTok{\{}
-    \DataTypeTok{int}\NormalTok{ input}\OperatorTok{=(}\NormalTok{group}\OperatorTok{*}\DecValTok{100}\OperatorTok{+}\NormalTok{call}\OperatorTok{)\%}\NormalTok{comparison\_models}\OperatorTok{::}\NormalTok{BENCHMARK\_INPUT\_COUNT}\OperatorTok{;}
-\NormalTok{    comparison\_models}\OperatorTok{::}\NormalTok{predict}\OperatorTok{(}\NormalTok{model}\OperatorTok{,}\NormalTok{comparison\_models}\OperatorTok{::}\NormalTok{BENCHMARK\_INPUTS}\OperatorTok{[}\NormalTok{input}\OperatorTok{],}\NormalTok{output}\OperatorTok{);}
-\NormalTok{    checksum}\OperatorTok{+=}\NormalTok{output}\OperatorTok{[}\DecValTok{0}\OperatorTok{]+}\NormalTok{output}\OperatorTok{[}\DecValTok{1}\OperatorTok{]+}\NormalTok{output}\OperatorTok{[}\DecValTok{2}\OperatorTok{];}
-  \OperatorTok{\}}
-  \ControlFlowTok{return} \KeywordTok{static\_cast}\OperatorTok{\textless{}}\DataTypeTok{uint32\_t}\OperatorTok{\textgreater{}(}\NormalTok{micros}\OperatorTok{()){-}}\NormalTok{begin}\OperatorTok{;}
-\OperatorTok{\}}
-\end{Highlighting}
-\end{Shaded}
+\texttt{TEACHER\_RESULT\_COMPARE\_V10} の \texttt{timeModel()}
+は，指定モデルの推論を保存済み実測9入力で100回行い，\texttt{micros()}
+{[}4{]}で経過時間を求める関数である．\texttt{comparison\_models::predict()}
+で推論を呼び出し，出力の合計をチェックサムとして保持する．\texttt{runBenchmarks()}
+は各モデル10回のウォームアップ後に100推論×5組を計時し，Dense先行とCSR先行を交互にする．経過時間を100で割り，1推論当たりの時間を求めた．
 
 計時区間は推論・入力選択・チェックサム加算を含み，センサ読取・シリアル出力・MSE計算を除く．新規10回の読取時間や，推論関数単体の時間とは異なる．
 
@@ -500,7 +474,7 @@ H & 方式 & 平均MSE & 標本SD & 最小 & 最大 & 300以下の回数 \\
 
 \section{本稿で省略した内容}\label{ux672cux7a3fux3067ux7701ux7565ux3057ux305fux5185ux5bb9}
 
-対応差，モデル配列容量，推論時間，Flash・RAMの結果，考察，結論および各回の実測値は，完成版に掲載している．本稿はその一部を確認するための抜粋である．
+対応差，モデル配列容量，推論時間，Flash・RAMの結果，考察，結論および各回の実測値は，完成版に掲載している．本稿はその一部を確認するための抜粋である．使用関数の役割を本文で説明し，コメント付きコードを付録に掲載する．
 
 \section{参考文献}\label{ux53c2ux8003ux6587ux732e}
 
@@ -522,5 +496,63 @@ Multiplication on Throughput-Oriented Processors，'' Proceedings of SC
 {[}5{]} PyTorch Contributors， ``SmoothL1Loss，'' PyTorch
 Documentation，
 \url{https://docs.pytorch.org/docs/stable/generated/torch.nn.SmoothL1Loss.html}．
+
+\section{付録：コメント付きコード}\label{ux4ed8ux9332ux30b3ux30e1ux30f3ux30c8ux4ed8ux304dux30b3ux30fcux30c9}
+
+実際に使用した \texttt{teacher\_compare\_v10.ino}
+の関数に，行ごとの説明コメントを加えて示す．
+
+\Needspace{22\baselineskip}
+
+\subsection{CSR層の推論}\label{csrux5c64ux306eux63a8ux8ad6}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ sparseLayer}\OperatorTok{(} \CommentTok{// CSR形式の1層を計算する関数}
+  \AttributeTok{const}\NormalTok{ comparison\_models}\OperatorTok{::}\NormalTok{SparseLayer }\OperatorTok{\&}\NormalTok{layer}\OperatorTok{,} \CommentTok{// 層の重みと位置情報}
+  \AttributeTok{const} \DataTypeTok{float} \OperatorTok{*}\NormalTok{input}\OperatorTok{,} \CommentTok{// 入力配列を受け取る}
+  \DataTypeTok{float} \OperatorTok{*}\NormalTok{output}\OperatorTok{,} \CommentTok{// 計算結果を書き込む配列}
+  \DataTypeTok{bool}\NormalTok{ relu }\CommentTok{// ReLUを適用するかの指定}
+\OperatorTok{)} \OperatorTok{\{} \CommentTok{// 関数の処理を開始する}
+  \ControlFlowTok{for} \OperatorTok{(}\DataTypeTok{int}\NormalTok{ r }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}\NormalTok{ r }\OperatorTok{\textless{}}\NormalTok{ layer}\OperatorTok{.}\NormalTok{rows}\OperatorTok{;}\NormalTok{ r}\OperatorTok{++)} \OperatorTok{\{} \CommentTok{// 出力先の各行を順に計算する}
+    \DataTypeTok{float}\NormalTok{ value }\OperatorTok{=}\NormalTok{ layer}\OperatorTok{.}\NormalTok{bias}\OperatorTok{[}\NormalTok{r}\OperatorTok{];} \CommentTok{// その行のバイアスを合計の初期値にする}
+    \ControlFlowTok{for} \OperatorTok{(}\DataTypeTok{uint16\_t}\NormalTok{ k }\OperatorTok{=}\NormalTok{ layer}\OperatorTok{.}\NormalTok{row}\OperatorTok{[}\NormalTok{r}\OperatorTok{];} \CommentTok{// その行の非ゼロ重みの開始位置}
+\NormalTok{         k }\OperatorTok{\textless{}}\NormalTok{ layer}\OperatorTok{.}\NormalTok{row}\OperatorTok{[}\NormalTok{r}\OperatorTok{+}\DecValTok{1}\OperatorTok{];} \CommentTok{// 次の行の開始位置の手前まで繰り返す}
+\NormalTok{         k}\OperatorTok{++)} \CommentTok{// 次の保存位置へ進む}
+\NormalTok{      value }\OperatorTok{+=}\NormalTok{ layer}\OperatorTok{.}\NormalTok{values}\OperatorTok{[}\NormalTok{k}\OperatorTok{]} \OperatorTok{*}\NormalTok{ input}\OperatorTok{[}\NormalTok{layer}\OperatorTok{.}\NormalTok{col}\OperatorTok{[}\NormalTok{k}\OperatorTok{]];} \CommentTok{// 重みと対応入力の積を加える}
+\NormalTok{    output}\OperatorTok{[}\NormalTok{r}\OperatorTok{]} \OperatorTok{=} \OperatorTok{(}\NormalTok{relu }\OperatorTok{\&\&}\NormalTok{ value }\OperatorTok{\textless{}} \DecValTok{0}\OperatorTok{)} \OperatorTok{?} \DecValTok{0} \OperatorTok{:}\NormalTok{ value}\OperatorTok{;} \CommentTok{// 指定時は負の値を0にする}
+  \OperatorTok{\}} \CommentTok{// その行の計算を終える}
+\OperatorTok{\}} \CommentTok{// 関数を終える}
+\end{Highlighting}
+\end{Shaded}
+
+\Needspace{27\baselineskip}
+
+\subsection{推論時間の計測}\label{ux63a8ux8ad6ux6642ux9593ux306eux8a08ux6e2c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{uint32\_t}\NormalTok{ timeModel}\OperatorTok{(} \CommentTok{// 100推論の経過時間を返す関数}
+  \DataTypeTok{int}\NormalTok{ model}\OperatorTok{,} \CommentTok{// 計時するモデルの番号}
+  \DataTypeTok{int}\NormalTok{ group}\OperatorTok{,} \CommentTok{// 計時する組の番号}
+  \DataTypeTok{double} \OperatorTok{\&}\NormalTok{checksum }\CommentTok{// 出力の合計を呼出元へ返す参照}
+\OperatorTok{)} \OperatorTok{\{} \CommentTok{// 関数の処理を開始する}
+  \DataTypeTok{float}\NormalTok{ output}\OperatorTok{[}\DecValTok{3}\OperatorTok{];} \CommentTok{// 推論結果のRGBを一時保存する}
+\NormalTok{  checksum }\OperatorTok{=} \DecValTok{0}\OperatorTok{;} \CommentTok{// 出力の合計を初期化する}
+  \DataTypeTok{uint32\_t}\NormalTok{ begin }\OperatorTok{=} \KeywordTok{static\_cast}\OperatorTok{\textless{}}\DataTypeTok{uint32\_t}\OperatorTok{\textgreater{}(}\NormalTok{micros}\OperatorTok{());} \CommentTok{// 開始時刻を記録する}
+  \ControlFlowTok{for} \OperatorTok{(}\DataTypeTok{int}\NormalTok{ call }\OperatorTok{=} \DecValTok{0}\OperatorTok{;}\NormalTok{ call }\OperatorTok{\textless{}} \DecValTok{100}\OperatorTok{;}\NormalTok{ call}\OperatorTok{++)} \OperatorTok{\{} \CommentTok{// 100回の推論を繰り返す}
+    \DataTypeTok{int}\NormalTok{ input }\OperatorTok{=} \OperatorTok{(}\NormalTok{group }\OperatorTok{*} \DecValTok{100} \OperatorTok{+}\NormalTok{ call}\OperatorTok{)} \CommentTok{// 組を通した呼出番号を求める}
+      \OperatorTok{\%}\NormalTok{ comparison\_models}\OperatorTok{::}\NormalTok{BENCHMARK\_INPUT\_COUNT}\OperatorTok{;} \CommentTok{// 9入力を巡回する番号にする}
+\NormalTok{    comparison\_models}\OperatorTok{::}\NormalTok{predict}\OperatorTok{(} \CommentTok{// 指定モデルの推論を呼び出す}
+\NormalTok{      model}\OperatorTok{,} \CommentTok{// モデル番号を渡す}
+\NormalTok{      comparison\_models}\OperatorTok{::}\NormalTok{BENCHMARK\_INPUTS}\OperatorTok{[}\NormalTok{input}\OperatorTok{],} \CommentTok{// 選んだ保存入力を渡す}
+\NormalTok{      output}\OperatorTok{);} \CommentTok{// 結果をoutputに受け取る}
+\NormalTok{    checksum }\OperatorTok{+=}\NormalTok{ output}\OperatorTok{[}\DecValTok{0}\OperatorTok{]} \OperatorTok{+}\NormalTok{ output}\OperatorTok{[}\DecValTok{1}\OperatorTok{]} \OperatorTok{+}\NormalTok{ output}\OperatorTok{[}\DecValTok{2}\OperatorTok{];} \CommentTok{// RGBの出力を合計へ加える}
+  \OperatorTok{\}} \CommentTok{// 100回の繰り返しを終える}
+  \ControlFlowTok{return} \KeywordTok{static\_cast}\OperatorTok{\textless{}}\DataTypeTok{uint32\_t}\OperatorTok{\textgreater{}(}\NormalTok{micros}\OperatorTok{())} \OperatorTok{{-}}\NormalTok{ begin}\OperatorTok{;} \CommentTok{// 経過時間をµsで返す}
+\OperatorTok{\}} \CommentTok{// 関数を終える}
+\end{Highlighting}
+\end{Shaded}
+
 
 \end{document}

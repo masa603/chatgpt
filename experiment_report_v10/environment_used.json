@@ -6,7 +6,7 @@
   "numpy": "2.3.5",
   "matplotlib": "3.10.8",
   "training_torch_recorded": "2.8.0+cpu",
-  "source_base_commit": "bfbcf88aab7ad381aa7344cd4f557cf63066abf9",
+  "source_base_commit": "c27fb8cc7e975f88cfe6e32b7bec8771c1207d6b",
   "snapshot_scope": "Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.",
   "physical_captures": 10,
   "excluded_captures": 0,
@@ -18,5 +18,6 @@
   "report_requirements": "Week6 supplied PDF pages6-7; requirement mapping in requirements/coverage.md. Lecture slides excluded from bibliography by user request.",
   "editorial_update": "Removed glossary and repetitive tutorial explanations; retained experiment conditions, equations, code, results and required discussion; Japanese prose punctuation unified to fullwidth period and comma; measurements and frozen models unchanged.",
   "caption_layout": "Centered figure/table captions with no sentence punctuation in PDF/LaTeX and DOCX.",
-  "report_MSE_display": "Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation."
+  "report_MSE_display": "Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation.",
+  "code_explanation_layout": "Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace."
 }

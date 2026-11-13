@@ -1,6 +1,6 @@
 {
   "scope": "Factual package of10 actual user-reported physical reads; all80 model outputs and unmodified code/data.",
-  "file_count": 964,
+  "file_count": 965,
   "files": [
     {
       "path": ".gitattributes",
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6585,
-      "sha256": "3ebe7af2c73ca46247df55ea1f80d1a4b757a0bd712f9cb8572fc2f8536c79ab"
+      "bytes": 6763,
+      "sha256": "bec19dd2f5740b22278c58eafea7668a8ae40719aad220a1615f46b456aa13b4"
     },
     {
       "path": "build_docx.log",
@@ -984,8 +984,8 @@
     },
     {
       "path": "draft/README.md",
-      "bytes": 886,
-      "sha256": "e52dd630f0d0217a9b7676eefe478dc607ffabda6cb19bc2e65f1288abcb6241"
+      "bytes": 1010,
+      "sha256": "82c9220fcc1eda97dcbbcea9b5d090866d9fffe4c4f2fd938de3a7f5bf9519e1"
     },
     {
       "path": "draft/build_docx.log",
@@ -1004,33 +1004,33 @@
     },
     {
       "path": "draft/report_draft.docx",
-      "bytes": 115726,
-      "sha256": "6a7009d047c89b5223c957c5bf5a41a45cdb3ec200289a12e5f8a7bf19b499a9"
+      "bytes": 116507,
+      "sha256": "fc7a9f0ce70fb9f9b2d2b5f5cd49ce0a24f2d7234d261342f44002ee9ae2f63d"
     },
     {
       "path": "draft/report_draft.md",
-      "bytes": 16975,
-      "sha256": "62f3730fc1cbdd73d7521a4296d8ffb71a96d64e945cee84f00080b51b15e314"
+      "bytes": 19080,
+      "sha256": "0e6566ada804dc846a9b8b18588a35edf997dcfd0716cf022a1ef9f7902b1336"
     },
     {
       "path": "draft/report_draft.pdf",
-      "bytes": 262968,
-      "sha256": "d35ca5c82cd979db0686e59e0c750ede51b7ecc345fd50228ada9dc9ea7f6061"
+      "bytes": 288028,
+      "sha256": "497cd52b957467993d762c5e842ed3b357cc5854a2e0bc841dbb492ef41ec902"
     },
     {
       "path": "draft/report_draft.tex",
-      "bytes": 27989,
-      "sha256": "2232c04b6dd37d3b13328f70b893e2c4729f575943cc724cfb841a7ac934a4f6"
+      "bytes": 30929,
+      "sha256": "76014fd0cedebcea6e940d8c1ae426a0d1d7a4d67c039667f5015ce5450d4696"
     },
     {
       "path": "draft/verification.json",
-      "bytes": 733,
-      "sha256": "2256f6381b2041438b51711e84494feda4fcce1e0d53f1f637b83b5e6e7a3cac"
+      "bytes": 766,
+      "sha256": "c8c6332446bb72c75c8edb12bf415a1dc30bcbf128e72507a7b0fc31bd766a3c"
     },
     {
       "path": "environment_used.json",
-      "bytes": 1654,
-      "sha256": "d1a672f64a75e3d889ab5a2fd5d65fa5efb48bdcf051fabf7825e569c5efb04d"
+      "bytes": 1846,
+      "sha256": "ea3ec995219ffcda12318107b717c30b60e3a2f51960ab5506c01a9fa67b65bc"
     },
     {
       "path": "explanation/README.md",
@@ -1065,7 +1065,7 @@
     {
       "path": "explanation/verification.json",
       "bytes": 725,
-      "sha256": "054ece00b3e7ee38868bc76802c7587e413a9a5ebd08746db5d5031366da416a"
+      "sha256": "6838c9012faafa4083d117956d0e0c0c4f6d2aa9793ad93fb569831d742b3038"
     },
     {
       "path": "figures/capacity_and_time.pdf",
@@ -1109,8 +1109,8 @@
     },
     {
       "path": "header.tex",
-      "bytes": 435,
-      "sha256": "2a99ed019b0aa1031aff075bddcb27a29bab0de23dd3196eeac070ae1a396a18"
+      "bytes": 502,
+      "sha256": "99570ee383d43cb399dd24f8327bb803e258135c90e9604cd365fba8abf9c743"
     },
     {
       "path": "raw_logs/hardware/run_01/README.md",
@@ -2444,28 +2444,28 @@
     },
     {
       "path": "report.docx",
-      "bytes": 496082,
-      "sha256": "59b82fdd5db3787c6a24398c3d320273b4c5e04a67b5c03b109fcb01502b6f67"
+      "bytes": 496876,
+      "sha256": "6e0feda47d6035b5f5d6b1f36778dc6d549cf4884cfa25292d9e25f2096f3091"
     },
     {
       "path": "report.md",
-      "bytes": 27587,
-      "sha256": "157cffc2e0158e48312806566b684f2624225f27edbff51dd96d1244dad4a338"
+      "bytes": 29569,
+      "sha256": "b705614057260a96f7480188f604e8de8defa79869740733d02d71a5fe0414b3"
     },
     {
       "path": "report.pdf",
-      "bytes": 669691,
-      "sha256": "5b903fd203d3814f1eb9306059cfb1b309389939cce629ad5b13b8cd9fbb48b7"
+      "bytes": 691579,
+      "sha256": "6e615441087483c32800f72bb9b9738928331a5a1b8c999001c493f2e9593fd7"
     },
     {
       "path": "report.tex",
-      "bytes": 40578,
-      "sha256": "0e957fc15f3ff61f8c347847614ee5e82a73c266157d6d214e4c277f5d634cc4"
+      "bytes": 43379,
+      "sha256": "a71114a1b86af492b3c5e54ddf6d2d969623d28d98d77a9b55298eed41bab0fd"
     },
     {
       "path": "requirements/coverage.md",
-      "bytes": 4248,
-      "sha256": "37f6b112d767fcca93a7067416c0e287294487c8b44ae034b8ddda6396c4ac82"
+      "bytes": 4372,
+      "sha256": "0dc9731061e0d15f16fddf02260d78f995e10ef8e97760ca364e0ba96b5f21d9"
     },
     {
       "path": "requirements/source.json",
@@ -2894,8 +2894,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_draft_report.py",
-      "bytes": 5175,
-      "sha256": "5bc8f543d9c8538d1a363974cfba74dc433c3d01b5850524f9bd34d298cd5cbd"
+      "bytes": 5596,
+      "sha256": "f418a0738653b4fa725463956ba8989287ddb82b0f8e88d724d1395271df739d"
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_explanation_guide.py",
@@ -2919,8 +2919,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_report_package.py",
-      "bytes": 25588,
-      "sha256": "7c697faa9fc3e5ed4dc4941e246ffeac420e0f2b9b3b209c3eb6e8b47f719e6e"
+      "bytes": 26511,
+      "sha256": "af3856db4dbd6f43c3d0f61014ba9c92945e54789e33c8b2ad44e5b79df83d52"
     },
     {
       "path": "source_snapshot/teacher_result_v10/caption_layout.lua",
@@ -4524,8 +4524,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_requirements/coverage.md",
-      "bytes": 4248,
-      "sha256": "37f6b112d767fcca93a7067416c0e287294487c8b44ae034b8ddda6396c4ac82"
+      "bytes": 4372,
+      "sha256": "0dc9731061e0d15f16fddf02260d78f995e10ef8e97760ca364e0ba96b5f21d9"
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_requirements/source.json",
@@ -4538,14 +4538,19 @@
       "sha256": "c464f467443b4d4592fbd457d78b074c6692f570fccfb8f29e92bbd27d3a0af3"
     },
     {
+      "path": "source_snapshot/teacher_result_v10/report_sections/code_appendix.md",
+      "bytes": 2421,
+      "sha256": "b180b5cc9ec875b5876e843278eb2af3467df93f4029d4704c98dc62aee9c9f4"
+    },
+    {
       "path": "source_snapshot/teacher_result_v10/report_sections/explanation_guide.md",
       "bytes": 14588,
       "sha256": "2b5528c87597fb6bc3af167e2814fbe465b7a3b0da4fa264063c14cb1ddaf70e"
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_sections/future_work.md",
-      "bytes": 1089,
-      "sha256": "32577e36492866f4139b5d152ff0b4e8a5cd713a9cd63d81d85a59d188d4bcb8"
+      "bytes": 1072,
+      "sha256": "853c747598f541fc9b6430a7294d3742fd8f4a75e62a704b66ccc3fc38c53fb1"
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_sections/hand_calculation.md",
@@ -4554,8 +4559,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_sections/implementation.md",
-      "bytes": 1761,
-      "sha256": "dcd41d2f43c7708a41395afff3ea65e9f8c263e7c8732864dc74102922bf0900"
+      "bytes": 1873,
+      "sha256": "362083be54ebf3b92f5e4c766aa0a75a71a256c3f453a998841bd2c0742432bb"
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_sections/plan_changes.md",
@@ -4569,8 +4574,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_sections/report_body.md",
-      "bytes": 17463,
-      "sha256": "c10bf6f264f08acc97d043238fbb15051303832c23db946a29441a2af76bf3a3"
+      "bytes": 17662,
+      "sha256": "cd84696b62aa555293317bb142f963efe2cce46b532efe7134c46cecd7203543"
     },
     {
       "path": "source_snapshot/teacher_result_v10/results.csv",
@@ -4809,13 +4814,13 @@
     },
     {
       "path": "verification.json",
-      "bytes": 1723,
-      "sha256": "3c6590917ba45515b4efbc35881951f224f99cdb7c28e258d44ea0f141baccd4"
+      "bytes": 1867,
+      "sha256": "ffddc4df16939145b7fbf3012613095ab9ce46c509a4564d86cf756465885b9c"
     },
     {
       "path": "verify_package.py",
-      "bytes": 14164,
-      "sha256": "1b5c3b365646445747a16de9f51f70f97f4a3cff6771067425b518308affe008"
+      "bytes": 14717,
+      "sha256": "38276a9fbe7067315a76a7a9be68341107b265ad54ffadf33e1c7c403155e3d1"
     },
     {
       "path": "word_reference.docx",

@@ -28,6 +28,7 @@ def build(package=PACKAGE):
     methods = text.split('# 目的\n', 1)[1].split('\n# 結果\n', 1)[0]
     results = text.split('# 結果\n', 1)[1].split('\n\\Needspace{10\\baselineskip}', 1)[0]
     bibliography = text.split('# 参考文献\n', 1)[1].split('\n# 付録', 1)[0]
+    appendix_code = text.split('## コメント付きコード\n', 1)[1].replace('\n### ', '\n## ')
     draft = metadata + '''
 # 本稿の範囲
 
@@ -38,10 +39,10 @@ def build(package=PACKAGE):
 
 # 本稿で省略した内容
 
-対応差，モデル配列容量，推論時間，Flash・RAMの結果，考察，結論および各回の実測値は，完成版に掲載している．本稿はその一部を確認するための抜粋である．
+対応差，モデル配列容量，推論時間，Flash・RAMの結果，考察，結論および各回の実測値は，完成版に掲載している．本稿はその一部を確認するための抜粋である．使用関数の役割を本文で説明し，コメント付きコードを付録に掲載する．
 
 # 参考文献
-''' + bibliography
+''' + bibliography + '\n\n# 付録：コメント付きコード\n' + appendix_code
     assert '完成版から一部を省略した確認用草稿' in draft
     assert '表1　全10回のMSE集計' in draft and '表2　' not in draft
     assert '# 考察\n' not in draft and '# 結論\n' not in draft
@@ -65,8 +66,8 @@ def build(package=PACKAGE):
         (output / ('build_' + extension + '.log')).write_text(result.stderr)
     assert complete_hashes == {name: sha(package / name) for name in complete_hashes}
     record = dict(created_date_japan='2026-11-13', role='EXPLICIT_REVIEW_EXCERPT_FROM_COMPLETE_REPORT',
-                  included='PURPOSE_THEORY_METHODS_AND_ALL10_MSE_SUMMARY',
-                  omitted='PAIRED_DIFFERENCES_CAPACITY_TIMING_FLASH_RAM_DISCUSSION_CONCLUSION_APPENDIX',
+                  included='PURPOSE_THEORY_METHODS_ALL10_MSE_SUMMARY_AND_ANNOTATED_CODE_APPENDIX',
+                  omitted='PAIRED_DIFFERENCES_CAPACITY_TIMING_FLASH_RAM_DISCUSSION_CONCLUSION_RAW_DATA_APPENDIX',
                   complete_report_files_unchanged=complete_hashes, new_measurements=False,
                   retraining=False, source_measurements_unchanged=True)
     (output / 'verification.json').write_text(json.dumps(record, ensure_ascii=False, indent=2) + '\n')
@@ -75,6 +76,7 @@ def build(package=PACKAGE):
 [途中稿PDF](report_draft.pdf) ／ [Word](report_draft.docx) ／ [LaTeX](report_draft.tex)
 
 完成版から一部を省略した確認用草稿です．目的・理論・実験方法と，全10回のMSE集計までを掲載しています．
+関数の役割は本文で説明し，行ごとの説明は付録のコメント付きコードにまとめています．
 元の完成版は [report.pdf](../report.pdf) です．測定値や実施状況，作成日を変更した記録ではありません．
 元データは同じものを使用し，図表キャプションの中央揃え・句読点なし，MSEの小数第3位以降の切り捨ても引き継いでいます．
 
