@@ -4,10 +4,10 @@
   "included": "PURPOSE_THEORY_METHODS_ALL10_MSE_SUMMARY_AND_ANNOTATED_CODE_APPENDIX",
   "omitted": "PAIRED_DIFFERENCES_CAPACITY_TIMING_FLASH_RAM_DISCUSSION_CONCLUSION_RAW_DATA_APPENDIX",
   "complete_report_files_unchanged": {
-    "report.md": "b705614057260a96f7480188f604e8de8defa79869740733d02d71a5fe0414b3",
-    "report.pdf": "6e615441087483c32800f72bb9b9738928331a5a1b8c999001c493f2e9593fd7",
-    "report.tex": "a71114a1b86af492b3c5e54ddf6d2d969623d28d98d77a9b55298eed41bab0fd",
-    "report.docx": "6e0feda47d6035b5f5d6b1f36778dc6d549cf4884cfa25292d9e25f2096f3091"
+    "report.md": "f5d9a00a309ebbd210bdb8cb8cf147d0e9923571b9d81f528a4f19ee185a2372",
+    "report.pdf": "3cb2d35e2ac2b58c7a7c0497506567cf58cf83cc306e934c7cd4ae15d09b745c",
+    "report.tex": "64e02199a51a5e32ed6980b9c99e0fd5a491ec60aa324a0d659dbd92c14b9b7d",
+    "report.docx": "aa5e2349fe2393a86a97181a4953b6c4cb792bc3b01278edbbe4adfa85b3a586"
   },
   "new_measurements": false,
   "retraining": false,
