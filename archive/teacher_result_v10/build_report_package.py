@@ -191,7 +191,7 @@ def build():
         'learning_followup/goal_update.json','experiment_today/protocol_change.json','experiment_plan.tex']
     for source in sources:copy_path(ROOT/source,OUT/'source_snapshot'/source)
     (OUT/'requirements.txt').write_text('numpy==2.3.5\ntorch==2.8.0\nPillow==12.3.0\nmatplotlib==3.10.8\n')
-    environment={'report_created_date_japan':'2026-11-09','report_updated_date_japan':'2026-11-12','python':sys.version,'platform':platform.platform(),
+    environment={'report_created_date_japan':'2026-11-09','report_updated_date_japan':'2026-11-13','python':sys.version,'platform':platform.platform(),
         'numpy':np.__version__,'matplotlib':matplotlib.__version__,'training_torch_recorded':'2.8.0+cpu',
         'source_base_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         'snapshot_scope':'Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.',
@@ -200,7 +200,7 @@ def build():
         'actual_new_firmware_memory_received':fresh_memory is not None,'single_model_memory_builds_received':8,
         'single_model_memory_source':'User-pasted Arduino IDE usage summaries;IDE/core versions and build binaries not supplied.'}
     environment['report_requirements']='Week6 supplied PDF pages6-7; requirement mapping in requirements/coverage.md. Lecture slides excluded from bibliography by user request.'
-    environment['editorial_update']='Plain Japanese definitions, shared-input diagram, Japanese plot labels and explanations of formulas/code/tables; measurements and frozen models unchanged.'
+    environment['editorial_update']='Removed glossary and repetitive tutorial explanations; retained experiment conditions, equations, code, results and required discussion; Japanese prose punctuation unified to fullwidth period and comma; measurements and frozen models unchanged.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '-V','mainfont=Noto Serif CJK JP','-V','sansfont=Noto Sans CJK JP','-V','monofont=Noto Sans Mono CJK JP',
@@ -217,7 +217,7 @@ def build():
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
-用語の説明と比較の流れを先に置き、式・コード・表の読み方を本文で説明しています。測定値と結論は保持しています。
+用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
 
 実際の紙の測定10回を全て含めています。第2回は操作ミスに気づいていないとの回答を残し、削除していません。
