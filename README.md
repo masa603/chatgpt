@@ -7,6 +7,7 @@
 | やりたいこと | 開く場所 |
 | --- | --- |
 | 提出用の報告書を見る | [報告書PDF](experiment_report_v10/report.pdf) |
+| 目的・方法・MSE集計まで確認する | [途中稿PDF（完成版からの抜粋）](experiment_report_v10/draft/report_draft.pdf) |
 | レポートの内容を理解する | [本人用の解説PDF（8ページ）](experiment_report_v10/explanation/guide.pdf) |
 | LaTeXで編集する | [report.tex](experiment_report_v10/report.tex) |
 | Wordで編集する | [report.docx](experiment_report_v10/report.docx) |

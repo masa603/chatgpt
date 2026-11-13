@@ -237,6 +237,7 @@ def build():
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
+目的・方法・MSE集計までを確認する [途中稿PDF](draft/report_draft.pdf) も用意しています．完成版から一部を省略した抜粋稿です．
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
 図表キャプションは中央揃え・句読点なしです．MSEとその標本SD・対応差は小数第2位まで表示し，第3位以降を切り捨てています．平均や増加率は切り捨て前の値から計算し，元CSVは保持しています．
@@ -295,6 +296,7 @@ source_snapshot内のteacher_result_v10にprepare.py、train.py、data_weights.p
 記録済み結果の検算には再学習は不要です。
 ''')
     subprocess.run([sys.executable,str(HERE/'build_explanation_guide.py'),'--package',str(OUT)],check=True)
+    subprocess.run([sys.executable,str(HERE/'build_draft_report.py'),'--package',str(OUT)],check=True)
     for path in OUT.rglob('*'):
         if path.is_file():path.chmod(0o644)
     files=[p for p in sorted(OUT.rglob('*')) if p.is_file() and p.name!='manifest.json']
