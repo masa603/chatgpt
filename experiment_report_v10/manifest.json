@@ -1,6 +1,6 @@
 {
   "scope": "Factual package of10 actual user-reported physical reads; all80 model outputs and unmodified code/data.",
-  "file_count": 976,
+  "file_count": 984,
   "files": [
     {
       "path": ".gitattributes",
@@ -9,8 +9,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7035,
-      "sha256": "13f2d0ab794a2345886612becd5b34a96824c1d458307d2517f23b13e104626d"
+      "bytes": 7257,
+      "sha256": "24ca1dbf41296f334c1d114b1649d3e1f4e38f5f6fcdcd8e2813a6cc737ac860"
     },
     {
       "path": "build_docx.log",
@@ -1044,13 +1044,43 @@
     },
     {
       "path": "explanation/README.md",
-      "bytes": 858,
-      "sha256": "4569bb7132b262e28800f71c0ede9b643e6b226f1fc7731607bee23d693503fb"
+      "bytes": 1417,
+      "sha256": "33360f75198093390fd3d85f5ad68e7471d087e492a74c8238c493bc2c3d3640"
     },
     {
       "path": "explanation/build.log",
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "explanation/commute_build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "explanation/commute_guide.md",
+      "bytes": 18501,
+      "sha256": "6cb758426b4ec86ffc8f1f827d05e754482c98d1c577d2558c8b33669132b8c7"
+    },
+    {
+      "path": "explanation/commute_guide.pdf",
+      "bytes": 168712,
+      "sha256": "285544a3975edd1d57127ac9b588c8cb9743057525b0325c634472eb36e2714f"
+    },
+    {
+      "path": "explanation/commute_guide.tex",
+      "bytes": 32562,
+      "sha256": "20e78fe74aff77a821d62c6db85494b4d9c7cc89a5f30c15c3ba1311174b178b"
+    },
+    {
+      "path": "explanation/commute_header.tex",
+      "bytes": 706,
+      "sha256": "8800609e66ba83735b23752693ed279f0bf88e063f0640cef39260a88c52b49a"
+    },
+    {
+      "path": "explanation/commute_verification.json",
+      "bytes": 1795,
+      "sha256": "9e5c8bd4a15ec39df24d4149a027b09932d8f8e8f094a685b81256048a859fe2"
     },
     {
       "path": "explanation/guide.md",
@@ -2933,14 +2963,19 @@
       "sha256": "f51b5244efa1c91e38fde8affcd0e5ebb04087786daa600cac059f4fe746b324"
     },
     {
+      "path": "source_snapshot/teacher_result_v10/build_commute_guide.py",
+      "bytes": 8018,
+      "sha256": "18346a2a79480b26d3d142e040dd0388cc7cd754144d9731800217015bd92025"
+    },
+    {
       "path": "source_snapshot/teacher_result_v10/build_draft_report.py",
       "bytes": 5911,
       "sha256": "d4623f45c8220e2b8227b9918d47e01a7397b39c2c16d44c0d7641eee2a94d3b"
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_explanation_guide.py",
-      "bytes": 7232,
-      "sha256": "01dcdcf3069b35b2afecf58f6c93406ca03cdebaa560031221fcd1ee1b64eb9f"
+      "bytes": 7791,
+      "sha256": "0cb7c3fb3516cce5eab1be1409bf0219a71a578c95302adb8f13daabf56b4b29"
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_fresh.py",
@@ -2959,8 +2994,8 @@
     },
     {
       "path": "source_snapshot/teacher_result_v10/build_report_package.py",
-      "bytes": 27390,
-      "sha256": "97b5d45d65b4bbbf12c0bbc780b31252aa34bb5094c379cd8bfdc220c6c09181"
+      "bytes": 27716,
+      "sha256": "3447470a8379302f933d877a161268e36022db2bd23a4a9e4954004fa7773ffe"
     },
     {
       "path": "source_snapshot/teacher_result_v10/caption_layout.lua",
@@ -4591,6 +4626,11 @@
       "path": "source_snapshot/teacher_result_v10/report_sections/code_appendix.md",
       "bytes": 2421,
       "sha256": "b180b5cc9ec875b5876e843278eb2af3467df93f4029d4704c98dc62aee9c9f4"
+    },
+    {
+      "path": "source_snapshot/teacher_result_v10/report_sections/commute_guide.md",
+      "bytes": 17276,
+      "sha256": "236abac6bc193628ae0bcb915369dad266eadbcd3d38bdaf76840152d394b899"
     },
     {
       "path": "source_snapshot/teacher_result_v10/report_sections/explanation_guide.md",

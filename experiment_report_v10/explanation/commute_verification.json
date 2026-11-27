@@ -1,0 +1,29 @@
+{
+  "created_date_japan": "2026-11-27",
+  "role": "OFFLINE_A5_STUDY_GUIDE",
+  "format": "A5 portrait;14pt text;10pt code;21 topics",
+  "original_files_unchanged": {
+    "report.pdf": "11f4fb24557ba0b5fbeb4b84cb8695feace1efb4d26d6a86106c2d21ba658e3f",
+    "report.docx": "ae2c64e88b85efdd483b12fcbaade5f198ffa225f50c4c4bbcca3b68b342bbce",
+    "report.md": "1fff93fe517c2aa7442604d56089a16e4f59d5fd0af4fca8d136a6d2523f0754",
+    "report.tex": "193ba04b1d3c0b690a7fdfd88da36788c08d478505c46a5f5b5099fa91649d81",
+    "explanation/guide.pdf": "8ccc793c8e4d88c57346bd63203e217bc4f6bd1e66d14012809fa8afb8bbfa1c",
+    "data/training135.csv": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a"
+  },
+  "physical_capture_count": 10,
+  "MSE_records": 80,
+  "MSE_display": "TRUNCATE_THIRD_AND_LATER_DECIMALS",
+  "actual_code_excerpts_checked_ignoring_whitespace": true,
+  "illustrative_examples_labelled": true,
+  "new_measurement": false,
+  "retraining": false,
+  "sources": {
+    "data/physical10_mse_summary.csv": "5b4fe16acfe4e83a6b9a76a238ffe546d5964db462b8db8cd4cafb456d74c7ec",
+    "data/physical10_mse_all80.csv": "04545f78b59ea5ee89852d7ba71445f598de4e20c98b38dead8218914ee5b705",
+    "data/fixed_input_device_timing_capacity.csv": "cb5c84ac49449153251304acfcd61a5cc854b23a9074db0a6850bd094a63d514",
+    "data/single_model_memory_comparison.csv": "f7caf665b48d20fc4b2aaf0eccfc338d56783841849855bb86736badf0165805",
+    "code/teacher_compare_v10/teacher_compare_v10.ino": "33a4a70336a5e22fa2631ff0be976aa9178507cbd73a159f07ca80a81edb1cb4",
+    "code/teacher_fresh_v10/teacher_fresh_v10.ino": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
+    "source_snapshot/teacher_result_v10/train.py": "c7cd7bbe5be43083d3f412316577722766112467689a9cbe2049d961e08b069c"
+  }
+}
