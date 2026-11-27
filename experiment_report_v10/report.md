@@ -297,7 +297,7 @@ $$
 
 ![ボタン2個の回路](figures/circuit_two_buttons.png){width=100%}
 
-図5　使用した回路図
+図5　回路図
 
 ```{=latex}
 \end{minipage}

@@ -132,7 +132,7 @@ def verify(refresh=False):
     assert circuit['resistors_ohms']=={'R1':330,'R2':330,'R3':330,'R4':1000,'R5':10000,'R6':10000}
     assert circuit['button_mode']=='EXTERNAL_10K_PULLDOWN; BUTTON_TO_3V3; PRESSED_HIGH'
     assert re.findall(r'^図(\d+)　',report,re.M)==[str(i) for i in range(1,9)]
-    assert '図5　使用した回路図' in report
+    assert '図5　回路図' in report
     with ZipFile(HERE/'report.docx') as archive:
         root=ET.fromstring(archive.read('word/document.xml'))
     ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main',

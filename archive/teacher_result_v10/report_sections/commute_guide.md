@@ -471,7 +471,7 @@ CSRの10回平均MSE300以下と，Denseに対するMSE増加5%以下を満た�
 ![](../figures/circuit_two_buttons.pdf){width=100%}
 
 \begin{center}
-使用した回路図
+回路図
 \end{center}
 
 提示された参考回路を基に配置を変えて描いた．PDF内の図は拡大して読める．
