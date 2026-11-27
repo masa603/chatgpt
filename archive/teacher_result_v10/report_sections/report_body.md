@@ -4,7 +4,7 @@ subtitle: "アジャイルワーク2　実験報告書"
 author: "@@ID@@　@@NAME@@"
 student-id: "@@ID@@"
 student-name: "@@NAME@@"
-date: "記録整理日：2026年11月13日"
+date: "記録整理日：2026年11月27日"
 ---
 
 # はじめに
