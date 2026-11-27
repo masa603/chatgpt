@@ -721,18 +721,17 @@ CSRの10回平均MSE300以下と，Denseに対するMSE増加5\%以下を満た�
 \includegraphics[width=1\textwidth,height=\textheight]{../figures/circuit_two_buttons.pdf}
 
 \begin{center}
-ボタン2個の接続回路
+使用した回路図
 \end{center}
 
 提示された参考回路を基に配置を変えて描いた．PDF内の図は拡大して読める．
 
-\textbf{SW1：D2で黒白校正．SW2：D3で色読取．}
-両方ともGNDへつなぎ，\texttt{INPUT\_PULLUP}で押すとLOW，離すとHIGHになる．
+\textbf{SW1：D2で黒白校正．SW2：D3で色読取．} 各入力を10
+kΩでGNDへつなぎ，押すと3.3 Vへつながる．押すとHIGH，離すとLOWになる．
 
 LEDは赤D8・緑D6・青D7へ，各330 Ωを通して接続する．受光部は3.3
 VとA0，負荷1 kΩを使用する．GND記号はすべて共通である．
 
-実測10回はシリアル操作で行った．ボタンを使用するときは
-\texttt{USE\_PHYSICAL\_BUTTONS} を1にする．
+実測10回はシリアル操作で行い，外付けボタンは使用していない．
 
 \end{document}

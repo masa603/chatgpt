@@ -125,10 +125,14 @@ def verify(refresh=False):
         'SENSOR_PIN':'A0','LED_R_PIN':'8','LED_G_PIN':'6','LED_B_PIN':'7',
         'BUTTON_CALIB_PIN':'2','BUTTON_READ_PIN':'3','USE_PHYSICAL_BUTTONS':'0'}
     assert circuit['frozen_source_sha256']==sha(HERE/'code/teacher_fresh_v10/teacher_fresh_v10.ino')
-    assert circuit['netlist']['button_ground']==['SW1.2','SW2.2','GND']
-    assert circuit['button_mode']=='INPUT_PULLUP; pressed LOW'
+    assert circuit['netlist']['button_ground']==['R5.2','R6.2','GND']
+    assert circuit['netlist']['button_power']==['SW1.1','SW2.1','3V3']
+    assert circuit['netlist']['calibration']==['D2','SW1.2','R5.1']
+    assert circuit['netlist']['read']==['D3','SW2.2','R6.1']
+    assert circuit['resistors_ohms']=={'R1':330,'R2':330,'R3':330,'R4':1000,'R5':10000,'R6':10000}
+    assert circuit['button_mode']=='EXTERNAL_10K_PULLDOWN; BUTTON_TO_3V3; PRESSED_HIGH'
     assert re.findall(r'^図(\d+)　',report,re.M)==[str(i) for i in range(1,9)]
-    assert 'ボタン2個の接続回路' in report and '新規10回の測定ではシリアル操作を使用' in report
+    assert '図5　使用した回路図' in report and '新規10回の測定ではシリアル操作を使用' in report
     with ZipFile(HERE/'report.docx') as archive:
         root=ET.fromstring(archive.read('word/document.xml'))
     ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
@@ -216,7 +220,7 @@ def verify(refresh=False):
         'published_code_excerpts_match_frozen_firmware':True,'all4_manual_memory_breakdowns_match_numeric_array_sizes':True,
         'code_explanation_layout':'FUNCTION_ROLES_IN_BODY; TWO_LINE_BY_LINE_COMMENTED_FUNCTIONS_IN_APPENDIX; EXECUTABLE_TOKENS_MATCH_FROZEN_SOURCE',
         'cover_and_theory_layout':'DEDICATED_COVER; THREE_EXPLANATORY_FIGURES; 17_NUMBERED_EQUATIONS_WITH_BODY_REFERENCES; EDITABLE_WORD_EQUATIONS',
-        'two_button_circuit':'REDRAWN_FROM_ATTRIBUTED_USER_REFERENCE; USER_CONFIRMED_RESISTORS; PIN_MAP_CHECKED; D2/D3_GROUND_SWITCHES_AND_INPUT_PULLUP; FROZEN_SERIAL_CAPTURE_RECORDS_UNCHANGED',
+        'two_button_circuit':'USER_CONFIRMED_10K_PULLDOWN_EACH_TO_GND; BUTTONS_TO_3V3; PIN_MAP_CHECKED; MINIMAL_LABELS; CAPTION_USED_CIRCUIT; FROZEN_SERIAL_CAPTURE_RECORDS_UNCHANGED',
         'lecture_slides_excluded_from_bibliography':True,
         'published_color_images':80,'color_PNG_PPM_copies_byte_identical_to_raw_records':True,
         'each_color_image_MSE_matches_corresponding_physical_read':True,

@@ -240,7 +240,7 @@ def build():
     environment['code_explanation_layout']='Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.'
     environment['report_layout']='Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.'
     environment['numbered_display_equations']=equation_count
-    environment['circuit_figure']='Two-button reference circuit redrawn with attribution; D2/D3 INPUT_PULLUP; confirmed 330ohm LED resistors and1kohm sensor load; original physical10 serial control unchanged.'
+    environment['circuit_figure']='User-confirmed circuit: D2/D3 each with external10kohm pull-down toGND and button to3.3V; pressedHIGH; 330ohm LED resistors and1kohm sensor load; minimal component/pin/value labels; original physical10 serial control unchanged.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '--lua-filter='+str(HERE/'caption_layout.lua'),

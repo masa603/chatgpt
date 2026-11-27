@@ -1,7 +1,8 @@
 {
   "role": "REDRAWN_REFERENCE_CIRCUIT_WITH_TWO_MOMENTARY_BUTTONS",
   "reference": "User-supplied circuit image, rearranged with attribution",
-  "resistors_confirmed_by_user": "2026-11-27; LED:330 ohm each; sensor load:1 kiloohm",
+  "resistors_confirmed_by_user": "2026-11-27; LED:330 ohm each; sensor load:1 kiloohm; each button:10 kiloohm",
+  "button_wiring_confirmed_by_user": "2026-11-27; resistors to GND; buttons to3.3V",
   "sensor_type_symbol": "Phototransistor as in supplied reference; device model unconfirmed",
   "supply": "Sensor 3.3V as in supplied reference; common ground; USB board power",
   "pin_definitions_checked": {
@@ -13,7 +14,9 @@
     "BUTTON_READ_PIN": "3",
     "USE_PHYSICAL_BUTTONS": "0"
   },
-  "button_mode": "INPUT_PULLUP; pressed LOW",
+  "button_mode": "EXTERNAL_10K_PULLDOWN; BUTTON_TO_3V3; PRESSED_HIGH",
+  "frozen_firmware_button_mode": "INPUT_PULLUP; pressed LOW; disabled during actual10 captures",
+  "visible_labels": "BOARD_MODEL_COMPONENT_REFERENCES_RESISTOR_VALUES_PIN_NUMBERS_RGB_AND_POWER_NETS_ONLY",
   "physical10_capture_control": "SERIAL; PHYSICAL_BUTTONS_DISABLED_IN_FROZEN_FIRMWARE",
   "frozen_source_sha256": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
   "netlist": {
@@ -30,15 +33,22 @@
     ],
     "calibration": [
       "D2",
-      "SW1.1"
+      "SW1.2",
+      "R5.1"
     ],
     "read": [
       "D3",
-      "SW2.1"
+      "SW2.2",
+      "R6.1"
+    ],
+    "button_power": [
+      "SW1.1",
+      "SW2.1",
+      "3V3"
     ],
     "button_ground": [
-      "SW1.2",
-      "SW2.2",
+      "R5.2",
+      "R6.2",
       "GND"
     ],
     "red": [
@@ -62,5 +72,13 @@
       "LED_B.cathode",
       "GND"
     ]
+  },
+  "resistors_ohms": {
+    "R1": 330,
+    "R2": 330,
+    "R3": 330,
+    "R4": 1000,
+    "R5": 10000,
+    "R6": 10000
   }
 }
