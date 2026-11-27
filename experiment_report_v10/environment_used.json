@@ -6,7 +6,7 @@
   "numpy": "2.3.5",
   "matplotlib": "3.10.8",
   "training_torch_recorded": "2.8.0+cpu",
-  "source_base_commit": "779e679d637c95adeb7700898f38571be376697e",
+  "source_base_commit": "89c0f96635919728fed03343e278f44dac105939",
   "snapshot_scope": "Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.",
   "physical_captures": 10,
   "excluded_captures": 0,
@@ -22,5 +22,6 @@
   "code_explanation_layout": "Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.",
   "report_layout": "Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.",
   "numbered_display_equations": 17,
+  "report_section_structure": "Introduction: overview,purpose,comparison structure; ending: discussion,conclusion,future improvements; prose,measurements and equations preserved.",
   "circuit_figure": "User-confirmed circuit: D2/D3 each with external10kohm pull-down toGND and button to3.3V; pressedHIGH; 330ohm LED resistors and1kohm sensor load; minimal component/pin/value labels; original physical10 serial control unchanged."
 }

@@ -24,21 +24,24 @@ def build(package=PACKAGE):
     source = package / 'report.md'
     complete_hashes = {name: sha(package / name) for name in ['report.md', 'report.pdf', 'report.tex', 'report.docx']}
     text = source.read_text()
-    metadata = text[:text.index('\n# 概要')]
+    metadata = text[:text.index('\n# はじめに')]
     metadata = metadata.replace('アジャイルワーク2　実験報告書', 'アジャイルワーク2　実験報告書草稿（確認用抜粋）')
-    methods = text.split('# 目的\n', 1)[1].split('\n# 結果\n', 1)[0]
+    methods = text.split('# はじめに\n', 1)[1].split('\n# 結果\n', 1)[0]
     results = text.split('# 結果\n', 1)[1].split('\n\\Needspace{10\\baselineskip}', 1)[0]
     bibliography = text.split('# 参考文献\n', 1)[1].split('\n# 付録', 1)[0]
     appendix_code = text.split('## コメント付きコード\n', 1)[1].replace('\n### ', '\n## ')
     draft = metadata + '''
-# 本稿の範囲
+# はじめに
+
+## 本稿の範囲
 
 本稿は完成版から一部を省略した確認用草稿である．実施済みの実験に基づき，目的・理論・実験方法と，新規10回のMSE集計までを掲載する．
 
-# 目的
 ''' + methods + '\n\n# 結果\n' + results + '''
 
-# 本稿で省略した内容
+# 終わりに
+
+## 本稿で省略した内容
 
 対応差，モデル配列容量，推論時間，Flash・RAMの結果，考察，結論および各回の実測値は，完成版に掲載している．本稿はその一部を確認するための抜粋である．使用関数の役割を本文で説明し，コメント付きコードを付録に掲載する．
 

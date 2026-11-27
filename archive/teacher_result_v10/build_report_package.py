@@ -191,6 +191,7 @@ def build():
 \usepackage{needspace,etoolbox}
 \pretocmd{\section}{\Needspace{8\baselineskip}}{}{}
 \pretocmd{\subsection}{\Needspace{6\baselineskip}}{}{}
+\pretocmd{\subsubsection}{\Needspace{4\baselineskip}}{}{}
 \XeTeXlinebreaklocale "ja"
 \XeTeXlinebreakskip=0pt plus 1pt
 \setlength{\parindent}{1em}
@@ -240,6 +241,7 @@ def build():
     environment['code_explanation_layout']='Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.'
     environment['report_layout']='Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.'
     environment['numbered_display_equations']=equation_count
+    environment['report_section_structure']='Introduction: overview,purpose,comparison structure; ending: discussion,conclusion,future improvements; prose,measurements and equations preserved.'
     environment['circuit_figure']='User-confirmed circuit: D2/D3 each with external10kohm pull-down toGND and button to3.3V; pressedHIGH; 330ohm LED resistors and1kohm sensor load; minimal component/pin/value labels; original physical10 serial control unchanged.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
@@ -265,7 +267,8 @@ def build():
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
 図表キャプションは中央揃え・句読点なしです．MSEとその標本SD・対応差は小数第2位まで表示し，第3位以降を切り捨てています．平均や増加率は切り捨て前の値から計算し，元CSVは保持しています．
-使用関数の役割は本文で説明し，行ごとの説明は付録のコメント付きコードにまとめています．7.5の見出しは「今後の改善」です．
+使用関数の役割は本文で説明し，行ごとの説明は付録のコメント付きコードにまとめています．
+冒頭を「はじめに」（概要・目的・比較の構成），末尾を「終わりに」（考察・結論・今後の改善）へ整理しています．
 表紙を付け，理論にはネットワーク・学習・枝刈りとCSRの説明図を追加しました．独立した数式には番号を付け，本文から参照しています．式番号の一覧は [equations.json](equations.json) に保存しています．
 提出用PDFはLaTeX（XeLaTeX）から生成しています。[第6週資料と本文の対応](requirements/coverage.md) も別ファイルへ記録しました。講義資料は参考文献一覧へ入れていません。
 
