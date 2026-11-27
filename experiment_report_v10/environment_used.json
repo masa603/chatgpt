@@ -1,12 +1,12 @@
 {
   "report_created_date_japan": "2026-11-09",
-  "report_updated_date_japan": "2026-11-13",
+  "report_updated_date_japan": "2026-11-27",
   "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
   "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
   "numpy": "2.3.5",
   "matplotlib": "3.10.8",
   "training_torch_recorded": "2.8.0+cpu",
-  "source_base_commit": "b910af8a35f01860a81b06334708d03ce53c8d1c",
+  "source_base_commit": "5935b149a97a4abb5646b726fa50ad832881e295",
   "snapshot_scope": "Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.",
   "physical_captures": 10,
   "excluded_captures": 0,
@@ -21,5 +21,6 @@
   "report_MSE_display": "Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation.",
   "code_explanation_layout": "Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.",
   "report_layout": "Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.",
-  "numbered_display_equations": 17
+  "numbered_display_equations": 17,
+  "circuit_figure": "Two-button reference circuit redrawn with attribution; D2/D3 INPUT_PULLUP; confirmed 330ohm LED resistors and1kohm sensor load; original physical10 serial control unchanged."
 }

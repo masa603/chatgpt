@@ -91,7 +91,7 @@ mse[model]+=static_cast<double>(e)*e/27.0;'''
         'TRAIN_CODE':train,'CSR_BODY':csr,'MSE_CODE':mse_code,'TIMER_BODY':timer}
     body=(HERE/'report_sections/commute_guide.md').read_text()
     for key,value in substitutions.items():body=body.replace('@@'+key+'@@',value)
-    assert '@@' not in body and len(re.findall(r'^# \d+　',body,re.M))==21
+    assert '@@' not in body and len(re.findall(r'^# \d+　',body,re.M))==22
     assert '、' not in body and '。' not in body
     out=package/'explanation';out.mkdir(exist_ok=True)
     (out/'commute_guide.md').write_text(body)
@@ -124,13 +124,14 @@ mse[model]+=static_cast<double>(e)*e/27.0;'''
         if extra[-1].endswith('.pdf'):(out/'commute_build.log').write_text(result.stderr)
     assert unchanged=={name:sha(package/name) for name in unchanged}
     data_paths=[package/'data'/name for name in ['physical10_mse_summary.csv','physical10_mse_all80.csv','fixed_input_device_timing_capacity.csv','single_model_memory_comparison.csv']]
-    record={'created_date_japan':'2026-11-27','role':'OFFLINE_A5_STUDY_GUIDE','format':'A5 portrait;14pt text;10pt code;21 topics',
+    data_paths.extend([package/'figures/circuit_two_buttons.pdf', package/'figures/circuit_two_buttons.json'])
+    record={'created_date_japan':'2026-11-27','role':'OFFLINE_A5_STUDY_GUIDE','format':'A5 portrait;14pt text;10pt code;22 topics',
         'original_files_unchanged':unchanged,'physical_capture_count':10,'MSE_records':80,
         'MSE_display':'TRUNCATE_THIRD_AND_LATER_DECIMALS','actual_code_excerpts_checked_ignoring_whitespace':True,
         'illustrative_examples_labelled':True,'new_measurement':False,'retraining':False,
         'sources':{str(path.relative_to(package)):sha(path) for path in data_paths+source_paths}}
     (out/'commute_verification.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
-    print('Built offline A5 study guide;21 topics;8 means and real code excerpts checked;report/data unchanged.')
+    print('Built offline A5 study guide;22 topics;8 means, circuit and real code excerpts checked;report/data unchanged.')
 
 
 if __name__=='__main__':

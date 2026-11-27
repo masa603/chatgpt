@@ -20,6 +20,7 @@ from matplotlib.patches import FancyBboxPatch
 import numpy as np
 from report_layout import finish_docx, write_equation_record
 from theory_figures import build_theory_figures
+from circuit_figure import build_circuit_figure
 
 ROOT=Path(__file__).resolve().parents[1];HERE=Path(__file__).resolve().parent
 OUT=(ROOT.parent if (ROOT/'moved_paths.json').is_file() else ROOT)/'experiment_report_v10'
@@ -125,6 +126,7 @@ def build():
     OUT.mkdir(exist_ok=True)
     figures(reads,device,single_memory)
     build_theory_figures(OUT/'figures')
+    build_circuit_figure(OUT/'figures', HERE/'teacher_fresh_v10/teacher_fresh_v10.ino')
     single_rows='\n'.join(f"| {r['H']} | {r['dense_flash_bytes']:,} | {r['csr_flash_bytes']:,} | {r['flash_saved_bytes']:,} | {r['flash_reduction_percent']:.2f}% | {r['dense_static_ram_bytes']:,} |" for r in single_memory['pairs'])
     memory_components=[]
     summary_rows='\n'.join(f"| {r['H']} | {r['format']} | {mse_text(r['mean_mse'])} | {mse_text(r['sample_stddev_mse'])} | {mse_text(r['min_mse'])} | {mse_text(r['max_mse'])} | {r['reads_with_mse_le300']}/10 |" for r in stats)
@@ -223,7 +225,7 @@ def build():
         'learning_followup/goal_update.json','experiment_today/protocol_change.json','experiment_plan.tex']
     for source in sources:copy_path(ROOT/source,OUT/'source_snapshot'/source)
     (OUT/'requirements.txt').write_text('numpy==2.3.5\ntorch==2.8.0\nPillow==12.3.0\nmatplotlib==3.10.8\n')
-    environment={'report_created_date_japan':'2026-11-09','report_updated_date_japan':'2026-11-13','python':sys.version,'platform':platform.platform(),
+    environment={'report_created_date_japan':'2026-11-09','report_updated_date_japan':'2026-11-27','python':sys.version,'platform':platform.platform(),
         'numpy':np.__version__,'matplotlib':matplotlib.__version__,'training_torch_recorded':'2.8.0+cpu',
         'source_base_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         'snapshot_scope':'Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.',
@@ -238,6 +240,7 @@ def build():
     environment['code_explanation_layout']='Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.'
     environment['report_layout']='Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.'
     environment['numbered_display_equations']=equation_count
+    environment['circuit_figure']='Two-button reference circuit redrawn with attribution; D2/D3 INPUT_PULLUP; confirmed 330ohm LED resistors and1kohm sensor load; original physical10 serial control unchanged.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '--lua-filter='+str(HERE/'caption_layout.lua'),
@@ -256,7 +259,8 @@ def build():
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
-[電車で読むA5解説PDF（22ページ）](explanation/commute_guide.pdf) は，実験の回数・結果・式・使用コードを，具体例付きで説明します．保存すればオフラインで読めます．
+[電車で読むA5解説PDF（23ページ）](explanation/commute_guide.pdf) は，実験の回数・結果・式・使用コードと，ボタン2個の回路を具体例付きで説明します．保存すればオフラインで読めます．
+[回路図PDF](figures/circuit_two_buttons.pdf) ／ [PNG](figures/circuit_two_buttons.png) ／ [編集用SVG](figures/circuit_two_buttons.svg) も単独で開けます．
 目的・方法・MSE集計までを確認する [途中稿PDF](draft/report_draft.pdf) も用意しています．完成版から一部を省略した抜粋稿です．
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
@@ -326,7 +330,7 @@ source_snapshot内のteacher_result_v10にprepare.py、train.py、data_weights.p
     manifest={'scope':'Factual package of10 actual user-reported paper readings,all80 measured model outputs,real saved-input timing and original code/data.',
         'file_count':len(files),'files':[{'path':p.relative_to(OUT).as_posix(),'bytes':p.stat().st_size,'sha256':sha(p)} for p in files]}
     (OUT/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    print(f'Built report with cover,7 figures,{equation_count} numbered equations,actual10 logs and source snapshot: {len(files)} files.')
+    print(f'Built report with cover,8 figures,{equation_count} numbered equations,actual10 logs and source snapshot: {len(files)} files.')
 
 
 if __name__=='__main__':build()

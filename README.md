@@ -1,7 +1,7 @@
 # 色補正実験：最新版の案内
 
 **提出する報告書は [report.pdf](experiment_report_v10/report.pdf) です。**
-2026年11月13日更新．提出用レポートは用語表と重複説明を削り，句読点を「．」「，」に統一しました．内容を理解するための解説PDFも用意しています．
+2026年11月27日更新．提出用レポートは用語表と重複説明を削り，句読点を「．」「，」に統一しました．内容を理解するための解説PDFも用意しています．
 図表キャプションは中央揃え・句読点なしです．MSEは小数第2位まで表示し，第3位以降を切り捨てています．元の測定データは保持しています．
 使用関数の役割は本文で説明し，行ごとの説明は付録のコメント付きコードにまとめています．
 表紙と理論の説明図を追加し，数式には番号と本文からの参照を付けています．
@@ -11,7 +11,8 @@
 | 提出用の報告書を見る | [報告書PDF](experiment_report_v10/report.pdf) |
 | 目的・方法・MSE集計まで確認する | [途中稿PDF（完成版からの抜粋）](experiment_report_v10/draft/report_draft.pdf) |
 | レポートの内容を理解する | [本人用の解説PDF（8ページ）](experiment_report_v10/explanation/guide.pdf) |
-| 電車で実験・式・コードを読む | [A5解説PDF（22ページ）](experiment_report_v10/explanation/commute_guide.pdf) |
+| 電車で実験・式・コードを読む | [A5解説PDF（23ページ）](experiment_report_v10/explanation/commute_guide.pdf) |
+| ボタン2個の回路を見る | [回路図PDF](experiment_report_v10/figures/circuit_two_buttons.pdf) ／ [PNG](experiment_report_v10/figures/circuit_two_buttons.png) |
 | LaTeXで編集する | [report.tex](experiment_report_v10/report.tex) |
 | Wordで編集する | [report.docx](experiment_report_v10/report.docx) |
 | 各次元の色画像とMSEを見る | [色画像の一覧](experiment_report_v10/color_images/README.md) |

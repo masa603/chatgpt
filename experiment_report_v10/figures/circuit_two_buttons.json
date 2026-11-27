@@ -1,0 +1,66 @@
+{
+  "role": "REDRAWN_REFERENCE_CIRCUIT_WITH_TWO_MOMENTARY_BUTTONS",
+  "reference": "User-supplied circuit image, rearranged with attribution",
+  "resistors_confirmed_by_user": "2026-11-27; LED:330 ohm each; sensor load:1 kiloohm",
+  "sensor_type_symbol": "Phototransistor as in supplied reference; device model unconfirmed",
+  "supply": "Sensor 3.3V as in supplied reference; common ground; USB board power",
+  "pin_definitions_checked": {
+    "SENSOR_PIN": "A0",
+    "LED_R_PIN": "8",
+    "LED_G_PIN": "6",
+    "LED_B_PIN": "7",
+    "BUTTON_CALIB_PIN": "2",
+    "BUTTON_READ_PIN": "3",
+    "USE_PHYSICAL_BUTTONS": "0"
+  },
+  "button_mode": "INPUT_PULLUP; pressed LOW",
+  "physical10_capture_control": "SERIAL; PHYSICAL_BUTTONS_DISABLED_IN_FROZEN_FIRMWARE",
+  "frozen_source_sha256": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
+  "netlist": {
+    "sensor_collector": [
+      "3V3"
+    ],
+    "sensor_emitter": [
+      "A0",
+      "R4.1"
+    ],
+    "sensor_ground": [
+      "R4.2",
+      "GND"
+    ],
+    "calibration": [
+      "D2",
+      "SW1.1"
+    ],
+    "read": [
+      "D3",
+      "SW2.1"
+    ],
+    "button_ground": [
+      "SW1.2",
+      "SW2.2",
+      "GND"
+    ],
+    "red": [
+      "D8",
+      "R1",
+      "LED_R.anode"
+    ],
+    "green": [
+      "D6",
+      "R2",
+      "LED_G.anode"
+    ],
+    "blue": [
+      "D7",
+      "R3",
+      "LED_B.anode"
+    ],
+    "led_ground": [
+      "LED_R.cathode",
+      "LED_G.cathode",
+      "LED_B.cathode",
+      "GND"
+    ]
+  }
+}

@@ -166,6 +166,8 @@
   14〜17：CSRと保存容量
 \item
   18〜21：MSE・計時・説明の練習
+\item
+  22：回路図とボタンの配線
 \end{itemize}
 
 コードは使用済みソースの抜粋を中心に掲載した．説明用の数値・疑似コードはその旨を記した．画像と説明はPDFに入っているため，保存後はオフラインで読める．
@@ -711,5 +713,26 @@ MSE増加率は平均同士の比から求める．
 CSRの10回平均MSE300以下と，Denseに対するMSE増加5\%以下を満たさなかった．
 
 今回の範囲は学習チャートの新規読取での比較である．未知色の独立最終評価，H50，搭載限界と最大スタック使用量は未実施である．
+
+\newpage
+
+\section{22　ボタン2個の回路図}\label{ux30dcux30bfux30f32ux500bux306eux56deux8defux56f3}
+
+\includegraphics[width=1\textwidth,height=\textheight]{../figures/circuit_two_buttons.pdf}
+
+\begin{center}
+ボタン2個の接続回路
+\end{center}
+
+提示された参考回路を基に配置を変えて描いた．PDF内の図は拡大して読める．
+
+\textbf{SW1：D2で黒白校正．SW2：D3で色読取．}
+両方ともGNDへつなぎ，\texttt{INPUT\_PULLUP}で押すとLOW，離すとHIGHになる．
+
+LEDは赤D8・緑D6・青D7へ，各330 Ωを通して接続する．受光部は3.3
+VとA0，負荷1 kΩを使用する．GND記号はすべて共通である．
+
+実測10回はシリアル操作で行った．ボタンを使用するときは
+\texttt{USE\_PHYSICAL\_BUTTONS} を1にする．
 
 \end{document}

@@ -1,13 +1,13 @@
 {
   "created_date_japan": "2026-11-27",
   "role": "OFFLINE_A5_STUDY_GUIDE",
-  "format": "A5 portrait;14pt text;10pt code;21 topics",
+  "format": "A5 portrait;14pt text;10pt code;22 topics",
   "original_files_unchanged": {
-    "report.pdf": "11f4fb24557ba0b5fbeb4b84cb8695feace1efb4d26d6a86106c2d21ba658e3f",
-    "report.docx": "ae2c64e88b85efdd483b12fcbaade5f198ffa225f50c4c4bbcca3b68b342bbce",
-    "report.md": "1fff93fe517c2aa7442604d56089a16e4f59d5fd0af4fca8d136a6d2523f0754",
-    "report.tex": "193ba04b1d3c0b690a7fdfd88da36788c08d478505c46a5f5b5099fa91649d81",
-    "explanation/guide.pdf": "8ccc793c8e4d88c57346bd63203e217bc4f6bd1e66d14012809fa8afb8bbfa1c",
+    "report.pdf": "28900b5231ed5702e36f56fddf007935f04c630e751e6e508862cb703afe6ea0",
+    "report.docx": "4e074508288e1cc39736a70c46c3a600164a97a859416998ba35e9c79dc459af",
+    "report.md": "89917f4da6f480464064b0b6c319b1af00f005350e21a5e78c4236eb115f9f28",
+    "report.tex": "ff33264e051f235c4f8a27ed0913a85bf89e85fbe6f31090bddd4ecd55c77053",
+    "explanation/guide.pdf": "b01a8220cddba5e10a16802e429497951c055c683375f960a7545cd718e35e64",
     "data/training135.csv": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a"
   },
   "physical_capture_count": 10,
@@ -22,6 +22,8 @@
     "data/physical10_mse_all80.csv": "04545f78b59ea5ee89852d7ba71445f598de4e20c98b38dead8218914ee5b705",
     "data/fixed_input_device_timing_capacity.csv": "cb5c84ac49449153251304acfcd61a5cc854b23a9074db0a6850bd094a63d514",
     "data/single_model_memory_comparison.csv": "f7caf665b48d20fc4b2aaf0eccfc338d56783841849855bb86736badf0165805",
+    "figures/circuit_two_buttons.pdf": "dc6683fa88126c0bc111eec58e7078db80e1c0338abcb26eee6c41f651ddddf0",
+    "figures/circuit_two_buttons.json": "b6eab0758c6099533e3055dc3f2bb11fa655193c95a7d462b15c5f5a8fd04bb7",
     "code/teacher_compare_v10/teacher_compare_v10.ino": "33a4a70336a5e22fa2631ff0be976aa9178507cbd73a159f07ca80a81edb1cb4",
     "code/teacher_fresh_v10/teacher_fresh_v10.ino": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
     "source_snapshot/teacher_result_v10/train.py": "c7cd7bbe5be43083d3f412316577722766112467689a9cbe2049d961e08b069c"

@@ -235,6 +235,24 @@ $$
 
 紙は手で支え，照明を同じ状態に保つ手順で測定した．照度・距離・角度の定量記録はない．
 
+図5は提示された参考回路を基に，ボタンを2個として描き直した接続図である．受光素子は参考図に合わせてフォトトランジスタで表し，型番は未確認である．LEDの各330 Ωと受光部の1 kΩは実機の抵抗値として確認した．
+
+\Needspace{32\baselineskip}
+
+```{=latex}
+\noindent\begin{minipage}{\linewidth}
+```
+
+![ボタン2個の回路](figures/circuit_two_buttons.png){width=100%}
+
+図5　ボタン2個の接続回路
+
+```{=latex}
+\end{minipage}
+```
+
+SW1はD2の黒白校正，SW2はD3の色読取に対応する．両方ともGNDへ接続し，`INPUT_PULLUP`で押下時をLOWとして検出する．新規10回の測定ではシリアル操作を使用し，コードの `USE_PHYSICAL_BUTTONS` は0であった．ボタン操作を使用する場合は1に設定する．
+
 ## 学習データと正解画像
 
 学習データは実測135行（3×3分111行，6×4分24行）を使用した．3×3の教師値と評価には `result.ppm` を使用し，6×4分には配布Notebookの教師値を使用した．
@@ -305,7 +323,7 @@ RAW・黒白校正値・正規化入力・モデル識別値・閾値・PPMを�
 
 ![新規10回のMSE](figures/physical_mse10.png)
 
-図5　各回のMSE（縦軸は対数目盛　破線は目標300）
+図6　各回のMSE（縦軸は対数目盛　破線は目標300）
 
 ```{=latex}
 \end{minipage}
@@ -343,7 +361,7 @@ NNZは非ゼロ重み数，疎性は重みを0にした割合を示す．全Hで
 
 ![容量と実機推論時間](figures/capacity_and_time.png)
 
-図6　モデル配列容量と推論時間（誤差棒は5組の標本SD）
+図7　モデル配列容量と推論時間（誤差棒は5組の標本SD）
 
 ```{=latex}
 \end{minipage}
@@ -380,7 +398,7 @@ NNZは非ゼロ重み数，疎性は重みを0にした割合を示す．全Hで
 
 ![単独モデルのFlash](figures/single_model_flash.png)
 
-図7　単独モデルのFlash使用量
+図8　単独モデルのFlash使用量
 
 ```{=latex}
 \end{minipage}
