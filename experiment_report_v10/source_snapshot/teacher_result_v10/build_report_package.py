@@ -236,7 +236,7 @@ def build():
         'single_model_memory_source':'User-pasted Arduino IDE usage summaries;IDE/core versions and build binaries not supplied.'}
     environment['report_requirements']='Week6 supplied PDF pages6-7; requirement mapping in requirements/coverage.md. Lecture slides excluded from bibliography by user request.'
     environment['editorial_update']='Removed glossary and repetitive tutorial explanations; retained experiment conditions, equations, code, results and required discussion; Japanese prose punctuation unified to fullwidth period and comma; measurements and frozen models unchanged.'
-    environment['caption_layout']='Centered figure/table captions with no sentence punctuation in PDF/LaTeX and DOCX.'
+    environment['caption_layout']='Centered figure/table captions with no sentence punctuation;12pt space after figure captions in PDF/LaTeX and DOCX; table-caption spacing unchanged.'
     environment['report_MSE_display']='Two decimal places; third and later decimals truncated using Decimal ROUND_DOWN; source CSVs unchanged; summary statistics computed before truncation.'
     environment['code_explanation_layout']='Function roles described in body; line-by-line annotated CSR/timing code in appendix; executable tokens match frozen source after removing comments/whitespace.'
     environment['report_layout']='Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.'
