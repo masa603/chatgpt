@@ -10,6 +10,7 @@
 | やりたいこと | 開く場所 |
 | --- | --- |
 | 提出用の報告書を見る | [報告書PDF](experiment_report_v10/report.pdf) |
+| 完成版を口頭で説明する練習をする | [口頭説明用PDF](experiment_report_v10/explanation/oral_guide.pdf) |
 | 目的・方法・MSE集計まで確認する | [途中稿PDF（完成版からの抜粋）](experiment_report_v10/draft/report_draft.pdf) |
 | レポートの内容を理解する | [本人用の解説PDF（8ページ）](experiment_report_v10/explanation/guide.pdf) |
 | 電車で実験・式・コードを読む | [A5解説PDF（23ページ）](experiment_report_v10/explanation/commute_guide.pdf) |

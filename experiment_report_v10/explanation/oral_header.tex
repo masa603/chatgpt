@@ -1,0 +1,16 @@
+\usepackage{setspace,needspace,etoolbox}
+\setstretch{1.08}
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 1pt
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.22em}
+\setlength{\footskip}{18pt}
+\renewcommand{\arraystretch}{1.08}
+\pretocmd{\section}{\Needspace{5\baselineskip}}{}{}
+\usepackage{fvextra}
+\newcommand{\oralcodefont}{\fontsize{10}{12}\selectfont}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\oralcodefont,commandchars=\\\{\}}
+\renewcommand{\CommentTok}[1]{\textcolor[rgb]{0.25,0.25,0.25}{#1}}
+\makeatletter
+\renewcommand{\maketitle}{\begin{center}\vspace*{-4mm}{\LARGE\bfseries\@title\par}\vspace{3mm}{\normalsize\@date\par}\end{center}}
+\makeatother

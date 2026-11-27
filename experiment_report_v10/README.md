@@ -5,6 +5,7 @@
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
 [電車で読むA5解説PDF（23ページ）](explanation/commute_guide.pdf) は，実験の回数・結果・式・使用コードと，回路図を具体例付きで説明します．保存すればオフラインで読めます．
+[口頭説明用PDF](explanation/oral_guide.pdf) は，完成版の章立てに沿い，説明の原稿・式17個・コード・結果の読み方・想定質問を32項目でまとめています．
 [回路図PDF](figures/circuit.pdf) ／ [元画像PNG](figures/circuit.png) も単独で開けます．回路図は受領した画像を変更せずに使用しています．
 目的・方法・MSE集計までを確認する [途中稿PDF](draft/report_draft.pdf) も用意しています．完成版から一部を省略した抜粋稿です．
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
