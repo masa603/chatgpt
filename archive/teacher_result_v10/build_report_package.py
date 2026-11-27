@@ -242,6 +242,7 @@ def build():
     environment['report_layout']='Dedicated cover; three added theoretical figures with explicitly illustrative weights; sequentially numbered display equations with body references; native editable numbered Word equations.'
     environment['numbered_display_equations']=equation_count
     environment['report_section_structure']='Introduction: overview,purpose,comparison structure; ending: discussion,conclusion,future improvements; prose,measurements and equations preserved.'
+    environment['term_expansion_policy']='Formal names provided once at first narrative use for technical abbreviations; product names, titles, figure labels, code identifiers and bibliography titles retain their original spelling.'
     environment['circuit_figure']='User-confirmed circuit: D2/D3 each with external10kohm pull-down toGND and button to3.3V; pressedHIGH; 330ohm LED resistors and1kohm sensor load; minimal component/pin/value labels; original physical10 serial control unchanged.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',

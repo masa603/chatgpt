@@ -3,11 +3,11 @@
   "role": "OFFLINE_A5_STUDY_GUIDE",
   "format": "A5 portrait;14pt text;10pt code;22 topics",
   "original_files_unchanged": {
-    "report.pdf": "813c4b628ee0687dbe62ce5ad6776e667c2c140314a7811615a0e44bcc45a3ed",
-    "report.docx": "8499c31bfe820a01c932e144d6844073b4ffab7db7326a5443f8be23d08eb350",
-    "report.md": "b763d3ca908ca6233ab58a839ff3ebc4c2c4b361e3e221b73761271b1c1eb050",
-    "report.tex": "e522cdaf79227420c05595cd616b218563ea33cd309ad589e43437a468621c60",
-    "explanation/guide.pdf": "ca076373ca40370ccf339e69f01ee22ff7a4e25bda8ebe7437e9aa9c0a8f6e7d",
+    "report.pdf": "fb747f090589705fa7c75532b86bff5a17f742e74d36a52078d1b031459f98a7",
+    "report.docx": "756c8c55ec007b13a12e3cd0e2bdc6937153094665ee9421b5199dc5d490183c",
+    "report.md": "e0f4906a2713a0bf0689f8d600131ab00f29489cae72e76b4d5467fe99d5cd0e",
+    "report.tex": "65bf9462f38c91c14f449ff12db0ad501d7c98ef69d2afa82246247b3c6ac06e",
+    "explanation/guide.pdf": "e47981c6aa4dc590c93d95565452a53e84a1140a08cb72a50017539dc185d3ac",
     "data/training135.csv": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a"
   },
   "physical_capture_count": 10,

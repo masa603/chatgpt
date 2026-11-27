@@ -1,12 +1,12 @@
 ## メモリ容量の手計算
 
-図2の各接続に重みが1個ずつあるため，Denseの重み数は $N_w=3H+H^2+3H$ となる．各計算単位のバイアスは $N_b=2H+3$ 個である．FP32は1個4 byteなので，式[Dense容量](#eq:dense-bytes)で配列容量を求める．
+図2の各接続に重みが1個ずつあるため，Denseの重み数は $N_w=3H+H^2+3H$ となる．各計算単位のバイアスは $N_b=2H+3$ 個である．32ビット単精度浮動小数点形式（32-bit Floating Point：FP32）は1個4 byteなので，式[Dense容量](#eq:dense-bytes)で配列容量を求める．
 
 ::: {#eq:dense-bytes .numbered-equation}
 $$B_{\mathrm{Dense}}=4(N_w+N_b)=4(H^2+8H+3)\quad[\mathrm{byte}]$$
 :::
 
-CSRは非ゼロ重みK個をFP32，列番号をuint8，行開始位置をuint16で保存する．容量はそれぞれ4K，K，$2(2H+6)$ byteとなる．行位置の個数は各層の行数に終端を1個ずつ足した $(H+1)+(H+1)+(3+1)=2H+6$ 個である．バイアスを全て残すと，総容量は式[CSR容量](#eq:csr-bytes)となる．
+CSRは非ゼロ重みK個をFP32，列番号を符号なし8ビット整数（uint8），行開始位置を符号なし16ビット整数（uint16）で保存する．容量はそれぞれ4K，K，$2(2H+6)$ byteとなる．行位置の個数は各層の行数に終端を1個ずつ足した $(H+1)+(H+1)+(3+1)=2H+6$ 個である．バイアスを全て残すと，総容量は式[CSR容量](#eq:csr-bytes)となる．
 
 ::: {#eq:csr-bytes .numbered-equation}
 $$
@@ -43,4 +43,4 @@ CSRでは位置情報も保存するため，非ゼロ重みが多いと容量�
 $$5K<4H^2+20H-12$$
 :::
 
-この計算は数値配列のみを対象とし，構造体・アラインメント・Arduinoコア等を含むFlash全体はIDE表示で別に評価した．
+この計算は数値配列のみを対象とし，構造体・アラインメント・Arduinoコア等を含むFlash全体は，Arduinoの統合開発環境（Integrated Development Environment：IDE）の表示で別に評価した．
