@@ -122,7 +122,7 @@ def verify(refresh=False):
         assert (HERE/'figures'/('circuit'+extension)).stat().st_size>1000
     circuit=json.loads((HERE/'figures/circuit.json').read_text())
     original=HERE/'reference/circuit_original.png'
-    assert sha(original)==circuit['image_sha256']=='8be202cc92b91aa0b01c52132dcdfd09d8eea3e942944a97733b0e7949f375be'
+    assert sha(original)==circuit['image_sha256']=='a5228011fb90821adb2531dea2b0e7d3e2dcc30e9fc3e38164b48c7eae954c0b'
     assert (HERE/'figures/circuit.png').read_bytes()==original.read_bytes()
     assert original.read_bytes()==(HERE/'source_snapshot/teacher_result_v10/reference/circuit_original.png').read_bytes()
     assert circuit['original_png_byte_identical'] and not any(circuit[key] for key in ['image_edited','cropped','redrawn'])

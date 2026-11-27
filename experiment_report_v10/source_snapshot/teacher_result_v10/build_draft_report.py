@@ -39,7 +39,7 @@ def build(package=PACKAGE):
 
 ''' + methods + '\n\n# 結果\n' + results + '''
 
-# 終わりに
+# おわりに
 
 ## 本稿で省略した内容
 

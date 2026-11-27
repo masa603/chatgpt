@@ -6,7 +6,7 @@
   "numpy": "2.3.5",
   "matplotlib": "3.10.8",
   "training_torch_recorded": "2.8.0+cpu",
-  "source_base_commit": "9487f4bf7ad1764dac436c262a3ca8d45ef6205e",
+  "source_base_commit": "03d383a406f9e391559d0b066bd89e388bfce176",
   "snapshot_scope": "Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.",
   "physical_captures": 10,
   "excluded_captures": 0,
