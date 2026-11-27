@@ -225,7 +225,7 @@ def build():
         'distributed_training/materials/train_L1_normalization.ipynb','distributed_training/materials/requirements_provided.txt',
         'learning_followup/goal_update.json','experiment_today/protocol_change.json','experiment_plan.tex']
     for source in sources:copy_path(ROOT/source,OUT/'source_snapshot'/source)
-    (OUT/'requirements.txt').write_text('numpy==2.3.5\ntorch==2.8.0\nPillow==12.3.0\nmatplotlib==3.10.8\n')
+    (OUT/'requirements.txt').write_text('numpy==2.3.5\ntorch==2.8.0\nPillow==12.3.0\nmatplotlib==3.10.8\nPyMuPDF==1.26.6\n')
     environment={'report_created_date_japan':'2026-11-09','report_updated_date_japan':'2026-11-27','python':sys.version,'platform':platform.platform(),
         'numpy':np.__version__,'matplotlib':matplotlib.__version__,'training_torch_recorded':'2.8.0+cpu',
         'source_base_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
@@ -243,7 +243,7 @@ def build():
     environment['numbered_display_equations']=equation_count
     environment['report_section_structure']='Introduction: overview,purpose,comparison structure; ending: discussion,conclusion,future improvements; prose,measurements and equations preserved.'
     environment['term_expansion_policy']='Formal names provided once at first narrative use for technical abbreviations; product names, titles, figure labels, code identifiers and bibliography titles retain their original spelling.'
-    environment['circuit_figure']='User-confirmed circuit: D2/D3 each with external10kohm pull-down toGND and button to3.3V; pressedHIGH; 330ohm LED resistors and1kohm sensor load; minimal component/pin/value labels; original physical10 serial control unchanged.'
+    environment['circuit_figure']='Original user-supplied PNG copied byte-for-byte from uploadedZIP; no redrawing,cropping or image editing; full-image lossless PDF embedding; caption 回路図; original measurements and firmware unchanged.'
     (OUT/'environment_used.json').write_text(json.dumps(environment,indent=2)+'\n')
     common=['pandoc','report.md','--from=markdown-implicit_figures','--standalone','--number-sections','--resource-path=.',
         '--lua-filter='+str(HERE/'caption_layout.lua'),
@@ -262,8 +262,8 @@ def build():
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
-[電車で読むA5解説PDF（23ページ）](explanation/commute_guide.pdf) は，実験の回数・結果・式・使用コードと，ボタン2個の回路を具体例付きで説明します．保存すればオフラインで読めます．
-[回路図PDF](figures/circuit_two_buttons.pdf) ／ [PNG](figures/circuit_two_buttons.png) ／ [編集用SVG](figures/circuit_two_buttons.svg) も単独で開けます．
+[電車で読むA5解説PDF（23ページ）](explanation/commute_guide.pdf) は，実験の回数・結果・式・使用コードと，回路図を具体例付きで説明します．保存すればオフラインで読めます．
+[回路図PDF](figures/circuit.pdf) ／ [元画像PNG](figures/circuit.png) も単独で開けます．回路図は受領した画像を変更せずに使用しています．
 目的・方法・MSE集計までを確認する [途中稿PDF](draft/report_draft.pdf) も用意しています．完成版から一部を省略した抜粋稿です．
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
@@ -305,7 +305,7 @@ def build():
 
 ## 保存ログの再計算
 
-Python3.12、NumPy・PyTorch・Pillow・Matplotlib、Node.js、C++11対応g++を使います。
+Python3.12、NumPy・PyTorch・Pillow・Matplotlib・PyMuPDF、Node.js、C++11対応g++を使います。
 requirements.txtはクラウドで使った主要Python版です。OS・CPUが違う場合は、凍結済みヘッダと受領した実機PPMを結果の照合基準にします。
 
 source_snapshotを作業ディレクトリとして、次を実行できます。

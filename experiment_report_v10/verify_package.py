@@ -118,19 +118,17 @@ def verify(refresh=False):
     for name in ['theory_network','theory_learning','theory_pruning_csr']:
         for extension in ['.png','.pdf']:
             assert (HERE/'figures'/(name+extension)).stat().st_size>1000
-    for extension in ['.png','.pdf','.svg']:
-        assert (HERE/'figures'/('circuit_two_buttons'+extension)).stat().st_size>1000
-    circuit=json.loads((HERE/'figures/circuit_two_buttons.json').read_text())
-    assert circuit['pin_definitions_checked']=={
-        'SENSOR_PIN':'A0','LED_R_PIN':'8','LED_G_PIN':'6','LED_B_PIN':'7',
-        'BUTTON_CALIB_PIN':'2','BUTTON_READ_PIN':'3','USE_PHYSICAL_BUTTONS':'0'}
-    assert circuit['frozen_source_sha256']==sha(HERE/'code/teacher_fresh_v10/teacher_fresh_v10.ino')
-    assert circuit['netlist']['button_ground']==['R5.2','R6.2','GND']
-    assert circuit['netlist']['button_power']==['SW1.1','SW2.1','3V3']
-    assert circuit['netlist']['calibration']==['D2','SW1.2','R5.1']
-    assert circuit['netlist']['read']==['D3','SW2.2','R6.1']
-    assert circuit['resistors_ohms']=={'R1':330,'R2':330,'R3':330,'R4':1000,'R5':10000,'R6':10000}
-    assert circuit['button_mode']=='EXTERNAL_10K_PULLDOWN; BUTTON_TO_3V3; PRESSED_HIGH'
+    for extension in ['.png','.pdf']:
+        assert (HERE/'figures'/('circuit'+extension)).stat().st_size>1000
+    circuit=json.loads((HERE/'figures/circuit.json').read_text())
+    original=HERE/'reference/circuit_original.png'
+    assert sha(original)==circuit['image_sha256']=='8be202cc92b91aa0b01c52132dcdfd09d8eea3e942944a97733b0e7949f375be'
+    assert (HERE/'figures/circuit.png').read_bytes()==original.read_bytes()
+    assert original.read_bytes()==(HERE/'source_snapshot/teacher_result_v10/reference/circuit_original.png').read_bytes()
+    assert circuit['original_png_byte_identical'] and not any(circuit[key] for key in ['image_edited','cropped','redrawn'])
+    assert circuit['role']=='USER_SUPPLIED_ORIGINAL_CIRCUIT_IMAGE'
+    assert circuit['frozen_firmware_sha256']==sha(HERE/'code/teacher_fresh_v10/teacher_fresh_v10.ino')
+    assert not list((HERE/'figures').glob('circuit_two_buttons.*'))
     assert re.findall(r'^図(\d+)　',report,re.M)==[str(i) for i in range(1,9)]
     assert '図5　回路図' in report
     with ZipFile(HERE/'report.docx') as archive:
@@ -220,7 +218,7 @@ def verify(refresh=False):
         'published_code_excerpts_match_frozen_firmware':True,'all4_manual_memory_breakdowns_match_numeric_array_sizes':True,
         'code_explanation_layout':'FUNCTION_ROLES_IN_BODY; TWO_LINE_BY_LINE_COMMENTED_FUNCTIONS_IN_APPENDIX; EXECUTABLE_TOKENS_MATCH_FROZEN_SOURCE',
         'cover_and_theory_layout':'DEDICATED_COVER; THREE_EXPLANATORY_FIGURES; 17_NUMBERED_EQUATIONS_WITH_BODY_REFERENCES; EDITABLE_WORD_EQUATIONS',
-        'two_button_circuit':'USER_CONFIRMED_10K_PULLDOWN_EACH_TO_GND; BUTTONS_TO_3V3; PIN_MAP_CHECKED; MINIMAL_LABELS; CAPTION_USED_CIRCUIT; FROZEN_SERIAL_CAPTURE_RECORDS_UNCHANGED',
+        'circuit_figure':'USER_SUPPLIED_ORIGINAL_PNG_BYTE_IDENTICAL; NO_REDRAW_CROP_OR_IMAGE_EDIT; CAPTION_CIRCUIT; FROZEN_MEASUREMENTS_AND_FIRMWARE_UNCHANGED',
         'lecture_slides_excluded_from_bibliography':True,
         'published_color_images':80,'color_PNG_PPM_copies_byte_identical_to_raw_records':True,
         'each_color_image_MSE_matches_corresponding_physical_read':True,

@@ -1,0 +1,27 @@
+{
+  "role": "USER_SUPPLIED_ORIGINAL_CIRCUIT_IMAGE",
+  "source": "reference/circuit_original.png",
+  "image_sha256": "8be202cc92b91aa0b01c52132dcdfd09d8eea3e942944a97733b0e7949f375be",
+  "width": 1900,
+  "height": 788,
+  "original_png_byte_identical": true,
+  "image_edited": false,
+  "cropped": false,
+  "redrawn": false,
+  "pdf_embedding": "LOSSLESS_RGB_PIXELS; FULL_IMAGE; ORIGINAL_ASPECT_RATIO",
+  "rgb_pixels_sha256": "cd82bb385843481180925b52744ba528d7b2592008af872c18d342053e22d1e2",
+  "frozen_firmware_sha256": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
+  "source_provenance": {
+    "received_date_japan": "2026-11-27",
+    "source_file_id": "file_00000000bc0c82098467245b0bbbc3dd",
+    "source_zip_filename": "スクリーンショット 2026-11-27 14.37.45.zip",
+    "source_zip_sha256": "b64897d46325da1546db85f3feb8c5ded09d602f5bc2ada521d66c9d79dd7cb2",
+    "source_image_filename": "スクリーンショット 2026-11-27 14.37.45.png",
+    "image_sha256": "8be202cc92b91aa0b01c52132dcdfd09d8eea3e942944a97733b0e7949f375be",
+    "image_width": 1900,
+    "image_height": 788,
+    "mode": "RGBA",
+    "instruction": "Use the supplied image unchanged; caption is 回路図",
+    "image_edited": false
+  }
+}

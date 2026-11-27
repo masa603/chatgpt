@@ -3,11 +3,11 @@
   "role": "OFFLINE_A5_STUDY_GUIDE",
   "format": "A5 portrait;14pt text;10pt code;22 topics",
   "original_files_unchanged": {
-    "report.pdf": "1623cff1aea94d950821375fd95cd6efd1025cbb878a6a69943a771e39739f74",
-    "report.docx": "6a12736b507351f33d607cf7da3728e498dcb8fef17163ad46a4d8b148d64a91",
-    "report.md": "724f0ccaa09e8997b2ed089823ef6fd51030cecd0f5448c59b3db3d60b2f9ea9",
-    "report.tex": "7d66ac7ded18baef36f20efaf7ec11c56b0e2d1510ea2af9359ae3f597ede755",
-    "explanation/guide.pdf": "d77807ed44c6871b7660c305387f1a4d71c90c31964052bc0dda888fe089bdf3",
+    "report.pdf": "4969243f7b15b23e5194dd10bf3bb881a778b62c13aa461a86779ad94abdf231",
+    "report.docx": "cfeec38f9453acf145f7c131cdf4710e80ccad7daca90ae25b97b551e75efa6d",
+    "report.md": "c9b9a40b979d55c50d4e33c001f9b2fdec79f285ca0ba61e68038687ccdf8516",
+    "report.tex": "2541f1651b11aa04c3ee5e7305034a1010696b3d6c4d7bd929ac6656ca680386",
+    "explanation/guide.pdf": "6d95f262098a5e7e5f23c0628adeb3870d7c23ce0ee23622b71810ea78ac50d8",
     "data/training135.csv": "67385d38c581978bde6bacc2d4571283d0198573939cc8eebc6bea39e6ade73a"
   },
   "physical_capture_count": 10,
@@ -22,8 +22,8 @@
     "data/physical10_mse_all80.csv": "04545f78b59ea5ee89852d7ba71445f598de4e20c98b38dead8218914ee5b705",
     "data/fixed_input_device_timing_capacity.csv": "cb5c84ac49449153251304acfcd61a5cc854b23a9074db0a6850bd094a63d514",
     "data/single_model_memory_comparison.csv": "f7caf665b48d20fc4b2aaf0eccfc338d56783841849855bb86736badf0165805",
-    "figures/circuit_two_buttons.pdf": "852527b454ede293cea4e45dff238a087c6cc48320b9a43fa90e29e7810f9cde",
-    "figures/circuit_two_buttons.json": "de7f945ad530a8608288aa18f12977385a2b5cecbb7c6486d2b747fb5217c764",
+    "figures/circuit.pdf": "e190b9f2dc57c4676283cdc133aaf1e51451ade63e250d279245a40a1f531f8d",
+    "figures/circuit.json": "f95f19d37de114c49b10cc8d45da89068782c5ddabbedebda9235eb1e3b6891d",
     "code/teacher_compare_v10/teacher_compare_v10.ino": "33a4a70336a5e22fa2631ff0be976aa9178507cbd73a159f07ca80a81edb1cb4",
     "code/teacher_fresh_v10/teacher_fresh_v10.ino": "167a49c122c497111bb7c9dc8741fc19182a6d93ab91442bf6c4b609670009ad",
     "source_snapshot/teacher_result_v10/train.py": "c7cd7bbe5be43083d3f412316577722766112467689a9cbe2049d961e08b069c"

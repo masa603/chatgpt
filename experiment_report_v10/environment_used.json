@@ -6,7 +6,7 @@
   "numpy": "2.3.5",
   "matplotlib": "3.10.8",
   "training_torch_recorded": "2.8.0+cpu",
-  "source_base_commit": "2fec388bbb1f520f7afe699bc9ce276bd3860059",
+  "source_base_commit": "9487f4bf7ad1764dac436c262a3ca8d45ef6205e",
   "snapshot_scope": "Current workspace including actualcapture10 and8 user-reported single-model memory builds; original frozen models preserved.",
   "physical_captures": 10,
   "excluded_captures": 0,
@@ -24,5 +24,5 @@
   "numbered_display_equations": 17,
   "report_section_structure": "Introduction: overview,purpose,comparison structure; ending: discussion,conclusion,future improvements; prose,measurements and equations preserved.",
   "term_expansion_policy": "Formal names provided once at first narrative use for technical abbreviations; product names, titles, figure labels, code identifiers and bibliography titles retain their original spelling.",
-  "circuit_figure": "User-confirmed circuit: D2/D3 each with external10kohm pull-down toGND and button to3.3V; pressedHIGH; 330ohm LED resistors and1kohm sensor load; minimal component/pin/value labels; original physical10 serial control unchanged."
+  "circuit_figure": "Original user-supplied PNG copied byte-for-byte from uploadedZIP; no redrawing,cropping or image editing; full-image lossless PDF embedding; caption \u56de\u8def\u56f3; original measurements and firmware unchanged."
 }

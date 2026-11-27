@@ -4,8 +4,8 @@
 
 [報告書PDF](report.pdf)、[編集できるWord版](report.docx)、[Markdown本文](report.md)、[LaTeX本文](report.tex) を用意しました。
 内容を理解するための資料は [本人用の解説PDF（8ページ）](explanation/guide.pdf) です。実験の目的、式、コード、MSE、容量、速度を順に説明しています。提出用はreport.pdfです。
-[電車で読むA5解説PDF（23ページ）](explanation/commute_guide.pdf) は，実験の回数・結果・式・使用コードと，ボタン2個の回路を具体例付きで説明します．保存すればオフラインで読めます．
-[回路図PDF](figures/circuit_two_buttons.pdf) ／ [PNG](figures/circuit_two_buttons.png) ／ [編集用SVG](figures/circuit_two_buttons.svg) も単独で開けます．
+[電車で読むA5解説PDF（23ページ）](explanation/commute_guide.pdf) は，実験の回数・結果・式・使用コードと，回路図を具体例付きで説明します．保存すればオフラインで読めます．
+[回路図PDF](figures/circuit.pdf) ／ [元画像PNG](figures/circuit.png) も単独で開けます．回路図は受領した画像を変更せずに使用しています．
 目的・方法・MSE集計までを確認する [途中稿PDF](draft/report_draft.pdf) も用意しています．完成版から一部を省略した抜粋稿です．
 学籍番号・氏名は元の計画書にある情報を引き継いでいます。
 用語表と重複した解説を削り，実験条件・必要な式とコード・結果・考察を中心に整理しました．本文の句読点は「．」「，」へ統一し，測定値と結論は保持しています．
@@ -47,7 +47,7 @@
 
 ## 保存ログの再計算
 
-Python3.12、NumPy・PyTorch・Pillow・Matplotlib、Node.js、C++11対応g++を使います。
+Python3.12、NumPy・PyTorch・Pillow・Matplotlib・PyMuPDF、Node.js、C++11対応g++を使います。
 requirements.txtはクラウドで使った主要Python版です。OS・CPUが違う場合は、凍結済みヘッダと受領した実機PPMを結果の照合基準にします。
 
 source_snapshotを作業ディレクトリとして、次を実行できます。

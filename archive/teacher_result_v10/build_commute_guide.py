@@ -124,7 +124,7 @@ mse[model]+=static_cast<double>(e)*e/27.0;'''
         if extra[-1].endswith('.pdf'):(out/'commute_build.log').write_text(result.stderr)
     assert unchanged=={name:sha(package/name) for name in unchanged}
     data_paths=[package/'data'/name for name in ['physical10_mse_summary.csv','physical10_mse_all80.csv','fixed_input_device_timing_capacity.csv','single_model_memory_comparison.csv']]
-    data_paths.extend([package/'figures/circuit_two_buttons.pdf', package/'figures/circuit_two_buttons.json'])
+    data_paths.extend([package/'figures/circuit.pdf', package/'figures/circuit.json'])
     record={'created_date_japan':'2026-11-27','role':'OFFLINE_A5_STUDY_GUIDE','format':'A5 portrait;14pt text;10pt code;22 topics',
         'original_files_unchanged':unchanged,'physical_capture_count':10,'MSE_records':80,
         'MSE_display':'TRUNCATE_THIRD_AND_LATER_DECIMALS','actual_code_excerpts_checked_ignoring_whitespace':True,

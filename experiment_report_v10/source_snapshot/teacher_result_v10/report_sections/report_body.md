@@ -239,23 +239,21 @@ $$
 
 紙は手で支え，照明を同じ状態に保つ手順で測定した．照度・距離・角度の定量記録はない．
 
-図5は提示された参考図を基に作図した．抵抗はLEDが各330 Ω，受光部が1 kΩ，2個のボタンが各10 kΩである．受光素子の型番は未確認である．グラウンド（Ground：GND）は共通とした．
+図5に回路図を示す．グラウンド（Ground：GND）は共通とした．
 
-\Needspace{32\baselineskip}
+\Needspace{22\baselineskip}
 
 ```{=latex}
 \noindent\begin{minipage}{\linewidth}
 ```
 
-![ボタン2個の回路](figures/circuit_two_buttons.png){width=100%}
+![回路図](figures/circuit.png){width=100%}
 
 図5　回路図
 
 ```{=latex}
 \end{minipage}
 ```
-
-SW1はD2の黒白校正，SW2はD3の色読取に対応する．各入力を10 kΩでGNDへ接続し，ボタンを押すと3.3 Vへつながる．
 
 ## 学習データと正解画像
 

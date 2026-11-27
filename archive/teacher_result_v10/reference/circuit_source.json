@@ -1,0 +1,13 @@
+{
+  "received_date_japan": "2026-11-27",
+  "source_file_id": "file_00000000bc0c82098467245b0bbbc3dd",
+  "source_zip_filename": "スクリーンショット 2026-11-27 14.37.45.zip",
+  "source_zip_sha256": "b64897d46325da1546db85f3feb8c5ded09d602f5bc2ada521d66c9d79dd7cb2",
+  "source_image_filename": "スクリーンショット 2026-11-27 14.37.45.png",
+  "image_sha256": "8be202cc92b91aa0b01c52132dcdfd09d8eea3e942944a97733b0e7949f375be",
+  "image_width": 1900,
+  "image_height": 788,
+  "mode": "RGBA",
+  "instruction": "Use the supplied image unchanged; caption is 回路図",
+  "image_edited": false
+}
